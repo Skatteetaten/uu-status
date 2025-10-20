@@ -61,7 +61,7 @@
 
     /* WCAG-knapper i topp-brudd-lista */
 .wcag-btn {
-  background: var(--accent, #005fcc);
+  background: #005fcc;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -698,12 +698,21 @@ legend.innerHTML = `
           }
         });
 
-        // Agg-tabell (WCAG topp)
-        const box = document.createElement('div');
-        const h2 = document.createElement('h2');
-        h2.textContent = 'Topp brudd (WCAG-krav)';
-        h2.style.marginTop = '35px';
-        box.appendChild(h2);
+       // Agg-tabell (WCAG topp)
+const box = document.createElement('div');
+
+const h2 = document.createElement('h2');
+h2.textContent = 'Topp brudd (WCAG-krav)';
+h2.style.marginTop = '35px';
+box.appendChild(h2);
+
+// Forklaringstekst som <p> under overskriften
+const info = document.createElement('p');
+info.className = 'muted';
+info.textContent = 'Knappene setter valgt WCAG-krav som filter i tabellen over.';
+info.style.margin = '4px 0 10px';
+box.appendChild(info);
+
 
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
