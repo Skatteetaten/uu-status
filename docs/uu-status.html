@@ -688,28 +688,39 @@ legend.innerHTML = `
         let expanded = false;
         const PAGE = 15;
 
-        function renderAgg() {
-          const list = expanded ? wcagAgg : wcagAgg.slice(0, PAGE);
-          tb.innerHTML = '';
-          for (const [code, count] of list) {
-            const tr = document.createElement('tr');
-            const td1 = document.createElement('td');
-            const link = document.createElement('a');
-            link.textContent = code;
-            link.title = 'Klikk for å filtrere på ' + code;
-            link.addEventListener('click', () => {
-              wcagFilter.value = code;
-              apply();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            td1.appendChild(link);
-            const td2 = document.createElement('td');
-            td2.textContent = count;
-            tr.appendChild(td1); tr.appendChild(td2);
-            tb.appendChild(tr);
-          }
-          toggle.textContent = expanded ? 'Vis færre' : 'Vis alle';
-        }
+function renderAgg() {
+  const list = expanded ? wcagAgg : wcagAgg.slice(0, PAGE);
+  tb.innerHTML = '';
+
+  for (const [code, count] of list) {
+    const tr = document.createElement('tr');
+
+    // Første celle: WCAG-knapp
+    const td1 = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'wcag-link';
+    btn.textContent = code;
+    btn.title = 'Filtrer listen til kun krav ' + code;
+    btn.addEventListener('click', () => {
+      wcagFilter.value = code;
+      apply();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    td1.appendChild(btn);
+
+    // Andre celle: antall brudd
+    const td2 = document.createElement('td');
+    td2.textContent = count;
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tb.appendChild(tr);
+  }
+
+  toggle.textContent = expanded ? 'Vis færre' : 'Vis alle';
+}
+
 
         const toggle = document.createElement('button');
         toggle.className = 'btn-link';
