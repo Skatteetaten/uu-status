@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UU-status</title>
   <style>
-    :root {
-      --bg: #0b0f14;
-      --card: #11161d;
-      --muted: #9fb0c3;
-      --text: #e7eef7;
-      --accent: #6fb3ff;
-      --ok: #28a745;
-      --warn: #f0ad4e;
-      --bad: #dc3545;
-      --border: #1f2a36;
-      --focus: #9dd1ff;
-      --detail-bg: #0e1420;
-      --detail-accent: #2a7de1;
-    }
+  :root {
+  --bg: #0b0f14;
+  --card: #121821;
+  --muted: #b4c3d5;
+  --text: #f2f6fb;
+  --accent: #1d5fb6;        /* sterkere blå – bedre mot hvit tekst */
+  --ok: #39d98a;            /* grønn med høyere lysstyrke */
+  --warn: #ffc94d;          /* klar gul for kontrast */
+  --bad: #ff4d6d;           /* sterk rød med AA-kontrast */
+  --border: #2a384a;        /* tydeligere linjer – 3:1 mot bakgrunn */
+  --focus: #66b8ff;         /* sterkere fokusramme */
+  --detail-bg: #101724;
+  --detail-accent: #2a8aff;
+}
     html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
     .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
     h1 { font-size: 28px; margin: 0 0 8px; }
@@ -40,7 +40,7 @@
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
     th { text-align: left; font-weight: 600; user-select: none; white-space: nowrap; }
     th.sortable { cursor: pointer; }
-    th.sortable .arrow { opacity: .5; margin-left: 6px; font-size: 11px; }
+    th.sortable .arrow { opacity: .8; color: var(--muted); margin-left: 6px; font-size: 11px; }
     tr:hover td { background: rgba(255,255,255,0.02); }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -131,7 +131,7 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <main class="wrap">
     <h1>UU-status Skatteetaten</h1>
     <div class="muted">Samlet oversikt over tilgjengelighetserklæringer (hentes fra uustatus.no). Oppdateres automatisk via GitHub Actions.</div>
 
@@ -239,8 +239,16 @@
       </div>
 
       <div class="agg" id="agg"></div>
+
+        <!-- CTA: Endringsarkiv -->
+      <div class="archive-cta" role="complementary" aria-label="Gå til endringsarkivet">
+        <a class="btn-archive" href="./uu-arkiv.html" rel="noopener">
+          Se endringsarkivet <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
     </div>
-  </div>
+  </main>
 
   <!-- Chart.js for infografikk -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -951,7 +959,7 @@ legend.innerHTML = `
 
   <!-- Agent UI -->
   <style>
-    .ai-fab{position:fixed;right:18px;bottom:18px;border-radius:999px;padding:12px 14px;background:#2a7de1;color:#fff;border:none;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
+    .ai-fab{position:fixed;right:18px;bottom:18px;border-radius:999px;padding:12px 14px;background:#2368bd;color:#fff;border:none;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
     .ai-panel{position:fixed;right:18px;bottom:78px;width:360px;max-width:92vw;background:#0e1420;border:1px solid #1f2a36;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.35);display:none}
     .ai-panel header{padding:10px 12px;border-bottom:1px solid #1f2a36;font-weight:600}
     .ai-body{max-height:50vh;overflow:auto;padding:10px 12px}
@@ -959,7 +967,7 @@ legend.innerHTML = `
     .ai-src{font-size:12px;color:#9fb0c3;margin-top:6px}
     .ai-input{display:flex;gap:8px;border-top:1px solid #1f2a36;padding:10px 12px}
     .ai-input input{flex:1;background:#11161d;border:1px solid #1f2a36;border-radius:10px;color:#e7eef7;padding:10px}
-    .ai-input button{background:#2a7de1;color:#fff;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
+    .ai-input button{background:#2365b6;color:#fff;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
   </style>
 
   <button class="ai-fab" id="aiFab" aria-expanded="false" aria-controls="aiPanel">Hjelp?</button>
@@ -1073,7 +1081,7 @@ legend.innerHTML = `
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
-    background: var(--accent, #2a7de1);
+    background: var(--accent, #1e67c5);
     color: #fff;
   }
   .btn-archive:hover { filter: brightness(1.1); }
@@ -1086,12 +1094,6 @@ legend.innerHTML = `
     .btn-archive:hover { transform: translateY(-1px); }
   }
 </style>
-
-<div class="archive-cta" role="complementary" aria-label="Gå til endringsarkivet">
-  <a class="btn-archive" href="./uu-arkiv.html" rel="noopener">
-    Se endringsarkivet <span aria-hidden="true">→</span>
-  </a>
-</div>
 
 </body>
 </html>

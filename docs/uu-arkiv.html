@@ -19,37 +19,99 @@
       --detail-bg: #0e1420;
       --detail-accent: #2a7de1;
     }
-    html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+
     .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
     h1 { font-size: 28px; margin: 0 0 8px; }
     .muted { color: var(--muted); }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
-    .toolbar { display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px; align-items: end; margin: 18px 0 14px; }
+    .cards {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .toolbar {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 160px 160px;
+      align-items: end;
+      margin: 18px 0 14px;
+    }
+
     .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
     .toolbar input, .toolbar select, .toolbar button {
-      background: var(--card); border: 1px solid var(--border); color: var(--text);
-      padding: 10px 12px; border-radius: 10px; outline: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      outline: none;
     }
-    .toolbar input:focus, .toolbar select:focus, .toolbar button:focus { box-shadow: 0 0 0 3px var(--focus); }
-    .toolbar button { cursor: pointer; }
+
+    .toolbar input:focus, .toolbar select:focus, .toolbar button:focus {
+      box-shadow: 0 0 0 3px var(--focus);
+    }
 
     table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
     th { text-align: left; font-weight: 600; white-space: nowrap; }
     tr:hover td { background: rgba(255,255,255,0.02); }
 
-    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
+    details summary {
+      cursor: pointer;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
 
-    .truncate { max-width: 540px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: bottom; }
+    details[open] summary {
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .truncate {
+      max-width: 540px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    ul { margin: 4px 0 8px 16px; padding: 0; }
+    li { margin: 0 0 3px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>UU-status – endringsarkiv</h1>
-    <div class="muted">Viser differanser som er oppdaget i sammenligning mot forrige <code>latest.json</code>. Snapshots lagres kun når noe faktisk endres, og grupperes på <em>sist oppdatert</em> (updatedAt).</div>
+    <div class="muted">
+      Her ser du hvilke endringer som er oppdaget siden forrige oppdatering.
+      Nye brudd, fjernede brudd og andre justeringer blir vist per nettsted.
+    </div>
     <p><a href="./uu-status.html">← Til oversikten</a></p>
 
     <div class="toolbar" role="region" aria-label="Filtre for endringsarkiv">
@@ -58,7 +120,7 @@
         <input id="q" type="search" placeholder="Filtrer på navn, domene eller URL…" autocomplete="off" />
       </div>
       <div class="field">
-        <label for="onlyAdded">Filtrer</label>
+        <label for="filterMode">Filtrer</label>
         <select id="filterMode">
           <option value="">Alle endringer</option>
           <option value="added">Kun nye brudd</option>
@@ -122,13 +184,10 @@
       }
     }
 
-    // Rens vekk støy som på uustatus-sider
     function cleanTitle(t) {
       if (!t) return "";
       let s = String(t).trim();
-      // Fjern "Tilgjengelighetserklæring for " i starten
       s = s.replace(/^\s*tilgjengelighetserkl(?:æ|ae)ring\s+for\s+/i, "");
-      // Fjern " | uustatus" eller " – uustatus" på slutten
       s = s.replace(/\s*(?:[\|\u2013-])\s*uustatus\s*$/i, "");
       return s.trim();
     }
@@ -142,7 +201,6 @@
         const rows = Array.isArray(data) ? data : (data.urls || []);
         for (const r of rows) {
           const url = r.url || r.href;
-          // Viktig: foretrekk "name" (samme som på statussiden), deretter title
           const rawTitle = (r.name || r.title || "");
           const title = cleanTitle(rawTitle);
           if (url && title) {
@@ -158,21 +216,36 @@
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error("Kunne ikke hente changes.jsonl");
       const text = await res.text();
-      return text
-        .split("\n")
-        .map(l => l.trim())
-        .filter(Boolean)
-        .map(l => JSON.parse(l));
+      return text.split("\n").map(l => l.trim()).filter(Boolean).map(l => JSON.parse(l));
     }
 
     function resolveTitle(row) {
       const key = canonUrl(row.url || "");
-      // Hvis vi i framtiden logger title i changes.jsonl: rens den også
       const fromLog = row.title ? cleanTitle(row.title) : "";
       const fromMap = titleByUrl.get(key) || "";
       const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
       const fallback = removed ? "Erklæring (fjernet)" : (row.url || "");
       return fromLog || fromMap || fallback;
+    }
+
+    function formatChanges(changed) {
+      if (!changed || typeof changed !== "object") return "";
+
+      const parts = [];
+      if (changed.totalNonConformities) {
+        const before = changed.totalNonConformities.before;
+        const after = changed.totalNonConformities.after;
+        if (before !== undefined && after !== undefined) {
+          parts.push(`Antall brudd endret fra ${before} til ${after}.`);
+        }
+      }
+      if (changed.totalWarnings) {
+        parts.push(`Antall advarsler endret fra ${changed.totalWarnings.before} til ${changed.totalWarnings.after}.`);
+      }
+      if (changed.statementUpdatedAt) {
+        parts.push("Selve erklæringen er oppdatert.");
+      }
+      return parts.length ? parts.join(" ") : "Andre små endringer registrert.";
     }
 
     function passesFilters(row, state, resolvedTitle) {
@@ -238,24 +311,23 @@
         const tdDet = document.createElement("td");
         const det = document.createElement("details");
         const sum = document.createElement("summary");
-        sum.textContent = "Vis";
+        sum.textContent = "Vis detaljer";
         det.appendChild(sum);
 
         const secAdded = document.createElement("div");
-        secAdded.innerHTML = "<strong>Nye:</strong>" + (plus ? `<ul>${r.added.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
+        secAdded.innerHTML = "<strong>Nye brudd:</strong>" +
+          (plus ? `<ul>${r.added.map(x => `<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
         det.appendChild(secAdded);
 
         const secRemoved = document.createElement("div");
-        secRemoved.innerHTML = "<strong>Fjernet:</strong>" + (minus ? `<ul>${r.removed.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
+        secRemoved.innerHTML = "<strong>Fjernede brudd:</strong>" +
+          (minus ? `<ul>${r.removed.map(x => `<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
         det.appendChild(secRemoved);
 
         if (r.changed && Object.keys(r.changed).length) {
           const hdr = document.createElement("div");
-          hdr.innerHTML = "<strong>Andre endringer:</strong>";
-          const pre = document.createElement("pre");
-          pre.textContent = JSON.stringify(r.changed, null, 2);
+          hdr.innerHTML = "<strong>Andre endringer:</strong> " + escapeHTML(formatChanges(r.changed));
           det.appendChild(hdr);
-          det.appendChild(pre);
         }
 
         const snapLink = document.createElement("div");
@@ -264,13 +336,12 @@
         snapLink.innerHTML = `
           <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>
           <a href="./data/uustatus/snapshots_by_updated/${escapeHTML(yyyyMmDd || "")}.json" target="_blank" rel="noopener">
-            Snapshot ${escapeHTML(yyyyMmDd || "")}
+            Åpne snapshot ${escapeHTML(yyyyMmDd || "")}
           </a>`;
         det.appendChild(snapLink);
 
         tdDet.appendChild(det);
         tr.appendChild(tdDet);
-
         tbody.appendChild(tr);
       }
 
@@ -286,7 +357,7 @@
       let state = { q: "", mode: "", from: null };
 
       try {
-        await loadTitleMap();           // <- last navn/titler først
+        await loadTitleMap();
         all = await fetchJSONL(LOG_URL);
       } catch (e) {
         const tbody = document.getElementById("tbody");
