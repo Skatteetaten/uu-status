@@ -1,0 +1,14 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattekalkulator - Beregn skatten din | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10"
+      ],
+      "totalNonConformities": 1
+    }
+  ]
+}

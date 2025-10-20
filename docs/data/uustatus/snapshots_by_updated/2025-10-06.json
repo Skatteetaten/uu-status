@@ -1,0 +1,17 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/2b1a0612-6d0b-4d33-855b-fe3173ed655b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tips om avvik i Folkeregisteret | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.3.2",
+        "1.3.5",
+        "3.3.1"
+      ],
+      "totalNonConformities": 4
+    }
+  ]
+}
