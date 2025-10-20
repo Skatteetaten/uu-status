@@ -205,3 +205,19 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# --- UU-status genererte filer ---
+# CSV/JSON-filer som genereres av scripts
+uu-status.csv
+uu-status-details.json
+
+# eventuelle midlertidige snapshots/logs
+docs/data/uustatus/snapshots/
+docs/data/uustatus/snapshots_by_updated/
+docs/data/uustatus/logs/
+
+# beholde docs/ siden den brukes til Pages
+!docs/
+!docs/**/*.html
+!docs/**/*.css
+!docs/**/*.js
