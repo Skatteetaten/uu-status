@@ -1,0 +1,982 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0193e69a-7038-4809-9859-e71ddc747071",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for skatteetaten.no | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.2.1",
+        "1.3.1",
+        "1.3.5",
+        "1.4.11",
+        "1.4.3",
+        "2.4.1",
+        "3.1.2",
+        "3.3.1"
+      ],
+      "totalNonConformities": 9
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tips oss | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10"
+      ],
+      "totalNonConformities": 2
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tabellkort - beregn skattetrekk | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/90be03a3-13e4-4979-8c88-f38727fb77e0",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skatteetatens designsystem - Github | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "3.1.2"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Beregn skatt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "1.4.12",
+        "2.4.3",
+        "2.4.7",
+        "3.1.2",
+        "3.2.4"
+      ],
+      "totalNonConformities": 7
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattekalkulator - Beregn skatten din | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/f601d522-c18e-4cde-9c8a-f3c39aa9995e",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Min side | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/e1c1e944-48f2-47ac-be68-21824d833339",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Selvbetjening motorvogn | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.3.1",
+        "1.3.2",
+        "2.1.2",
+        "2.4.1",
+        "2.4.2",
+        "2.4.3",
+        "2.4.5",
+        "2.4.6",
+        "2.5.3",
+        "3.1.1",
+        "3.2.2",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 14
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a677a1b4-b156-4e05-8754-e62c218f056e",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Innboks | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.3.1",
+        "1.4.1",
+        "1.4.10",
+        "2.4.3",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 7
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/85917b0d-c897-4f1c-a9cb-94e7ff359c4b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Min side virksomhet | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.4.3"
+      ],
+      "totalNonConformities": 2
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Min skatt og mine skattedokumenter | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.2"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Folkeregister | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.1.1",
+        "2.4.3",
+        "2.4.4",
+        "3.3.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 7
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/8c79a29b-693a-432c-b404-b2dc280ff7bc",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Aksjeoppgaven | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.4.3"
+      ],
+      "totalNonConformities": 2
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Endre skattekort | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.11",
+        "2.1.1",
+        "2.4.3",
+        "2.4.5",
+        "2.4.7",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 8
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a220a476-5308-4a4f-91f8-2589cfb4cd52",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skatt delegering | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Mine inntekter og arbeidsforhold | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Melding om kildeskatt på renter, royalty og leiebetalinger | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "2.4.3"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/f8134272-66a6-4139-85e7-eeb9c64e1cb0",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattelister for mediehus | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "2.4.3",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/23a46c06-1d7f-46ce-aff3-ff2367d9f86f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Internasjonal rapportering CRS/FATCA | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/65d9e9e9-1611-4fd6-bcca-1fd5ca56646d",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/9026f9d6-8ab5-4fb8-bba6-88aaeb18dbcf",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - nye opplysninger til oppgavegiverregisteret | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/9328d70e-f881-42e6-9028-b8e6a043d145",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om eller klage på motregning i fremtidige bidrag | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Fullmakt - bidrag og tilbakebetaling | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Fullmakt - bidrag og tilbakebetaling | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/474734e3-a0fa-4021-98c1-3f80f5029f0f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om fritak for solidaransvar | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/96c10424-bbb7-4a19-8ce1-d75e1a146666",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Rettighetspakke innsyn web | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.4.10",
+        "1.4.3",
+        "3.3.2"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/3cda10ad-635e-457c-8fe1-c90c5b4bab4f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Oversikt over innhold i skattemeldingen | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "1.4.3",
+        "2.4.1"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/6ff36d85-dfeb-4701-8f46-1fdb8293c33f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Betalinger til selvstendig næringsdrivende | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Utskrift av skattemelding og skatteoppgjør | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/93d6de46-3b5d-4ecc-9149-b0d27af706fa",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Konto for utbetalinger fra Skatteetaten | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "3.3.1"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/46477ae1-0ba8-46bc-a2f4-2591f9b60593",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligsparing for ungdom | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a49940f0-d273-4728-8ff4-4adce824cadf",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattelister | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/62611290-2cdd-44d9-a3ca-d317adbb6711",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - betaling for pass og stell av barn | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/4d3f5dbd-e902-48a6-aa6e-0b0533a5de9b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om dagsoppgjør eller månedsoppgjør | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d8127968-6877-47fc-8201-abe46d54439f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte dagsoppgjør eller månedsoppgjør | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a6397693-d147-4941-83d0-09d638989c1e",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte kreditt for engangsavgift | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/70e51ceb-3ded-416b-b647-251d634ea738",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om kreditt for engangsavgift | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - innskudd, utlån og renter mv | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/4d87bd2a-a5d3-4b8e-ae7a-1212fb6e2811",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Attest for skatt og avgift | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Utsatt frist søknad | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.2"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligsameie | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.3.2",
+        "1.3.5",
+        "1.4.10",
+        "1.4.12",
+        "1.4.4",
+        "2.4.6",
+        "3.1.2",
+        "3.3.1",
+        "3.3.3"
+      ],
+      "totalNonConformities": 10
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligselskap | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.3.2",
+        "1.3.5",
+        "1.4.10",
+        "1.4.12",
+        "1.4.4",
+        "2.1.1",
+        "2.4.6",
+        "3.1.2",
+        "3.3.1",
+        "3.3.3"
+      ],
+      "totalNonConformities": 11
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/18bd7a08-517c-4ef7-8bec-06cd6568563b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skriv til oss | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/19bc325d-4200-4f68-9788-e4d478a9c49e",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om tollkreditt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/bd86d295-ad04-4c36-bfe2-fe88231f2de5",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte tollkreditt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/ff1db11a-0c6e-4289-9a59-1cf56b03898f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Kjøp fra produsent – egg | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "1.4.12",
+        "1.4.4"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/aeeb6601-3230-49a1-8376-da89724fb1e2",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Kjøp fra produsent – korn | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "1.4.12",
+        "1.4.4"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a9727a41-37f8-4c21-ba2b-c82cd5f4a52c",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Kjøp fra produsent – melk | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "1.4.12",
+        "1.4.4"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/97188853-f36e-441f-abf3-0cc7cd444fb1",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Kjøp fra produsent – slakt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "1.4.12",
+        "1.4.4"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d7e02a17-9f66-4ea6-8b47-894de9a774b4",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Kjøp fra produsent – Jord- og hagebruk | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "1.4.12",
+        "1.4.4"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/70c131d2-31de-4af7-b2cf-bf2a2ae4b144",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tenor Testdatasøk | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.2.1",
+        "3.1.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 5
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/78176632-e3c1-4a2d-8640-6f3810536b99",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Godtgjøring til opphaver til åndsverk | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/e37132b1-c16e-40a8-84b9-e21385a50e53",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - skadeforsikring | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/4ef4a04a-0461-4234-aef3-540d8970fd55",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Innsyn etter personopplysningsloven | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "3.2.1",
+        "3.2.2",
+        "3.3.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 6
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/2c1faadd-00a7-40fd-870e-9cf5805a2d35",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Min skatteplikt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/eb130211-e58f-4677-9a3e-319446e3f898",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om skattekort for utenlandsk arbeidstaker | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Intranett | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.3.1",
+        "1.4.1",
+        "1.4.11",
+        "1.4.12",
+        "1.4.3",
+        "2.1.1",
+        "2.1.2",
+        "2.4.3",
+        "2.4.4",
+        "2.5.3",
+        "3.1.2"
+      ],
+      "totalNonConformities": 12
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/971ea794-9fc7-4533-8d47-e0d03ba3218a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for A-meldingen for veldedig eller allmennyttig organisasjon | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/1962c333-41e1-4cfa-9882-bb3fad358981",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Min merverdiavgift | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "2.4.3",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/e32e9bfb-189a-4390-af64-f39fc93a190a",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Særavgifter | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.3.1",
+        "1.4.10",
+        "2.2.1",
+        "2.4.1",
+        "2.4.2",
+        "2.4.3",
+        "2.4.4",
+        "3.2.2",
+        "3.3.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 12
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattemeldingen | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "1.4.13",
+        "2.4.1",
+        "2.4.3",
+        "2.4.7"
+      ],
+      "totalNonConformities": 6
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/cb17285c-a864-4b63-a0b1-77694f88c382",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skatteetaten status | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "2.4.2",
+        "2.4.3",
+        "3.1.2"
+      ],
+      "totalNonConformities": 5
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/85e1c596-39a7-4808-86bf-81f5ec7971cd",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Nettolønn til bruttolønn | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "3.1.2"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/2b1a0612-6d0b-4d33-855b-fe3173ed655b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tips om avvik i Folkeregisteret | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.3.2",
+        "1.3.5",
+        "3.3.1"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/23cc25da-3600-433b-a83c-9f0797057e50",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Oppdrags- og arbeidsforholdsregisteret | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "2.4.3",
+        "3.1.2",
+        "3.2.2",
+        "3.3.1",
+        "3.3.3"
+      ],
+      "totalNonConformities": 7
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/9f28dbdb-019b-4808-8104-ba3357850873",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for A-meldingen for virksomheter uten lønnssystem (A10) | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.2",
+        "2.4.3",
+        "3.1.2",
+        "3.2.2"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/35614cc2-407f-4319-ba2c-1c6829e03a82",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for A-meldingen for arbeid i hjemmet | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/b3d88e65-5bce-452d-91a8-c2aa76835fb2",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Folkeregisteret - om tjenestene | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "1.4.12",
+        "1.4.3",
+        "2.4.4",
+        "3.1.1"
+      ],
+      "totalNonConformities": 6
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for A-meldingen - Avstemmingsinformasjon | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/f25c6608-37de-4886-913a-3f4144e522a3",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Trekkontroll | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Servicesenter for utenlandske arbeidstakere | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.13",
+        "2.1.1",
+        "3.1.2"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/310fd87d-0eb3-4982-8549-b9143ab22cbc",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Mine arbeidsgivere | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.1",
+        "2.4.1"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/fda75c75-d3d3-42ac-acb5-627bae3c1b93",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Beta-API'er - Github | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.4.1",
+        "1.4.10",
+        "1.4.11",
+        "1.4.3",
+        "2.4.3",
+        "3.1.2"
+      ],
+      "totalNonConformities": 7
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/92d37593-8a99-4ebc-b21a-98cf04e4d0a2",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for RF-1097 Søknad om endring av eller krav om forskuddsskatt – upersonlig skattyter | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 3
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/26c4a573-0f38-4ba4-95f8-d6a7c504b387",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skiftefullmakt | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.4.10",
+        "2.4.3",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/31334400-de06-4eeb-909f-ac880e5af8c9",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattekort arbeidsgiver | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3",
+        "3.3.2"
+      ],
+      "totalNonConformities": 2
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/57e83d7e-fba0-4fb0-bf66-16ca42c08b8d",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Statens innkrevingssentral | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "1.4.3",
+        "2.1.1",
+        "2.4.1",
+        "2.4.2",
+        "2.4.3",
+        "3.3.1",
+        "3.3.2",
+        "3.3.4"
+      ],
+      "totalNonConformities": 10
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for VAT On E-Commerce (VOEC) | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.4.3",
+        "3.3.2",
+        "3.3.3"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/d84635ae-57ad-4edf-b460-b41e1f96255b",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Mine saker - Namsmann og forliksrådtjenester | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.1.1",
+        "1.3.1",
+        "1.4.11",
+        "1.4.13",
+        "2.1.1",
+        "2.1.2",
+        "2.4.2",
+        "2.4.3",
+        "2.5.3",
+        "3.1.2",
+        "3.3.1",
+        "3.3.2"
+      ],
+      "totalNonConformities": 12
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/28600a84-ef55-4d19-b69c-919cc48f6df0",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Brev om skattemeldingen | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "1.3.1",
+        "2.2.1",
+        "2.4.1",
+        "2.4.2",
+        "3.1.2",
+        "3.3.2"
+      ],
+      "totalNonConformities": 6
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/93799278-4e66-4b78-984a-44715606a354",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om endring av avregning i ytelse - bidrag og tilbakebetaling | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/b8fa4de7-ebf7-47d4-9bf5-07efaa310964",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Rapportering av utleie av fast eiendom fra formidlingsselskap | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/18fecbde-8bf8-4bfd-ad26-440f4f96af94",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Avtale om fristforlengelse - bidrag og tilbakebetaling | uustatus",
+      "updatedAt": "",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    }
+  ]
+}
