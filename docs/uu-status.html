@@ -59,6 +59,37 @@
     .wcag-link::after { content: '↗'; font-size: 12px; opacity: .9; }
     .wcag-link:hover::after { opacity: 1; }
 
+    /* WCAG-knapper i topp-brudd-lista */
+.wcag-btn {
+  background: var(--accent, #1e67c5);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font: inherit;
+  text-align: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+/* Hover / fokus */
+.wcag-btn:hover {
+  background: #2a8aff;
+  transform: translateY(-1px);
+}
+
+.wcag-btn:focus-visible {
+  outline: 3px solid var(--focus, #9dd1ff);
+  outline-offset: 2px;
+}
+
+/* Fjerner evt. tidligere ::after-pil (fra lenke-stiler) */
+.wcag-btn::after {
+  content: none !important;
+}
+
+
     .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
     .btn-link.toggle { display: inline-flex; align-items: center; gap: 6px; }
     .btn-link.toggle .caret { transition: transform .15s ease; font-size: 12px; }
@@ -699,7 +730,7 @@ function renderAgg() {
     const td1 = document.createElement('td');
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'wcag-link';
+    btn.className = 'wcag-btn';
     btn.textContent = code;
     btn.title = 'Filtrer listen til kun krav ' + code;
     btn.addEventListener('click', () => {
