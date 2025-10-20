@@ -1,0 +1,8 @@
+body { font-family: system-ui, sans-serif; margin: 2rem; }
+main { max-width: 900px; }
+#q { width: 100%; padding: .6rem; margin: .5rem 0; }
+button { padding: .6rem .9rem; }
+.card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem 1.2rem; margin: 1rem 0; }
+h2 { margin: .2rem 0 .5rem; }
+h3 { margin: .8rem 0 .3rem; font-size: 1rem; }
+ul { margin: .2rem 0 .6rem 1.2rem; }
