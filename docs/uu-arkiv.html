@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UU-status – endringsarkiv</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #11161d;
+      --muted: #9fb0c3;
+      --text: #e7eef7;
+      --accent: #6fb3ff;
+      --ok: #28a745;
+      --warn: #f0ad4e;
+      --bad: #dc3545;
+      --border: #1f2a36;
+      --focus: #9dd1ff;
+      --detail-bg: #0e1420;
+      --detail-accent: #2a7de1;
+    }
+    html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    .muted { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
+    .toolbar { display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px; align-items: end; margin: 18px 0 14px; }
+    .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
+    .toolbar input, .toolbar select, .toolbar button {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      padding: 10px 12px; border-radius: 10px; outline: none;
+    }
+    .toolbar input:focus, .toolbar select:focus, .toolbar button:focus { box-shadow: 0 0 0 3px var(--focus); }
+    .toolbar button { cursor: pointer; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { text-align: left; font-weight: 600; white-space: nowrap; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
+
+    .truncate { max-width: 540px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: bottom; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>UU-status – endringsarkiv</h1>
+    <div class="muted">Viser differanser som er oppdaget i sammenligning mot forrige <code>latest.json</code>. Snapshots lagres kun når noe faktisk endres, og grupperes på <em>sist oppdatert</em> (updatedAt).</div>
+    <p><a href="./uu-status.html">← Til oversikten</a></p>
+
+    <div class="toolbar" role="region" aria-label="Filtre for endringsarkiv">
+      <div class="field">
+        <label for="q">Søk (navn/domene/URL)</label>
+        <input id="q" type="search" placeholder="Filtrer på navn, domene eller URL…" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="onlyAdded">Filtrer</label>
+        <select id="filterMode">
+          <option value="">Alle endringer</option>
+          <option value="added">Kun nye brudd</option>
+          <option value="removed">Kun fjernede brudd</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="dateFrom">Fra dato (UTC)</label>
+        <input id="dateFrom" type="date" />
+      </div>
+    </div>
+
+    <div class="cards" role="region" aria-label="Endringslogg">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th>Dato/tid</th>
+            <th>Domene</th>
+            <th>Navn</th>
+            <th>+ / −</th>
+            <th>Detaljer</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="5" class="muted">Laster endringer…</td></tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <div id="count" class="muted"></div>
+        <div class="muted">Kilde: <code>docs/data/uustatus/logs/changes.jsonl</code></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const LOG_URL = "./data/uustatus/logs/changes.jsonl";
+    const DETAILS_URL = "./uu-status-details.json";
+
+    function escapeHTML(s) {
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function canonUrl(u) {
+      try {
+        const a = new URL((u || '').trim());
+        a.hash = ''; a.search = '';
+        let host = a.hostname.toLowerCase();
+        if (a.port && !((a.protocol === 'http:' && a.port === '80') || (a.protocol === 'https:' && a.port === '443'))) {
+          host += `:${a.port}`;
+        }
+        let path = a.pathname || '';
+        if (path !== '/' && path.endsWith('/')) path = path.slice(0, -1);
+        return `${a.protocol}//${host}${path}`;
+      } catch {
+        return (u || '').trim();
+      }
+    }
+
+    // Rens vekk støy som på uustatus-sider
+    function cleanTitle(t) {
+      if (!t) return "";
+      let s = String(t).trim();
+      // Fjern "Tilgjengelighetserklæring for " i starten
+      s = s.replace(/^\s*tilgjengelighetserkl(?:æ|ae)ring\s+for\s+/i, "");
+      // Fjern " | uustatus" eller " – uustatus" på slutten
+      s = s.replace(/\s*(?:[\|\u2013-])\s*uustatus\s*$/i, "");
+      return s.trim();
+    }
+
+    const titleByUrl = new Map();
+
+    async function loadTitleMap() {
+      try {
+        const res = await fetch(DETAILS_URL, { cache: "no-store" });
+        const data = await res.json();
+        const rows = Array.isArray(data) ? data : (data.urls || []);
+        for (const r of rows) {
+          const url = r.url || r.href;
+          // Viktig: foretrekk "name" (samme som på statussiden), deretter title
+          const rawTitle = (r.name || r.title || "");
+          const title = cleanTitle(rawTitle);
+          if (url && title) {
+            titleByUrl.set(canonUrl(url), title);
+          }
+        }
+      } catch (e) {
+        console.warn("Kunne ikke laste tittel-kart:", e);
+      }
+    }
+
+    async function fetchJSONL(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error("Kunne ikke hente changes.jsonl");
+      const text = await res.text();
+      return text
+        .split("\n")
+        .map(l => l.trim())
+        .filter(Boolean)
+        .map(l => JSON.parse(l));
+    }
+
+    function resolveTitle(row) {
+      const key = canonUrl(row.url || "");
+      // Hvis vi i framtiden logger title i changes.jsonl: rens den også
+      const fromLog = row.title ? cleanTitle(row.title) : "";
+      const fromMap = titleByUrl.get(key) || "";
+      const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
+      const fallback = removed ? "Erklæring (fjernet)" : (row.url || "");
+      return fromLog || fromMap || fallback;
+    }
+
+    function passesFilters(row, state, resolvedTitle) {
+      const q = state.q;
+      const hay = (resolvedTitle || "") + " " + (row.domain || "") + " " + (row.url || "");
+      const hit = !q || hay.toLowerCase().includes(q);
+      if (!hit) return false;
+
+      if (state.mode === "added" && !(row.added && row.added.length > 0)) return false;
+      if (state.mode === "removed" && !(row.removed && row.removed.length > 0)) return false;
+
+      if (state.from) {
+        const ts = new Date(row.ts);
+        if (isNaN(ts)) return false;
+        if (ts < state.from) return false;
+      }
+      return true;
+    }
+
+    function render(rows) {
+      const tbody = document.getElementById("tbody");
+      const count = document.getElementById("count");
+      tbody.innerHTML = "";
+
+      if (!rows.length) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 5;
+        td.className = "muted";
+        td.textContent = "Ingen endringer på valgt filter.";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        count.textContent = "";
+        return;
+      }
+
+      for (const r of rows) {
+        const plus = (r.added?.length || 0);
+        const minus = (r.removed?.length || 0);
+        const tr = document.createElement("tr");
+
+        const tdTs = document.createElement("td");
+        tdTs.textContent = new Date(r.ts).toLocaleString("no-NO");
+        tr.appendChild(tdTs);
+
+        const tdDom = document.createElement("td");
+        tdDom.textContent = r.domain || "";
+        tr.appendChild(tdDom);
+
+        const tdName = document.createElement("td");
+        const title = resolveTitle(r);
+        if (r.url) {
+          tdName.innerHTML = `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a>`;
+        } else {
+          tdName.innerHTML = `<span class="truncate">${escapeHTML(title)}</span>`;
+        }
+        tr.appendChild(tdName);
+
+        const tdDiff = document.createElement("td");
+        tdDiff.textContent = `+${plus} / −${minus}`;
+        tr.appendChild(tdDiff);
+
+        const tdDet = document.createElement("td");
+        const det = document.createElement("details");
+        const sum = document.createElement("summary");
+        sum.textContent = "Vis";
+        det.appendChild(sum);
+
+        const secAdded = document.createElement("div");
+        secAdded.innerHTML = "<strong>Nye:</strong>" + (plus ? `<ul>${r.added.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
+        det.appendChild(secAdded);
+
+        const secRemoved = document.createElement("div");
+        secRemoved.innerHTML = "<strong>Fjernet:</strong>" + (minus ? `<ul>${r.removed.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
+        det.appendChild(secRemoved);
+
+        if (r.changed && Object.keys(r.changed).length) {
+          const hdr = document.createElement("div");
+          hdr.innerHTML = "<strong>Andre endringer:</strong>";
+          const pre = document.createElement("pre");
+          pre.textContent = JSON.stringify(r.changed, null, 2);
+          det.appendChild(hdr);
+          det.appendChild(pre);
+        }
+
+        const snapLink = document.createElement("div");
+        const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
+        snapLink.style.marginTop = ".5rem";
+        snapLink.innerHTML = `
+          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>
+          <a href="./data/uustatus/snapshots_by_updated/${escapeHTML(yyyyMmDd || "")}.json" target="_blank" rel="noopener">
+            Snapshot ${escapeHTML(yyyyMmDd || "")}
+          </a>`;
+        det.appendChild(snapLink);
+
+        tdDet.appendChild(det);
+        tr.appendChild(tdDet);
+
+        tbody.appendChild(tr);
+      }
+
+      count.textContent = `${rows.length} endringer`;
+    }
+
+    (async function init(){
+      const q = document.getElementById("q");
+      const mode = document.getElementById("filterMode");
+      const dateFrom = document.getElementById("dateFrom");
+
+      let all = [];
+      let state = { q: "", mode: "", from: null };
+
+      try {
+        await loadTitleMap();           // <- last navn/titler først
+        all = await fetchJSONL(LOG_URL);
+      } catch (e) {
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
+        return;
+      }
+
+      function apply(){
+        const rows = all
+          .map(r => ({ row: r, title: resolveTitle(r) }))
+          .filter(({row, title}) => passesFilters(row, state, title))
+          .sort((a,b) => new Date(b.row.ts) - new Date(a.row.ts))
+          .map(({row}) => row);
+        render(rows);
+      }
+
+      q.addEventListener("input", () => {
+        state.q = q.value.trim().toLowerCase();
+        apply();
+      });
+      mode.addEventListener("change", () => {
+        state.mode = mode.value;
+        apply();
+      });
+      dateFrom.addEventListener("change", () => {
+        state.from = dateFrom.value ? new Date(dateFrom.value + "T00:00:00Z") : null;
+        apply();
+      });
+
+      apply();
+    })();
+  </script>
+</body>
+</html>
