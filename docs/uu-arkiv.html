@@ -103,6 +103,16 @@
 
     ul { margin: 4px 0 8px 16px; padding: 0; }
     li { margin: 0 0 3px; }
+
+    /* --- Paginering --- */
+    .pager { display:flex; justify-content: space-between; align-items:center; padding:10px 6px; gap:12px; flex-wrap:wrap; }
+    .pager-left { display:flex; align-items:center; gap:8px; }
+    .pager select { background: var(--card); border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:10px; }
+    .pages { display:flex; gap:6px; flex-wrap:wrap; }
+    .btn-page { background:none; border:1px solid var(--border); color:var(--text); padding:6px 10px; border-radius:10px; cursor:pointer; }
+    .btn-page[disabled] { opacity:.5; cursor:default; }
+    .btn-page.active, .btn-page[aria-current="page"] { border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25); }
+    .pager-info { color: var(--muted); font-size: 12px; }
   </style>
 </head>
 <body>
@@ -148,6 +158,23 @@
           <tr><td colspan="5" class="muted">Laster endringer…</td></tr>
         </tbody>
       </table>
+
+      <!-- Paginering -->
+      <div class="pager" role="navigation" aria-label="Sideveksler">
+        <div class="pager-left">
+          <label for="pageSize" class="muted">Vis per side:</label>
+          <select id="pageSize" aria-label="Velg antall rader per side" title="Antall rader per side">
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="all">Alle</option>
+          </select>
+          <span id="pageInfo" class="pager-info"></span>
+        </div>
+        <div class="pages" id="pagerBtns"></div>
+      </div>
+
       <div class="footer">
         <div id="count" class="muted"></div>
         <div class="muted">Kilde: <code>docs/data/uustatus/logs/changes.jsonl</code></div>
@@ -158,6 +185,21 @@
   <script type="module">
     const LOG_URL = "./data/uustatus/logs/changes.jsonl";
     const DETAILS_URL = "./uu-status-details.json";
+
+    const tbody = document.getElementById("tbody");
+    const count = document.getElementById("count");
+    const q = document.getElementById("q");
+    const mode = document.getElementById("filterMode");
+    const dateFrom = document.getElementById("dateFrom");
+    const pageSizeSel = document.getElementById("pageSize");
+    const pagerBtns = document.getElementById("pagerBtns");
+    const pageInfo = document.getElementById("pageInfo");
+
+    let all = [];
+    let view = [];
+    let state = { q: "", mode: "", from: null };
+    let page = 1;
+    let pageSize = 20;
 
     function escapeHTML(s) {
       return String(s)
@@ -230,7 +272,6 @@
 
     function formatChanges(changed) {
       if (!changed || typeof changed !== "object") return "";
-
       const parts = [];
       if (changed.totalNonConformities) {
         const before = changed.totalNonConformities.before;
@@ -253,10 +294,8 @@
       const hay = (resolvedTitle || "") + " " + (row.domain || "") + " " + (row.url || "");
       const hit = !q || hay.toLowerCase().includes(q);
       if (!hit) return false;
-
       if (state.mode === "added" && !(row.added && row.added.length > 0)) return false;
       if (state.mode === "removed" && !(row.removed && row.removed.length > 0)) return false;
-
       if (state.from) {
         const ts = new Date(row.ts);
         if (isNaN(ts)) return false;
@@ -265,50 +304,49 @@
       return true;
     }
 
-    function render(rows) {
-      const tbody = document.getElementById("tbody");
-      const count = document.getElementById("count");
-      tbody.innerHTML = "";
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+    function buildPageList(totalPages, current) {
+      if (totalPages <= 9) return Array.from({ length: totalPages }, (_, i) => i + 1);
+      const pages = [1];
+      const start = Math.max(2, current - 2);
+      const end = Math.min(totalPages - 1, current + 2);
+      if (start > 2) pages.push("…");
+      for (let i = start; i <= end; i++) pages.push(i);
+      if (end < totalPages - 1) pages.push("…");
+      pages.push(totalPages);
+      return pages;
+    }
 
-      if (!rows.length) {
-        const tr = document.createElement("tr");
-        const td = document.createElement("td");
-        td.colSpan = 5;
-        td.className = "muted";
-        td.textContent = "Ingen endringer på valgt filter.";
-        tr.appendChild(td);
-        tbody.appendChild(tr);
+    function render() {
+      tbody.innerHTML = "";
+      const total = view.length;
+      const isAll = (pageSize === Infinity);
+      const totalPages = isAll ? 1 : Math.max(1, Math.ceil(total / pageSize));
+      page = clamp(page, 1, totalPages);
+      const startIdx = isAll ? 0 : (page - 1) * pageSize;
+      const endIdx = isAll ? total : Math.min(startIdx + pageSize, total);
+      const pageRows = view.slice(startIdx, endIdx);
+
+      if (!pageRows.length) {
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Ingen endringer på valgt filter.</td></tr>`;
         count.textContent = "";
+        pageInfo.textContent = "";
+        pagerBtns.innerHTML = "";
         return;
       }
 
-      for (const r of rows) {
+      for (const r of pageRows) {
         const plus = (r.added?.length || 0);
         const minus = (r.removed?.length || 0);
         const tr = document.createElement("tr");
-
-        const tdTs = document.createElement("td");
-        tdTs.textContent = new Date(r.ts).toLocaleString("no-NO");
-        tr.appendChild(tdTs);
-
-        const tdDom = document.createElement("td");
-        tdDom.textContent = r.domain || "";
-        tr.appendChild(tdDom);
-
-        const tdName = document.createElement("td");
-        const title = resolveTitle(r);
-        if (r.url) {
-          tdName.innerHTML = `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a>`;
-        } else {
-          tdName.innerHTML = `<span class="truncate">${escapeHTML(title)}</span>`;
-        }
-        tr.appendChild(tdName);
-
-        const tdDiff = document.createElement("td");
-        tdDiff.textContent = `+${plus} / −${minus}`;
-        tr.appendChild(tdDiff);
-
-        const tdDet = document.createElement("td");
+        tr.innerHTML = `
+          <td>${new Date(r.ts).toLocaleString("no-NO")}</td>
+          <td>${escapeHTML(r.domain || "")}</td>
+          <td>${r.url ? `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(resolveTitle(r))}</a>` : `<span class="truncate">${escapeHTML(resolveTitle(r))}</span>`}</td>
+          <td>+${plus} / −${minus}</td>
+          <td></td>
+        `;
+        const tdDet = tr.lastElementChild;
         const det = document.createElement("details");
         const sum = document.createElement("summary");
         sum.textContent = "Vis detaljer";
@@ -341,54 +379,73 @@
         det.appendChild(snapLink);
 
         tdDet.appendChild(det);
-        tr.appendChild(tdDet);
         tbody.appendChild(tr);
       }
 
-      count.textContent = `${rows.length} endringer`;
+      count.textContent = `${total} endringer`;
+      const a = isAll ? 1 : startIdx + 1;
+      const b = isAll ? total : endIdx;
+      pageInfo.textContent = `Viser ${a}–${b} av ${total}`;
+
+      pagerBtns.innerHTML = "";
+      if (!isAll && totalPages > 1) {
+        const makeBtn = (txt, label, disabled, onClick) => {
+          const b = document.createElement("button");
+          b.className = "btn-page";
+          b.textContent = txt;
+          if (label) b.setAttribute("aria-label", label);
+          b.disabled = !!disabled;
+          if (!disabled) b.addEventListener("click", onClick);
+          return b;
+        };
+        pagerBtns.appendChild(makeBtn("«","Første side",page===1,()=>{page=1;render();}));
+        pagerBtns.appendChild(makeBtn("‹","Forrige side",page===1,()=>{page--;render();}));
+        for (const p of buildPageList(totalPages,page)) {
+          if (p==="…") {
+            const dot=document.createElement("span");dot.className="btn-page";dot.textContent="…";pagerBtns.appendChild(dot);
+          } else {
+            const b=makeBtn(String(p),null,false,()=>{page=p;render();});
+            if (p===page) b.setAttribute("aria-current","page");
+            pagerBtns.appendChild(b);
+          }
+        }
+        pagerBtns.appendChild(makeBtn("›","Neste side",page===totalPages,()=>{page++;render();}));
+        pagerBtns.appendChild(makeBtn("»","Siste side",page===totalPages,()=>{page=totalPages;render();}));
+      }
     }
 
-    (async function init(){
-      const q = document.getElementById("q");
-      const mode = document.getElementById("filterMode");
-      const dateFrom = document.getElementById("dateFrom");
-
-      let all = [];
-      let state = { q: "", mode: "", from: null };
-
+    async function init(){
       try {
         await loadTitleMap();
         all = await fetchJSONL(LOG_URL);
       } catch (e) {
-        const tbody = document.getElementById("tbody");
         tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
         return;
       }
 
       function apply(){
-        const rows = all
+        view = all
           .map(r => ({ row: r, title: resolveTitle(r) }))
           .filter(({row, title}) => passesFilters(row, state, title))
           .sort((a,b) => new Date(b.row.ts) - new Date(a.row.ts))
           .map(({row}) => row);
-        render(rows);
+        render();
       }
 
-      q.addEventListener("input", () => {
-        state.q = q.value.trim().toLowerCase();
-        apply();
-      });
-      mode.addEventListener("change", () => {
-        state.mode = mode.value;
-        apply();
-      });
-      dateFrom.addEventListener("change", () => {
-        state.from = dateFrom.value ? new Date(dateFrom.value + "T00:00:00Z") : null;
-        apply();
+      q.addEventListener("input", () => { state.q = q.value.trim().toLowerCase(); apply(); });
+      mode.addEventListener("change", () => { state.mode = mode.value; apply(); });
+      dateFrom.addEventListener("change", () => { state.from = dateFrom.value ? new Date(dateFrom.value + "T00:00:00Z") : null; apply(); });
+      pageSizeSel.addEventListener("change", () => {
+        const v = pageSizeSel.value;
+        pageSize = v === "all" ? Infinity : parseInt(v);
+        page = 1;
+        render();
       });
 
       apply();
-    })();
+    }
+
+    init();
   </script>
 </body>
 </html>
