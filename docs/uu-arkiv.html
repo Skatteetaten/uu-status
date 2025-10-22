@@ -48,7 +48,7 @@
     }
 
     .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
-    .toolbar input, .toolbar select {
+    .toolbar input, .toolbar select, .toolbar button {
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--text);
@@ -57,7 +57,7 @@
       outline: none;
     }
 
-    .toolbar input:focus, .toolbar select:focus {
+    .toolbar input:focus, .toolbar select:focus, .toolbar button:focus {
       box-shadow: 0 0 0 3px var(--focus);
     }
 
@@ -77,7 +77,9 @@
       margin-bottom: 4px;
     }
 
-    details[open] summary { margin-bottom: 6px; }
+    details[open] summary {
+      margin-bottom: 6px;
+    }
 
     .footer {
       display:flex;
@@ -101,16 +103,6 @@
 
     ul { margin: 4px 0 8px 16px; padding: 0; }
     li { margin: 0 0 3px; }
-
-    /* --- PAGINERING --- */
-    .pager { display:flex; justify-content: space-between; align-items:center; padding:10px 6px; gap:12px; flex-wrap:wrap; }
-    .pager-left { display:flex; align-items:center; gap:8px; }
-    .pager select { background: var(--card); border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:10px; }
-    .pages { display:flex; gap:6px; flex-wrap:wrap; }
-    .btn-page { background:none; border:1px solid var(--border); color:var(--text); padding:6px 10px; border-radius:10px; cursor:pointer; }
-    .btn-page[disabled] { opacity:.5; cursor:default; }
-    .btn-page.active, .btn-page[aria-current="page"] { border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25); }
-    .pager-info { color: var(--muted); font-size: 12px; }
   </style>
 </head>
 <body>
@@ -156,23 +148,6 @@
           <tr><td colspan="5" class="muted">Laster endringer…</td></tr>
         </tbody>
       </table>
-
-      <!-- Paginering -->
-      <div class="pager" role="navigation" aria-label="Sideveksler">
-        <div class="pager-left">
-          <label for="pageSize" class="muted">Vis per side:</label>
-          <select id="pageSize" aria-label="Velg antall rader per side" title="Antall rader per side">
-            <option value="20" selected>20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-            <option value="all">Alle</option>
-          </select>
-          <span id="pageInfo" class="pager-info"></span>
-        </div>
-        <div class="pages" id="pagerBtns"></div>
-      </div>
-
       <div class="footer">
         <div id="count" class="muted"></div>
         <div class="muted">Kilde: <code>docs/data/uustatus/logs/changes.jsonl</code></div>
@@ -181,236 +156,239 @@
   </div>
 
   <script type="module">
-    const LOG_URL = location.pathname.includes('/docs/')
-      ? './data/uustatus/logs/changes.jsonl'
-      : './docs/data/uustatus/logs/changes.jsonl';
-    const DETAILS_URL = './uu-status-details.json';
+    const LOG_URL = "./data/uustatus/logs/changes.jsonl";
+    const DETAILS_URL = "./uu-status-details.json";
 
-    const tbody = document.getElementById("tbody");
-    const count = document.getElementById("count");
-    const q = document.getElementById("q");
-    const mode = document.getElementById("filterMode");
-    const dateFrom = document.getElementById("dateFrom");
-    const pageSizeSel = document.getElementById("pageSize");
-    const pagerBtns = document.getElementById("pagerBtns");
-    const pageInfo = document.getElementById("pageInfo");
-
-    let all = [];
-    let view = [];
-    let state = { q: "", mode: "", from: null };
-    let page = 1;
-    let pageSize = 20;
-
-    function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
-    function buildPageList(totalPages,current){
-      if(totalPages<=9)return Array.from({length:totalPages},(_,i)=>i+1);
-      const pages=[1];
-      const start=Math.max(2,current-2);
-      const end=Math.min(totalPages-1,current+2);
-      if(start>2)pages.push("…");
-      for(let i=start;i<=end;i++)pages.push(i);
-      if(end<totalPages-1)pages.push("…");
-      pages.push(totalPages);
-      return pages;
+    function escapeHTML(s) {
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
 
-    function escapeHTML(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
-
-    function canonUrl(u){
-      try{
-        const a=new URL((u||"").trim());
-        a.hash="";a.search="";
-        let host=a.hostname.toLowerCase();
-        if(a.port&&!((a.protocol==="http:"&&a.port==="80")||(a.protocol==="https:"&&a.port==="443"))){host+=`:${a.port}`;}
-        let path=a.pathname||"";
-        if(path!=="/"&&path.endsWith("/"))path=path.slice(0,-1);
-        return`${a.protocol}//${host}${path}`;
-      }catch{return(u||"").trim();}
+    function canonUrl(u) {
+      try {
+        const a = new URL((u || '').trim());
+        a.hash = ''; a.search = '';
+        let host = a.hostname.toLowerCase();
+        if (a.port && !((a.protocol === 'http:' && a.port === '80') || (a.protocol === 'https:' && a.port === '443'))) {
+          host += `:${a.port}`;
+        }
+        let path = a.pathname || '';
+        if (path !== '/' && path.endsWith('/')) path = path.slice(0, -1);
+        return `${a.protocol}//${host}${path}`;
+      } catch {
+        return (u || '').trim();
+      }
     }
 
-    function cleanTitle(t){
-      if(!t)return"";
-      let s=String(t).trim();
-      s=s.replace(/^\s*tilgjengelighetserkl(?:æ|ae)ring\s+for\s+/i,"");
-      s=s.replace(/\s*(?:[\|\u2013-])\s*uustatus\s*$/i,"");
+    function cleanTitle(t) {
+      if (!t) return "";
+      let s = String(t).trim();
+      s = s.replace(/^\s*tilgjengelighetserkl(?:æ|ae)ring\s+for\s+/i, "");
+      s = s.replace(/\s*(?:[\|\u2013-])\s*uustatus\s*$/i, "");
       return s.trim();
     }
 
-    const titleByUrl=new Map();
-    async function loadTitleMap(){
-      try{
-        const res=await fetch(DETAILS_URL,{cache:"no-store"});
-        const data=await res.json();
-        const rows=Array.isArray(data)?data:(data.urls||[]);
-        for(const r of rows){
-          const url=r.url||r.href;
-          const rawTitle=(r.name||r.title||"");
-          const title=cleanTitle(rawTitle);
-          if(url&&title){titleByUrl.set(canonUrl(url),title);}
+    const titleByUrl = new Map();
+
+    async function loadTitleMap() {
+      try {
+        const res = await fetch(DETAILS_URL, { cache: "no-store" });
+        const data = await res.json();
+        const rows = Array.isArray(data) ? data : (data.urls || []);
+        for (const r of rows) {
+          const url = r.url || r.href;
+          const rawTitle = (r.name || r.title || "");
+          const title = cleanTitle(rawTitle);
+          if (url && title) {
+            titleByUrl.set(canonUrl(url), title);
+          }
         }
-      }catch(e){console.warn("Kunne ikke laste tittel-kart:",e);}
-    }
-
-    async function fetchJSONL(url){
-      const res=await fetch(url,{cache:"no-store"});
-      if(!res.ok)throw new Error("Kunne ikke hente changes.jsonl");
-      const text=await res.text();
-      return text.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>JSON.parse(l));
-    }
-
-    function resolveTitle(row){
-      const key=canonUrl(row.url||"");
-      const fromLog=row.title?cleanTitle(row.title):"";
-      const fromMap=titleByUrl.get(key)||"";
-      const removed=(row.changed&&(row.changed.removedEntry||row.changed.removedUrl));
-      const fallback=removed?"Erklæring (fjernet)":(row.url||"");
-      return fromLog||fromMap||fallback;
-    }
-
-    function formatChanges(changed){
-      if(!changed||typeof changed!=="object")return"";
-      const parts=[];
-      if(changed.totalNonConformities){
-        const b=changed.totalNonConformities.before;
-        const a=changed.totalNonConformities.after;
-        if(b!==undefined&&a!==undefined)parts.push(`Antall brudd endret fra ${b} til ${a}.`);
+      } catch (e) {
+        console.warn("Kunne ikke laste tittel-kart:", e);
       }
-      if(changed.totalWarnings){parts.push(`Antall advarsler endret fra ${changed.totalWarnings.before} til ${changed.totalWarnings.after}.`);}
-      if(changed.statementUpdatedAt){parts.push("Selve erklæringen er oppdatert.");}
-      return parts.length?parts.join(" "):"Andre små endringer registrert.";
     }
 
-    function passesFilters(row,state,resolvedTitle){
-      const q=state.q;
-      const hay=(resolvedTitle||"")+" "+(row.domain||"")+" "+(row.url||"");
-      const hit=!q||hay.toLowerCase().includes(q);
-      if(!hit)return false;
-      if(state.mode==="added"&&!(row.added&&row.added.length>0))return false;
-      if(state.mode==="removed"&&!(row.removed&&row.removed.length>0))return false;
-      if(state.from){
-        const ts=new Date(row.ts);
-        if(isNaN(ts)||ts<state.from)return false;
+    async function fetchJSONL(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error("Kunne ikke hente changes.jsonl");
+      const text = await res.text();
+      return text.split("\n").map(l => l.trim()).filter(Boolean).map(l => JSON.parse(l));
+    }
+
+    function resolveTitle(row) {
+      const key = canonUrl(row.url || "");
+      const fromLog = row.title ? cleanTitle(row.title) : "";
+      const fromMap = titleByUrl.get(key) || "";
+      const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
+      const fallback = removed ? "Erklæring (fjernet)" : (row.url || "");
+      return fromLog || fromMap || fallback;
+    }
+
+    function formatChanges(changed) {
+      if (!changed || typeof changed !== "object") return "";
+
+      const parts = [];
+      if (changed.totalNonConformities) {
+        const before = changed.totalNonConformities.before;
+        const after = changed.totalNonConformities.after;
+        if (before !== undefined && after !== undefined) {
+          parts.push(`Antall brudd endret fra ${before} til ${after}.`);
+        }
+      }
+      if (changed.totalWarnings) {
+        parts.push(`Antall advarsler endret fra ${changed.totalWarnings.before} til ${changed.totalWarnings.after}.`);
+      }
+      if (changed.statementUpdatedAt) {
+        parts.push("Selve erklæringen er oppdatert.");
+      }
+      return parts.length ? parts.join(" ") : "Andre små endringer registrert.";
+    }
+
+    function passesFilters(row, state, resolvedTitle) {
+      const q = state.q;
+      const hay = (resolvedTitle || "") + " " + (row.domain || "") + " " + (row.url || "");
+      const hit = !q || hay.toLowerCase().includes(q);
+      if (!hit) return false;
+
+      if (state.mode === "added" && !(row.added && row.added.length > 0)) return false;
+      if (state.mode === "removed" && !(row.removed && row.removed.length > 0)) return false;
+
+      if (state.from) {
+        const ts = new Date(row.ts);
+        if (isNaN(ts)) return false;
+        if (ts < state.from) return false;
       }
       return true;
     }
 
-    function render(){
-      tbody.innerHTML="";
-      const total=view.length;
-      const isAll=(pageSize===Infinity);
-      const totalPages=isAll?1:Math.max(1,Math.ceil(total/pageSize));
-      page=clamp(page,1,totalPages);
-      const startIdx=isAll?0:(page-1)*pageSize;
-      const endIdx=isAll?total:Math.min(startIdx+pageSize,total);
-      const pageRows=view.slice(startIdx,endIdx);
+    function render(rows) {
+      const tbody = document.getElementById("tbody");
+      const count = document.getElementById("count");
+      tbody.innerHTML = "";
 
-      if(!pageRows.length){
-        const tr=document.createElement("tr");
-        const td=document.createElement("td");
-        td.colSpan=5;td.className="muted";td.textContent="Ingen endringer på valgt filter.";
-        tr.appendChild(td);tbody.appendChild(tr);
-        count.textContent="";pageInfo.textContent="";pagerBtns.innerHTML="";
+      if (!rows.length) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 5;
+        td.className = "muted";
+        td.textContent = "Ingen endringer på valgt filter.";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        count.textContent = "";
         return;
       }
 
-      for(const r of pageRows){
-        const plus=(r.added?.length||0),minus=(r.removed?.length||0);
-        const tr=document.createElement("tr");
-        const tdTs=document.createElement("td");
-        tdTs.textContent=new Date(r.ts).toLocaleString("no-NO");
+      for (const r of rows) {
+        const plus = (r.added?.length || 0);
+        const minus = (r.removed?.length || 0);
+        const tr = document.createElement("tr");
+
+        const tdTs = document.createElement("td");
+        tdTs.textContent = new Date(r.ts).toLocaleString("no-NO");
         tr.appendChild(tdTs);
-        const tdDom=document.createElement("td");tdDom.textContent=r.domain||"";tr.appendChild(tdDom);
-        const tdName=document.createElement("td");
-        const title=resolveTitle(r);
-        tdName.innerHTML=r.url?`<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a>`:`<span class="truncate">${escapeHTML(title)}</span>`;
+
+        const tdDom = document.createElement("td");
+        tdDom.textContent = r.domain || "";
+        tr.appendChild(tdDom);
+
+        const tdName = document.createElement("td");
+        const title = resolveTitle(r);
+        if (r.url) {
+          tdName.innerHTML = `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a>`;
+        } else {
+          tdName.innerHTML = `<span class="truncate">${escapeHTML(title)}</span>`;
+        }
         tr.appendChild(tdName);
-        const tdDiff=document.createElement("td");
-        tdDiff.textContent=`+${plus} / −${minus}`;
+
+        const tdDiff = document.createElement("td");
+        tdDiff.textContent = `+${plus} / −${minus}`;
         tr.appendChild(tdDiff);
-        const tdDet=document.createElement("td");
-        const det=document.createElement("details");
-        const sum=document.createElement("summary");
-        sum.textContent="Vis detaljer";det.appendChild(sum);
-        const secAdded=document.createElement("div");
-        secAdded.innerHTML="<strong>Nye brudd:</strong>"+(plus?`<ul>${r.added.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>`:" <span class='muted'>Ingen</span>");
+
+        const tdDet = document.createElement("td");
+        const det = document.createElement("details");
+        const sum = document.createElement("summary");
+        sum.textContent = "Vis detaljer";
+        det.appendChild(sum);
+
+        const secAdded = document.createElement("div");
+        secAdded.innerHTML = "<strong>Nye brudd:</strong>" +
+          (plus ? `<ul>${r.added.map(x => `<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
         det.appendChild(secAdded);
-        const secRemoved=document.createElement("div");
-        secRemoved.innerHTML="<strong>Fjernede brudd:</strong>"+(minus?`<ul>${r.removed.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>`:" <span class='muted'>Ingen</span>");
+
+        const secRemoved = document.createElement("div");
+        secRemoved.innerHTML = "<strong>Fjernede brudd:</strong>" +
+          (minus ? `<ul>${r.removed.map(x => `<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
         det.appendChild(secRemoved);
-        if(r.changed&&Object.keys(r.changed).length){
-          const hdr=document.createElement("div");
-          hdr.innerHTML="<strong>Andre endringer:</strong> "+escapeHTML(formatChanges(r.changed));
+
+        if (r.changed && Object.keys(r.changed).length) {
+          const hdr = document.createElement("div");
+          hdr.innerHTML = "<strong>Andre endringer:</strong> " + escapeHTML(formatChanges(r.changed));
           det.appendChild(hdr);
         }
-        const snap=document.createElement("div");
-        const ymd=(r.updatedDate||(r.ts||"").slice(0,10));
-        snap.style.marginTop=".5rem";
-        snap.innerHTML=`<div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(ymd||"")}</div><a href="./data/uustatus/snapshots_by_updated/${escapeHTML(ymd||"")}.json" target="_blank" rel="noopener">Åpne snapshot ${escapeHTML(ymd||"")}</a>`;
-        det.appendChild(snap);
+
+        const snapLink = document.createElement("div");
+        const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
+        snapLink.style.marginTop = ".5rem";
+        snapLink.innerHTML = `
+          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>
+          <a href="./data/uustatus/snapshots_by_updated/${escapeHTML(yyyyMmDd || "")}.json" target="_blank" rel="noopener">
+            Åpne snapshot ${escapeHTML(yyyyMmDd || "")}
+          </a>`;
+        det.appendChild(snapLink);
+
         tdDet.appendChild(det);
         tr.appendChild(tdDet);
         tbody.appendChild(tr);
       }
 
-      count.textContent=`${total} endringer`;
-      const a=isAll?1:startIdx+1,b=isAll?total:endIdx;
-      pageInfo.textContent=`Viser ${a}–${b} av ${total}`;
-
-      // Pager-knapper
-      pagerBtns.innerHTML="";
-      if(!isAll&&totalPages>1){
-        const makeBtn=(txt,label,disabled,onClick)=>{
-          const b=document.createElement("button");
-          b.className="btn-page";b.textContent=txt;
-          if(label)b.setAttribute("aria-label",label);
-          b.disabled=!!disabled;
-          if(!disabled)b.addEventListener("click",onClick);
-          return b;
-        };
-        pagerBtns.appendChild(makeBtn("«","Første side",page===1,()=>{page=1;render();}));
-        pagerBtns.appendChild(makeBtn("‹","Forrige side",page===1,()=>{page=Math.max(1,page-1);render();}));
-        for(const p of buildPageList(totalPages,page)){
-          if(p==="…"){const dot=document.createElement("span");dot.className="btn-page";dot.textContent="…";dot.style.cursor="default";pagerBtns.appendChild(dot);}
-          else {
-            const b=makeBtn(String(p),null,false,()=>{page=p;render();});
-            if(p===page)b.setAttribute("aria-current","page");
-            pagerBtns.appendChild(b);
-          }
-        }
-        pagerBtns.appendChild(makeBtn("›","Neste side",page===totalPages,()=>{page=Math.min(totalPages,page+1);render();}));
-        pagerBtns.appendChild(makeBtn("»","Siste side",page===totalPages,()=>{page=totalPages;render();}));
-      }
+      count.textContent = `${rows.length} endringer`;
     }
 
-    async function init(){
-      try{
+    (async function init(){
+      const q = document.getElementById("q");
+      const mode = document.getElementById("filterMode");
+      const dateFrom = document.getElementById("dateFrom");
+
+      let all = [];
+      let state = { q: "", mode: "", from: null };
+
+      try {
         await loadTitleMap();
-        all=await fetchJSONL(LOG_URL);
-        apply();
-      }catch(e){
-        tbody.innerHTML=`<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
-        console.error(e);
+        all = await fetchJSONL(LOG_URL);
+      } catch (e) {
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
+        return;
       }
-    }
 
-    function apply(){
-      const qVal=q.value.trim().toLowerCase();
-      state.q=qVal;
-      view=all.filter(r=>passesFilters(r,state,resolveTitle(r)));
-      render();
-    }
+      function apply(){
+        const rows = all
+          .map(r => ({ row: r, title: resolveTitle(r) }))
+          .filter(({row, title}) => passesFilters(row, state, title))
+          .sort((a,b) => new Date(b.row.ts) - new Date(a.row.ts))
+          .map(({row}) => row);
+        render(rows);
+      }
 
-    q.addEventListener("input",apply);
-    mode.addEventListener("change",()=>{state.mode=mode.value;apply();});
-    dateFrom.addEventListener("change",()=>{state.from=dateFrom.value?new Date(dateFrom.value+"T00:00:00Z"):null;apply();});
-    pageSizeSel.addEventListener("change",()=>{
-      const v=pageSizeSel.value;
-      pageSize=v==="all"?Infinity:parseInt(v,10);
-      page=1;
-      render();
-    });
+      q.addEventListener("input", () => {
+        state.q = q.value.trim().toLowerCase();
+        apply();
+      });
+      mode.addEventListener("change", () => {
+        state.mode = mode.value;
+        apply();
+      });
+      dateFrom.addEventListener("change", () => {
+        state.from = dateFrom.value ? new Date(dateFrom.value + "T00:00:00Z") : null;
+        apply();
+      });
 
-    init();
+      apply();
+    })();
   </script>
 </body>
 </html>
