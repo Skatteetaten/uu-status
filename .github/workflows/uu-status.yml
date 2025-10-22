@@ -13,13 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repo
+      - name: Check out repo (full historikk + behold filer)
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0         # full historikk
+          fetch-depth: 0       # henter hele historikken (nødvendig for baseline)
           ref: main
-          clean: false           # behold eksisterende filer (docs/latest.json m.m.)
+          fetch-tags: true
+          clean: false         # behold eksisterende filer (f.eks. docs/latest.json)
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -32,6 +33,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          # for HTML-parsing i enrich-steget
           pip install beautifulsoup4 requests
 
       - name: Build UU-status CSV + details
