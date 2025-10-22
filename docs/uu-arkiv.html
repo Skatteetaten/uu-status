@@ -102,7 +102,7 @@
     ul { margin: 4px 0 8px 16px; padding: 0; }
     li { margin: 0 0 3px; }
 
-    /* Paginering */
+    /* --- PAGINERING --- */
     .pager { display:flex; justify-content: space-between; align-items:center; padding:10px 6px; gap:12px; flex-wrap:wrap; }
     .pager-left { display:flex; align-items:center; gap:8px; }
     .pager select { background: var(--card); border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:10px; }
@@ -181,8 +181,10 @@
   </div>
 
   <script type="module">
-    const LOG_URL = "./data/uustatus/logs/changes.jsonl";
-    const DETAILS_URL = "./uu-status-details.json";
+    const LOG_URL = location.pathname.includes('/docs/')
+      ? './data/uustatus/logs/changes.jsonl'
+      : './docs/data/uustatus/logs/changes.jsonl';
+    const DETAILS_URL = './uu-status-details.json';
 
     const tbody = document.getElementById("tbody");
     const count = document.getElementById("count");
@@ -371,4 +373,44 @@
           if(p==="…"){const dot=document.createElement("span");dot.className="btn-page";dot.textContent="…";dot.style.cursor="default";pagerBtns.appendChild(dot);}
           else {
             const b=makeBtn(String(p),null,false,()=>{page=p;render();});
-            if
+            if(p===page)b.setAttribute("aria-current","page");
+            pagerBtns.appendChild(b);
+          }
+        }
+        pagerBtns.appendChild(makeBtn("›","Neste side",page===totalPages,()=>{page=Math.min(totalPages,page+1);render();}));
+        pagerBtns.appendChild(makeBtn("»","Siste side",page===totalPages,()=>{page=totalPages;render();}));
+      }
+    }
+
+    async function init(){
+      try{
+        await loadTitleMap();
+        all=await fetchJSONL(LOG_URL);
+        apply();
+      }catch(e){
+        tbody.innerHTML=`<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
+        console.error(e);
+      }
+    }
+
+    function apply(){
+      const qVal=q.value.trim().toLowerCase();
+      state.q=qVal;
+      view=all.filter(r=>passesFilters(r,state,resolveTitle(r)));
+      render();
+    }
+
+    q.addEventListener("input",apply);
+    mode.addEventListener("change",()=>{state.mode=mode.value;apply();});
+    dateFrom.addEventListener("change",()=>{state.from=dateFrom.value?new Date(dateFrom.value+"T00:00:00Z"):null;apply();});
+    pageSizeSel.addEventListener("change",()=>{
+      const v=pageSizeSel.value;
+      pageSize=v==="all"?Infinity:parseInt(v,10);
+      page=1;
+      render();
+    });
+
+    init();
+  </script>
+</body>
+</html>
