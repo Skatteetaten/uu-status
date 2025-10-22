@@ -13,12 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # --- Hent repo med full historikk (viktig for diffs mellom snapshots)
       - name: Check out repo
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0   # må være 0 for at build_uu_archive.py skal finne forrige snapshots
+          fetch-depth: 0         # full historikk
+          ref: main
+          clean: false           # behold eksisterende filer (docs/latest.json m.m.)
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -31,7 +32,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          # for HTML-parsing i enrich-steget
           pip install beautifulsoup4 requests
 
       - name: Build UU-status CSV + details
@@ -56,7 +56,6 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
-      # --- Lett sanity: hvor mange har faktisk koder etter enrich?
       - name: Sanity summary (codes present in details)
         run: |
           python - <<'PY'
@@ -68,7 +67,6 @@ jobs:
           print(f"details.json entries: {len(rows)} | with codes: {with_codes}")
           PY
 
-      # --- Lett inspeksjon av baseline i HEAD (nyttig ved feilsøking)
       - name: Inspect HEAD baseline (light)
         run: |
           echo "Branch: $(git rev-parse --abbrev-ref HEAD)"
@@ -85,31 +83,24 @@ jobs:
               print("0 (could not read baseline)")
           PY
 
-      # --- Bygg arkivet (diffs + snapshots)
       - name: Build archive (diff & event snapshots)
         env:
-          # robust: prøv HEAD, HEAD~1, ... for å finne en baseline med endringer
           AUTO_BACKTRACK: "1"
           MAX_BACKTRACK: "20"
         run: |
           python build_uu_archive.py
 
-      # --- Commit oppdaterte filer hvis noe faktisk har endret seg
       - name: Commit updated CSV, details and page (if changed)
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add uu-status.csv uu-status-details.json || true
           git add -A docs
-
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            echo "Changes detected. Committing and pushing..."
             git commit -m "Update UU-status + archive (csv, details, page, snapshots, changes)"
-            # Rebase i tilfelle det er kommet nye commits siden sist
             git pull --rebase
             git push
           fi
