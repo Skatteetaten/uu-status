@@ -271,9 +271,9 @@
       "totalNonConformities": 0
     },
     {
-      "url": "https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3",
+      "url": "https://uustatus.no/nb/erklaringer/publisert/7f062dc7-c923-4032-b24e-600e0520a14c",
       "domain": "uustatus.no",
-      "title": "Tilgjengelighetserklæring for Fullmakt - bidrag og tilbakebetaling | uustatus",
+      "title": "Tilgjengelighetserklæring for Klage på eller henvendelse om motregning - bidrag og tilbakebetaling | uustatus",
       "updatedAt": "",
       "nonConformities": [],
       "totalNonConformities": 0
@@ -603,10 +603,8 @@
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Min skatteplikt | uustatus",
       "updatedAt": "",
-      "nonConformities": [
-        "1.3.1"
-      ],
-      "totalNonConformities": 1
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/eb130211-e58f-4677-9a3e-319446e3f898",
@@ -990,14 +988,6 @@
       "url": "https://uustatus.no/nb/erklaringer/publisert/da746138-2ec0-464d-8442-61a65639f0bb",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet | uustatus",
-      "updatedAt": "",
-      "nonConformities": [],
-      "totalNonConformities": 0
-    },
-    {
-      "url": "https://uustatus.no/nb/erklaringer/publisert/65d9e9e9-1611-4fd6-bcca-1fd5ca56646d",
-      "domain": "uustatus.no",
-      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring | uustatus",
       "updatedAt": "",
       "nonConformities": [],
       "totalNonConformities": 0
