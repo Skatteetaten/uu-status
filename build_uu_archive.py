@@ -127,7 +127,7 @@ def normalize_entry(raw: dict):
     url = (raw.get("url") or raw.get("href") or "").strip()
     domain = (raw.get("domain") or to_domain(url)).strip()
     title = (raw.get("title") or raw.get("name") or "").strip()
-    updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or "").strip()
+    updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or raw.get("last_checked") or "").strip()
 
     codes = _extract_codes(raw)
     total = _extract_total(raw)
@@ -187,6 +187,17 @@ def read_prev_from_ref(ref: str):
         return urls if isinstance(urls, list) else []
     except Exception:
         return []  # <- viktig
+
+def read_prev_local():
+    """Les baseline latest.json fra lokal fil (hvis den eksisterer).
+       Dette sikrer at vi bruker den nyeste baseline som ble generert, ikke bare git.
+    """
+    data = load_json(LATEST_JSON)
+    if isinstance(data, dict) and isinstance(data.get("urls"), list):
+        return data["urls"]
+    if isinstance(data, list):
+        return data
+    return []
 
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
@@ -341,14 +352,28 @@ def main():
     final_changes = []
     used_ref = None
 
-    # Prøv alle refs. diff_once() håndterer tom baseline/0 keys.
-    for ref in refs:
-        prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
-        changes = diff_once(prev_rows, curr)
+    # VIKTIG: Sjekk den lokale latest.json først (den nyeste baseline)
+    # Dette forhindrer at samme endring registreres flere ganger
+    prev_rows_local = read_prev_local()
+    if prev_rows_local:
+        print(f"Bruker lokal baseline ({LATEST_JSON}): {len(prev_rows_local)} elementer")
+        changes = diff_once(prev_rows_local, curr)
         if changes:
-            used_ref = ref
+            used_ref = "(local)"
             final_changes = changes
-            break
+        else:
+            print("Ingen endringer funnet mot lokal baseline.")
+    
+    # Hvis ingen endringer funnet mot lokal baseline, prøv git-refs
+    if not final_changes:
+        print("Prøver git-refs for baseline...")
+        for ref in refs:
+            prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
+            changes = diff_once(prev_rows, curr)
+            if changes:
+                used_ref = ref
+                final_changes = changes
+                break
 
     if not final_changes:
         # Siste forsvar: snapshot ALT
