@@ -188,17 +188,6 @@ def read_prev_from_ref(ref: str):
     except Exception:
         return []  # <- viktig
 
-def read_prev_local():
-    """Les baseline latest.json fra lokal fil (hvis den eksisterer).
-       Dette sikrer at vi bruker den nyeste baseline som ble generert, ikke bare git.
-    """
-    data = load_json(LATEST_JSON)
-    if isinstance(data, dict) and isinstance(data.get("urls"), list):
-        return data["urls"]
-    if isinstance(data, list):
-        return data
-    return []
-
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
 
@@ -352,34 +341,29 @@ def main():
     final_changes = []
     used_ref = None
 
-    # VIKTIG: Sjekk den lokale latest.json først (den nyeste baseline)
-    # Dette forhindrer at samme endring registreres flere ganger
-    prev_rows_local = read_prev_local()
-    if prev_rows_local:
-        print(f"Bruker lokal baseline ({LATEST_JSON}): {len(prev_rows_local)} elementer")
-        changes = diff_once(prev_rows_local, curr)
+    # VIKTIG: Les baseline fra git HEAD (siste committede versjon)
+    # Dette sikrer at vi kun registrerer faktiske endringer, ikke alle erklæringer hver dag
+    print("Prøver git-refs for baseline...")
+    for ref in refs:
+        prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
+        if prev_rows:
+            print(f"  Fant baseline i {ref}: {len(prev_rows)} elementer")
+        changes = diff_once(prev_rows, curr)
         if changes:
-            used_ref = "(local)"
+            used_ref = ref
             final_changes = changes
-        else:
-            print("Ingen endringer funnet mot lokal baseline.")
-    
-    # Hvis ingen endringer funnet mot lokal baseline, prøv git-refs
-    if not final_changes:
-        print("Prøver git-refs for baseline...")
-        for ref in refs:
-            prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
-            changes = diff_once(prev_rows, curr)
-            if changes:
-                used_ref = ref
-                final_changes = changes
-                break
+            print(f"  Fant {len(changes)} endringer mot {ref}")
+            break
 
     if not final_changes:
-        # Siste forsvar: snapshot ALT
-        print("Ingen endringer funnet via refs. Tvinger initial snapshot for dagens datasett.")
-        final_changes = make_initial_changes(curr)
-        used_ref = refs[0] if refs else "(n/a)"
+        # Hvis ingen baseline funnet i git, og ingen endringer: alt er oppdatert
+        if prev_rows:
+            print("Ingen endringer funnet - alt er oppdatert.")
+        else:
+            # Første gang: snapshot ALT
+            print("Ingen baseline funnet. Tvinger initial snapshot for dagens datasett.")
+            final_changes = make_initial_changes(curr)
+            used_ref = refs[0] if refs else "(n/a)"
 
     print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
 
