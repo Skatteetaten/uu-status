@@ -127,7 +127,11 @@ def normalize_entry(raw: dict):
     url = (raw.get("url") or raw.get("href") or "").strip()
     domain = (raw.get("domain") or to_domain(url)).strip()
     title = (raw.get("title") or raw.get("name") or "").strip()
-    updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or raw.get("last_checked") or "").strip()
+    updatedAt_raw = (raw.get("updatedAt") or raw.get("lastChecked") or raw.get("last_checked") or "").strip()
+    
+    # Normaliser updatedAt til bare dato (YYYY-MM-DD) for konsistent sammenligning
+    # Hvis det er en ISO-timestamp, ta bare de første 10 tegnene (dato-delen)
+    updatedAt = updatedAt_raw[:10] if updatedAt_raw and len(updatedAt_raw) >= 10 else updatedAt_raw
 
     codes = _extract_codes(raw)
     total = _extract_total(raw)
