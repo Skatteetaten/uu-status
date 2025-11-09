@@ -25,6 +25,18 @@ enrich_uu_details.py: legger til WCAG-koder og annen metainformasjon.
 
 build_uu_archive.py: oppdaterer arkiv og historikk.
 
+📋 Endringsarkiv
+
+Arkivet (docs/uu-arkiv.html) viser alle endringer som er gjort i tilgjengelighetserklæringene. Systemet:
+
+- Detekterer automatisk nye endringer ved å sammenligne med forrige baseline
+- Registrerer kun faktiske endringer (ignorerer kun updatedAt-endringer uten andre endringer)
+- Unngår duplikater ved å sjekke om samme endring allerede er logget
+- Beholder alle eksisterende endringer når det ikke er nye endringer
+- Oppretter snapshots per updatedDate for hver endring
+
+Endringene logges i docs/data/uustatus/logs/changes.jsonl og vises i arkivtabellen.
+
 Resultatene lagres i docs/:
 
 docs/uu-status.csv – full oversikt i tabellform.
