@@ -372,10 +372,25 @@
         const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
         snapLink.style.marginTop = ".5rem";
         snapLink.innerHTML = `
-          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>
-          <a href="./data/uustatus/snapshots_by_updated/${escapeHTML(yyyyMmDd || "")}.json" target="_blank" rel="noopener">
-            Åpne snapshot ${escapeHTML(yyyyMmDd || "")}
-          </a>`;
+          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>`;
+        // Sjekk om snapshot-filen eksisterer før vi viser lenken
+        const snapshotUrl = `./data/uustatus/snapshots_by_updated/${yyyyMmDd || ""}.json`;
+        fetch(snapshotUrl, { method: "HEAD" })
+          .then(res => {
+            if (res.ok) {
+              const link = document.createElement("a");
+              link.href = snapshotUrl;
+              link.target = "_blank";
+              link.rel = "noopener";
+              link.textContent = `Åpne snapshot ${escapeHTML(yyyyMmDd || "")}`;
+              snapLink.appendChild(link);
+            } else {
+              snapLink.innerHTML += `<span class="muted">Snapshot ikke tilgjengelig</span>`;
+            }
+          })
+          .catch(() => {
+            snapLink.innerHTML += `<span class="muted">Snapshot ikke tilgjengelig</span>`;
+          });
         det.appendChild(snapLink);
 
         tdDet.appendChild(det);
