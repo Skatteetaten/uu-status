@@ -1,0 +1,42 @@
+[
+  {
+    "q": "Hva betyr fargene på brudd-pillene?",
+    "a": "<div><strong>Fargekoder på brudd:</strong><ul><li><span class='pill ok'>0</span>: Ingen brudd</li><li><span class='pill warn'>1–5</span>: Noen brudd</li><li><span class='pill bad'>6+</span>: Mange brudd</li></ul></div>",
+    "tags": ["brudd","pills","farge"]
+  },
+  {
+    "q": "Hva er fristen for å oppdatere en tilgjengelighetserklæring?",
+    "a": "Hver erklæring skal oppdateres minst én gang i året. Fristen settes til <em>1 år</em> etter «Sist oppdatert» (eller «Opprettet» hvis den er ny). Oransje badge vises når det er ≤ 56 dager igjen; rød badge når fristen er utløpt.",
+    "tags": ["frist","oppdatert","badge"]
+  },
+  {
+    "q": "Hva betyr kolonnen 'Brudd (av X)'?",
+    "a": "Tallet viser antall WCAG-brudd som er funnet for løsningen. <em>X</em> er totalt antall vurderte krav (typisk 48).",
+    "tags": ["brudd","krav"]
+  },
+  {
+    "q": "Hvor kommer WCAG-kravene fra?",
+    "a": "Kravene følger WCAG 2.x. Klikk på et WCAG-kode-merke i detaljene for å filtrere på det kravet i listen.",
+    "tags": ["wcag","koder","detaljer"]
+  },
+  {
+    "q": "Hvordan fungerer WCAG-filteret i verktøylinjen?",
+    "a": "WCAG-filteret viser kun løsninger som har brudd med valgt kode. Tall i nedtrekkslisten viser hvor mange løsninger som berøres av hver kode.",
+    "tags": ["filter","wcag"]
+  },
+  {
+    "q": "Hva er 'Topp brudd (WCAG-krav)' nederst?",
+    "a": "Dette er en aggregering av hvor mange løsninger som har brudd per WCAG-kode. Klikk på en kode for å filtrere listen. Bruk «Vis alle / Vis færre» for å utvide eller skjule resten.",
+    "tags": ["agg","topp brudd","wcag"]
+  },
+  {
+    "q": "Hvordan laster jeg ned CSV?",
+    "a": "Bruk knappen «Last ned CSV» i verktøylinjen. Den henter samme datagrunnlag som vises i tabellen.",
+    "tags": ["csv","last ned"]
+  },
+  {
+    "q": "Hvorfor mangler noen detaljer for en erklæring?",
+    "a": "Hvis vi ikke har funnet koder i detaljfilen for en URL, vises teksten «Ingen detaljer funnet for denne erklæringen».",
+    "tags": ["detaljer","koder","mangler"]
+  }
+]
