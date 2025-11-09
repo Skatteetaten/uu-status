@@ -309,12 +309,6 @@ def diff_once(prev_rows, curr_rows):
 
     # DEBUG: tell keys
     print(f"  prev_rows={len(prev_rows or [])} | prev_keys={len(prev_by)}  ||  curr_rows={len(curr_rows or [])} | curr_keys={len(curr_by)}")
-    
-    # DEBUG: sjekk hvor mange nøkler som faktisk matcher
-    matching_keys = set(prev_by.keys()) & set(curr_by.keys())
-    new_keys = set(curr_by.keys()) - set(prev_by.keys())
-    removed_keys = set(prev_by.keys()) - set(curr_by.keys())
-    print(f"  Matching keys: {len(matching_keys)}, New keys: {len(new_keys)}, Removed keys: {len(removed_keys)}")
 
     # Hvis vi ikke klarer å lage nøkler for dagens data, fall tilbake: behandle alle som nye.
     if (curr_rows and not curr_by):
@@ -349,13 +343,6 @@ def diff_once(prev_rows, curr_rows):
         else:
             changed, added, removed = compute_change(p, c)
             if changed or added or removed:
-                # DEBUG: vis hva som faktisk endret seg
-                if changed:
-                    print(f"    DEBUG: Endring funnet for key {k[:50]}...: {list(changed.keys())}")
-                if added:
-                    print(f"    DEBUG: Added nonConformities for key {k[:50]}...: {added}")
-                if removed:
-                    print(f"    DEBUG: Removed nonConformities for key {k[:50]}...: {removed}")
                 updated_date = (c.get("updatedAt") or "")[:10] or today_str()
                 changes.append({
                     "ts": now_iso,
