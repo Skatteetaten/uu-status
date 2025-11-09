@@ -1,0 +1,127 @@
+name: Build UU-status (CSV + Details + Page)
+
+on:
+  schedule:
+    - cron: "27 1 * * *"   # daglig 01:27 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo (full historikk + behold filer)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0       # henter hele historikken (nødvendig for baseline)
+          ref: main
+          fetch-tags: true
+          clean: false         # behold eksisterende filer (f.eks. docs/latest.json)
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: "requirements.txt"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # for HTML-parsing i enrich-steget
+          pip install beautifulsoup4 requests
+
+      - name: Build UU-status CSV + details
+        run: |
+          python scrape_uustatus.py
+
+      - name: Copy files to docs (for GitHub Pages)
+        run: |
+          mkdir -p docs
+          cp uu-status.csv docs/uu-status.csv
+          cp uu-status-details.json docs/uu-status-details.json
+
+      - name: Enrich details with WCAG codes (all statements)
+        run: |
+          python enrich_uu_details.py
+
+      - name: Ensure archive folders & seed files
+        run: |
+          mkdir -p docs/data/uustatus/snapshots_by_updated
+          mkdir -p docs/data/uustatus/snapshots
+          mkdir -p docs/data/uustatus/logs
+          [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
+          [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
+
+      - name: Sanity summary (codes present in details)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
+          rows = data.get("urls") if isinstance(data, dict) else data
+          with_codes = sum(1 for r in rows if r.get("nonConformities"))
+          print(f"details.json entries: {len(rows)} | with codes: {with_codes}")
+          PY
+
+      - name: Inspect HEAD baseline (light)
+        run: |
+          echo "Branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "HEAD  : $(git rev-parse HEAD)"
+          if git ls-tree -r --name-only HEAD | grep -q '^docs/data/uustatus/latest.json$'; then
+            echo "✓ Filen finnes i HEAD"
+            echo "Filstørrelse i HEAD:"
+            git show HEAD:docs/data/uustatus/latest.json | wc -c || echo "Kunne ikke lese filstørrelse"
+            echo "Første 200 tegn i filen:"
+            git show HEAD:docs/data/uustatus/latest.json 2>&1 | head -c 200 || echo "Kunne ikke lese innhold"
+            echo ""
+            echo "baseline url count (HEAD):"
+            git show HEAD:docs/data/uustatus/latest.json 2>&1 | python - <<'PY'
+import sys, json
+try:
+    content = sys.stdin.read()
+    if not content.strip():
+        print("0 (filen er tom)")
+        sys.exit(0)
+    j=json.loads(content)
+    urls=j["urls"] if isinstance(j,dict) else j
+    if isinstance(urls, list):
+        print(len(urls))
+    else:
+        print(f"0 (urls er ikke en liste, type: {type(urls).__name__})")
+except json.JSONDecodeError as e:
+    print(f"0 (JSON-feil: {e})")
+except Exception as e:
+    print(f"0 (feil: {type(e).__name__}: {e})")
+PY
+          else
+            echo "✗ Filen finnes IKKE i HEAD"
+            echo "baseline url count (HEAD): 0 (filen mangler)"
+          fi
+
+      - name: Build archive (diff & event snapshots)
+        env:
+          AUTO_BACKTRACK: "1"
+          MAX_BACKTRACK: "20"
+        run: |
+          python build_uu_archive.py
+
+      - name: Commit updated CSV, details and page (if changed)
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add uu-status.csv uu-status-details.json || true
+          git add -A docs
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update UU-status + archive (csv, details, page, snapshots, changes)"
+            git pull --rebase
+            git push
+          fi
