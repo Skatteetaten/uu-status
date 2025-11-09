@@ -10,7 +10,7 @@ INPUT_CSV = Path("uustatus-urls.csv")  # kildelista
 OUTPUT_CSV = Path("uu-status.csv")     # resultat-tabell
 DETAILS_JSON = Path("uu-status-details.json")  # nye detaljer per erklæring
 
-HEADERS = {"User-Agent": "toolsified-uustatus-scraper (+https://github.com/Almasy74/toolsified)"}
+HEADERS = {"User-Agent": "uu-status-scraper (+https://github.com/Skatteetaten/uu-status)"}
 
 # Regex-mønstre
 BRUDD_RE = re.compile(r"Det er brudd på\s+(\d+)\s+av\s+(\d+)\s+krav", re.IGNORECASE)
