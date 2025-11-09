@@ -268,6 +268,12 @@ def compute_change(prev_entry: dict, curr_entry: dict):
         if "totalNonConformities" not in changed and len(p_nc) != len(c_nc):
             changed["totalNonConformities"] = {"before": len(p_nc), "after": len(c_nc)}
 
+    # Ignorer updatedAt-endringer hvis det er den eneste endringen (uten faktiske endringer i nonConformities)
+    if changed and len(changed) == 1 and "updatedAt" in changed:
+        if not added and not removed:
+            # Kun updatedAt endret, ingen faktiske endringer - ignorer
+            return (None, [], [])
+
     if changed or added or removed:
         return (changed or None, added, removed)
     return (None, [], [])
