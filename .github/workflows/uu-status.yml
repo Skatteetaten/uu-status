@@ -81,24 +81,24 @@ jobs:
             git show HEAD:docs/data/uustatus/latest.json 2>&1 | head -c 200 || echo "Kunne ikke lese innhold"
             echo ""
             echo "baseline url count (HEAD):"
-            git show HEAD:docs/data/uustatus/latest.json 2>&1 | python - <<-'PY'
-              import sys, json
-              try:
-                  content = sys.stdin.read()
-                  if not content.strip():
-                      print("0 (filen er tom)")
-                      sys.exit(0)
-                  j=json.loads(content)
-                  urls=j["urls"] if isinstance(j,dict) else j
-                  if isinstance(urls, list):
-                      print(len(urls))
-                  else:
-                      print(f"0 (urls er ikke en liste, type: {type(urls).__name__})")
-              except json.JSONDecodeError as e:
-                  print(f"0 (JSON-feil: {e})")
-              except Exception as e:
-                  print(f"0 (feil: {type(e).__name__}: {e})")
-            PY
+            git show HEAD:docs/data/uustatus/latest.json 2>&1 | python3 -c "
+import sys, json
+try:
+    content = sys.stdin.read()
+    if not content.strip():
+        print('0 (filen er tom)')
+        sys.exit(0)
+    j=json.loads(content)
+    urls=j['urls'] if isinstance(j,dict) else j
+    if isinstance(urls, list):
+        print(len(urls))
+    else:
+        print(f'0 (urls er ikke en liste, type: {type(urls).__name__})')
+except json.JSONDecodeError as e:
+    print(f'0 (JSON-feil: {e})')
+except Exception as e:
+    print(f'0 (feil: {type(e).__name__}: {e})')
+"
           else
             echo "✗ Filen finnes IKKE i HEAD"
             echo "baseline url count (HEAD): 0 (filen mangler)"
