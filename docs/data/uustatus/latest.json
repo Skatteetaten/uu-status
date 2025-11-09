@@ -790,9 +790,10 @@
       "title": "Tilgjengelighetserklæring for A-meldingen - Avstemmingsinformasjon | uustatus",
       "updatedAt": "2025-11-09",
       "nonConformities": [
+        "1.1.1",
         "2.4.3"
       ],
-      "totalNonConformities": 1
+      "totalNonConformities": 2
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/f25c6608-37de-4886-913a-3f4144e522a3",
