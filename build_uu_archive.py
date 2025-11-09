@@ -129,9 +129,19 @@ def normalize_entry(raw: dict):
     title = (raw.get("title") or raw.get("name") or "").strip()
     updatedAt_raw = (raw.get("updatedAt") or raw.get("lastChecked") or raw.get("last_checked") or "").strip()
     
-    # Normaliser updatedAt til bare dato (YYYY-MM-DD) for konsistent sammenligning
-    # Hvis det er en ISO-timestamp, ta bare de første 10 tegnene (dato-delen)
-    updatedAt = updatedAt_raw[:10] if updatedAt_raw and len(updatedAt_raw) >= 10 else updatedAt_raw
+    # Normaliser updatedAt til bare dato (YYYY-MM-DD)
+    # Hvis det er en ISO timestamp (f.eks. "2025-11-04T02:07:28.273039+00:00"), ta de første 10 tegnene
+    # Hvis det allerede er en dato (YYYY-MM-DD), behold den
+    # Hvis det er tomt, behold tom streng
+    if updatedAt_raw:
+        if len(updatedAt_raw) >= 10 and updatedAt_raw[4] == "-" and updatedAt_raw[7] == "-":
+            # Ser ut som en ISO-dato eller timestamp, ta bare dato-delen
+            updatedAt = updatedAt_raw[:10]
+        else:
+            # Prøv å parse andre datoformater hvis nødvendig
+            updatedAt = updatedAt_raw
+    else:
+        updatedAt = ""
 
     codes = _extract_codes(raw)
     total = _extract_total(raw)
@@ -185,12 +195,41 @@ def read_prev_from_ref(ref: str):
        Ved feil/mangel -> TOM baseline ([]) for å trigge 'første gangs' endringer.
     """
     try:
-        blob = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True)
+        blob = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True, stderr=subprocess.PIPE)
         js = json.loads(blob)
         urls = js.get("urls") if isinstance(js, dict) else js
-        return urls if isinstance(urls, list) else []
-    except Exception:
+        result = urls if isinstance(urls, list) else []
+        print(f"  Leser baseline fra {ref}: {len(result)} entries")
+        return result
+    except subprocess.CalledProcessError as e:
+        print(f"  WARN: Kunne ikke lese baseline fra {ref}: git show feilet (exit code {e.returncode})")
         return []  # <- viktig
+    except json.JSONDecodeError as e:
+        print(f"  WARN: Kunne ikke parse baseline fra {ref}: JSON-feil: {e}")
+        return []
+    except Exception as e:
+        print(f"  WARN: Kunne ikke lese baseline fra {ref}: {type(e).__name__}: {e}")
+        return []  # <- viktig
+
+def read_prev_from_local():
+    """Les baseline latest.json fra lokal fil (for testing).
+       Ved feil/mangel -> TOM baseline ([]) for å trigge 'første gangs' endringer.
+    """
+    try:
+        if not LATEST_JSON.exists():
+            print(f"  Leser baseline fra lokal fil: filen eksisterer ikke")
+            return []
+        js = load_json(LATEST_JSON, fallback=None)
+        if js is None:
+            print(f"  Leser baseline fra lokal fil: kunne ikke parse JSON")
+            return []
+        urls = js.get("urls") if isinstance(js, dict) else js
+        result = urls if isinstance(urls, list) else []
+        print(f"  Leser baseline fra lokal fil: {len(result)} entries")
+        return result
+    except Exception as e:
+        print(f"  WARN: Kunne ikke lese baseline fra lokal fil: {type(e).__name__}: {e}")
+        return []
 
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
@@ -330,42 +369,50 @@ def main():
         sys.exit(1)
 
     # Bestem referanser å teste som baseline
+    # TEST_MODE: Bruk lokal fil i stedet for git HEAD (for raskere testing)
+    test_mode = os.getenv("TEST_MODE", "").strip().lower() in ("1", "true", "yes", "on")
     forced_ref = os.getenv("BASELINE_REF", "").strip()
     auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
     max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
-
-    if forced_ref:
-        refs = [forced_ref]
-    elif auto_bt:
-        refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
-    else:
-        refs = ["HEAD"]
 
     print(f"Dagens datasett: {len(curr)} elementer.")
     final_changes = []
     used_ref = None
 
-    # VIKTIG: Les baseline fra git HEAD (siste committede versjon)
-    # Dette sikrer at vi kun registrerer faktiske endringer, ikke alle erklæringer hver dag
-    print("Prøver git-refs for baseline...")
-    for ref in refs:
-        prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
-        if prev_rows:
-            print(f"  Fant baseline i {ref}: {len(prev_rows)} elementer")
+    # TEST_MODE: Bruk lokal fil for testing (ikke avhengig av git eller dato)
+    if test_mode:
+        print("TEST_MODE: Bruker lokal fil som baseline (ikke git HEAD)")
+        prev_rows = read_prev_from_local()
         changes = diff_once(prev_rows, curr)
         if changes:
-            used_ref = ref
+            used_ref = "LOCAL_FILE"
             final_changes = changes
-            print(f"  Fant {len(changes)} endringer mot {ref}")
-            break
-
-    if not final_changes:
-        # Hvis ingen baseline funnet i git, og ingen endringer: alt er oppdatert
-        if prev_rows:
-            print("Ingen endringer funnet - alt er oppdatert.")
         else:
-            # Første gang: snapshot ALT
-            print("Ingen baseline funnet. Tvinger initial snapshot for dagens datasett.")
+            # Ingen endringer funnet - dette er OK, ikke registrer noe
+            print("TEST_MODE: Ingen endringer funnet mellom baseline og dagens datasett.")
+            used_ref = "LOCAL_FILE"
+            final_changes = []  # Tom liste = ingen endringer
+    else:
+        # Normal modus: Bruk git HEAD
+        if forced_ref:
+            refs = [forced_ref]
+        elif auto_bt:
+            refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
+        else:
+            refs = ["HEAD"]
+
+        # Prøv alle refs. diff_once() håndterer tom baseline/0 keys.
+        for ref in refs:
+            prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
+            changes = diff_once(prev_rows, curr)
+            if changes:
+                used_ref = ref
+                final_changes = changes
+                break
+
+        if not final_changes:
+            # Siste forsvar: snapshot ALT
+            print("Ingen endringer funnet via refs. Tvinger initial snapshot for dagens datasett.")
             final_changes = make_initial_changes(curr)
             used_ref = refs[0] if refs else "(n/a)"
 
@@ -376,40 +423,42 @@ def main():
         for row in final_changes:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-    # 2) Skriv snapshots per updatedDate
-    changed_by_date = defaultdict(list)
-    curr_index = index_by_key(curr)
-    for ch in final_changes:
-        candidate = None
-        url = (ch.get("url") or "").strip()
-        if url:
-            kk = "url::" + canon_url(url)
-            candidate = curr_index.get(kk)
-        if not candidate:
-            # fallback: prøv direkte URL-match
-            for it in curr:
-                if (it.get("url") or "") == url:
-                    candidate = it
-                    break
-        if not candidate:
-            continue
-        key = (ch.get("updatedDate") or today_str())
-        changed_by_date[key].append(candidate)
+    # 2) Skriv snapshots per updatedDate (kun hvis det er endringer)
+    if final_changes:
+        changed_by_date = defaultdict(list)
+        curr_index = index_by_key(curr)
+        for ch in final_changes:
+            candidate = None
+            url = (ch.get("url") or "").strip()
+            if url:
+                kk = "url::" + canon_url(url)
+                candidate = curr_index.get(kk)
+            if not candidate:
+                # fallback: prøv direkte URL-match
+                for it in curr:
+                    if (it.get("url") or "") == url:
+                        candidate = it
+                        break
+            if not candidate:
+                continue
+            key = (ch.get("updatedDate") or today_str())
+            changed_by_date[key].append(candidate)
 
-    for date_key, entries in changed_by_date.items():
-        out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
-        existing = load_json(out_fp, fallback={"urls": []})
-        exist_by = index_by_key(existing.get("urls", []))
-        for e in entries:
-            kk = make_key(e)
-            if kk:
-                exist_by[kk] = e
-        out_fp.write_text(json.dumps({"urls": list(exist_by.values())}, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"Skrev snapshot for {date_key}: {out_fp}")
+        for date_key, entries in changed_by_date.items():
+            out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
+            existing = load_json(out_fp, fallback={"urls": []})
+            exist_by = index_by_key(existing.get("urls", []))
+            for e in entries:
+                kk = make_key(e)
+                if kk:
+                    exist_by[kk] = e
+            out_fp.write_text(json.dumps({"urls": list(exist_by.values())}, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"Skrev snapshot for {date_key}: {out_fp}")
 
     # 3) Oppdater baseline (ALLTID etter diff)
+    # curr er allerede normalisert fra read_current(), så vi kan lagre direkte
     LATEST_JSON.write_text(json.dumps({"urls": curr}, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Oppdaterte {LATEST_JSON}")
+    print(f"Oppdaterte {LATEST_JSON} med {len(curr)} normaliserte entries")
 
 if __name__ == "__main__":
     main()
