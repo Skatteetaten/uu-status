@@ -443,16 +443,52 @@ def main():
 
     print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
 
-    # 1) Logg endringer
+    # 1) Logg endringer (unngå duplikater)
+    # Les eksisterende endringer for å sjekke duplikater
+    existing_changes = set()
+    if CHANGES_LOG.exists():
+        try:
+            with CHANGES_LOG.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        existing = json.loads(line)
+                        # Bruk URL + after_hash som unik nøkkel
+                        url = existing.get("url", "")
+                        after_hash = existing.get("after_hash", "")
+                        if url and after_hash:
+                            existing_changes.add((url, after_hash))
+                    except json.JSONDecodeError:
+                        continue
+        except Exception as e:
+            print(f"  WARN: Kunne ikke lese eksisterende endringer: {e}")
+
+    # Logg kun nye endringer
+    new_changes = []
     with CHANGES_LOG.open("a", encoding="utf-8") as f:
         for row in final_changes:
-            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            url = row.get("url", "")
+            after_hash = row.get("after_hash", "")
+            key = (url, after_hash)
+            if key not in existing_changes:
+                f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                existing_changes.add(key)
+                new_changes.append(row)
+            else:
+                print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}...)")
+    
+    if new_changes:
+        print(f"  Logget {len(new_changes)} nye endringer (skippet {len(final_changes) - len(new_changes)} duplikater)")
+    else:
+        print(f"  Alle {len(final_changes)} endringer var allerede logget (duplikater)")
 
-    # 2) Skriv snapshots per updatedDate (kun hvis det er endringer)
-    if final_changes:
+    # 2) Skriv snapshots per updatedDate (kun hvis det er nye endringer)
+    if new_changes:
         changed_by_date = defaultdict(list)
         curr_index = index_by_key(curr)
-        for ch in final_changes:
+        for ch in new_changes:
             candidate = None
             url = (ch.get("url") or "").strip()
             if url:
