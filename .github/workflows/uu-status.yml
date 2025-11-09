@@ -85,10 +85,16 @@ jobs:
             echo "✗ Filen finnes IKKE i HEAD"
             echo "baseline url count (HEAD): 0 (filen mangler)"
           fi
-          git show HEAD:docs/data/uustatus/latest.json 2>/dev/null | python - <<'PY'
-          import sys, json
+          python - <<'PY'
+          import sys, json, subprocess
           try:
-              content = sys.stdin.read()
+              result = subprocess.run(
+                  ["git", "show", "HEAD:docs/data/uustatus/latest.json"],
+                  capture_output=True,
+                  text=True,
+                  check=True
+              )
+              content = result.stdout
               if not content.strip():
                   print("0 (filen er tom)")
                   sys.exit(0)
@@ -98,6 +104,8 @@ jobs:
                   print(len(urls))
               else:
                   print(f"0 (urls er ikke en liste, type: {type(urls).__name__})")
+          except subprocess.CalledProcessError as e:
+              print(f"0 (git show feilet: {e.stderr.strip()})")
           except json.JSONDecodeError as e:
               print(f"0 (JSON-feil: {e})")
           except Exception as e:
