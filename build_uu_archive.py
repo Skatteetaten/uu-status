@@ -443,7 +443,7 @@ def main():
 
     print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
 
-    # 1) Logg endringer (unngå duplikater)
+    # 1) Logg endringer (behold kun de nye endringene - erstatt hele filen)
     # Les eksisterende endringer for å sjekke duplikater
     existing_changes = set()
     if CHANGES_LOG.exists():
@@ -465,23 +465,29 @@ def main():
         except Exception as e:
             print(f"  WARN: Kunne ikke lese eksisterende endringer: {e}")
 
-    # Logg kun nye endringer
+    # Logg kun nye endringer (ikke duplikater)
     new_changes = []
-    with CHANGES_LOG.open("a", encoding="utf-8") as f:
-        for row in final_changes:
-            url = row.get("url", "")
-            after_hash = row.get("after_hash", "")
-            key = (url, after_hash)
-            if key not in existing_changes:
-                f.write(json.dumps(row, ensure_ascii=False) + "\n")
-                existing_changes.add(key)
-                new_changes.append(row)
-            else:
-                print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}...)")
+    for row in final_changes:
+        url = row.get("url", "")
+        after_hash = row.get("after_hash", "")
+        key = (url, after_hash)
+        if key not in existing_changes:
+            new_changes.append(row)
+        else:
+            print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}...)")
     
+    # Skriv nye endringer til filen (legg til, ikke erstatt)
     if new_changes:
-        print(f"  Logget {len(new_changes)} nye endringer (skippet {len(final_changes) - len(new_changes)} duplikater)")
+        # Legg til nye endringer (append mode)
+        with CHANGES_LOG.open("a", encoding="utf-8") as f:
+            for row in new_changes:
+                f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        if len(new_changes) > 1:
+            print(f"  Logget {len(new_changes)} nye endringer (skippet {len(final_changes) - len(new_changes)} duplikater)")
+        else:
+            print(f"  Logget {len(new_changes)} ny endring (skippet {len(final_changes) - len(new_changes)} duplikater)")
     else:
+        # Hvis ingen nye endringer, gjør ingenting (behold alle eksisterende rader)
         print(f"  Alle {len(final_changes)} endringer var allerede logget (duplikater)")
 
     # 2) Skriv snapshots per updatedDate (kun hvis det er nye endringer)
