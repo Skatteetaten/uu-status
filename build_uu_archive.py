@@ -251,7 +251,7 @@ def read_prev_from_local():
         return []
 
 # --------- diff ----------
-CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
+CHECK_FIELDS = ["title", "updatedAt", "totalNonConformities"]
 
 def compute_change(prev_entry: dict, curr_entry: dict):
     p_nc = set(prev_entry.get("nonConformities") or [])
@@ -344,13 +344,17 @@ def diff_once(prev_rows, curr_rows):
             changed, added, removed = compute_change(p, c)
             if changed or added or removed:
                 updated_date = (c.get("updatedAt") or "")[:10] or today_str()
+                before_h = sha1(dict(p))
+                after_h = sha1(dict(c))
+                url_str = c.get("url") or ""
+                print(f"  Oppdaget endring: {url_str[:60]}... (before_hash: {before_h[:16]}..., after_hash: {after_h[:16]}...)")
                 changes.append({
                     "ts": now_iso,
                     "detectedDate": detected_date,
-                    "url": c.get("url") or "",
-                    "domain": c.get("domain") or to_domain(c.get("url") or ""),
-                    "before_hash": sha1(dict(p)),
-                    "after_hash": sha1(dict(c)),
+                    "url": url_str,
+                    "domain": c.get("domain") or to_domain(url_str),
+                    "before_hash": before_h,
+                    "after_hash": after_h,
                     "added": added,
                     "removed": removed,
                     "changed": changed,
@@ -442,8 +446,17 @@ def main():
             used_ref = refs[0] if refs else "(n/a)"
 
     print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
+    if final_changes:
+        print(f"  Detaljer om endringer:")
+        for ch in final_changes[:5]:  # Vis første 5 for debugging
+            url = ch.get("url", "")[:50]
+            before_h = ch.get("before_hash")
+            after_h = ch.get("after_hash", "")
+            print(f"    - {url}... (before: {str(before_h)[:16] if before_h else 'None'}..., after: {after_h[:16] if after_h else 'None'}...)")
+        if len(final_changes) > 5:
+            print(f"    ... og {len(final_changes) - 5} flere")
 
-    # 1) Logg endringer (behold kun de nye endringene - erstatt hele filen)
+    # 1) Logg endringer (behold kun de nye endringene - sjekk for duplikater)
     # Les eksisterende endringer for å sjekke duplikater
     existing_changes = set()
     if CHANGES_LOG.exists():
@@ -455,11 +468,19 @@ def main():
                         continue
                     try:
                         existing = json.loads(line)
-                        # Bruk URL + after_hash som unik nøkkel
+                        # Bruk URL + before_hash + after_hash som unik nøkkel for å fange samme endring
+                        # Dette sikrer at samme endring (samme overgang fra A til B) ikke logges flere ganger
                         url = existing.get("url", "")
-                        after_hash = existing.get("after_hash", "")
-                        if url and after_hash:
-                            existing_changes.add((url, after_hash))
+                        before_hash = existing.get("before_hash")
+                        after_hash = existing.get("after_hash")
+                        if url:
+                            # For nye entries (before_hash er None), bruk kun url + after_hash
+                            # For endringer (begge hashes eksisterer), bruk begge
+                            if before_hash is None:
+                                key = (url, None, after_hash)
+                            else:
+                                key = (url, before_hash, after_hash)
+                            existing_changes.add(key)
                     except json.JSONDecodeError:
                         continue
         except Exception as e:
@@ -469,12 +490,17 @@ def main():
     new_changes = []
     for row in final_changes:
         url = row.get("url", "")
+        before_hash = row.get("before_hash")
         after_hash = row.get("after_hash", "")
-        key = (url, after_hash)
+        # Samme logikk som over for å matche nøkkel-formatet
+        if before_hash is None:
+            key = (url, None, after_hash)
+        else:
+            key = (url, before_hash, after_hash)
         if key not in existing_changes:
             new_changes.append(row)
         else:
-            print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}...)")
+            print(f"  Skipper duplikat endring: {url[:50]}... (before_hash: {str(before_hash)[:16] if before_hash else 'None'}..., after_hash: {after_hash[:16] if after_hash else 'None'}...)")
     
     # Skriv nye endringer til filen (legg til, ikke erstatt)
     if new_changes:
