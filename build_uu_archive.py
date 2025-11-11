@@ -468,18 +468,17 @@ def main():
                         continue
                     try:
                         existing = json.loads(line)
-                        # Bruk URL + before_hash + after_hash som unik nøkkel for å fange samme endring
-                        # Dette sikrer at samme endring (samme overgang fra A til B) ikke logges flere ganger
+                        # Bruk URL + after_hash + added + removed som unik nøkkel for å fange samme endring
+                        # Dette sikrer at samme endring (samme resultat) ikke logges flere ganger,
+                        # uavhengig av hva baseline var når endringen ble oppdaget
                         url = existing.get("url", "")
-                        before_hash = existing.get("before_hash")
                         after_hash = existing.get("after_hash")
-                        if url:
-                            # For nye entries (before_hash er None), bruk kun url + after_hash
-                            # For endringer (begge hashes eksisterer), bruk begge
-                            if before_hash is None:
-                                key = (url, None, after_hash)
-                            else:
-                                key = (url, before_hash, after_hash)
+                        added = tuple(sorted(existing.get("added", [])))  # Tuple for å kunne bruke i set
+                        removed = tuple(sorted(existing.get("removed", [])))  # Tuple for å kunne bruke i set
+                        if url and after_hash:
+                            # Bruk URL + after_hash + added + removed som nøkkel
+                            # Dette fanger samme endring selv om before_hash er forskjellig
+                            key = (url, after_hash, added, removed)
                             existing_changes.add(key)
                     except json.JSONDecodeError:
                         continue
@@ -490,17 +489,19 @@ def main():
     new_changes = []
     for row in final_changes:
         url = row.get("url", "")
-        before_hash = row.get("before_hash")
         after_hash = row.get("after_hash", "")
+        added = tuple(sorted(row.get("added", [])))  # Tuple for å kunne bruke i set
+        removed = tuple(sorted(row.get("removed", [])))  # Tuple for å kunne bruke i set
         # Samme logikk som over for å matche nøkkel-formatet
-        if before_hash is None:
-            key = (url, None, after_hash)
+        if url and after_hash:
+            key = (url, after_hash, added, removed)
+            if key not in existing_changes:
+                new_changes.append(row)
+            else:
+                print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}..., added: {len(added)}, removed: {len(removed)})")
         else:
-            key = (url, before_hash, after_hash)
-        if key not in existing_changes:
+            # Hvis mangler url eller after_hash, logg allikevel (skal ikke skje normalt)
             new_changes.append(row)
-        else:
-            print(f"  Skipper duplikat endring: {url[:50]}... (before_hash: {str(before_hash)[:16] if before_hash else 'None'}..., after_hash: {after_hash[:16] if after_hash else 'None'}...)")
     
     # Skriv nye endringer til filen (legg til, ikke erstatt)
     if new_changes:
