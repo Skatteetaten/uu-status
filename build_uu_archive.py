@@ -468,17 +468,30 @@ def main():
                         continue
                     try:
                         existing = json.loads(line)
-                        # Bruk URL + after_hash + added + removed som unik nøkkel for å fange samme endring
+                        # Bruk URL + added + removed + totalNonConformities_after som unik nøkkel
                         # Dette sikrer at samme endring (samme resultat) ikke logges flere ganger,
-                        # uavhengig av hva baseline var når endringen ble oppdaget
+                        # uavhengig av updatedAt-endringer eller hva baseline var når endringen ble oppdaget
                         url = existing.get("url", "")
-                        after_hash = existing.get("after_hash")
                         added = tuple(sorted(existing.get("added", [])))  # Tuple for å kunne bruke i set
                         removed = tuple(sorted(existing.get("removed", [])))  # Tuple for å kunne bruke i set
-                        if url and after_hash:
-                            # Bruk URL + after_hash + added + removed som nøkkel
-                            # Dette fanger samme endring selv om before_hash er forskjellig
-                            key = (url, after_hash, added, removed)
+                        # Hent totalNonConformities_after fra changed-feltet eller beregn fra added/removed
+                        changed = existing.get("changed") or {}
+                        total_after = None
+                        if isinstance(changed, dict) and "totalNonConformities" in changed:
+                            total_after = changed["totalNonConformities"].get("after")
+                        # Fallback: beregn fra before og endringer hvis ikke tilgjengelig
+                        if total_after is None:
+                            total_before = None
+                            if isinstance(changed, dict) and "totalNonConformities" in changed:
+                                total_before = changed["totalNonConformities"].get("before")
+                            if total_before is not None:
+                                total_after = total_before - len(removed) + len(added)
+                        # Hvis fortsatt None, bruk None som nøkkel (for nye entries eller removed entries)
+                        # Dette er OK fordi vi sammenligner med samme logikk for nye endringer
+                        if url:
+                            # Bruk URL + added + removed + total_after som nøkkel
+                            # Dette fanger samme endring selv om updatedAt eller before_hash er forskjellig
+                            key = (url, added, removed, total_after)
                             existing_changes.add(key)
                     except json.JSONDecodeError:
                         continue
@@ -489,18 +502,31 @@ def main():
     new_changes = []
     for row in final_changes:
         url = row.get("url", "")
-        after_hash = row.get("after_hash", "")
         added = tuple(sorted(row.get("added", [])))  # Tuple for å kunne bruke i set
         removed = tuple(sorted(row.get("removed", [])))  # Tuple for å kunne bruke i set
+        # Hent totalNonConformities_after fra changed-feltet eller beregn fra added/removed
+        changed = row.get("changed") or {}
+        total_after = None
+        if isinstance(changed, dict) and "totalNonConformities" in changed:
+            total_after = changed["totalNonConformities"].get("after")
+        # Fallback: beregn fra before og endringer hvis ikke tilgjengelig
+        if total_after is None:
+            total_before = None
+            if isinstance(changed, dict) and "totalNonConformities" in changed:
+                total_before = changed["totalNonConformities"].get("before")
+            if total_before is not None:
+                total_after = total_before - len(removed) + len(added)
+        # Hvis fortsatt None, bruk None som nøkkel (for nye entries eller removed entries)
+        # Dette er OK fordi vi sammenligner med samme logikk for eksisterende endringer
         # Samme logikk som over for å matche nøkkel-formatet
-        if url and after_hash:
-            key = (url, after_hash, added, removed)
+        if url:
+            key = (url, added, removed, total_after)
             if key not in existing_changes:
                 new_changes.append(row)
             else:
-                print(f"  Skipper duplikat endring: {url[:50]}... (after_hash: {after_hash[:16]}..., added: {len(added)}, removed: {len(removed)})")
+                print(f"  Skipper duplikat endring: {url[:50]}... (added: {len(added)}, removed: {len(removed)}, total_after: {total_after})")
         else:
-            # Hvis mangler url eller after_hash, logg allikevel (skal ikke skje normalt)
+            # Hvis mangler url, logg allikevel (skal ikke skje normalt)
             new_changes.append(row)
     
     # Skriv nye endringer til filen (legg til, ikke erstatt)
