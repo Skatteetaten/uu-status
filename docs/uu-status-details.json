@@ -13,7 +13,7 @@
       "3.3.1",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:10:46.955834+00:00",
+    "last_checked": "2025-12-24T02:10:46.977952+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -36,7 +36,7 @@
       "1.4.10",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:10:48.165322+00:00",
+    "last_checked": "2025-12-24T02:10:48.372217+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10"
@@ -49,7 +49,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784",
     "name": "Tabelltrekk",
     "codes": [],
-    "last_checked": "2025-12-23T02:10:49.369088+00:00",
+    "last_checked": "2025-12-24T02:10:49.765928+00:00",
     "title": "Tilgjengelighetserklæring for Tabellkort - beregn skattetrekk | uustatus",
     "domain": "uustatus.no"
   },
@@ -59,7 +59,7 @@
     "codes": [
       "3.1.2"
     ],
-    "last_checked": "2025-12-23T02:10:50.568100+00:00",
+    "last_checked": "2025-12-24T02:10:51.168262+00:00",
     "nonConformities": [
       "3.1.2"
     ],
@@ -81,7 +81,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:10:51.838532+00:00",
+    "last_checked": "2025-12-24T02:10:52.595333+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -101,7 +101,7 @@
     "codes": [
       "1.4.10"
     ],
-    "last_checked": "2025-12-23T02:10:53.039972+00:00",
+    "last_checked": "2025-12-24T02:10:53.982614+00:00",
     "nonConformities": [
       "1.4.10"
     ],
@@ -113,7 +113,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/f601d522-c18e-4cde-9c8a-f3c39aa9995e",
     "name": "Min side",
     "codes": [],
-    "last_checked": "2025-12-23T02:10:54.242373+00:00",
+    "last_checked": "2025-12-24T02:10:55.379517+00:00",
     "title": "Tilgjengelighetserklæring for Min side | uustatus",
     "domain": "uustatus.no"
   },
@@ -136,7 +136,7 @@
       "3.3.1",
       "3.3.2"
     ],
-    "last_checked": "2025-12-23T02:10:55.458983+00:00",
+    "last_checked": "2025-12-24T02:10:56.780044+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -171,7 +171,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:10:56.670111+00:00",
+    "last_checked": "2025-12-24T02:10:58.196184+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -193,7 +193,7 @@
       "2.4.3",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:10:57.875004+00:00",
+    "last_checked": "2025-12-24T02:10:59.591874+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.3"
@@ -209,7 +209,7 @@
       "2.4.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:10:59.028382+00:00",
+    "last_checked": "2025-12-24T02:11:00.978235+00:00",
     "nonConformities": [
       "2.4.2"
     ],
@@ -232,7 +232,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:00.241461+00:00",
+    "last_checked": "2025-12-24T02:11:02.393697+00:00",
     "nonConformities": [
       "1.3.1",
       "2.1.1",
@@ -253,7 +253,7 @@
       "1.3.1",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:01.448998+00:00",
+    "last_checked": "2025-12-24T02:11:03.781165+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.3"
@@ -276,7 +276,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:02.605528+00:00",
+    "last_checked": "2025-12-24T02:11:05.246878+00:00",
     "nonConformities": [
       "1.3.1",
       "1.3.2",
@@ -297,7 +297,7 @@
       "2.4.3",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:03.814857+00:00",
+    "last_checked": "2025-12-24T02:11:06.632980+00:00",
     "nonConformities": [
       "2.4.3"
     ],
@@ -315,7 +315,7 @@
       "3.2.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:05.023948+00:00",
+    "last_checked": "2025-12-24T02:11:08.025251+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.2",
@@ -335,7 +335,7 @@
       "2.4.3",
       "4.1.1"
     ],
-    "last_checked": "2025-12-23T02:11:06.232342+00:00",
+    "last_checked": "2025-12-24T02:11:09.426431+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -354,7 +354,7 @@
       "2.4.3",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:07.438095+00:00",
+    "last_checked": "2025-12-24T02:11:10.886719+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -374,7 +374,7 @@
       "3.3.1",
       "3.3.3"
     ],
-    "last_checked": "2025-12-23T02:11:08.647765+00:00",
+    "last_checked": "2025-12-24T02:11:12.292384+00:00",
     "nonConformities": [
       "1.3.1",
       "3.1.1",
@@ -390,7 +390,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/65d9e9e9-1611-4fd6-bcca-1fd5ca56646d",
     "name": "Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:09.847581+00:00",
+    "last_checked": "2025-12-24T02:11:13.670678+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring | uustatus",
     "domain": "uustatus.no"
   },
@@ -398,7 +398,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/9026f9d6-8ab5-4fb8-bba6-88aaeb18dbcf",
     "name": "Tredjepartsopplysninger - nye opplysninger til oppgavegiverregisteret",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:11.049948+00:00",
+    "last_checked": "2025-12-24T02:11:15.052372+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - nye opplysninger til oppgavegiverregisteret | uustatus",
     "domain": "uustatus.no"
   },
@@ -406,7 +406,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/9328d70e-f881-42e6-9028-b8e6a043d145",
     "name": "Søknad om eller klage på motregning i fremtidige bidrag",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:12.249353+00:00",
+    "last_checked": "2025-12-24T02:11:16.446001+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om eller klage på motregning i fremtidige bidrag | uustatus",
     "domain": "uustatus.no"
   },
@@ -414,7 +414,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3",
     "name": "Fullmakt - bidrag og tilbakebetaling",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:13.457088+00:00",
+    "last_checked": "2025-12-24T02:11:17.836642+00:00",
     "title": "Tilgjengelighetserklæring for Fullmakt - bidrag og tilbakebetaling | uustatus",
     "domain": "uustatus.no"
   },
@@ -422,7 +422,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/7f062dc7-c923-4032-b24e-600e0520a14c",
     "name": "Klage på eller henvendelse om motregning - bidrag og tilbakebetaling",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:14.662815+00:00",
+    "last_checked": "2025-12-24T02:11:19.231545+00:00",
     "title": "Tilgjengelighetserklæring for Klage på eller henvendelse om motregning - bidrag og tilbakebetaling | uustatus",
     "domain": "uustatus.no"
   },
@@ -430,7 +430,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/474734e3-a0fa-4021-98c1-3f80f5029f0f",
     "name": "Søknad om fritak for solidaransvar",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:15.865659+00:00",
+    "last_checked": "2025-12-24T02:11:20.606358+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om fritak for solidaransvar | uustatus",
     "domain": "uustatus.no"
   },
@@ -444,7 +444,7 @@
       "3.3.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:17.072160+00:00",
+    "last_checked": "2025-12-24T02:11:21.994172+00:00",
     "nonConformities": [
       "1.1.1",
       "1.4.10",
@@ -466,7 +466,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:18.286610+00:00",
+    "last_checked": "2025-12-24T02:11:23.389442+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -481,7 +481,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/6ff36d85-dfeb-4701-8f46-1fdb8293c33f",
     "name": "Betalinger til selvstendig næringsdrivende",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:19.483272+00:00",
+    "last_checked": "2025-12-24T02:11:24.766901+00:00",
     "title": "Tilgjengelighetserklæring for Betalinger til selvstendig næringsdrivende | uustatus",
     "domain": "uustatus.no"
   },
@@ -489,7 +489,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd",
     "name": "Utskrift av skattemelding og skatteoppgjør",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:20.685811+00:00",
+    "last_checked": "2025-12-24T02:11:26.226905+00:00",
     "title": "Tilgjengelighetserklæring for Utskrift av skattemelding og skatteoppgjør | uustatus",
     "domain": "uustatus.no"
   },
@@ -500,7 +500,7 @@
       "3.3.1",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:21.887995+00:00",
+    "last_checked": "2025-12-24T02:11:27.611840+00:00",
     "nonConformities": [
       "3.3.1"
     ],
@@ -512,7 +512,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/46477ae1-0ba8-46bc-a2f4-2591f9b60593",
     "name": "Tredjepartsopplysninger - boligsparing for ungdom",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:23.086581+00:00",
+    "last_checked": "2025-12-24T02:11:28.995724+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligsparing for ungdom | uustatus",
     "domain": "uustatus.no"
   },
@@ -523,7 +523,7 @@
       "2.4.3",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:24.240192+00:00",
+    "last_checked": "2025-12-24T02:11:30.391041+00:00",
     "nonConformities": [
       "2.4.3"
     ],
@@ -535,7 +535,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/62611290-2cdd-44d9-a3ca-d317adbb6711",
     "name": "Tredjepartsopplysninger - betaling for pass og stell av barn",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:25.436869+00:00",
+    "last_checked": "2025-12-24T02:11:31.778561+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - betaling for pass og stell av barn | uustatus",
     "domain": "uustatus.no"
   },
@@ -543,7 +543,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/4d3f5dbd-e902-48a6-aa6e-0b0533a5de9b",
     "name": "Søknad om dagsoppgjør eller månedsoppgjør",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:26.641582+00:00",
+    "last_checked": "2025-12-24T02:11:33.204272+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om dagsoppgjør eller månedsoppgjør | uustatus",
     "domain": "uustatus.no"
   },
@@ -551,7 +551,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/d8127968-6877-47fc-8201-abe46d54439f",
     "name": "Søknad om å endre, gjenåpne eller avslutte dagsoppgjør eller månedsoppgjør",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:27.849168+00:00",
+    "last_checked": "2025-12-24T02:11:34.582303+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte dagsoppgjør eller månedsoppgjør | uustatus",
     "domain": "uustatus.no"
   },
@@ -559,7 +559,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/a6397693-d147-4941-83d0-09d638989c1e",
     "name": "Søknad om å endre, gjenåpne eller avslutte kreditt for engangsavgift",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:29.046790+00:00",
+    "last_checked": "2025-12-24T02:11:35.967510+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte kreditt for engangsavgift | uustatus",
     "domain": "uustatus.no"
   },
@@ -567,7 +567,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/70e51ceb-3ded-416b-b647-251d634ea738",
     "name": "Søknad om kreditt for engangsavgift",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:30.251550+00:00",
+    "last_checked": "2025-12-24T02:11:37.365202+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om kreditt for engangsavgift | uustatus",
     "domain": "uustatus.no"
   },
@@ -575,7 +575,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c",
     "name": "Tredjepartsopplysninger - innskudd, utlån og renter mv",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:31.455528+00:00",
+    "last_checked": "2025-12-24T02:11:38.751294+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - innskudd, utlån og renter mv | uustatus",
     "domain": "uustatus.no"
   },
@@ -583,7 +583,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/4d87bd2a-a5d3-4b8e-ae7a-1212fb6e2811",
     "name": "Attest for skatt og avgift",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:32.661129+00:00",
+    "last_checked": "2025-12-24T02:11:40.146564+00:00",
     "title": "Tilgjengelighetserklæring for Attest for skatt og avgift | uustatus",
     "domain": "uustatus.no"
   },
@@ -594,7 +594,7 @@
       "2.4.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:33.868272+00:00",
+    "last_checked": "2025-12-24T02:11:41.533786+00:00",
     "nonConformities": [
       "2.4.2"
     ],
@@ -611,7 +611,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:35.135935+00:00",
+    "last_checked": "2025-12-24T02:11:42.922846+00:00",
     "nonConformities": [
       "1.3.1",
       "3.3.2"
@@ -635,7 +635,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:36.352494+00:00",
+    "last_checked": "2025-12-24T02:11:44.324567+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -654,7 +654,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/18bd7a08-517c-4ef7-8bec-06cd6568563b",
     "name": "Skriv til oss",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:37.560449+00:00",
+    "last_checked": "2025-12-24T02:11:45.704841+00:00",
     "title": "Tilgjengelighetserklæring for Skriv til oss | uustatus",
     "domain": "uustatus.no"
   },
@@ -662,7 +662,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57",
     "name": "Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:38.752734+00:00",
+    "last_checked": "2025-12-24T02:11:47.103852+00:00",
     "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn | uustatus",
     "domain": "uustatus.no"
   },
@@ -670,7 +670,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/19bc325d-4200-4f68-9788-e4d478a9c49e",
     "name": "Søknad om tollkreditt",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:39.956922+00:00",
+    "last_checked": "2025-12-24T02:11:48.482981+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om tollkreditt | uustatus",
     "domain": "uustatus.no"
   },
@@ -678,7 +678,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/bd86d295-ad04-4c36-bfe2-fe88231f2de5",
     "name": "Søknad om å endre, gjenåpne eller avslutte tollkreditt",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:41.158401+00:00",
+    "last_checked": "2025-12-24T02:11:49.861897+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om å endre, gjenåpne eller avslutte tollkreditt | uustatus",
     "domain": "uustatus.no"
   },
@@ -691,7 +691,7 @@
       "1.4.4",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:42.372263+00:00",
+    "last_checked": "2025-12-24T02:11:51.264237+00:00",
     "nonConformities": [
       "1.4.10",
       "1.4.12",
@@ -711,7 +711,7 @@
       "1.4.4",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:43.575529+00:00",
+    "last_checked": "2025-12-24T02:11:52.658642+00:00",
     "nonConformities": [
       "1.4.10",
       "1.4.12",
@@ -731,7 +731,7 @@
       "1.4.4",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:44.781290+00:00",
+    "last_checked": "2025-12-24T02:11:54.061682+00:00",
     "nonConformities": [
       "1.4.10",
       "1.4.12",
@@ -751,7 +751,7 @@
       "1.4.4",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:45.991534+00:00",
+    "last_checked": "2025-12-24T02:11:55.450641+00:00",
     "nonConformities": [
       "1.4.10",
       "1.4.12",
@@ -771,7 +771,7 @@
       "1.4.4",
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:47.257940+00:00",
+    "last_checked": "2025-12-24T02:11:56.838166+00:00",
     "nonConformities": [
       "1.4.10",
       "1.4.12",
@@ -792,7 +792,7 @@
       "3.3.2",
       "3.3.3"
     ],
-    "last_checked": "2025-12-23T02:11:48.463477+00:00",
+    "last_checked": "2025-12-24T02:11:58.237094+00:00",
     "nonConformities": [
       "1.3.1",
       "2.2.1",
@@ -808,7 +808,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/78176632-e3c1-4a2d-8640-6f3810536b99",
     "name": "Godtgjøring til opphaver til åndsverk",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:49.669630+00:00",
+    "last_checked": "2025-12-24T02:11:59.620981+00:00",
     "title": "Tilgjengelighetserklæring for Godtgjøring til opphaver til åndsverk | uustatus",
     "domain": "uustatus.no"
   },
@@ -821,7 +821,7 @@
       "4.1.1",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:50.877474+00:00",
+    "last_checked": "2025-12-24T02:12:01.026225+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.2"
@@ -841,7 +841,7 @@
       "3.3.2",
       "3.3.3"
     ],
-    "last_checked": "2025-12-23T02:11:52.089981+00:00",
+    "last_checked": "2025-12-24T02:12:02.422352+00:00",
     "nonConformities": [
       "1.3.1",
       "3.2.1",
@@ -858,7 +858,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/2c1faadd-00a7-40fd-870e-9cf5805a2d35",
     "name": "Min skatteplikt",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:53.287626+00:00",
+    "last_checked": "2025-12-24T02:12:03.806725+00:00",
     "title": "Tilgjengelighetserklæring for Min skatteplikt | uustatus",
     "domain": "uustatus.no"
   },
@@ -866,7 +866,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/eb130211-e58f-4677-9a3e-319446e3f898",
     "name": "Søknad om skattekort for utenlandsk arbeidstaker",
     "codes": [],
-    "last_checked": "2025-12-23T02:11:54.494494+00:00",
+    "last_checked": "2025-12-24T02:12:05.196521+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om skattekort for utenlandsk arbeidstaker | uustatus",
     "domain": "uustatus.no"
   },
@@ -890,7 +890,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:55.710352+00:00",
+    "last_checked": "2025-12-24T02:12:06.595245+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -915,7 +915,7 @@
     "codes": [
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:11:56.915560+00:00",
+    "last_checked": "2025-12-24T02:12:07.996333+00:00",
     "nonConformities": [
       "2.4.3"
     ],
@@ -933,7 +933,7 @@
       "3.3.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:11:58.120361+00:00",
+    "last_checked": "2025-12-24T02:12:09.333803+00:00",
     "nonConformities": [
       "1.4.10",
       "2.4.3",
@@ -963,7 +963,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:11:59.340645+00:00",
+    "last_checked": "2025-12-24T02:12:10.772045+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -995,7 +995,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:00.555628+00:00",
+    "last_checked": "2025-12-24T02:12:12.170747+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1019,7 +1019,7 @@
       "3.1.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:01.804579+00:00",
+    "last_checked": "2025-12-24T02:12:13.567983+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1037,7 +1037,7 @@
     "codes": [
       "3.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:03.012962+00:00",
+    "last_checked": "2025-12-24T02:12:14.976075+00:00",
     "nonConformities": [
       "3.1.2"
     ],
@@ -1056,7 +1056,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:04.215737+00:00",
+    "last_checked": "2025-12-24T02:12:16.370775+00:00",
     "nonConformities": [
       "1.3.1",
       "1.3.2",
@@ -1082,7 +1082,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:05.428131+00:00",
+    "last_checked": "2025-12-24T02:12:17.768654+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1106,7 +1106,7 @@
       "3.2.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:06.634208+00:00",
+    "last_checked": "2025-12-24T02:12:19.167857+00:00",
     "nonConformities": [
       "2.4.2",
       "2.4.3",
@@ -1123,7 +1123,7 @@
     "codes": [
       "2.4.3"
     ],
-    "last_checked": "2025-12-23T02:12:07.829456+00:00",
+    "last_checked": "2025-12-24T02:12:20.556671+00:00",
     "nonConformities": [
       "2.4.3"
     ],
@@ -1142,7 +1142,7 @@
       "2.4.4",
       "3.1.1"
     ],
-    "last_checked": "2025-12-23T02:12:09.104594+00:00",
+    "last_checked": "2025-12-24T02:12:21.970907+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1162,7 +1162,7 @@
       "2.4.3",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:10.307091+00:00",
+    "last_checked": "2025-12-24T02:12:23.361040+00:00",
     "nonConformities": [
       "2.4.3"
     ],
@@ -1178,7 +1178,7 @@
       "3.3.2",
       "3.3.3"
     ],
-    "last_checked": "2025-12-23T02:12:11.512862+00:00",
+    "last_checked": "2025-12-24T02:12:24.749310+00:00",
     "nonConformities": [
       "2.4.3",
       "3.3.2",
@@ -1198,7 +1198,7 @@
       "3.1.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:12.724929+00:00",
+    "last_checked": "2025-12-24T02:12:26.141148+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.13",
@@ -1218,7 +1218,7 @@
       "2.4.1",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:13.956104+00:00",
+    "last_checked": "2025-12-24T02:12:27.527961+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.1",
@@ -1241,7 +1241,7 @@
       "3.1.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:15.172903+00:00",
+    "last_checked": "2025-12-24T02:12:28.932506+00:00",
     "nonConformities": [
       "1.1.1",
       "1.4.1",
@@ -1265,7 +1265,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:16.474552+00:00",
+    "last_checked": "2025-12-24T02:12:30.326562+00:00",
     "nonConformities": [
       "1.3.1",
       "3.3.2",
@@ -1285,7 +1285,7 @@
       "3.3.2",
       "4.1.1"
     ],
-    "last_checked": "2025-12-23T02:12:17.682180+00:00",
+    "last_checked": "2025-12-24T02:12:31.710184+00:00",
     "nonConformities": [
       "1.4.10",
       "2.4.3",
@@ -1305,7 +1305,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:18.890888+00:00",
+    "last_checked": "2025-12-24T02:12:33.104692+00:00",
     "nonConformities": [
       "2.4.3",
       "3.3.2"
@@ -1331,7 +1331,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:20.110038+00:00",
+    "last_checked": "2025-12-24T02:12:34.495918+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1360,7 +1360,7 @@
       "4.1.2",
       "4.1.3"
     ],
-    "last_checked": "2025-12-23T02:12:21.315273+00:00",
+    "last_checked": "2025-12-24T02:12:35.906273+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.3",
@@ -1388,7 +1388,7 @@
       "3.3.1",
       "3.3.2"
     ],
-    "last_checked": "2025-12-23T02:12:22.531176+00:00",
+    "last_checked": "2025-12-24T02:12:37.335866+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -1419,7 +1419,7 @@
       "3.3.2",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:23.831718+00:00",
+    "last_checked": "2025-12-24T02:12:38.729274+00:00",
     "nonConformities": [
       "1.3.1",
       "2.2.1",
@@ -1436,7 +1436,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/93799278-4e66-4b78-984a-44715606a354",
     "name": "Søknad om endring av avregning i ytelse - bidrag og tilbakebetaling",
     "codes": [],
-    "last_checked": "2025-12-23T02:12:25.126412+00:00",
+    "last_checked": "2025-12-24T02:12:40.110613+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om endring av avregning i ytelse - bidrag og tilbakebetaling | uustatus",
     "domain": "uustatus.no"
   },
@@ -1448,7 +1448,7 @@
       "2.4.2",
       "2.4.6"
     ],
-    "last_checked": "2025-12-23T02:12:26.334381+00:00",
+    "last_checked": "2025-12-24T02:12:41.503119+00:00",
     "nonConformities": [
       "1.3.1",
       "2.4.2",
@@ -1462,7 +1462,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/18fecbde-8bf8-4bfd-ad26-440f4f96af94",
     "name": "Avtale om fristforlengelse - bidrag og tilbakebetaling",
     "codes": [],
-    "last_checked": "2025-12-23T02:12:27.540066+00:00",
+    "last_checked": "2025-12-24T02:12:42.896556+00:00",
     "title": "Tilgjengelighetserklæring for Avtale om fristforlengelse - bidrag og tilbakebetaling | uustatus",
     "domain": "uustatus.no"
   },
@@ -1470,7 +1470,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/98148ac6-eb3d-4f84-b3af-e167f9dad103",
     "name": "Søknad om kjøretillatelse ved midlertidig opphold i Norge",
     "codes": [],
-    "last_checked": "2025-12-23T02:12:28.745117+00:00",
+    "last_checked": "2025-12-24T02:12:44.313559+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om kjøretillatelse ved midlertidig opphold i Norge | uustatus",
     "domain": "uustatus.no"
   },
@@ -1478,7 +1478,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/da746138-2ec0-464d-8442-61a65639f0bb",
     "name": "Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet",
     "codes": [],
-    "last_checked": "2025-12-23T02:12:29.944480+00:00",
+    "last_checked": "2025-12-24T02:12:45.697344+00:00",
     "title": "Tilgjengelighetserklæring for Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet | uustatus",
     "domain": "uustatus.no"
   },
@@ -1491,7 +1491,7 @@
       "2.4.1",
       "3.1.1"
     ],
-    "last_checked": "2025-12-23T02:12:31.161934+00:00",
+    "last_checked": "2025-12-24T02:12:47.091685+00:00",
     "nonConformities": [
       "1.3.1",
       "1.4.10",
@@ -1512,7 +1512,7 @@
       "4.1.1",
       "4.1.2"
     ],
-    "last_checked": "2025-12-23T02:12:32.377664+00:00",
+    "last_checked": "2025-12-24T02:12:48.485521+00:00",
     "nonConformities": [
       "1.1.1",
       "2.4.1",
@@ -1537,7 +1537,7 @@
       "2.4.7",
       "3.1.1"
     ],
-    "last_checked": "2025-12-23T02:12:33.648084+00:00",
+    "last_checked": "2025-12-24T02:12:49.896605+00:00",
     "nonConformities": [
       "1.1.1",
       "1.3.1",
@@ -1558,7 +1558,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/57116662-c9ab-444f-811a-68f474e634c8",
     "name": "Svar oss i sak",
     "codes": [],
-    "last_checked": "2025-12-23T02:12:34.851460+00:00",
+    "last_checked": "2025-12-24T02:12:51.303231+00:00",
     "title": "Tilgjengelighetserklæring for Svar oss i sak | uustatus",
     "domain": "uustatus.no"
   }
