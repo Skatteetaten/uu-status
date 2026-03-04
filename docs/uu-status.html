@@ -118,13 +118,41 @@
     .brudd-wrap { display: inline-flex; align-items: baseline; gap: 8px; }
     .brudd-total { color: var(--muted); font-size: 12px; }
 
-    /* Topp-brudd seksjon */
-    .agg { margin-top: 14px; }
-    .agg h2 { font-size: 16px; margin: 0 0 8px; }
-    .agg table { width: auto; min-width: 280px; border-collapse: collapse; }
-    .agg th, .agg td { padding: 6px 10px; border: 1px solid var(--border); }
-    .agg th { background: rgba(255,255,255,0.03); }
-    .agg a { cursor: pointer; }
+    /* Flest brudd seksjon */
+    .agg { margin-top: 14px; border: 1px solid var(--border); border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); overflow: hidden; }
+    .agg-head { padding: 20px; border-bottom: 1px solid var(--border); }
+    .agg-title { font-size: 22px; line-height: 1.25; margin: 0 0 8px; }
+    .agg-sub { margin: 0; color: var(--muted); font-size: 15px; }
+    .agg-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .agg-col { padding: 20px; }
+    .agg-col + .agg-col { border-left: 1px solid var(--border); }
+    .agg-col h3 { margin: 0 0 8px; font-size: 18px; }
+    .agg-selected { margin: 0 0 8px; font-size: 18px; }
+    .agg-hint { margin: 0 0 14px; color: var(--muted); }
+    .agg-chip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .agg-chip {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .agg-chip:hover { border-color: var(--accent); }
+    .agg-chip.is-active { background: #1f6fd7; border-color: #1f6fd7; }
+    .agg-chip.is-clear { background: transparent; }
+    .agg-list { display: grid; gap: 12px; }
+    .agg-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; }
+    .agg-item .wcag-btn { margin: 0; }
+    .agg-name { font-size: 15px; }
+    .agg-count { color: var(--muted); min-width: 28px; text-align: right; font-variant-numeric: tabular-nums; }
+    .agg-meter { grid-column: 2 / 4; height: 9px; border-radius: 999px; background: rgba(255,255,255,.09); overflow: hidden; }
+    .agg-meter > span { display: block; height: 100%; background: linear-gradient(90deg, #2e7edb, #7abaff); border-radius: 999px; }
+    .agg-actions { margin-top: 14px; display: flex; justify-content: flex-start; }
+    .agg-actions.right { justify-content: flex-end; }
+    .agg .btn-link { border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; text-decoration: none; }
+    .agg .btn-link:hover { border-color: var(--accent); }
 
     /* Paginering */
     .pager { display:flex; justify-content: space-between; align-items:center; padding:10px 6px; gap:12px; flex-wrap:wrap; }
@@ -158,6 +186,8 @@
       .toolbar { grid-template-columns: 1fr 1fr; }
       .chart-grid{grid-template-columns:1fr}
       .kpi-grid{grid-template-columns:repeat(2,1fr)}
+      .agg-body { grid-template-columns: 1fr; }
+      .agg-col + .agg-col { border-left: 0; border-top: 1px solid var(--border); }
     }
   </style>
 </head>
@@ -183,8 +213,8 @@
 
       <div class="chart-grid">
         <div class="chart-card">
-          <div class="muted" style="margin-bottom:6px">Topp WCAG-brudd</div>
-          <canvas id="chTopCodes" aria-label="Topp WCAG-brudd" role="img"></canvas>
+          <div class="muted" style="margin-bottom:6px">Flest WCAG-brudd</div>
+          <canvas id="chTopCodes" aria-label="Flest WCAG-brudd" role="img"></canvas>
         </div>
         <div class="chart-card">
   <div class="muted" style="margin-bottom:6px">Fordeling av brudd per løsning</div>
@@ -701,80 +731,151 @@ legend.innerHTML = `
           }
         });
 
-       // Agg-tabell (WCAG topp)
-const box = document.createElement('div');
 
-const h2 = document.createElement('h2');
-h2.textContent = 'Topp brudd (WCAG-krav)';
-h2.style.marginTop = '35px';
-box.appendChild(h2);
+       // Flest brudd-seksjon
+        const WCAG_LABELS = {
+          '1.3.1': 'Informasjon og relasjoner',
+          '2.4.3': 'Fokusrekkefolge',
+          '4.1.2': 'Navn, rolle, verdi',
+          '4.1.3': 'Statusmeldinger',
+          '1.4.10': 'Reflow',
+          '3.3.2': 'Ledetekster eller instruksjoner',
+          '2.4.2': 'Sidetitler',
+          '3.1.2': 'Sprak pa elementniva'
+        };
+        const wcagName = (code) => WCAG_LABELS[code] || `WCAG ${code}`;
 
-// Forklaringstekst som <p> under overskriften
-const info = document.createElement('p');
-info.className = 'muted';
-info.textContent = 'Knappene setter valgt WCAG-krav som filter i tabellen over.';
-info.style.margin = '4px 0 10px';
-box.appendChild(info);
-
-
-        const tbl = document.createElement('table');
-        const thead = document.createElement('thead');
-        const hr = document.createElement('tr');
-        const h1 = document.createElement('th'); h1.textContent = 'Krav';
-        const h2c = document.createElement('th'); h2c.textContent = 'Antall løsninger';
-        hr.appendChild(h1); hr.appendChild(h2c); thead.appendChild(hr);
-        tbl.appendChild(thead);
-
-        const tb = document.createElement('tbody');
-        tbl.appendChild(tb);
-
-        let expanded = false;
-        const PAGE = 15;
-
-function renderAgg() {
-  const list = expanded ? wcagAgg : wcagAgg.slice(0, PAGE);
-  tb.innerHTML = '';
-
-  for (const [code, count] of list) {
-    const tr = document.createElement('tr');
-
-    // Første celle: WCAG-knapp
-    const td1 = document.createElement('td');
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'wcag-btn';
-    btn.textContent = code;
-    btn.title = 'Filtrer listen til kun krav ' + code;
-    btn.addEventListener('click', () => {
-      wcagFilter.value = code;
-      apply();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    td1.appendChild(btn);
-
-    // Andre celle: antall brudd
-    const td2 = document.createElement('td');
-    td2.textContent = count;
-
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tb.appendChild(tr);
-  }
-
-  toggle.textContent = expanded ? 'Vis færre' : 'Vis alle';
-}
-
-
-        const toggle = document.createElement('button');
-        toggle.className = 'btn-link';
-        toggle.style.marginTop = '8px';
-        toggle.addEventListener('click', () => { expanded = !expanded; renderAgg(); });
-
+        const box = document.createElement('section');
         box.className = 'agg';
-        box.appendChild(tbl);
-        box.appendChild(toggle);
+
+        const head = document.createElement('div');
+        head.className = 'agg-head';
+        head.innerHTML = `
+          <h2 class="agg-title">Vanligste tilgjengelighetsbrudd</h2>
+          <p class="agg-sub">Viser hvilke tilgjengelighetskrav som oftest rapporteres med brudd i tilgjengelighetserklæringer.</p>
+        `;
+        box.appendChild(head);
+
+        const body = document.createElement('div');
+        body.className = 'agg-body';
+        box.appendChild(body);
+
+        const left = document.createElement('div');
+        left.className = 'agg-col';
+        left.innerHTML = `
+          <p class="agg-selected" id="aggSelectedLabel"><strong>Valgt:</strong> Ingen (viser alle)</p>
+          <p class="agg-hint">Velg et krav for å filtrere løsningstabellen.</p>
+        `;
+        const chipGrid = document.createElement('div');
+        chipGrid.className = 'agg-chip-grid';
+        left.appendChild(chipGrid);
+        const leftActions = document.createElement('div');
+        leftActions.className = 'agg-actions';
+        const leftToggle = document.createElement('button');
+        leftToggle.type = 'button';
+        leftToggle.className = 'btn-link';
+        leftActions.appendChild(leftToggle);
+        left.appendChild(leftActions);
+        body.appendChild(left);
+
+        const right = document.createElement('div');
+        right.className = 'agg-col';
+        const rightTitle = document.createElement('h3');
+        rightTitle.textContent = 'Flest brudd';
+        const listEl = document.createElement('div');
+        listEl.className = 'agg-list';
+        const rightActions = document.createElement('div');
+        rightActions.className = 'agg-actions right';
+        const rightToggle = document.createElement('button');
+        rightToggle.type = 'button';
+        rightToggle.className = 'btn-link';
+        rightActions.appendChild(rightToggle);
+        right.appendChild(rightTitle);
+        right.appendChild(listEl);
+        right.appendChild(rightActions);
+        body.appendChild(right);
+
         agg.innerHTML = '';
         agg.appendChild(box);
+
+        let expanded = false;
+        const PAGE = 8;
+
+        function setWcagFilter(code) {
+          wcagFilter.value = code || '';
+          apply();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderAgg() {
+          const selectedCode = wcagFilter.value;
+          const selectedLabel = document.getElementById('aggSelectedLabel');
+          if (selectedLabel) {
+            selectedLabel.innerHTML = selectedCode
+              ? `<strong>Valgt:</strong> ${selectedCode} (${wcagName(selectedCode)})`
+              : '<strong>Valgt:</strong> Ingen (viser alle)';
+          }
+
+          const list = expanded ? wcagAgg : wcagAgg.slice(0, PAGE);
+          const maxCount = wcagAgg.length ? wcagAgg[0][1] : 1;
+
+          chipGrid.innerHTML = '';
+          const clearBtn = document.createElement('button');
+          clearBtn.type = 'button';
+          clearBtn.className = `agg-chip is-clear${selectedCode ? '' : ' is-active'}`;
+          clearBtn.textContent = 'Alle';
+          clearBtn.addEventListener('click', () => setWcagFilter(''));
+          chipGrid.appendChild(clearBtn);
+
+          for (const [code] of list) {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = `agg-chip${selectedCode === code ? ' is-active' : ''}`;
+            chip.textContent = code;
+            chip.title = `Filtrer listen til kun krav ${code}`;
+            chip.addEventListener('click', () => setWcagFilter(code));
+            chipGrid.appendChild(chip);
+          }
+
+          listEl.innerHTML = '';
+          for (const [code, count] of list) {
+            const row = document.createElement('div');
+            row.className = 'agg-item';
+
+            const codeBtn = document.createElement('button');
+            codeBtn.type = 'button';
+            codeBtn.className = 'wcag-btn';
+            codeBtn.textContent = code;
+            codeBtn.addEventListener('click', () => setWcagFilter(code));
+
+            const name = document.createElement('div');
+            name.className = 'agg-name';
+            name.textContent = wcagName(code);
+
+            const val = document.createElement('div');
+            val.className = 'agg-count';
+            val.textContent = count;
+
+            const meter = document.createElement('div');
+            meter.className = 'agg-meter';
+            const fill = document.createElement('span');
+            fill.style.width = `${Math.max(6, (count / maxCount) * 100)}%`;
+            meter.appendChild(fill);
+
+            row.appendChild(codeBtn);
+            row.appendChild(name);
+            row.appendChild(val);
+            row.appendChild(meter);
+            listEl.appendChild(row);
+          }
+
+          const toggleText = expanded ? 'Vis færre' : 'Vis alle';
+          leftToggle.textContent = toggleText;
+          rightToggle.textContent = toggleText;
+        }
+
+        leftToggle.addEventListener('click', () => { expanded = !expanded; renderAgg(); });
+        rightToggle.addEventListener('click', () => { expanded = !expanded; renderAgg(); });
         renderAgg();
 
         // Apply + Render
@@ -786,6 +887,7 @@ function renderAgg() {
           view = data.filter(r => matchesFilters(r, q, vf, uf, wc, detByUrl));
           view = sortRows(view, sortKey, sortAsc);
           page = 1; // reset ved nye kriterier
+          renderAgg();
           render();
         };
 
