@@ -3,6 +3,7 @@
   const LOCAL_MIRROR_URL = './data/uustatus/benchmark-source.json';
   const CACHE_KEY = 'uu-benchmark-cache-v2-orgnr';
   const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+  const REQUIREMENTS_PER_DECLARATION = 48;
 
   const TARGETS = [
     { key: 'skatteetaten', name: 'Skatteetaten', aliases: ['skatteetaten', 'skatteetatens'], orgNumbers: ['974761076'] },
@@ -349,7 +350,8 @@
     const rows = TARGETS.map((t) => {
       const s = map.get(t.key);
       const declarationCount = s.declarationUrls.size;
-      const bruddandel = s.vurderte > 0 ? s.brudd / s.vurderte : null;
+      const denominator = declarationCount * REQUIREMENTS_PER_DECLARATION;
+      const bruddandel = denominator > 0 ? s.brudd / denominator : null;
       const totalWithIr = s.vurderte + s.ikkeRelevant;
       const andelIr = s.hasIkkeRelevant && totalWithIr > 0 ? s.ikkeRelevant / totalWithIr : null;
       return {
@@ -534,7 +536,7 @@
         <tr class="detail-row" id="${detailId}" hidden>
           <td colspan="5">
             <div class="detail-content">
-              <p>Bruddandel beregnet som brudd / (brudd + oppfylt) i de rapporterte erklæringene.</p>
+              <p>Bruddandel beregnet som brudd / (antall erklæringer × ${REQUIREMENTS_PER_DECLARATION}).</p>
               <ul>
                 <li><strong>Erklæringer:</strong><br>${linkListHtml(row.declarationUrls)}</li>
                 <li><strong>Løsninger:</strong><br>${linkListHtml(row.solutionUrls)}</li>
@@ -562,8 +564,8 @@
     const othersWithRate = others.filter((r) => r.bruddandel !== null);
 
     const weightedBrudd = others.reduce((sum, r) => sum + r.brudd, 0);
-    const weightedVurderte = others.reduce((sum, r) => sum + r.vurderte, 0);
-    const weighted = weightedVurderte > 0 ? weightedBrudd / weightedVurderte : null;
+    const weightedDenominator = others.reduce((sum, r) => sum + (r.records * REQUIREMENTS_PER_DECLARATION), 0);
+    const weighted = weightedDenominator > 0 ? weightedBrudd / weightedDenominator : null;
 
     const unweighted = othersWithRate.length
       ? othersWithRate.reduce((sum, r) => sum + r.bruddandel, 0) / othersWithRate.length
@@ -579,7 +581,7 @@
     if (kpiRank) kpiRank.textContent = rankText;
     if (kpiExplain) {
       if (skatteetaten && skatteetaten.bruddandel !== null) {
-        kpiExplain.textContent = `${formatPercent(skatteetaten.bruddandel)} betyr at ${formatPercent(skatteetaten.bruddandel)} av de vurderte tilgjengelighetskravene er rapportert med brudd i Skatteetatens tjenester. Hver erklaering testes mot 48 krav.`;
+        kpiExplain.textContent = `${formatPercent(skatteetaten.bruddandel)} betyr at ${formatPercent(skatteetaten.bruddandel)} av de 48 kravene per erklæring er rapportert med brudd i Skatteetatens tjenester.`;
       } else {
         kpiExplain.textContent = 'Ingen beregnet bruddandel for Skatteetaten i tilgjengelig datagrunnlag.';
       }
