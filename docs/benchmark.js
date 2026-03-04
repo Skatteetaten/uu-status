@@ -577,7 +577,7 @@
     const rankText = bestRank > 0 ? `${bestRank} av ${ranked.length}` : '—';
 
     if (kpiSe) kpiSe.textContent = skatteetaten ? formatPercent(skatteetaten.bruddandel) : '—';
-    if (kpiWeighted) kpiWeighted.textContent = formatPercent(weighted);
+    if (kpiWeighted) kpiWeighted.textContent = formatPercent(unweighted);
     if (kpiRank) kpiRank.textContent = rankText;
     if (kpiExplain) {
       if (skatteetaten && skatteetaten.bruddandel !== null) {
