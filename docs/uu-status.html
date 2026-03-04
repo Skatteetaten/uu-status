@@ -734,16 +734,57 @@ legend.innerHTML = `
 
        // Flest brudd-seksjon
         const WCAG_LABELS = {
-          '1.3.1': 'Informasjon og relasjoner',
-          '2.4.3': 'Fokusrekkefolge',
-          '4.1.2': 'Navn, rolle, verdi',
-          '4.1.3': 'Statusmeldinger',
+          '1.1.1': 'Ikke-tekstlig innhold (Niv\u00e5 A)',
+          '1.2.1': 'Bare lyd og bare video (forh\u00e5ndsinnspilt) (Niv\u00e5 A)',
+          '1.2.2': 'Teksting (forh\u00e5ndsinnspilt) (Niv\u00e5 A)',
+          '1.2.5': 'Synstolking (forh\u00e5ndsinnspilt) (Niv\u00e5 AA)',
+          '1.3.1': 'Informasjon og relasjoner (Niv\u00e5 A)',
+          '1.3.2': 'Meningsfylt rekkef\u00f8lge (Niv\u00e5 A)',
+          '1.3.3': 'Sensoriske egenskaper (Niv\u00e5 A)',
+          '1.3.4': 'Visningsretning (Niv\u00e5 AA)',
+          '1.3.5': 'Identifiser form\u00e5l med inndata (Niv\u00e5 AA)',
+          '1.4.1': 'Bruk av farge (Niv\u00e5 A)',
+          '1.4.2': 'Styring av lyd (Niv\u00e5 A)',
+          '1.4.3': 'Kontrast (minimum) (Niv\u00e5 AA)',
+          '1.4.4': 'Endring av tekstst\u00f8rrelse (Niv\u00e5 AA)',
+          '1.4.5': 'Bilder av tekst (Niv\u00e5 AA)',
           '1.4.10': 'Reflow',
-          '3.3.2': 'Ledetekster eller instruksjoner',
-          '2.4.2': 'Sidetitler',
-          '3.1.2': 'Sprak pa elementniva'
+          '1.4.11': 'Kontrast ikke-tekstlig innhold',
+          '1.4.12': 'Tekstavstand',
+          '1.4.13': 'Pekerf\u00f8lsomt innhold eller innhold ved tastaturfokus',
+          '2.1.1': 'Tastatur (Niv\u00e5 A)',
+          '2.1.2': 'Ingen tastaturfelle (Niv\u00e5 A)',
+          '2.1.4': 'Hurtigtaster som best\u00e5r av ett tegn (Niv\u00e5 A)',
+          '2.2.1': 'Justerbar hastighet (Niv\u00e5 A)',
+          '2.2.2': 'Pause, stopp, skjul (Niv\u00e5 A)',
+          '2.3.1': 'Terskelverdi p\u00e5 maksimalt tre glimt (Niv\u00e5 A)',
+          '2.4.1': 'Hoppe over blokker (Niv\u00e5 A)',
+          '2.4.2': 'Sidetitler (Niv\u00e5 A)',
+          '2.4.3': 'Fokusrekkef\u00f8lge (Niv\u00e5 A)',
+          '2.4.4': 'Form\u00e5l med lenke (i kontekst) (Niv\u00e5 A)',
+          '2.4.5': 'Flere m\u00e5ter (Niv\u00e5 AA)',
+          '2.4.6': 'Overskrifter og ledetekster (Niv\u00e5 AA)',
+          '2.4.7': 'Synlig fokus (Niv\u00e5 AA)',
+          '2.5.1': 'Pekerbevegelser (Niv\u00e5 A)',
+          '2.5.2': 'Pekeravbrytelse (Niv\u00e5 A)',
+          '2.5.3': 'Ledetekst i navn (Niv\u00e5 A)',
+          '2.5.4': 'Bevegelsesaktivering (Niv\u00e5 A)',
+          '3.1.1': 'Spr\u00e5k p\u00e5 siden (Niv\u00e5 A)',
+          '3.1.2': 'Spr\u00e5k p\u00e5 deler av innhold (Niv\u00e5 AA)',
+          '3.2.1': 'Fokus (Niv\u00e5 A)',
+          '3.2.2': 'Inndata (Niv\u00e5 A)',
+          '3.2.3': 'Konsekvent navigering (Niv\u00e5 AA)',
+          '3.2.4': 'Konsekvent identifikasjon (Niv\u00e5 AA)',
+          '3.3.1': 'Identifikasjon av feil (Niv\u00e5 A)',
+          '3.3.2': 'Ledetekster eller instruksjoner (Niv\u00e5 A)',
+          '3.3.3': 'Forslag ved feil (Niv\u00e5 AA)',
+          '3.3.4': 'Forhindring av feil (juridiske feil, \u00f8konomiske feil, datafeil) (Niv\u00e5 AA)',
+          '4.1.1': 'Parsing (oppdeling) (Niv\u00e5 A)',
+          '4.1.2': 'Navn, rolle, verdi (Niv\u00e5 A)',
+          '4.1.3': 'Statusbeskjeder (Niv\u00e5 AA)'
         };
-        const wcagName = (code) => WCAG_LABELS[code] || `WCAG ${code}`;
+        const wcagName = (code) =>
+          (WCAG_LABELS[code] || `WCAG ${code}`).replace(/\s+\(Niv\u00e5\s+[A-Z]+\)$/, '');
 
         const box = document.createElement('section');
         box.className = 'agg';
@@ -752,7 +793,7 @@ legend.innerHTML = `
         head.className = 'agg-head';
         head.innerHTML = `
           <h2 class="agg-title">Vanligste tilgjengelighetsbrudd</h2>
-          <p class="agg-sub">Viser hvilke tilgjengelighetskrav som oftest rapporteres med brudd i tilgjengelighetserklæringer.</p>
+          <p class="agg-sub">Viser hvilke tilgjengelighetskrav som oftest rapporteres med brudd i tilgjengelighetserkl&aelig;ringer.</p>
         `;
         box.appendChild(head);
 
@@ -764,7 +805,7 @@ legend.innerHTML = `
         left.className = 'agg-col';
         left.innerHTML = `
           <p class="agg-selected" id="aggSelectedLabel"><strong>Valgt:</strong> Ingen (viser alle)</p>
-          <p class="agg-hint">Velg et krav for å filtrere løsningstabellen.</p>
+          <p class="agg-hint">Velg et krav for &aring; filtrere l&oslash;sningstabellen.</p>
         `;
         const chipGrid = document.createElement('div');
         chipGrid.className = 'agg-chip-grid';
@@ -869,7 +910,7 @@ legend.innerHTML = `
             listEl.appendChild(row);
           }
 
-          const toggleText = expanded ? 'Vis færre' : 'Vis alle';
+          const toggleText = expanded ? 'Vis f\u00e6rre' : 'Vis alle';
           leftToggle.textContent = toggleText;
           rightToggle.textContent = toggleText;
         }
