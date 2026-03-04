@@ -185,12 +185,25 @@
   .accordion-btn {
     width: 100%;
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
     background: transparent;
     color: var(--text);
     border: none;
     padding: 12px;
     font-weight: 700;
     cursor: pointer;
+  }
+  .accordion-btn::before {
+    content: "▶";
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform 0.15s ease;
+  }
+  .accordion-btn[aria-expanded="true"]::before {
+    transform: rotate(90deg);
   }
   .accordion-btn:focus-visible {
     outline: 3px solid var(--focus);
