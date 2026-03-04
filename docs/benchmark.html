@@ -1,0 +1,303 @@
+﻿<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tilgjengelighetsstatus i offentlige digitale løsninger</title>
+  <style>
+  :root {
+    --bg: #0b0f14;
+    --card: #121821;
+    --muted: #b4c3d5;
+    --text: #f2f6fb;
+    --accent: #339dff;
+    --ok: #39d98a;
+    --warn: #ffc94d;
+    --bad: #ff4d6d;
+    --border: #2a384a;
+    --focus: #66b8ff;
+    --detail-bg: #101724;
+    --detail-accent: #2a8aff;
+  }
+
+  html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+  .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 0 0 8px; }
+  .muted { color: var(--muted); }
+
+  .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
+  .section { margin-top: 14px; }
+
+  .archive-cta {
+    margin: 18px 0 12px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-archive {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    background: #005fcc;
+    color: #fff;
+  }
+  .btn-archive:hover { filter: brightness(1.1); text-decoration: none; }
+  .btn-archive:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+  .intro p { margin: 4px 0; }
+  .intro .measure { margin-top: 6px; font-weight: 600; }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .kpi-box {
+    background: var(--detail-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--detail-accent);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .kpi-label { color: var(--muted); font-size: 13px; }
+  .kpi-value { font-size: 24px; font-weight: 700; margin-top: 4px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { text-align: left; font-weight: 600; white-space: nowrap; }
+
+  .info-btn {
+    margin-left: 6px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1;
+    cursor: help;
+    padding: 0;
+  }
+  .info-btn:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .info-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  .info-popover {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%);
+    width: min(320px, 72vw);
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--detail-bg);
+    color: var(--text);
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: normal;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    z-index: 20;
+  }
+  .info-popover[hidden] {
+    display: none;
+  }
+  .info-popover::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: var(--border);
+  }
+
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); }
+  .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
+  .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
+  .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
+  .pill.neutral { color: var(--muted); }
+
+  .clickable-row { cursor: pointer; }
+  .clickable-row:hover td,
+  .clickable-row:focus td { background: rgba(255,255,255,0.03); }
+  .clickable-row:focus { outline: none; }
+  .clickable-row:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
+  .row-target {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .row-caret {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.2;
+    transition: transform 0.15s ease;
+    margin-top: 2px;
+  }
+  .clickable-row[aria-expanded="true"] .row-caret {
+    transform: rotate(90deg);
+  }
+
+  .detail-row td {
+    background: var(--detail-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .detail-content {
+    border-left: 4px solid var(--detail-accent);
+    border-radius: 0 0 10px 10px;
+    padding: 10px 12px;
+  }
+  .detail-content p { margin: 4px 0 8px; }
+  .detail-content ul { margin: 0; padding-left: 18px; }
+
+  .source-line {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .accordion {
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--detail-bg);
+  }
+  .accordion-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    padding: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .accordion-btn:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: -3px;
+    border-radius: 12px;
+  }
+  .accordion-panel {
+    padding: 0 12px 12px;
+  }
+  .accordion-panel ul { margin: 8px 0 0 18px; }
+  .technical {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    th, td { font-size: 13px; }
+  }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="archive-cta" role="navigation" aria-label="Navigasjon">
+      <a class="btn-archive" href="./uu-status.html">Til UU-status <span aria-hidden="true">→</span></a>
+    </div>
+
+    <section class="intro">
+      <h1>Tilgjengelighetsstatus i offentlige digitale løsninger</h1>
+      <p class="muted">Denne siden sammenligner tilgjengelighetsstatus i offentlige digitale løsninger basert på tilgjengelighetserklæringer.</p>
+      <p class="muted">Den gir et sammenligningsgrunnlag og kan brukes som en styringsindikator.</p>
+      <p class="measure">Bruddandel viser hvor stor andel av de vurderte tilgjengelighetskravene som er rapportert med brudd.</p>
+    </section>
+
+    <section class="cards section" aria-label="Oppsummering">
+      <h2>Hvordan ligger vi an?</h2>
+      <div class="kpi-grid">
+        <div class="kpi-box">
+          <div class="kpi-label">
+            Vår andel krav med brudd
+            <button class="info-btn" type="button" data-tooltip="Andel av vurderte tilgjengelighetskrav som er rapportert med brudd i tilgjengelighetserklæringene. Beregnes som: brudd / (brudd + oppfylt)." aria-label="Info om andel krav med brudd">i</button>
+          </div>
+          <div class="kpi-value" id="kpiSkatteetaten">—</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-label">
+            Snitt hos andre virksomheter
+            <button class="info-btn" type="button" data-tooltip="Gjennomsnittlig andel krav med brudd hos de andre virksomhetene i denne sammenligningen." aria-label="Info om snitt hos andre virksomheter">i</button>
+          </div>
+          <div class="kpi-value" id="kpiWeightedOthers">—</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-label">Skatteetatens plassering (beste = lavest bruddandel)</div>
+          <div class="kpi-value" id="kpiRank">—</div>
+        </div>
+      </div>
+      <p class="muted" id="kpiExplain" style="margin-top:8px">—</p>
+    </section>
+
+    <section class="cards section" role="region" aria-label="Benchmark-tabell">
+      <div class="muted" style="margin-bottom:8px">Klikk på en rad (<span aria-hidden="true">▶</span>) for å se detaljer.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Target</th>
+            <th>
+              Erklæringer (ant.)
+              <button class="info-btn" type="button" data-tooltip="Antall unike erklærings-URLer for valgt virksomhetsnavn og organisasjonsnummer." aria-label="Info om erklæringer">i</button>
+            </th>
+            <th>Brudd (ant.) / Snitt</th>
+            <th>
+              Bruddandel
+              <button class="info-btn" type="button" data-tooltip="Bruddandel = Brudd / (Brudd + Oppfylt). Viser andel vurderte krav som er rapportert brutt." aria-label="Info om bruddandel">i</button>
+            </th>
+            <th>
+              Oppdatert
+              <button class="info-btn" type="button" data-tooltip="Viser datoen for den nyeste oppdateringen blant erklæringene som inngår for virksomheten." aria-label="Info om oppdatert">i</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="benchmarkBody">
+          <tr><td colspan="5" class="muted">Laster data…</td></tr>
+        </tbody>
+      </table>
+      <div class="source-line" id="sourceLine">Datakilde: Uu-tilsynets åpne datasett.</div>
+    </section>
+
+    <section class="accordion" aria-label="Metode og forbehold">
+      <button id="methodToggle" class="accordion-btn" type="button" aria-expanded="false" aria-controls="methodPanel">
+        Metode og forbehold
+      </button>
+      <div id="methodPanel" class="accordion-panel" hidden>
+        <ul>
+          <li>Data er hentet fra tilgjengelighetserklæringer og er selvrapportert av virksomhetene.</li>
+          <li>Én erklæring gjelder normalt én digital løsning. Antall erklæringer sier derfor mest om omfanget av løsninger.</li>
+          <li>Bruddandel beregnes som andel brudd av vurderte krav: brudd / (brudd + oppfylt).</li>
+          <li>Tallene gir et sammenligningsgrunnlag, men sier ikke nødvendigvis noe om faktisk brukeropplevelse eller kvalitet på tilgjengeligheten.</li>
+        </ul>
+        <p class="technical" id="technicalStatus">Teknisk: —</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./benchmark.js"></script>
+</body>
+</html>
