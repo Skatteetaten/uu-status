@@ -32,6 +32,33 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    .archive-cta {
+      margin: 0 0 18px;
+      padding: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    .btn-archive {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1171e7;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid #1171e7;
+      text-decoration: none;
+    }
+    .btn-archive:hover {
+      filter: brightness(1.05);
+      text-decoration: none;
+    }
+
     .cards {
       background: var(--card);
       border: 1px solid var(--border);
@@ -117,12 +144,14 @@
 </head>
 <body>
   <div class="wrap">
+    <div class="archive-cta" role="navigation" aria-label="Navigasjon">
+      <a class="btn-archive" href="./uu-status.html">Til UU-status <span aria-hidden="true">&rarr;</span></a>
+    </div>
     <h1>UU-status – endringsarkiv</h1>
     <div class="muted">
       Her ser du hvilke endringer som er oppdaget siden forrige oppdatering.
       Nye brudd, fjernede brudd og andre justeringer blir vist per nettsted.
     </div>
-    <p><a href="./uu-status.html">← Til oversikten</a></p>
 
     <div class="toolbar" role="region" aria-label="Filtre for endringsarkiv">
       <div class="field">
@@ -148,14 +177,14 @@
         <thead>
           <tr>
             <th>Dato/tid</th>
-            <th>Domene</th>
+            
             <th>Navn</th>
             <th>+ / −</th>
             <th>Detaljer</th>
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr><td colspan="5" class="muted">Laster endringer…</td></tr>
+          <tr><td colspan="4" class="muted">Laster endringer…</td></tr>
         </tbody>
       </table>
 
@@ -328,7 +357,7 @@
       const pageRows = view.slice(startIdx, endIdx);
 
       if (!pageRows.length) {
-        tbody.innerHTML = `<tr><td colspan="5" class="muted">Ingen endringer på valgt filter.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="muted">Ingen endringer på valgt filter.</td></tr>`;
         count.textContent = "";
         pageInfo.textContent = "";
         pagerBtns.innerHTML = "";
@@ -341,7 +370,6 @@
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${new Date(r.ts).toLocaleString("no-NO")}</td>
-          <td>${escapeHTML(r.domain || "")}</td>
           <td>${r.url ? `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(resolveTitle(r))}</a>` : `<span class="truncate">${escapeHTML(resolveTitle(r))}</span>`}</td>
           <td>+${plus} / −${minus}</td>
           <td></td>
@@ -434,7 +462,7 @@
         await loadTitleMap();
         all = await fetchJSONL(LOG_URL);
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
         return;
       }
 
@@ -464,3 +492,4 @@
   </script>
 </body>
 </html>
+
