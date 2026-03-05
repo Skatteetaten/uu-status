@@ -27,7 +27,9 @@
   .muted { color: var(--muted); }
 
   .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
-  .table-frame { width: 100%; }
+  .table-frame { width: 100%; box-sizing: border-box; }
+  .table-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+  .table-scroll > table { width: max-content; min-width: 100%; }
   .section { margin-top: 14px; }
 
   .archive-cta {
@@ -225,8 +227,7 @@
   a:hover { text-decoration: underline; }
 
   @media (max-width: 900px) {
-    .table-frame { width: max-content; min-width: 100%; }
-    .table-frame > table { width: max-content; min-width: 100%; }
+    .table-frame { width: 100%; }
     .kpi-grid { grid-template-columns: 1fr; }
     th, td { font-size: 13px; }
   }
@@ -272,6 +273,7 @@
 
     <section class="cards table-frame section" role="region" aria-label="Benchmark-tabell">
       <div class="muted" style="margin-bottom:8px">Klikk på en rad (<span aria-hidden="true">▶</span>) for å se detaljer.</div>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -295,6 +297,7 @@
           <tr><td colspan="5" class="muted">Laster data…</td></tr>
         </tbody>
       </table>
+      </div>
       <div class="source-line" id="sourceLine">Datakilde: Uu-tilsynets åpne datasett.</div>
     </section>
 

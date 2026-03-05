@@ -36,7 +36,9 @@
     .toolbar button { cursor: pointer; }
 
     .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
-    .table-frame { width: 100%; }
+    .table-frame { width: 100%; box-sizing: border-box; }
+    .table-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+    .table-scroll > table { width: max-content; min-width: 100%; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
     th { text-align: left; font-weight: 600; user-select: none; white-space: nowrap; }
@@ -191,8 +193,7 @@
       .agg-col + .agg-col { border-left: 0; border-top: 1px solid var(--border); }
     }
     @media (max-width: 900px) {
-      .table-frame { width: max-content; min-width: 100%; }
-      .table-frame > table { width: max-content; min-width: 100%; }
+      .table-frame { width: 100%; }
     }
   </style>
 </head>
@@ -269,6 +270,7 @@
 
     <!-- TABELL + PAGINERING -->
     <div class="cards table-frame" role="region" aria-label="Tabell med resultater">
+      <div class="table-scroll">
       <table id="tbl">
         <thead>
           <tr>
@@ -283,6 +285,7 @@
           <tr><td colspan="5" class="muted">Laster data…</td></tr>
         </tbody>
       </table>
+      </div>
 
       <div class="pager" role="navigation" aria-label="Sideveksler">
         <div class="pager-left">
@@ -304,18 +307,18 @@
         <div id="asof" class="muted"></div>
       </div>
 
-      <div class="agg" id="agg"></div>
+    </div>
 
-        <!-- CTA: Endringsarkiv -->
-      <div class="archive-cta" role="complementary" aria-label="Gå til endringsarkivet">
-        <a class="btn-archive" href="./uu-arkiv.html" rel="noopener">
-          Se endringsarkivet <span aria-hidden="true">→</span>
-        </a>
-        <a class="btn-archive" href="./benchmark.html" rel="noopener">
-          Se sammenligning med andre <span aria-hidden="true">→</span>
-        </a>
-      </div>
+    <div id="agg"></div>
 
+    <!-- CTA: Endringsarkiv -->
+    <div class="archive-cta" role="complementary" aria-label="Gå til endringsarkivet">
+      <a class="btn-archive" href="./uu-arkiv.html" rel="noopener">
+        Se endringsarkivet <span aria-hidden="true">→</span>
+      </a>
+      <a class="btn-archive" href="./benchmark.html" rel="noopener">
+        Se sammenligning med andre <span aria-hidden="true">→</span>
+      </a>
     </div>
   </main>
 

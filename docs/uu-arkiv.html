@@ -65,7 +65,9 @@
       border-radius: 16px;
       padding: 12px;
     }
-    .table-frame { width: 100%; }
+    .table-frame { width: 100%; box-sizing: border-box; }
+    .table-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+    .table-scroll > table { width: max-content; min-width: 100%; }
 
     .toolbar {
       display: grid;
@@ -142,8 +144,7 @@
     .btn-page.active, .btn-page[aria-current="page"] { border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25); }
     .pager-info { color: var(--muted); font-size: 12px; }
     @media (max-width: 900px) {
-      .table-frame { width: max-content; min-width: 100%; }
-      .table-frame > table { width: max-content; min-width: 100%; }
+      .table-frame { width: 100%; }
     }
   </style>
 </head>
@@ -178,6 +179,7 @@
     </div>
 
     <div class="cards table-frame" role="region" aria-label="Endringslogg">
+      <div class="table-scroll">
       <table id="tbl">
         <thead>
           <tr>
@@ -192,6 +194,7 @@
           <tr><td colspan="4" class="muted">Laster endringer…</td></tr>
         </tbody>
       </table>
+      </div>
 
       <!-- Paginering -->
       <div class="pager" role="navigation" aria-label="Sideveksler">
