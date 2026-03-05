@@ -36,6 +36,7 @@
     .toolbar button { cursor: pointer; }
 
     .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
+    .table-card { width: max-content; min-width: 100%; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
     th { text-align: left; font-weight: 600; user-select: none; white-space: nowrap; }
@@ -263,7 +264,7 @@
     </div>
 
     <!-- TABELL + PAGINERING -->
-    <div class="cards" role="region" aria-label="Tabell med resultater">
+    <div class="cards table-card" role="region" aria-label="Tabell med resultater">
       <table id="tbl">
         <thead>
           <tr>
