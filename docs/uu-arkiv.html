@@ -65,8 +65,7 @@
       border-radius: 16px;
       padding: 12px;
     }
-    .table-card { width: 100%; overflow-x: auto; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
-    .table-card > table { width: 100%; min-width: 960px; }
+    .table-frame { width: 100%; }
 
     .toolbar {
       display: grid;
@@ -142,6 +141,10 @@
     .btn-page[disabled] { opacity:.5; cursor:default; }
     .btn-page.active, .btn-page[aria-current="page"] { border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25); }
     .pager-info { color: var(--muted); font-size: 12px; }
+    @media (max-width: 900px) {
+      .table-frame { width: max-content; min-width: 100%; }
+      .table-frame > table { width: max-content; min-width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -174,7 +177,7 @@
       </div>
     </div>
 
-    <div class="cards table-card" role="region" aria-label="Endringslogg">
+    <div class="cards table-frame" role="region" aria-label="Endringslogg">
       <table id="tbl">
         <thead>
           <tr>
