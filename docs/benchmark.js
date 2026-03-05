@@ -37,6 +37,42 @@
       name: 'Digdir',
       aliases: ['digitaliseringsdirektoratet', 'digdir'],
       orgNumbers: ['991825827']
+    },
+    {
+      key: 'ssb',
+      name: 'Statistisk sentralbyrå (SSB)',
+      aliases: ['statistisk sentralbyrå', 'statistisk sentralbyra', 'ssb'],
+      orgNumbers: ['971526920']
+    },
+    {
+      key: 'drammen_kommune',
+      name: 'Drammen kommune',
+      aliases: ['drammen kommune'],
+      orgNumbers: ['921234554']
+    },
+    {
+      key: 'bergen_kommune',
+      name: 'Bergen kommune',
+      aliases: ['bergen kommune'],
+      orgNumbers: ['964338531']
+    },
+    {
+      key: 'baerum_kommune',
+      name: 'Bærum kommune',
+      aliases: ['bærum kommune', 'baerum kommune'],
+      orgNumbers: ['935478715']
+    },
+    {
+      key: 'vestland_fylkeskommune',
+      name: 'Vestland fylkeskommune',
+      aliases: ['vestland fylkeskommune'],
+      orgNumbers: ['821311632']
+    },
+    {
+      key: 'innlandet_fylkeskommune',
+      name: 'Innlandet fylkeskommune',
+      aliases: ['innlandet fylkeskommune'],
+      orgNumbers: ['920717152']
     }
   ];
 
@@ -73,7 +109,13 @@
     forsvaret: { suffixes: ['forsvaret.no'] },
     politi_lensmannsetaten: { suffixes: ['politi.no', 'politiet.no'] },
     utlendingsdirektoratet: { suffixes: ['udi.no'] },
-    digdir: { suffixes: ['digdir.no'] }
+    digdir: { suffixes: ['digdir.no'] },
+    ssb: { suffixes: ['ssb.no'] },
+    drammen_kommune: { suffixes: ['drammen.kommune.no'] },
+    bergen_kommune: { suffixes: ['bergen.kommune.no'] },
+    baerum_kommune: { suffixes: ['baerum.kommune.no', 'bærum.kommune.no'] },
+    vestland_fylkeskommune: { suffixes: ['vestlandfylke.no'] },
+    innlandet_fylkeskommune: { suffixes: ['innlandetfylke.no'] }
   };
 
   function normalize(input) {
