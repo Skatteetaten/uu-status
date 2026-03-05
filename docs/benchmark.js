@@ -73,6 +73,36 @@
       name: 'Innlandet fylkeskommune',
       aliases: ['innlandet fylkeskommune'],
       orgNumbers: ['920717152']
+    },
+    {
+      key: 'kvinesdal_kommune',
+      name: 'Kvinesdal kommune',
+      aliases: ['kvinesdal kommune'],
+      orgNumbers: ['964964076']
+    },
+    {
+      key: 'akershus_fylkeskommune',
+      name: 'Akershus fylkeskommune',
+      aliases: ['akershus fylkeskommune'],
+      orgNumbers: ['930580783']
+    },
+    {
+      key: 'agder_fylkeskommune',
+      name: 'Agder fylkeskommune',
+      aliases: ['agder fylkeskommune'],
+      orgNumbers: ['921707134']
+    },
+    {
+      key: 'asker_kommune',
+      name: 'Asker kommune',
+      aliases: ['asker kommune'],
+      orgNumbers: ['920125298']
+    },
+    {
+      key: 'nordre_follo_kommune',
+      name: 'Nordre Follo kommune',
+      aliases: ['nordre follo kommune'],
+      orgNumbers: ['922092648']
     }
   ];
 
@@ -115,7 +145,12 @@
     bergen_kommune: { suffixes: ['bergen.kommune.no'] },
     baerum_kommune: { suffixes: ['baerum.kommune.no', 'bærum.kommune.no'] },
     vestland_fylkeskommune: { suffixes: ['vestlandfylke.no'] },
-    innlandet_fylkeskommune: { suffixes: ['innlandetfylke.no'] }
+    innlandet_fylkeskommune: { suffixes: ['innlandetfylke.no'] },
+    kvinesdal_kommune: { suffixes: ['kvinesdal.kommune.no'] },
+    akershus_fylkeskommune: { suffixes: ['afk.no'] },
+    agder_fylkeskommune: { suffixes: ['agderfk.no'] },
+    asker_kommune: { suffixes: ['asker.kommune.no'] },
+    nordre_follo_kommune: { suffixes: ['nordrefollo.kommune.no'] }
   };
 
   function normalize(input) {
