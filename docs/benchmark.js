@@ -25,6 +25,18 @@
       name: 'Politidirektoratet',
       aliases: ['politidirektoratet'],
       orgNumbers: ['982531950']
+    },
+    {
+      key: 'utlendingsdirektoratet',
+      name: 'Utlendingsdirektoratet',
+      aliases: ['utlendingsdirektoratet'],
+      orgNumbers: ['974760746']
+    },
+    {
+      key: 'digdir',
+      name: 'Digdir',
+      aliases: ['digitaliseringsdirektoratet', 'digdir'],
+      orgNumbers: ['991825827']
     }
   ];
 
@@ -59,7 +71,9 @@
     statens_vegvesen: { suffixes: ['vegvesen.no', 'vegvesenet.no'] },
     oslo_kommune: { suffixes: ['oslo.kommune.no', 'oslokommune.no'] },
     forsvaret: { suffixes: ['forsvaret.no'] },
-    politi_lensmannsetaten: { suffixes: ['politi.no', 'politiet.no'] }
+    politi_lensmannsetaten: { suffixes: ['politi.no', 'politiet.no'] },
+    utlendingsdirektoratet: { suffixes: ['udi.no'] },
+    digdir: { suffixes: ['digdir.no'] }
   };
 
   function normalize(input) {
