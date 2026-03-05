@@ -82,7 +82,13 @@
     border-radius: 12px;
     padding: 10px 12px;
   }
-  .kpi-label { color: var(--muted); font-size: 13px; }
+  .kpi-label {
+    color: var(--muted);
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
   .kpi-value { font-size: 24px; font-weight: 700; margin-top: 4px; }
 
   table { width: 100%; border-collapse: collapse; }
@@ -91,19 +97,51 @@
 
   .info-btn {
     margin-left: 6px;
-    width: 18px;
-    height: 18px;
-    border: 1px solid var(--border);
+    width: 22px;
+    height: 22px;
+    border: 1px solid #78b8ff;
     border-radius: 999px;
-    background: transparent;
-    color: var(--muted);
-    font-size: 11px;
+    background: #0f2f57;
+    color: transparent;
+    font-size: 0;
     line-height: 1;
     cursor: help;
     padding: 0;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    top: 0;
+  }
+  .info-btn::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 9px;
+    width: 1px;
+    height: 7px;
+    background: #ffffff;
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+  .info-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    width: 2px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+  .info-btn:hover {
+    background: #1a4378;
+    border-color: #9fd0ff;
   }
   .info-btn:focus-visible {
-    outline: 3px solid var(--focus);
+    outline: 3px solid #9fd0ff;
     outline-offset: 2px;
   }
   .info-wrap {
@@ -209,6 +247,11 @@
     width: 16px;
     height: 16px;
     accent-color: var(--accent);
+  }
+  .th-with-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .accordion {
@@ -316,19 +359,10 @@
         <thead>
           <tr>
             <th>Virksomhet</th>
-            <th>
-              Erklæringer (ant.)
-              <button class="info-btn" type="button" data-tooltip="Antall unike erklærings-URLer for valgt virksomhetsnavn og organisasjonsnummer." aria-label="Info om erklæringer">i</button>
-            </th>
+            <th><span class="th-with-info">Erklæringer (ant.) <button class="info-btn" type="button" data-tooltip="Antall unike erklærings-URLer for valgt virksomhetsnavn og organisasjonsnummer." aria-label="Info om erklæringer">i</button></span></th>
             <th>Brudd (ant.) / Snitt</th>
-            <th>
-              Bruddandel
-              <button class="info-btn" type="button" data-tooltip="Bruddandel beregnes med fast grunnlag på 48 krav per erklæring: brudd / (erklæringer × 48)." aria-label="Info om bruddandel">i</button>
-            </th>
-            <th>
-              Oppdatert
-              <button class="info-btn" type="button" data-tooltip="Viser datoen for den nyeste oppdateringen blant erklæringene som inngår for virksomheten." aria-label="Info om oppdatert">i</button>
-            </th>
+            <th><span class="th-with-info">Bruddandel <button class="info-btn" type="button" data-tooltip="Bruddandel beregnes med fast grunnlag på 48 krav per erklæring: brudd / (erklæringer × 48)." aria-label="Info om bruddandel">i</button></span></th>
+            <th><span class="th-with-info">Oppdatert <button class="info-btn" type="button" data-tooltip="Viser datoen for den nyeste oppdateringen blant erklæringene som inngår for virksomheten." aria-label="Info om oppdatert">i</button></span></th>
           </tr>
         </thead>
         <tbody id="benchmarkBody">

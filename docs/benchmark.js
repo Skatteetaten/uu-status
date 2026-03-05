@@ -781,6 +781,7 @@
       pop.hidden = true;
       pop.textContent = text;
       wrap.appendChild(pop);
+      btn.textContent = 'i';
 
       btn.setAttribute('aria-controls', popId);
       btn.setAttribute('aria-expanded', 'false');
