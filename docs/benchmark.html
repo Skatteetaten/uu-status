@@ -27,7 +27,8 @@
   .muted { color: var(--muted); }
 
   .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
-  .table-card { width: max-content; min-width: 100%; }
+  .table-card { width: 100%; overflow-x: auto; box-sizing: border-box; }
+  .table-card > table { width: max(100%, 760px); }
   .section { margin-top: 14px; }
 
   .archive-cta {
