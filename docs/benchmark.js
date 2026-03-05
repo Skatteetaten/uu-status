@@ -643,6 +643,24 @@
     wireMoreLinksToggles(tbody);
   }
 
+  function isMunicipalityTargetName(name) {
+    const n = normalize(name || '');
+    return n.includes(' kommune') || n.includes(' fylkeskommune');
+  }
+
+  function applyTableFilters(rows) {
+    const hideMunicipalities = document.getElementById('hideMunicipalities');
+    if (!hideMunicipalities || !hideMunicipalities.checked) return rows;
+    return rows.filter((r) => !isMunicipalityTargetName(r.target));
+  }
+
+  function renderAll(rows) {
+    const filteredRows = applyTableFilters(rows);
+    renderRows(filteredRows);
+    renderKpis(filteredRows);
+    renderSourceLine(getMaxDate(filteredRows));
+  }
+
   function renderKpis(rows) {
     const kpiSe = document.getElementById('kpiSkatteetaten');
     const kpiWeighted = document.getElementById('kpiWeightedOthers');
@@ -796,6 +814,10 @@
   async function main() {
     setupAccordion();
     setupInfoPopovers();
+    const hideMunicipalities = document.getElementById('hideMunicipalities');
+    let latestRows = [];
+    const rerender = () => renderAll(latestRows);
+    if (hideMunicipalities) hideMunicipalities.addEventListener('change', rerender);
     let cache = loadCache();
     try {
       if (!cacheIsFresh(cache)) {
@@ -811,10 +833,8 @@
         cache = saveCache(records, source);
       }
 
-      const rows = aggregate(cache.records);
-      renderRows(rows);
-      renderKpis(rows);
-      renderSourceLine(getMaxDate(rows));
+      latestRows = aggregate(cache.records);
+      rerender();
       const sourceText = cache.source === 'lokal-speilfil'
         ? 'en lokal speilfil av Uu-tilsynets åpne datasett'
         : 'Uu-tilsynets åpne API';
@@ -822,10 +842,8 @@
     } catch (err) {
       const msg = err && err.message ? err.message : 'ukjent feil';
       if (cache && Array.isArray(cache.records) && cache.records.length) {
-        const rows = aggregate(cache.records);
-        renderRows(rows);
-        renderKpis(rows);
-        renderSourceLine(getMaxDate(rows));
+        latestRows = aggregate(cache.records);
+        rerender();
         setTechnicalStatus(`Feil ved oppdatering (${msg}). Viser siste cachede versjon fra ${formatDateTime(cache.fetchedAt)}.`, true);
       } else {
         renderError(msg);
