@@ -187,7 +187,7 @@ def fetch_skatteetaten_urls_from_api():
             resp = requests.get(
                 DATASET_URL,
                 params={"page": page, "size": 50},
-                headers={"Accept": "application/json"},
+                headers={"User-Agent": "Mozilla/5.0 (compatible; UU-Status-Bot/1.0)"},
                 timeout=30,
             )
             resp.raise_for_status()
