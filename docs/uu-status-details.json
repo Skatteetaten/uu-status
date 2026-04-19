@@ -10,8 +10,7 @@
       "1.4.3",
       "2.4.1",
       "3.1.2",
-      "3.3.1",
-      "4.1.3"
+      "3.3.1"
     ],
     "last_checked": "2026-04-19T02:12:46.134879+00:00",
     "nonConformities": [
@@ -34,8 +33,7 @@
     "name": "Tips oss",
     "codes": [
       "1.3.1",
-      "1.4.10",
-      "4.1.2"
+      "1.4.10"
     ],
     "last_checked": "2026-04-19T02:12:47.324290+00:00",
     "nonConformities": [
@@ -60,8 +58,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/90be03a3-13e4-4979-8c88-f38727fb77e0",
     "name": "Skatteetaten designsystem - Github",
     "codes": [
-      "3.1.2",
-      "4.1.2"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:12:49.686740+00:00",
     "nonConformities": [
@@ -82,9 +79,7 @@
       "2.4.3",
       "2.4.7",
       "3.1.2",
-      "3.2.4",
-      "4.1.2",
-      "4.1.3"
+      "3.2.4"
     ],
     "last_checked": "2026-04-19T02:12:50.876638+00:00",
     "nonConformities": [
@@ -121,8 +116,7 @@
     "name": "Min side",
     "codes": [
       "1.3.1",
-      "2.4.3",
-      "4.1.3"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:12:53.245084+00:00",
     "nonConformities": [
@@ -180,9 +174,7 @@
     "name": "Innboks",
     "codes": [
       "1.3.1",
-      "2.4.3",
-      "4.1.2",
-      "4.1.3"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:12:55.623293+00:00",
     "nonConformities": [
@@ -228,8 +220,7 @@
     "codes": [
       "1.3.1",
       "1.3.2",
-      "3.3.2",
-      "4.1.2"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:12:59.177847+00:00",
     "nonConformities": [
@@ -252,9 +243,7 @@
       "2.4.3",
       "2.4.4",
       "2.4.6",
-      "3.3.2",
-      "4.1.2",
-      "4.1.3"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:13:00.368676+00:00",
     "nonConformities": [
@@ -278,9 +267,7 @@
       "1.3.1",
       "2.4.2",
       "2.4.3",
-      "3.3.2",
-      "4.1.2",
-      "4.1.3"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:13:01.549896+00:00",
     "nonConformities": [
@@ -301,8 +288,7 @@
       "1.3.1",
       "2.4.2",
       "2.4.3",
-      "3.2.2",
-      "4.1.3"
+      "3.2.2"
     ],
     "last_checked": "2026-04-19T02:13:02.749123+00:00",
     "nonConformities": [
@@ -322,8 +308,7 @@
     "codes": [
       "1.3.1",
       "1.4.10",
-      "2.4.3",
-      "4.1.1"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:13:03.991763+00:00",
     "nonConformities": [
@@ -342,8 +327,7 @@
     "codes": [
       "1.3.1",
       "1.4.10",
-      "2.4.3",
-      "4.1.3"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:13:05.178689+00:00",
     "nonConformities": [
@@ -432,8 +416,7 @@
       "1.1.1",
       "1.4.10",
       "1.4.3",
-      "3.3.2",
-      "4.1.2"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:13:14.709763+00:00",
     "nonConformities": [
@@ -454,9 +437,7 @@
       "1.3.1",
       "1.4.10",
       "1.4.3",
-      "2.4.1",
-      "4.1.2",
-      "4.1.3"
+      "2.4.1"
     ],
     "last_checked": "2026-04-19T02:13:15.898591+00:00",
     "nonConformities": [
@@ -498,8 +479,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/93d6de46-3b5d-4ecc-9149-b0d27af706fa",
     "name": "Konto for utbetalinger fra Skatteetaten",
     "codes": [
-      "1.3.1",
-      "4.1.3"
+      "1.3.1"
     ],
     "last_checked": "2026-04-19T02:13:19.462691+00:00",
     "nonConformities": [
@@ -531,8 +511,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/a49940f0-d273-4728-8ff4-4adce824cadf",
     "name": "Skattelister",
     "codes": [
-      "2.4.3",
-      "4.1.2"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:13:21.892303+00:00",
     "nonConformities": [
@@ -611,9 +590,7 @@
     "name": "Utsatt frist søknad",
     "codes": [
       "1.3.1",
-      "2.4.2",
-      "4.1.2",
-      "4.1.3"
+      "2.4.2"
     ],
     "last_checked": "2026-04-19T02:13:31.412833+00:00",
     "nonConformities": [
@@ -630,9 +607,7 @@
     "name": "Tredjepartsopplysninger - boligsameie",
     "codes": [
       "1.3.1",
-      "3.3.2",
-      "4.1.2",
-      "4.1.3"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:13:32.606122+00:00",
     "nonConformities": [
@@ -648,8 +623,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109",
     "name": "Tredjepartsopplysninger - boligselskap",
     "codes": [
-      "2.1.2",
-      "4.1.3"
+      "2.1.2"
     ],
     "last_checked": "2026-04-19T02:13:33.922166+00:00",
     "nonConformities": [
@@ -784,9 +758,7 @@
     "name": "Tredjepartsopplysninger - skadeforsikring",
     "codes": [
       "1.3.1",
-      "2.4.2",
-      "4.1.1",
-      "4.1.2"
+      "2.4.2"
     ],
     "last_checked": "2026-04-19T02:13:48.133715+00:00",
     "nonConformities": [
@@ -839,10 +811,7 @@
       "2.4.3",
       "2.4.4",
       "2.5.3",
-      "3.1.2",
-      "4.1.1",
-      "4.1.2",
-      "4.1.3"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:13:53.213052+00:00",
     "nonConformities": [
@@ -903,8 +872,7 @@
     "codes": [
       "2.1.1",
       "3.3.1",
-      "3.3.2",
-      "4.1.3"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:13:56.780085+00:00",
     "nonConformities": [
@@ -925,9 +893,7 @@
       "1.3.2",
       "2.4.3",
       "2.4.4",
-      "3.1.1",
-      "4.1.2",
-      "4.1.3"
+      "3.1.1"
     ],
     "last_checked": "2026-04-19T02:13:58.074209+00:00",
     "nonConformities": [
@@ -939,7 +905,8 @@
     ],
     "totalNonConformities": 5,
     "title": "Tilgjengelegheitserklæring for Merverdiavgifts­håndboken | uustatus",
-    "domain": "uustatus.no"
+    "domain": "uustatus.no",
+    "opprettet": "2026-01-22"
   },
   {
     "url": "https://uustatus.no/nn/erklaringer/publisert/7ab75090-1f32-4cef-9edb-3932179a4250",
@@ -947,7 +914,8 @@
     "codes": [],
     "last_checked": "2026-04-19T02:13:59.260040+00:00",
     "title": "Tilgjengelegheitserklæring for Rapportering av opplysninger om avtalevilkår og salgsvilkår ved særskattepliktig realisasjon av naturgass fra norsk sokkel | uustatus",
-    "domain": "uustatus.no"
+    "domain": "uustatus.no",
+    "opprettet": "2026-02-27"
   },
   {
     "url": "https://uustatus.no/nn/erklaringer/publisert/00583d50-3635-4a89-889f-fb1ee6c22234",
@@ -955,7 +923,8 @@
     "codes": [],
     "last_checked": "2026-04-19T02:14:00.438136+00:00",
     "title": "Tilgjengelegheitserklæring for Klage på vedtak om utvidet kontroll | uustatus",
-    "domain": "uustatus.no"
+    "domain": "uustatus.no",
+    "opprettet": "2026-02-27"
   },
   {
     "url": "https://uustatus.no/nn/erklaringer/publisert/398bc579-1d88-44fc-b342-a19759d95f0d",
@@ -977,7 +946,8 @@
     ],
     "totalNonConformities": 5,
     "title": "Tilgjengelegheitserklæring for Innlevering av kontoopplysninger | uustatus",
-    "domain": "uustatus.no"
+    "domain": "uustatus.no",
+    "opprettet": "2026-03-02"
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/e32e9bfb-189a-4390-af64-f39fc93a190a",
@@ -990,8 +960,7 @@
       "2.4.2",
       "3.3.1",
       "3.3.2",
-      "3.3.3",
-      "4.1.3"
+      "3.3.3"
     ],
     "last_checked": "2026-04-19T02:14:02.828819+00:00",
     "nonConformities": [
@@ -1031,8 +1000,7 @@
       "2.4.3",
       "2.5.3",
       "3.1.2",
-      "3.3.1",
-      "4.1.2"
+      "3.3.1"
     ],
     "last_checked": "2026-04-19T02:14:05.194725+00:00",
     "nonConformities": [
@@ -1078,10 +1046,7 @@
       "3.1.2",
       "3.2.2",
       "3.3.1",
-      "3.3.3",
-      "4.1.1",
-      "4.1.2",
-      "4.1.3"
+      "3.3.3"
     ],
     "last_checked": "2026-04-19T02:14:08.750806+00:00",
     "nonConformities": [
@@ -1105,8 +1070,7 @@
       "2.4.2",
       "2.4.3",
       "3.1.2",
-      "3.2.2",
-      "4.1.2"
+      "3.2.2"
     ],
     "last_checked": "2026-04-19T02:14:09.937356+00:00",
     "nonConformities": [
@@ -1164,8 +1128,7 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445",
     "name": "A-meldingen - Avstemmingsinformasjon",
     "codes": [
-      "2.4.3",
-      "4.1.3"
+      "2.4.3"
     ],
     "last_checked": "2026-04-19T02:14:13.483544+00:00",
     "nonConformities": [
@@ -1202,8 +1165,7 @@
       "1.3.1",
       "1.4.13",
       "2.4.4",
-      "3.1.2",
-      "4.1.2"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:14:15.807904+00:00",
     "nonConformities": [
@@ -1231,8 +1193,7 @@
       "1.1.1",
       "1.4.1",
       "1.4.3",
-      "3.1.2",
-      "4.1.2"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:14:18.271175+00:00",
     "nonConformities": [
@@ -1280,8 +1241,7 @@
     "codes": [
       "1.3.1",
       "2.4.2",
-      "3.3.2",
-      "4.1.2"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:14:21.827812+00:00",
     "nonConformities": [
@@ -1303,8 +1263,7 @@
       "1.4.13",
       "2.4.3",
       "2.4.7",
-      "3.3.2",
-      "4.1.2"
+      "3.3.2"
     ],
     "last_checked": "2026-04-19T02:14:23.015721+00:00",
     "nonConformities": [
@@ -1332,9 +1291,7 @@
       "2.4.3",
       "3.3.1",
       "3.3.2",
-      "3.3.3",
-      "4.1.2",
-      "4.1.3"
+      "3.3.3"
     ],
     "last_checked": "2026-04-19T02:14:24.213105+00:00",
     "nonConformities": [
@@ -1363,9 +1320,7 @@
       "2.4.6",
       "3.3.1",
       "3.3.2",
-      "3.3.3",
-      "4.1.2",
-      "4.1.3"
+      "3.3.3"
     ],
     "last_checked": "2026-04-19T02:14:25.399610+00:00",
     "nonConformities": [
@@ -1459,9 +1414,7 @@
       "1.1.1",
       "1.4.11",
       "2.4.1",
-      "3.1.2",
-      "4.1.1",
-      "4.1.2"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:14:34.723095+00:00",
     "nonConformities": [
@@ -1488,8 +1441,7 @@
       "2.4.2",
       "2.4.4",
       "2.4.5",
-      "3.1.1",
-      "4.1.2"
+      "3.1.1"
     ],
     "last_checked": "2026-04-19T02:14:35.916630+00:00",
     "nonConformities": [
@@ -1562,9 +1514,7 @@
       "1.4.10",
       "2.4.2",
       "2.4.6",
-      "3.2.1",
-      "4.1.2",
-      "4.1.3"
+      "3.2.1"
     ],
     "last_checked": "2026-04-19T02:14:43.019984+00:00",
     "nonConformities": [
@@ -1598,8 +1548,7 @@
       "1.4.12",
       "1.4.3",
       "2.4.1",
-      "3.1.2",
-      "4.1.2"
+      "3.1.2"
     ],
     "last_checked": "2026-04-19T02:14:45.430354+00:00",
     "nonConformities": [
@@ -1622,8 +1571,7 @@
     "codes": [
       "1.3.1",
       "1.3.2",
-      "2.4.6",
-      "4.1.2"
+      "2.4.6"
     ],
     "last_checked": "2026-04-19T02:14:46.617702+00:00",
     "nonConformities": [
