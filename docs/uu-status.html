@@ -560,7 +560,7 @@
       }
 
       if (wcagCode) {
-        const d = detByUrl.get(row.Url);
+        const d = detByUrl.get(extractUuid(row.Url));
         const codes = (d && d.codes) || [];
         if (!codes.includes(wcagCode)) return false;
       }
@@ -654,10 +654,11 @@
         const detRes = await fetch(DETAILS_URL, { cache: 'no-store' });
         if (!detRes.ok) throw new Error('Kunne ikke hente detaljer');
         const details = await detRes.json();
-        const detByUrl = new Map(details.map(d => [d.url, d]));
+        const extractUuid = url => (url || '').match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)?.[0] || url;
+        const detByUrl = new Map(details.map(d => [extractUuid(d.url), d]));
 
         for (const row of data) {
-          const det = detByUrl.get(row.Url);
+          const det = detByUrl.get(extractUuid(row.Url));
           if (det?.opprettet) row.Opprettet = det.opprettet;
         }
 
@@ -1120,7 +1121,7 @@ legend.innerHTML = `
               title.textContent = 'WCAG-brudd funnet:';
               box.appendChild(title);
 
-              const d = detByUrl.get(r.Url);
+              const d = detByUrl.get(extractUuid(r.Url));
               const codes = (d && d.codes && d.codes.length) ? d.codes : [];
               const tags = document.createElement('div');
               tags.className = 'detail-tags';
