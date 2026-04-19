@@ -326,8 +326,12 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <script>
-    const CSV_URL = 'uu-status.csv';
     const DETAILS_URL = 'uu-status-details.json';
+    const DATASET_URL = 'https://data.uutilsynet.no/dataset/alle-erklaeringer';
+    const LOCAL_MIRROR_URL = 'data/uustatus/benchmark-source.json';
+    const SKATTEETATEN_ORG = '974761076';
+    const CACHE_KEY = 'uu-status-api-cache-v1';
+    const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 
     // Direkte-lenker for kjente koder (kan fylles på etter behov)
     const WCAG_LINKS = {
@@ -385,16 +389,73 @@
         `https://www.uutilsynet.no/search?search=${encodeURIComponent(code)}&f%5B0%5D=global_taxonomy%3A10&sort_by=search_api_relevance&sort_order=DESC`;
     }
 
-    function parseCSV(text, delimiter=';') {
-      const lines = text.trim().split(/\r?\n/);
-      const headers = lines[0].split(delimiter).map(h => h.trim());
-      const rows = lines.slice(1).map(line => {
-        const cols = line.split(delimiter).map(c => c.trim());
-        const obj = {};
-        headers.forEach((h, i) => { obj[h] = cols[i] ?? ''; });
-        return obj;
-      });
-      return { headers, rows };
+    function extractRecords(payload) {
+      if (!payload) return [];
+      const candidates = [
+        payload, payload._embedded,
+        payload._embedded && payload._embedded.dataElements,
+        payload.data, payload.items, payload.results, payload.records
+      ];
+      for (const c of candidates) {
+        if (Array.isArray(c) && c.length) return c;
+      }
+      return [];
+    }
+
+    async function fetchAllRecords() {
+      const firstRes = await fetch(DATASET_URL, { headers: { Accept: 'application/json' } });
+      if (!firstRes.ok) throw new Error(`HTTP ${firstRes.status}`);
+      const firstData = await firstRes.json();
+      let all = extractRecords(firstData);
+      const page = firstData.page || {};
+      const totalPages = Number(page.totalPages || 1);
+      const size = Number(page.size || 10);
+      for (let p = 2; p <= totalPages; p++) {
+        const url = new URL(DATASET_URL);
+        url.searchParams.set('page', String(p));
+        url.searchParams.set('size', String(size));
+        const res = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(`HTTP ${res.status} side ${p}`);
+        const rows = extractRecords(await res.json());
+        if (rows.length) all = all.concat(rows);
+      }
+      return all;
+    }
+
+    function loadCache() {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.records) || !parsed.fetchedAt) return null;
+        return parsed;
+      } catch { return null; }
+    }
+
+    function saveCache(records, source) {
+      const payload = { fetchedAt: Date.now(), records, source: source || 'api' };
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify(payload)); } catch { }
+      return payload;
+    }
+
+    function cacheIsFresh(cache) {
+      if (!cache || !cache.fetchedAt) return false;
+      return Date.now() - cache.fetchedAt < CACHE_TTL_MS;
+    }
+
+    function apiRecordToRow(rec) {
+      const brudd = rec.talBrot ?? 0;
+      const oppfylt = rec.talSamsvar ?? 0;
+      const irrelevant = rec.talIkkjeRelevant ?? 0;
+      const kravTotalt = (brudd + oppfylt + irrelevant) || 48;
+      return {
+        Navn: rec.iktLoeysingNamn || '',
+        Url:  rec.erklaeringsAdresse || '',
+        Brudd: String(brudd),
+        KravTotalt: String(kravTotalt),
+        SistOppdatert: rec.sisteOppdatering || '',
+        Opprettet: '',
+      };
     }
 
     function fmtDate(iso) {
@@ -558,18 +619,35 @@
       }
 
       try {
-        const [csvRes, detRes] = await Promise.all([
-          fetch(CSV_URL, { cache: 'no-store' }),
-          fetch(DETAILS_URL, { cache: 'no-store' })
-        ]);
-        if (!csvRes.ok) throw new Error('Kunne ikke hente CSV');
-        if (!detRes.ok) throw new Error('Kunne ikke hente detaljer');
+        let cache = loadCache();
+        if (!cacheIsFresh(cache)) {
+          let records, source;
+          try {
+            records = await fetchAllRecords();
+            source = 'api';
+          } catch {
+            const mirrorRes = await fetch(LOCAL_MIRROR_URL, { cache: 'no-store' });
+            if (!mirrorRes.ok) throw new Error('Kunne ikke hente data fra API eller lokal speil');
+            const mirrorData = await mirrorRes.json();
+            records = Array.isArray(mirrorData) ? mirrorData : extractRecords(mirrorData);
+            source = 'mirror';
+          }
+          cache = saveCache(records, source);
+        }
+        const skattRecords = cache.records.filter(
+          r => String(r.organisasjonsnummer || '') === SKATTEETATEN_ORG
+        );
+        data = skattRecords.map(apiRecordToRow);
 
-        const txt = await csvRes.text();
+        const detRes = await fetch(DETAILS_URL, { cache: 'no-store' });
+        if (!detRes.ok) throw new Error('Kunne ikke hente detaljer');
         const details = await detRes.json();
         const detByUrl = new Map(details.map(d => [d.url, d]));
-        const parsed = parseCSV(txt, ';');
-        data = parsed.rows;
+
+        for (const row of data) {
+          const det = detByUrl.get(row.Url);
+          if (det?.opprettet) row.Opprettet = det.opprettet;
+        }
 
         // WCAG-agg + fyll drop-down
         const wcagAgg = aggregateByCode(details);
@@ -585,11 +663,7 @@
         const totalBrudd = data.reduce((s, r) => s + (Number(r.Brudd || 0) || 0), 0);
         const zeroCount = data.filter(r => Number(r.Brudd||0) === 0).length;
 
-        const asOfIso = data.map(r => r.SistSjekket).filter(Boolean).sort().slice(-1)[0];
-        if (asOfIso) {
-          const d = new Date(asOfIso);
-          asof.textContent = `Sist sjekket: ${d.toLocaleString('no-NO')}`;
-        }
+        asof.textContent = `Sist hentet: ${new Date(cache.fetchedAt).toLocaleString('no-NO')}`;
         summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
         // --- Dashboard (bygges første gang bruker åpner) ---
@@ -1140,12 +1214,18 @@ legend.innerHTML = `
         });
 
         downloadBtn.addEventListener('click', () => {
+          const fields = ['Navn','Url','Brudd','KravTotalt','SistOppdatert','Opprettet'];
+          const lines = [fields.join(';')].concat(
+            data.map(r => fields.map(f => (r[f] ?? '').replace(/;/g, ',')).join(';'))
+          );
+          const blob = new Blob([lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
           const link = document.createElement('a');
-          link.href = CSV_URL;
+          link.href = URL.createObjectURL(blob);
           link.download = 'uu-status.csv';
           document.body.appendChild(link);
           link.click();
           link.remove();
+          URL.revokeObjectURL(link.href);
         });
 
         pageSizeSel.addEventListener('change', () => {

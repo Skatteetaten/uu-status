@@ -11,10 +11,21 @@ except Exception as e:
     sys.exit(1)
 
 DETAILS_FP = Path("docs/uu-status-details.json")
+DATASET_URL = "https://data.uutilsynet.no/dataset/alle-erklaeringer"
+SKATTEETATEN_ORG = "974761076"
 
 WCAG_CODE_RE = re.compile(r"\b(?:[0-3]\.\d{1,2}\.\d{1,2}[a-z]?)\b", re.I)
 DATE_NO_RE = re.compile(r"(?:Sist\s+(?:endret|oppdatert)[^0-9]{0,20})(\d{1,2}\.\d{1,2}\.\d{4})", re.I)
 DATE_ISO_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+OPPRETTET_RE = re.compile(
+    r"opprettet\s+(?:første\s*gang\s+)?(\d{1,2}\.\s*\w+\s+\d{4})",
+    re.IGNORECASE
+)
+MONTHS_NO = {
+    "januar": "January", "februar": "February", "mars": "March", "april": "April",
+    "mai": "May", "juni": "June", "juli": "July", "august": "August",
+    "september": "September", "oktober": "October", "november": "November", "desember": "December"
+}
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; UU-Status-Bot/1.0; +https://github.com/)",
@@ -39,6 +50,18 @@ def parse_date_no(s: str):
     """Konverter dd.mm.yyyy -> yyyy-mm-dd"""
     try:
         return datetime.strptime(s, "%d.%m.%Y").date().isoformat()
+    except Exception:
+        return None
+
+def parse_no_month_date(s: str):
+    """Konverter '5. januar 2023' -> '2023-01-05'"""
+    if not s:
+        return None
+    raw = s.strip()
+    for no, en in MONTHS_NO.items():
+        raw = re.sub(no, en, raw, flags=re.IGNORECASE)
+    try:
+        return datetime.strptime(raw.replace("  ", " "), "%d. %B %Y").date().isoformat()
     except Exception:
         return None
 
@@ -95,9 +118,9 @@ def scrape_one(url: str, timeout=20):
     try:
         resp = requests.get(url, headers=HEADERS, timeout=timeout)
     except Exception as e:
-        return None, None, None
+        return None, None, None, None
     if resp.status_code != 200:
-        return None, None, None
+        return None, None, None, None
 
     html = resp.text
     soup = BeautifulSoup(html, "html.parser")
@@ -110,7 +133,10 @@ def scrape_one(url: str, timeout=20):
                 codes = extract_codes_from_json_obj(data)
                 upd = extract_updated_from_json_obj(data)
                 if codes:
-                    return uniq_sorted(codes), upd, soup.title.string.strip() if soup.title else None
+                    text = soup.get_text(separator=" ", strip=True)
+                    m_opp = OPPRETTET_RE.search(text)
+                    opp = parse_no_month_date(m_opp.group(1)) if m_opp else None
+                    return uniq_sorted(codes), upd, soup.title.string.strip() if soup.title else None, opp
             except Exception:
                 pass
 
@@ -128,8 +154,55 @@ def scrape_one(url: str, timeout=20):
         if m_iso:
             upd = m_iso.group(0)
 
+    # 4) Opprettet-dato
+    m_opp = OPPRETTET_RE.search(text)
+    opp = parse_no_month_date(m_opp.group(1)) if m_opp else None
+
     title = soup.title.string.strip() if soup.title else None
-    return codes or None, upd, title
+    return codes or None, upd, title, opp
+
+def extract_api_records(payload):
+    if not isinstance(payload, dict):
+        return []
+    embedded = payload.get("_embedded") or {}
+    for key in ("dataElements", "items", "results", "content"):
+        v = embedded.get(key)
+        if isinstance(v, list) and v:
+            return v
+    return []
+
+def fetch_skatteetaten_urls_from_api():
+    """Returnerer liste med (erklaeringsAdresse, iktLoeysingNamn) for Skatteetaten."""
+    results = []
+    page = 1
+    while True:
+        try:
+            resp = requests.get(
+                DATASET_URL,
+                params={"page": page, "size": 50},
+                headers={"Accept": "application/json"},
+                timeout=30,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:
+            print(f"API-feil på side {page}: {e}", file=sys.stderr)
+            break
+        records = extract_api_records(data)
+        if not records:
+            break
+        for rec in records:
+            if str(rec.get("organisasjonsnummer") or "").strip() == SKATTEETATEN_ORG:
+                url = (rec.get("erklaeringsAdresse") or "").strip()
+                name = (rec.get("iktLoeysingNamn") or "").strip()
+                if url:
+                    results.append((url, name))
+        total_pages = int((data.get("page") or {}).get("totalPages") or 1)
+        if page >= total_pages:
+            break
+        page += 1
+        time.sleep(0.3)
+    return results
 
 def main():
     if not DETAILS_FP.exists():
@@ -139,18 +212,33 @@ def main():
     obj = json.loads(DETAILS_FP.read_text(encoding="utf-8"))
     rows = obj.get("urls") if isinstance(obj, dict) else obj
 
+    # Legg til nye URL-er frå API som ikkje allereie finst i details.json
+    existing_urls = {(r.get("url") or r.get("href") or "").strip() for r in rows}
+    api_entries = fetch_skatteetaten_urls_from_api()
+    added = 0
+    for url, name in api_entries:
+        if url and url not in existing_urls:
+            rows.append({"url": url, "name": name, "codes": []})
+            existing_urls.add(url)
+            added += 1
+    if added:
+        print(f"La til {added} nye URL-er frå API.")
+
     updated = 0
     for i, r in enumerate(rows):
         url = (r.get("url") or r.get("href") or "").strip()
         if not url:
             continue
-        codes, upd, title = scrape_one(url)
+        codes, upd, title, opp = scrape_one(url)
         if codes is not None:
             r["nonConformities"] = codes
+            r["codes"] = codes
             r["totalNonConformities"] = len(codes)
             updated += 1
         if upd and not r.get("updatedAt"):
             r["updatedAt"] = upd
+        if opp and not r.get("opprettet"):
+            r["opprettet"] = opp
         if title and not r.get("title"):
             r["title"] = title
         if not r.get("domain"):
