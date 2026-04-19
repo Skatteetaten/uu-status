@@ -462,7 +462,7 @@
       const kravTotalt = (brudd + oppfylt + irrelevant) || 48;
       return {
         Navn: rec.iktLoeysingNamn || '',
-        Url:  rec.erklaeringsAdresse || '',
+        Url:  (rec.erklaeringsAdresse || '').replace(/\/(?:nn|en)\/erklaringer\//, '/nb/erklaringer/'),
         Brudd: String(brudd),
         KravTotalt: String(kravTotalt),
         SistOppdatert: rec.sisteOppdatering || '',
