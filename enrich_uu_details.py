@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import csv as csv_module
 import json, re, sys, time
 from pathlib import Path
 from urllib.parse import urlparse
@@ -211,6 +212,26 @@ def main():
 
     obj = json.loads(DETAILS_FP.read_text(encoding="utf-8"))
     rows = obj.get("urls") if isinstance(obj, dict) else obj
+
+    # Seed opprettet-datoar frå uu-status.csv (generert i same CI-kjøring)
+    csv_fp = Path("uu-status.csv")
+    if not csv_fp.exists():
+        csv_fp = Path("docs/uu-status.csv")
+    csv_opprettet: dict[str, str] = {}
+    if csv_fp.exists():
+        with csv_fp.open(encoding="utf-8-sig", newline="") as f:
+            for row in csv_module.DictReader(f, delimiter=";"):
+                url = (row.get("Url") or "").strip()
+                opp = (row.get("Opprettet") or "").strip()
+                if url and opp:
+                    csv_opprettet[url] = opp
+        print(f"Leste {len(csv_opprettet)} opprettet-datoar frå CSV.")
+
+    # Pre-populate opprettet i eksisterende entries frå CSV
+    for r in rows:
+        url = (r.get("url") or r.get("href") or "").strip()
+        if url and not r.get("opprettet") and url in csv_opprettet:
+            r["opprettet"] = csv_opprettet[url]
 
     # Legg til nye URL-er frå API som ikkje allereie finst i details.json
     existing_urls = {(r.get("url") or r.get("href") or "").strip() for r in rows}
