@@ -14,7 +14,7 @@ DETAILS_FP = Path("docs/uu-status-details.json")
 DATASET_URL = "https://data.uutilsynet.no/dataset/alle-erklaeringer"
 SKATTEETATEN_ORG = "974761076"
 
-WCAG_CODE_RE = re.compile(r"\b(?:[0-3]\.\d{1,2}\.\d{1,2}[a-z]?)\b", re.I)
+WCAG_CODE_RE = re.compile(r"\b(?:[0-4]\.\d{1,2}\.\d{1,2}[a-z]?)\b", re.I)
 DATE_NO_RE = re.compile(r"(?:Sist\s+(?:endret|oppdatert)[^0-9]{0,20})(\d{1,2}\.\d{1,2}\.\d{4})", re.I)
 DATE_ISO_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
 OPPRETTET_RE = re.compile(
