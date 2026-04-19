@@ -38,10 +38,15 @@
     .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
     .table-frame { width: 100%; box-sizing: border-box; }
     .table-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
-    .table-scroll > table { width: max-content; min-width: 100%; }
-    table { width: 100%; border-collapse: collapse; }
+    .table-scroll > table { width: 100%; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    col.col-navn { width: auto; }
+    col.col-brudd { width: 130px; }
+    col.col-dato { width: 130px; }
+    col.col-detaljer { width: 110px; }
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
     th { text-align: left; font-weight: 600; user-select: none; white-space: nowrap; }
+    td:first-child { word-break: break-word; overflow-wrap: break-word; }
     th.sortable { cursor: pointer; }
     th.sortable .arrow { opacity: .8; color: var(--muted); margin-left: 6px; font-size: 11px; }
     tr:hover td { background: rgba(255,255,255,0.02); }
@@ -272,6 +277,13 @@
     <div class="cards table-frame" role="region" aria-label="Tabell med resultater">
       <div class="table-scroll">
       <table id="tbl">
+        <colgroup>
+          <col class="col-navn">
+          <col class="col-brudd">
+          <col class="col-dato">
+          <col class="col-dato">
+          <col class="col-detaljer">
+        </colgroup>
         <thead>
           <tr>
             <th class="sortable" data-key="Navn">Navn <span class="arrow">↕</span></th>
