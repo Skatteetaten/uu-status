@@ -1,4 +1,4 @@
-name: Build UU-status (CSV + Details + Page)
+name: Build UU-status (Details + Page)
 
 on:
   schedule:
@@ -36,19 +36,9 @@ jobs:
           # for HTML-parsing i enrich-steget
           pip install beautifulsoup4 requests
 
-      - name: Build UU-status CSV + details
-        run: |
-          python scrape_uustatus.py
-
       - name: Build benchmark source mirror
         run: |
           python build_benchmark_source.py
-
-      - name: Copy files to docs (for GitHub Pages)
-        run: |
-          mkdir -p docs
-          cp uu-status.csv docs/uu-status.csv
-          cp uu-status-details.json docs/uu-status-details.json
 
       - name: Enrich details with WCAG codes (all statements)
         run: |
@@ -123,17 +113,16 @@ jobs:
         run: |
           python build_uu_archive.py
 
-      - name: Commit updated CSV, details and page (if changed)
+      - name: Commit updated details and page (if changed)
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add uu-status.csv uu-status-details.json || true
           git add -A docs
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update UU-status + archive (csv, details, page, snapshots, changes)"
+            git commit -m "Update UU-status + archive (details, page, snapshots, changes)"
             git pull --rebase
             git push
           fi

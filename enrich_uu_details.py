@@ -171,8 +171,15 @@ def extract_api_records(payload):
             return v
     return []
 
+def extract_uuid(url: str) -> str:
+    m = re.search(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", url, re.I)
+    return m.group(0).lower() if m else ""
+
+def normalize_nb_url(url: str) -> str:
+    return re.sub(r"/(?:nn|en)/erklaringer/", "/nb/erklaringer/", url)
+
 def fetch_skatteetaten_urls_from_api():
-    """Returnerer liste med (erklaeringsAdresse, iktLoeysingNamn) for Skatteetaten."""
+    """Returnerer liste med (url_nb, iktLoeysingNamn, sisteOppdatering) for Skatteetaten."""
     results = []
     page = 1
     while True:
@@ -193,10 +200,11 @@ def fetch_skatteetaten_urls_from_api():
             break
         for rec in records:
             if str(rec.get("organisasjonsnummer") or "").strip() == SKATTEETATEN_ORG:
-                url = (rec.get("erklaeringsAdresse") or "").strip()
+                url = normalize_nb_url((rec.get("erklaeringsAdresse") or "").strip())
                 name = (rec.get("iktLoeysingNamn") or "").strip()
+                updated = (rec.get("sisteOppdatering") or "").strip()
                 if url:
-                    results.append((url, name))
+                    results.append((url, name, updated))
         total_pages = int((data.get("page") or {}).get("totalPages") or 1)
         if page >= total_pages:
             break
@@ -212,14 +220,30 @@ def main():
     obj = json.loads(DETAILS_FP.read_text(encoding="utf-8"))
     rows = obj.get("urls") if isinstance(obj, dict) else obj
 
-    # Legg til nye URL-er frå API som ikkje allereie finst i details.json
-    existing_urls = {(r.get("url") or r.get("href") or "").strip() for r in rows}
+    # UUID-basert oppslag for å matche API-URLer (som kan ha /nn/ prefix) mot details.json (som har /nb/)
+    existing_by_uuid = {}
+    for r in rows:
+        u = (r.get("url") or r.get("href") or "").strip()
+        uid = extract_uuid(u)
+        if uid:
+            existing_by_uuid[uid] = r
+
     api_entries = fetch_skatteetaten_urls_from_api()
     added = 0
-    for url, name in api_entries:
-        if url and url not in existing_urls:
-            rows.append({"url": url, "name": name, "codes": []})
-            existing_urls.add(url)
+    for url, name, updated in api_entries:
+        uid = extract_uuid(url)
+        if uid and uid in existing_by_uuid:
+            # Oppdater sisteOppdatering fra API hvis den mangler
+            r = existing_by_uuid[uid]
+            if updated and not r.get("updatedAt"):
+                r["updatedAt"] = updated[:10] if len(updated) >= 10 else updated
+        elif url:
+            new_entry = {"url": url, "name": name, "codes": []}
+            if updated:
+                new_entry["updatedAt"] = updated[:10] if len(updated) >= 10 else updated
+            rows.append(new_entry)
+            if uid:
+                existing_by_uuid[uid] = new_entry
             added += 1
     if added:
         print(f"La til {added} nye URL-er frå API.")

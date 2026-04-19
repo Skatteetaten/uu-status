@@ -19,9 +19,9 @@ GitHub Actions (.github/workflows/build.yml) kjører automatisk hver natt.
 
 Skriptene:
 
-scrape_uustatus.py: henter og oppdaterer alle erklæringer.
+enrich_uu_details.py: henter alle Skatteetatens erklæringer fra uutilsynet.no API og legger til WCAG-koder og metainformasjon.
 
-enrich_uu_details.py: legger til WCAG-koder og annen metainformasjon.
+build_benchmark_source.py: speil av alle erklæringer fra API til lokal JSON for benchmark-siden.
 
 build_uu_archive.py: oppdaterer arkiv og historikk.
 
@@ -39,9 +39,7 @@ Endringene logges i docs/data/uustatus/logs/changes.jsonl og vises i arkivtabell
 
 Resultatene lagres i docs/:
 
-docs/uu-status.csv – full oversikt i tabellform.
-
-docs/uu-status-details.json – detaljert informasjon per erklæring.
+docs/uu-status-details.json – detaljert informasjon per erklæring (WCAG-koder, opprettet-dato m.m.).
 
 docs/data/uustatus/... – historiske snapshots og logger.
 

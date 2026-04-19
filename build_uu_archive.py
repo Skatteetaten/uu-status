@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import csv
 import json
 import sys
 import hashlib
@@ -12,8 +11,7 @@ from collections import defaultdict
 
 # --- konfig ---
 DOCS = Path("docs")
-SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett (fra scrape/enrich)
-SOURCE_CSV  = DOCS / "uu-status.csv"            # fallback hvis JSON mangler
+SOURCE_JSON = DOCS / "uu-status-details.json"
 DATA_DIR    = DOCS / "data" / "uustatus"
 LOGS_DIR    = DATA_DIR / "logs"
 LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff
@@ -32,13 +30,6 @@ def load_json(fp: Path, fallback=None):
             return json.load(f)
     except Exception:
         return fallback
-
-def load_csv(fp: Path):
-    if not fp.exists():
-        return []
-    with fp.open("r", encoding="utf-8") as f:
-        r = csv.DictReader(f)
-        return list(r)
 
 def to_domain(url: str):
     try:
@@ -187,8 +178,7 @@ def read_current():
         return [normalize_entry(x) for x in data["urls"]]
     if isinstance(data, list):
         return [normalize_entry(x) for x in data]
-    rows = load_csv(SOURCE_CSV)
-    return [normalize_entry(x) for x in rows]
+    return []
 
 def read_prev_from_ref(ref: str):
     """Les baseline latest.json fra gitt git-ref.
@@ -394,7 +384,7 @@ def main():
 
     curr = read_current()
     if not isinstance(curr, list):
-        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
+        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json", file=sys.stderr)
         sys.exit(1)
 
     # Bestem referanser å teste som baseline
