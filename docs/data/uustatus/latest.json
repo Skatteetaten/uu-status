@@ -836,11 +836,13 @@
       "title": "Tilgjengelighetserklæring for Trekkontroll | uustatus",
       "updatedAt": "2026-02-17",
       "nonConformities": [
-        "2.4.3",
-        "3.3.2",
-        "3.3.3"
+        "1.3.1",
+        "1.4.10",
+        "1.4.12",
+        "2.4.2",
+        "4.1.3"
       ],
-      "totalNonConformities": 3
+      "totalNonConformities": 5
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121",
