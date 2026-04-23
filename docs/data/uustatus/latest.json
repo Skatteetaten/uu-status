@@ -592,8 +592,13 @@
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Søknad om skattekort for utenlandsk arbeidstaker | uustatus",
       "updatedAt": "2025-03-20",
-      "nonConformities": [],
-      "totalNonConformities": 0
+      "nonConformities": [
+        "1.3.1",
+        "3.3.3",
+        "4.1.2",
+        "4.1.3"
+      ],
+      "totalNonConformities": 4
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a",
