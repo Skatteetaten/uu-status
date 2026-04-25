@@ -1263,6 +1263,22 @@
       "updatedAt": "2026-03-03",
       "nonConformities": [],
       "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/5f92b879-42e9-4f0b-827e-eee292446cc6",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer | uustatus",
+      "updatedAt": "2026-04-24",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/7dc979c0-aaee-4915-b5d2-a6f1812aede3",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Innrapportering SAFT | uustatus",
+      "updatedAt": "2026-04-24",
+      "nonConformities": [],
+      "totalNonConformities": 0
     }
   ]
 }
