@@ -1863,23 +1863,21 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/8d749060-4f44-49ce-994e-e92953234b8f",
     "name": "Oppdragsgiverportalen",
     "codes": [
+      "1.3.1",
       "1.4.10",
-      "2.1.1",
+      "2.4.1",
       "2.4.3",
-      "2.5.3",
-      "3.3.2",
       "4.1.2"
     ],
     "updatedAt": "2026-03-11",
     "nonConformities": [
+      "1.3.1",
       "1.4.10",
-      "2.1.1",
+      "2.4.1",
       "2.4.3",
-      "2.5.3",
-      "3.3.2",
       "4.1.2"
     ],
-    "totalNonConformities": 6,
+    "totalNonConformities": 5,
     "opprettet": "2026-03-11",
     "title": "Tilgjengelighetserklæring for Oppdragsgiverportalen | uustatus",
     "domain": "uustatus.no"
@@ -1986,11 +1984,17 @@
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/5f92b879-42e9-4f0b-827e-eee292446cc6",
     "name": "Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer",
-    "codes": [],
+    "codes": [
+      "4.1.2"
+    ],
     "updatedAt": "2026-04-24",
     "opprettet": "2026-04-24",
     "title": "Tilgjengelighetserklæring for Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer | uustatus",
-    "domain": "uustatus.no"
+    "domain": "uustatus.no",
+    "nonConformities": [
+      "4.1.2"
+    ],
+    "totalNonConformities": 1
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/7dc979c0-aaee-4915-b5d2-a6f1812aede3",
