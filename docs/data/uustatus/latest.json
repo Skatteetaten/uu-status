@@ -1294,6 +1294,14 @@
         "2.4.5"
       ],
       "totalNonConformities": 5
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/b9536014-19fd-4d49-b085-7f1ea7e88311",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Systemleverandørers produkterklæring av kassasystemer | uustatus",
+      "updatedAt": "2026-05-08",
+      "nonConformities": [],
+      "totalNonConformities": 0
     }
   ]
 }
