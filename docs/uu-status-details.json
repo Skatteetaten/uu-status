@@ -164,7 +164,8 @@
       "3.1.1",
       "3.2.2",
       "3.3.1",
-      "3.3.2"
+      "3.3.2",
+      "4.1.3"
     ],
     "last_checked": "2026-04-19T02:12:54.437213+00:00",
     "nonConformities": [
@@ -181,9 +182,10 @@
       "3.1.1",
       "3.2.2",
       "3.3.1",
-      "3.3.2"
+      "3.3.2",
+      "4.1.3"
     ],
-    "totalNonConformities": 14,
+    "totalNonConformities": 15,
     "title": "Tilgjengelighetserklæring for Selvbetjening motorvogn | uustatus",
     "domain": "uustatus.no",
     "opprettet": "2023-01-25",
@@ -1003,19 +1005,23 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/1962c333-41e1-4cfa-9882-bb3fad358981",
     "name": "Min merverdiavgift",
     "codes": [
+      "1.4.10",
       "2.1.1",
+      "2.4.3",
       "3.3.1",
       "3.3.2",
       "4.1.3"
     ],
     "last_checked": "2026-04-19T02:13:56.780085+00:00",
     "nonConformities": [
+      "1.4.10",
       "2.1.1",
+      "2.4.3",
       "3.3.1",
       "3.3.2",
       "4.1.3"
     ],
-    "totalNonConformities": 4,
+    "totalNonConformities": 6,
     "title": "Tilgjengelighetserklæring for Min merverdiavgift | uustatus",
     "domain": "uustatus.no",
     "opprettet": "2023-01-18",
