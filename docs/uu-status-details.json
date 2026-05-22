@@ -1874,7 +1874,6 @@
     "name": "Oppdragsgiverportalen",
     "codes": [
       "1.3.1",
-      "1.4.10",
       "2.4.1",
       "2.4.3",
       "4.1.2"
@@ -1882,12 +1881,11 @@
     "updatedAt": "2026-03-11",
     "nonConformities": [
       "1.3.1",
-      "1.4.10",
       "2.4.1",
       "2.4.3",
       "4.1.2"
     ],
-    "totalNonConformities": 5,
+    "totalNonConformities": 4,
     "opprettet": "2026-03-11",
     "title": "Tilgjengelighetserklæring for Oppdragsgiverportalen | uustatus",
     "domain": "uustatus.no"
@@ -2031,21 +2029,15 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/d2995a2d-ed89-4ac2-9012-92ea6492028a",
     "name": "Min side - Eiendommer",
     "codes": [
-      "1.4.10",
-      "1.4.13",
-      "2.4.2",
       "2.4.4",
       "2.4.5"
     ],
     "updatedAt": "2026-04-27",
     "nonConformities": [
-      "1.4.10",
-      "1.4.13",
-      "2.4.2",
       "2.4.4",
       "2.4.5"
     ],
-    "totalNonConformities": 5,
+    "totalNonConformities": 2,
     "opprettet": "2026-04-27",
     "title": "Tilgjengelighetserklæring for Min side - Eiendommer | uustatus",
     "domain": "uustatus.no"
@@ -2084,6 +2076,21 @@
     "updatedAt": "2026-05-18",
     "opprettet": "2026-05-18",
     "title": "Tilgjengelighetserklæring for Klage på vedtak om tvangsmulkt eller overtredelsesgebyr | uustatus",
+    "domain": "uustatus.no"
+  },
+  {
+    "url": "https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a",
+    "name": "Innrapportering av a-melding som vedlegg",
+    "codes": [
+      "2.4.3"
+    ],
+    "updatedAt": "2026-05-21",
+    "nonConformities": [
+      "2.4.3"
+    ],
+    "totalNonConformities": 1,
+    "opprettet": "2026-05-21",
+    "title": "Tilgjengelighetserklæring for Innrapportering av a-melding som vedlegg | uustatus",
     "domain": "uustatus.no"
   }
 ]
