@@ -2027,15 +2027,13 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/d2995a2d-ed89-4ac2-9012-92ea6492028a",
     "name": "Min side - Eiendommer",
     "codes": [
-      "2.4.4",
-      "2.4.5"
+      "2.4.4"
     ],
     "updatedAt": "2026-04-27",
     "nonConformities": [
-      "2.4.4",
-      "2.4.5"
+      "2.4.4"
     ],
-    "totalNonConformities": 2,
+    "totalNonConformities": 1,
     "opprettet": "2026-04-27",
     "title": "Tilgjengelighetserklæring for Min side - Eiendommer | uustatus",
     "domain": "uustatus.no"
