@@ -311,13 +311,15 @@
       "updatedAt": "2025-07-03",
       "nonConformities": [
         "1.3.1",
-        "1.4.10",
+        "1.3.3",
+        "1.4.11",
         "1.4.3",
-        "2.4.1",
+        "2.4.2",
+        "2.4.3",
         "4.1.2",
         "4.1.3"
       ],
-      "totalNonConformities": 6
+      "totalNonConformities": 8
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/6ff36d85-dfeb-4701-8f46-1fdb8293c33f",
