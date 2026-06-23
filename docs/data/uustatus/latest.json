@@ -1314,11 +1314,9 @@
       "title": "Tilgjengelighetserklæring for Land-for-land-rapportering for skatteformål | uustatus",
       "updatedAt": "2026-05-12",
       "nonConformities": [
-        "1.4.10",
-        "1.4.12",
         "4.1.3"
       ],
-      "totalNonConformities": 3
+      "totalNonConformities": 1
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/50313dcd-45e5-40bd-9268-be896f8298f4",
