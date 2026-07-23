@@ -1343,6 +1343,47 @@
         "2.4.3"
       ],
       "totalNonConformities": 1
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/f64e1efc-c2f7-4285-ac38-b3c43872cc05",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Globalskatt mottak | uustatus",
+      "updatedAt": "2026-07-22",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "2.4.2",
+        "4.1.2",
+        "4.1.3"
+      ],
+      "totalNonConformities": 5
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/74032b18-c3b1-4d34-9045-2d624f715597",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Suppleringsskatt | uustatus",
+      "updatedAt": "2026-07-22",
+      "nonConformities": [
+        "1.3.1",
+        "2.4.2",
+        "3.1.2",
+        "4.1.3"
+      ],
+      "totalNonConformities": 4
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/3d688919-6cec-434d-b8d3-de12bb6441aa",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Globalskatt validering | uustatus",
+      "updatedAt": "2026-07-22",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.10",
+        "2.4.2",
+        "4.1.2",
+        "4.1.3"
+      ],
+      "totalNonConformities": 5
     }
   ]
 }
