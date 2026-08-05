@@ -915,7 +915,6 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/eb130211-e58f-4677-9a3e-319446e3f898",
     "name": "Søknad om skattekort for utenlandsk arbeidstaker",
     "codes": [
-      "1.3.1",
       "3.3.3",
       "4.1.2",
       "4.1.3"
@@ -926,12 +925,11 @@
     "opprettet": "2023-01-19",
     "updatedAt": "2025-03-20",
     "nonConformities": [
-      "1.3.1",
       "3.3.3",
       "4.1.2",
       "4.1.3"
     ],
-    "totalNonConformities": 4
+    "totalNonConformities": 3
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a",
