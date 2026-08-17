@@ -1,0 +1,27 @@
+.lenke {
+  display: inline-flex;
+  text-decoration: none;
+  border-radius: 4px;
+
+  // Tag legger svgPath foran teksten. For eksterne lenker er konvensjonen
+  // etter – det er slik designsystemets egen Link med isExternal gjør det,
+  // og slik den gamle siden gjorde det. Tag-en er en fleksboks, så ikonet
+  // flyttes bakerst med order uten å røre komponenten.
+  [class*='Tag-module'] svg {
+    order: 1;
+    margin-left: 0.25rem;
+  }
+
+  // Tag-en har egen bakgrunn og kantlinje; understreking ville lagt seg
+  // oppå den. Hover markeres på teksten i stedet.
+  &:hover [class*='Tag-module'] {
+    border-color: currentColor;
+    text-decoration: underline;
+  }
+
+  // Fokusmarkeringen må ligge utenpå merket, ikke inni det.
+  &:focus-visible {
+    outline: 3px solid var(--palette-azure-70);
+    outline-offset: 2px;
+  }
+}

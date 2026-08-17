@@ -211,13 +211,25 @@ __marimo__/
 uu-status.csv
 uu-status-details.json
 
-# eventuelle midlertidige snapshots/logs
+# snapshots_by_updated/ MÅ committes: arkivsiden slår opp
+# ./data/uustatus/snapshots_by_updated/<dato>.json og viser
+# "Snapshot ikke tilgjengelig" hvis filen mangler. Den lå tidligere her,
+# så ingen snapshots har noen gang nådd produksjon.
 docs/data/uustatus/snapshots/
-docs/data/uustatus/snapshots_by_updated/
-docs/data/uustatus/logs/
 
 # beholde docs/ siden den brukes til Pages
 !docs/
 !docs/**/*.html
 !docs/**/*.css
 !docs/**/*.js
+
+# --- Frontend (Vite + React + designsystemet) ---
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Python-malen over ignorerer "lib/" og "build/" på alle nivåer. Det er ment
+# for pakkebygg, men treffer også frontend-kildekoden. Hent den inn igjen.
+!app/lib/
+!app/lib/**

@@ -1,0 +1,52 @@
+.kort {
+  display: flex;
+  flex-direction: column;
+  // Etiketten øverst, tallet nederst. Uten dette fulgte tallet rett etter
+  // etiketten, og en etikett som brøt over to linjer dyttet tallet ned – da
+  // sto tallene i kortene på ulik høyde ved siden av hverandre.
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-m) var(--spacing-l);
+  border: 1px solid var(--palette-graphite-10);
+  border-left: 4px solid;
+  border-radius: 4px;
+}
+
+// Strek i den mørkeste tonen, bakgrunn i den lyseste. Teksten er
+// graphite-100 og holder godt over 7:1 mot alle fire bakgrunnene.
+.denim {
+  border-left-color: var(--palette-denim-100);
+  background: var(--palette-denim-10);
+}
+
+.burgundy {
+  border-left-color: var(--palette-burgundy-100);
+  background: var(--palette-burgundy-10);
+}
+
+.forest {
+  border-left-color: var(--palette-forest-100);
+  background: var(--palette-forest-10);
+}
+
+.ochre {
+  border-left-color: var(--palette-ochre-100);
+  background: var(--palette-ochre-10);
+}
+
+// Fleksrad, ikke inline-flyt: da sentreres ⓘ-knappen mot tekstlinjen
+// uavhengig av skriftstørrelse. Se kommentaren i Infoboks.
+.etikett {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  font-weight: 600;
+}
+
+.verdi {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}

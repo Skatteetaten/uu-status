@@ -1,0 +1,12 @@
+/**
+ * Ingen vertical-align her.
+ *
+ * `vertical-align: middle` justerer mot grunnlinjen pluss halve x-høyden, ikke
+ * mot linjeboksens faktiske senter. Når ikonknappen (22 px) er høyere enn
+ * tekstens glyffboks (17 px), gir det et synlig avvik på et par piksler.
+ * Sentreringen gjøres derfor av forelderen med `felles.medInfo`, som legger
+ * tekst og ikon i en fleksrad med `align-items: center`.
+ */
+.boks {
+  display: inline-flex;
+}

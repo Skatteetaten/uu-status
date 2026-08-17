@@ -1,0 +1,45 @@
+{
+  "name": "uu-status",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "UU-status – oversikt over Skatteetatens tilgjengelighetserklæringer. Bygget på Skatteetatens designsystem.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 3001",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@skatteetaten/ds-buttons": "2.10.0",
+    "@skatteetaten/ds-collections": "2.10.0",
+    "@skatteetaten/ds-content": "2.10.0",
+    "@skatteetaten/ds-core-designtokens": "2.10.0",
+    "@skatteetaten/ds-core-utils": "2.10.0",
+    "@skatteetaten/ds-forms": "2.10.0",
+    "@skatteetaten/ds-icons": "2.10.0",
+    "@skatteetaten/ds-layout": "2.10.0",
+    "@skatteetaten/ds-navigation": "2.10.0",
+    "@skatteetaten/ds-overlays": "2.10.0",
+    "@skatteetaten/ds-progress": "2.10.0",
+    "@skatteetaten/ds-status": "2.10.0",
+    "@skatteetaten/ds-table": "2.10.0",
+    "@skatteetaten/ds-typography": "2.10.0",
+    "i18next": "25.10.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-i18next": "15.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.21",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.2.0",
+    "sass-embedded": "1.89.2",
+    "typescript": "5.7.3",
+    "vite": "7.3.6"
+  }
+}

@@ -1,0 +1,42 @@
+// Se arkiv.module.scss for hvorfor auto-fit-rutenettene bruker min(…, 100%).
+
+// Kortene selv er felles, se komponenten Noekkeltall.
+.noekkeltall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--spacing-m);
+  margin: 0 0 var(--spacing-l);
+}
+
+.filter {
+  margin: 0 0 1.5rem;
+}
+
+.virksomhet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+// Se status.module.scss: kortform ville nullstilt venstre innrykk.
+.detaljer {
+  padding-top: var(--spacing-s);
+  padding-bottom: var(--spacing-m);
+}
+
+.kolonner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.metodetittel {
+  margin-top: 3rem;
+}
+
+.kilde {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,120 @@
+// min(…, 100%) i alle auto-fit-rutenettene på denne siden.
+//
+// minmax(15rem, 1fr) er et gulv kolonnen ikke kan krysse, også når det ikke
+// finnes plass: ved 320 px hadde filterboksen 238 px innvendig, mens gulvet
+// var 240 px, og nedtrekkene ble skjøvet ut av boksen. Med min(15rem, 100%)
+// får kolonnen lov til å krympe når beholderen er smalere enn ønsket bredde.
+
+// Kortene selv er felles, se komponenten Noekkeltall.
+.noekkeltall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: var(--spacing-m);
+  margin: 0 0 var(--spacing-xl);
+}
+
+.filterbryter {
+  margin: 0 0 var(--spacing-l);
+}
+
+// Samme tonede flate som på statusfanen, se status.module.scss.
+.filtre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  // Bunnjuster, så kontrollene flukter selv om etikettene brytes ulikt.
+  align-items: end;
+  gap: var(--spacing-m);
+  padding: var(--spacing-l);
+  margin: 0 0 var(--spacing-l);
+  border: 1px solid var(--palette-graphite-10);
+  border-radius: 4px;
+  background: var(--palette-graphite-5);
+}
+
+// Ligger utenfor .filtre-boksen, så knappen ikke ser ut som et filtervalg.
+.nullstill {
+  margin: calc(var(--spacing-m) * -1) 0 var(--spacing-l);
+}
+
+// Fokusmarkering når søkeknappen flytter fokus hit. Samme som på statusfanen.
+.treff:focus-visible {
+  outline: 3px solid var(--palette-azure-70);
+  outline-offset: 4px;
+}
+
+.treff {
+  margin: 0 0 var(--spacing-m);
+}
+
+// Luften ligger her, ikke i .markert, slik at teksten ikke flytter seg når
+// blinket slår inn ved første filterendring.
+.treffboks {
+  padding: var(--spacing-xs) var(--spacing-s);
+  margin-left: calc(var(--spacing-s) * -1);
+  border-radius: 4px;
+}
+
+// Kvittering på at filteret traff: bakgrunnen toner ut fra lys grønn.
+// Fargen er bare en bekreftelse – tallet i teksten sier det samme (WCAG 1.4.1).
+.markert {
+  animation: tonUt 2.5s ease-out forwards;
+}
+
+@keyframes tonUt {
+  from {
+    background-color: var(--palette-forest-10);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+// Et felt som blinker er nettopp det brukere med denne innstillingen ber om
+// å slippe. Teksten og opplesningen gir samme beskjed uten animasjonen.
+@media (prefers-reduced-motion: reduce) {
+  .markert {
+    animation: none;
+  }
+}
+
+// Samme som .datokolonne på statusfanen. «17. aug. 2026» er 98 px bred, mens
+// kolonnen bare ga 90 px, så datoen brakk etter måneden. «23. juli 2026» klarte
+// seg fordi j, l og i er smalere glyffer enn a, u og g – derfor brakk bare
+// noen av datoene, og det så tilfeldig ut.
+.datokolonne {
+  white-space: nowrap;
+}
+
+// 24 px på hver side spiser en sjettedel av en 320 px-skjerm. Under 30rem
+// gir vi plassen til kontrollene i stedet.
+@media (max-width: 30rem) {
+  .filtre {
+    padding: var(--spacing-m);
+  }
+}
+
+// Se status.module.scss: kortform ville nullstilt venstre innrykk.
+.detaljer {
+  padding-top: var(--spacing-s);
+  padding-bottom: var(--spacing-m);
+}
+
+.kolonner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.kodeliste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paginering {
+  margin-top: 1.5rem;
+}

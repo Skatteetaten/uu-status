@@ -1,0 +1,43 @@
+/**
+ * Etikett med en Infoboks ved siden av. Fleksrad framfor inline-flyt, slik at
+ * ikonet sentreres mot tekstlinjen uavhengig av skriftstørrelse og linjehøyde.
+ */
+.medInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+/**
+ * Markerer at innholdet hører til raden over.
+ *
+ * Bakgrunnsfarge ble prøvd først, men Tag har HVIT kantlinje – den er laget
+ * for å ligge på hvit bakgrunn, der kanten smelter inn. På en tonet bakgrunn
+ * havner merkefyll (1,12), kant (1,10) og bakgrunn nesten på samme lyshet, og
+ * merkene blir grøtete. En strek til venstre grupperer like tydelig uten å
+ * røre bakgrunnen bak merkene. Samme grep som den gamle siden brukte.
+ */
+.utvidetInnhold {
+  padding-left: var(--spacing-l);
+  border-left: 2px solid var(--palette-graphite-30);
+}
+
+/**
+ * Skjuler visuelt, men beholder for skjermleser.
+ *
+ * Brukes bl.a. på overskriftscellen til utvidingskolonnen i tabellene: den
+ * skal ikke ha synlig tekst, men kolonnen må ha en overskrift for at
+ * rad/kolonne-sammenhengen skal være riktig.
+ */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

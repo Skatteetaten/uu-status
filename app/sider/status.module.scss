@@ -1,0 +1,190 @@
+// Ingressen til venstre, Dashboard-knappen helt til høyre på samme linje.
+// På smal skjerm faller knappen ned under teksten.
+// Ingressen til venstre, Dashboard-knappen helt til høyre. Knappen er høyere
+// enn tekstlinjen, så den sentreres mot teksten framfor å toppjusteres – ellers
+// henger den nedenfor. På smal skjerm faller den ned under teksten.
+.ingressrad {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-m);
+  margin: 0 0 var(--spacing-l);
+
+  // Paragraph har egen bunnmarg som ville dyttet knappen ut av senter.
+  p {
+    margin-bottom: 0;
+  }
+}
+
+/**
+ * Modalen må være bredere enn designsystemets standard.
+ *
+ * DS setter max-width til --semantic-responsive-article (576 px), som er
+ * lesebredde for tekst. To diagramkort krever 22 rem hver pluss mellomrom, og
+ * ville ellers stablet seg og gitt loddrett rulling.
+ *
+ * Bredden klemmes mot skjermen, så modalen aldri blir bredere enn vinduet.
+ */
+.dashboardModal {
+  max-width: min(64rem, calc(100vw - 2 * var(--spacing-xl)));
+  width: 100%;
+}
+
+.filterbryter {
+  margin: 0 0 var(--spacing-l);
+}
+
+// Se arkiv.module.scss for hvorfor alle auto-fit-rutenettene bruker
+// min(…, 100%): uten det kan ikke kolonnen krympe under sin egen ønskede
+// bredde, og innholdet skyves ut av beholderen på smale skjermer.
+
+// Kortene selv er felles, se komponenten Noekkeltall.
+.noekkeltall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+  gap: var(--spacing-m);
+  margin: var(--spacing-m) 0 var(--spacing-l);
+}
+
+.diagrammer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  gap: var(--spacing-l);
+}
+
+.diagramkort {
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--palette-graphite-10);
+  border-radius: 4px;
+}
+
+// Tonet flate rundt filtrene, så det er tydelig hvor de slutter. Uten den
+// ser «Rader per side» og «Last ned CSV» rett under ut som en del av dem.
+// Skjemafeltene har egen hvit bakgrunn og mørk ramme, så de skiller seg ut.
+.filtre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  // Bunnjuster, slik at kontrollene flukter selv om etikettene
+  // brytes over ulikt antall linjer på smale skjermer.
+  align-items: end;
+  gap: var(--spacing-m);
+  padding: var(--spacing-l);
+  margin: 0 0 var(--spacing-l);
+  border: 1px solid var(--palette-graphite-10);
+  border-radius: 4px;
+  background: var(--palette-graphite-5);
+}
+
+// Se arkiv.module.scss: 24 px på hver side er for mye på en 320 px-skjerm.
+@media (max-width: 30rem) {
+  .filtre {
+    padding: var(--spacing-m);
+  }
+}
+
+// Ligger utenfor .filtre-boksen, så knappen ikke ser ut som et filtervalg.
+.nullstill {
+  margin: calc(var(--spacing-m) * -1) 0 var(--spacing-l);
+}
+
+.tabellinfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+// Fokusmarkering når søkeknappen flytter fokus hit. Uten den ville fokus
+// hoppet et sted brukeren ikke ser.
+.treff:focus-visible {
+  outline: 3px solid var(--palette-azure-70);
+  outline-offset: 4px;
+}
+
+// Se arkiv.module.scss: luften ligger på boksen, ikke på .markert, så teksten
+// ikke flytter seg når blinket slår inn første gang.
+.treffboks {
+  padding: var(--spacing-xs) var(--spacing-s);
+  margin-left: calc(var(--spacing-s) * -1);
+  border-radius: 4px;
+}
+
+.markert {
+  animation: tonUt 2.5s ease-out forwards;
+}
+
+@keyframes tonUt {
+  from {
+    background-color: var(--palette-forest-10);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markert {
+    animation: none;
+  }
+}
+
+.tabellhandlinger {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+// Blokknivå, ikke inline-flex. Som inline-nivå deltar boksene i grunnlinje-
+// justeringen av linjen, og Tag-en og det nakne tallet har ulik grunnlinje –
+// det ga 4 px forskjell i radhøyde mellom merkede og umerkede rader.
+.bruddcelle,
+.bruddNoeytral {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 24.2px;
+}
+
+// Rader med 1–5 brudd får verken farge eller ikon. Tallet skal likevel stå
+// på linje med tallene inne i merkene: Tag-en har 6 px innvendig luft pluss
+// 1,6 px kantlinje.
+.bruddNoeytral {
+  padding-right: 7.6px;
+  font-size: 0.875rem;
+}
+
+// Datoen og fristmerket skal stå på samme linje. Uten dette gir
+// datokolonnene etter for lange tjenestenavn, og hver rad blir to linjer høy.
+.datocelle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.datokolonne {
+  white-space: nowrap;
+}
+
+// Bare loddrett luft her. Kortformen `padding` ville nullstilt venstresiden,
+// som felles.utvidetInnhold setter for å gi plass til streken.
+.detaljer {
+  padding-top: var(--spacing-s);
+  padding-bottom: var(--spacing-m);
+}
+
+.kodeliste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.paginering {
+  margin-top: 1.5rem;
+}

@@ -1,0 +1,42 @@
+.liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rad {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 2.5rem;
+  align-items: center;
+  gap: var(--spacing-s-plus);
+  padding: 0.4rem 0.5rem;
+
+  & + & {
+    margin-top: 0.125rem;
+  }
+}
+
+.merkelapp {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.spor {
+  height: 1.5rem;
+  background: var(--palette-graphite-5);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fyll {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--palette-azure-70);
+}
+
+.verdi {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+}

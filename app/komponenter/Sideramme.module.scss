@@ -1,0 +1,39 @@
+/**
+ * Skjuler språkvelgeren i toppbanneret.
+ *
+ * TopBannerExternal rendrer den ubetinget – det finnes ingen prop for å slå
+ * den av, og TopBannerInternal er ikke et alternativ her. Derfor CSS.
+ *
+ * Selektoren treffer modulnavnet, som er stabilt; bare hash-suffikset varierer
+ * mellom versjoner av designsystemet. `display: none` fjerner den også fra
+ * tilgjengelighetstreet, så den blir ikke liggende igjen for skjermlesere.
+ *
+ * Sjekk om denne fortsatt trengs ved oppgradering av ds-layout.
+ */
+:global([class*='TopBannerLangPicker-module_container']) {
+  display: none;
+}
+
+/**
+ * Samme bredde og innrykk som toppbanneret.
+ *
+ * --semantic-responsive-container er designsystemets egen containerbredde og
+ * følger brekkpunktene: 100 % under 640 px, så 576 / 960 / 1152 px. Banneret
+ * bruker den internt, så en egendefinert max-width her gjør at innholdet
+ * ikke flukter med logoen.
+ *
+ * Vannrett innrykk kommer fra --semantic-responsive-container-spacing (som er
+ * 0 over 640 px, der containeren selv gir margen). Loddrett luft settes etter,
+ * så den ikke blir overskrevet av kortformen.
+ */
+.innhold {
+  max-width: var(--semantic-responsive-container);
+  margin: 0 auto;
+  padding: var(--semantic-responsive-container-spacing);
+  padding-top: var(--spacing-l);
+  padding-bottom: var(--spacing-mega);
+  scroll-margin-top: var(--spacing-m);
+}
+
+// Lesebredden ligger i stiler/felles.module.scss, så den er lik for alle
+// ingressene – ikke bare denne.

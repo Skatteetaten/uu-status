@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UU-status – Skatteetaten</title>
+    <!--
+      Statusoversikten er flyttet til forsiden. Denne fila blir liggende fordi
+      URL-en er offentlig og lenket til utenfra – den skal ikke gi 404.
+
+      Umiddelbar meta-refresh (0 sekunder) er tillatt etter WCAG; det er
+      forsinkede omdirigeringer som bryter 2.2.1. GitHub Pages kan ikke gjøre
+      omdirigering på tjenersiden, så dette er alternativet. Den synlige lenken
+      under fanger opp tilfeller der refresh er blokkert.
+
+      NB: bruk filnavn, ikke "./" – Vite forsøker å løse opp href som en
+      ressurs under bygget og feiler med EISDIR på en katalogsti.
+    -->
+    <meta http-equiv="refresh" content="0; url=index.html" />
+  </head>
+  <body>
+    <p>
+      Statusoversikten ligger nå på forsiden.
+      <a href="index.html">Gå til UU-status</a>
+    </p>
+  </body>
+</html>

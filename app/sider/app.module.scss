@@ -1,0 +1,5 @@
+// Luft mellom fanevalgene og innholdet under. Uten dette klistrer h2-en seg
+// til fanelinja. --spacing-xl er designsystemets eget token, ikke en egen verdi.
+.panel {
+  padding-top: var(--spacing-xl);
+}

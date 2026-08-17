@@ -1,0 +1,20 @@
+.liste {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+  overflow-wrap: anywhere;
+
+  li + li {
+    margin-top: 0.25rem;
+  }
+}
+
+.merKnapp {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
