@@ -28,7 +28,6 @@ import {
   hentErklaeringer,
   tellPerKrav,
 } from '../lib/data';
-import { lastNedCsv, tilCsv } from '../lib/csv';
 import type { Erklaering } from '../lib/typer';
 
 import felles from '../stiler/felles.module.scss';
@@ -490,27 +489,19 @@ export function Statusoversikt(): ReactElement {
             </Paragraph>
           </div>
         </div>
-        <div className={styles.tabellhandlinger}>
-          <Select
-            label={'Rader per side'}
-            hideLabel
-            hidePlaceholder
-            value={sidestoerrelse}
-            onChange={(e) => setSidestoerrelse(e.currentTarget.value)}
-          >
-            {SIDESTOERRELSER.map((s) => (
-              <Select.Option key={s} value={s}>
-                {s === ALLE ? 'Alle rader' : `${s} per side`}
-              </Select.Option>
-            ))}
-          </Select>
-          <Button
-            variant={'secondary'}
-            onClick={() => lastNedCsv(tilCsv(synlige), 'uu-status.csv')}
-          >
-            {'Last ned CSV'}
-          </Button>
-        </div>
+        <Select
+          label={'Rader per side'}
+          hideLabel
+          hidePlaceholder
+          value={sidestoerrelse}
+          onChange={(e) => setSidestoerrelse(e.currentTarget.value)}
+        >
+          {SIDESTOERRELSER.map((s) => (
+            <Select.Option key={s} value={s}>
+              {s === ALLE ? 'Alle rader' : `${s} per side`}
+            </Select.Option>
+          ))}
+        </Select>
       </div>
 
       <Table

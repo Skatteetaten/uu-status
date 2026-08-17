@@ -61,7 +61,7 @@
 }
 
 // Tonet flate rundt filtrene, så det er tydelig hvor de slutter. Uten den
-// ser «Rader per side» og «Last ned CSV» rett under ut som en del av dem.
+// ser «Rader per side» rett under ut som et filtervalg.
 // Skjemafeltene har egen hvit bakgrunn og mørk ramme, så de skiller seg ut.
 .filtre {
   display: grid;
@@ -131,12 +131,6 @@
   .markert {
     animation: none;
   }
-}
-
-.tabellhandlinger {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
 }
 
 // Blokknivå, ikke inline-flex. Som inline-nivå deltar boksene i grunnlinje-
