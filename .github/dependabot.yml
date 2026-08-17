@@ -1,0 +1,52 @@
+# Motvekt til pinningen.
+#
+# npm er låst eksakt, pip med SHA256-hash og alle actions til commit-SHA. Det
+# gir integritet, men fryser oss samtidig: uten dette ville ingen fått beskjed
+# når en av dem får en sårbarhet. Dependabot åpner PR-er i stedet, så
+# oppdateringer skjer som en gjennomgått endring og ikke automatisk i det
+# stille.
+version: 2
+
+updates:
+  # Dependabot forstår SHA-pinnede actions og oppdaterer versjonskommentaren
+  # på samme linje sammen med SHA-en, så «# v4» følger med.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    groups:
+      # De 14 ds-pakkene slippes i takt og skal alltid ha samme versjon.
+      # Uten gruppering ville en oppgradering blitt 14 PR-er som hver for seg
+      # gir en usammenhengende tilstand.
+      designsystemet:
+        patterns:
+          - "@skatteetaten/ds-*"
+
+  # NB: requirements.txt er hash-låst med --require-hashes, og hver pakke er
+  # listet eksplisitt med --no-deps. Dependabot dokumenterer pip-støtte, men
+  # det er ikke bekreftet her hvordan den håndterer akkurat den formen.
+  # Sjekk den første PR-en manuelt: alle fem pakkene må fortsatt stå med
+  # gyldig --hash, og charset-normalizer må beholde alle tre hashene
+  # (manylinux-hjulet, py3-hjulet og kildepakken). Blir hashene borte eller
+  # ufullstendige, feiler nattjobben på --require-hashes – synlig, ikke stille.
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps"

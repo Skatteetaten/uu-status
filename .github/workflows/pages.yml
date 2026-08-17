@@ -17,10 +17,10 @@ on:
   # ville siden aldri blitt bygget om med ferske data.
   workflow_call:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# Ingen tilgang som standard; begge jobbene ber om sitt eget. Ikke fordi noe
+# er utrygt i dag – jobbene setter allerede sine egne – men fordi en jobb som
+# legges til senere uten å tenke på tilganger da får ingenting, ikke alt.
+permissions: {}
 
 # Én publisering om gangen. Vi avbryter ikke pågående kjøringer: en halvferdig
 # deploy er verre enn å vente.
