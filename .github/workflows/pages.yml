@@ -1,0 +1,80 @@
+name: Publiser til GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - "docs/**"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "vite.config.mts"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+  # Kalles av uu-status.yml etter den nattlige datauppdateringen. Nødvendig
+  # fordi push gjort med GITHUB_TOKEN ikke trigger andre workflows – uten dette
+  # ville siden aldri blitt bygget om med ferske data.
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Én publisering om gangen. Vi avbryter ikke pågående kjøringer: en halvferdig
+# deploy er verre enn å vente.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bygg-og-publiser:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      # Se uu-status.yml: pinnet til commit-SHA, ikke tagg. Tagger kan flyttes.
+      - name: Sjekk ut repo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Sett opp Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Installer avhengigheter
+        run: npm ci
+
+      - name: Bygg (typecheck + vite)
+        run: npm run build
+
+      - name: Kontroller at kontrakten mot UU-portalen holder
+        run: |
+          set -e
+          # UU-portalen henter denne fila direkte fra Pages. Ligger den ikke i
+          # rota av artefakten, knekker portalen uten at noe annet feiler.
+          test -f dist/uu-status-details.json
+          node -e "
+            const d = JSON.parse(require('fs').readFileSync('dist/uu-status-details.json','utf8'));
+            if (!Array.isArray(d) || d.length === 0) throw new Error('details.json er tom eller ikke en liste');
+            const felt = ['nonConformities','codes','totalNonConformities','updatedAt','opprettet'];
+            const mangler = felt.filter(f => !(f in d[0]));
+            if (mangler.length) throw new Error('Mangler felt: ' + mangler.join(', '));
+            console.log('OK: ' + d.length + ' erklæringer, alle kontraktsfelt til stede');
+          "
+
+      - name: Konfigurer Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Last opp artefakt
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist
+
+      - name: Publiser
+        id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
