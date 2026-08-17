@@ -48,7 +48,12 @@
 
 // Luften ligger her, ikke i .markert, slik at teksten ikke flytter seg når
 // blinket slår inn ved første filterendring.
+//
+// inline-block gjør at boksen følger teksten i bredden. Som blokk strakk
+// blinket seg over hele raden, noe som ga et grønt felt på flere hundre piksler
+// for en setning på under halvparten.
 .treffboks {
+  display: inline-block;
   padding: var(--spacing-xs) var(--spacing-s);
   margin-left: calc(var(--spacing-s) * -1);
   border-radius: 4px;
@@ -82,6 +87,12 @@
 // seg fordi j, l og i er smalere glyffer enn a, u og g – derfor brakk bare
 // noen av datoene, og det så tilfeldig ut.
 .datokolonne {
+  white-space: nowrap;
+}
+
+// «Rettet / nye» brakk mellom skråstreken og «nye», så overskriften ble to
+// linjer høy og dro resten av overskriftsraden med seg.
+.enLinje {
   white-space: nowrap;
 }
 

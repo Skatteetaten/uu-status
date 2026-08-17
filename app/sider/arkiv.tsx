@@ -222,6 +222,19 @@ export function Endringsarkiv(): ReactElement {
     boks.classList.remove(styles.markert);
     void boks.offsetWidth; // tvinger reflow, så animasjonen starter på nytt
     boks.classList.add(styles.markert);
+
+    // Klassen må ryddes bort igjen. Ble den liggende, spilte animasjonen på
+    // nytt hver gang man byttet fane: et element med display:none animerer
+    // ikke, så CSS starter forfra i det fanen blir synlig igjen.
+    //
+    // Varigheten leses fra CSS, så den ikke står to steder. Ved
+    // prefers-reduced-motion er animasjonen «none» og varigheten 0.
+    const ms = parseFloat(getComputedStyle(boks).animationDuration) * 1000;
+    const timer = window.setTimeout(
+      () => boks.classList.remove(styles.markert),
+      ms + 50
+    );
+    return () => window.clearTimeout(timer);
   }, [sok, type, periode]);
 
   const harFilter = sok.trim() !== '' || type !== ALLE || periode !== ALLE;
@@ -442,7 +455,7 @@ export function Endringsarkiv(): ReactElement {
               <Table.HeaderCell>{'Oppdaget'}</Table.HeaderCell>
               <Table.HeaderCell>{'Erklæring'}</Table.HeaderCell>
               <Table.HeaderCell>{'Endring'}</Table.HeaderCell>
-              <Table.HeaderCell alignment={'right'}>
+              <Table.HeaderCell alignment={'right'} className={styles.enLinje}>
                 {'Rettet / nye'}
               </Table.HeaderCell>
             </Table.Row>

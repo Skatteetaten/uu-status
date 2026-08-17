@@ -206,6 +206,15 @@ export function Statusoversikt(): ReactElement {
     boks.classList.remove(styles.markert);
     void boks.offsetWidth; // tvinger reflow, så animasjonen starter på nytt
     boks.classList.add(styles.markert);
+
+    // Se arkiv.tsx: klassen må bort igjen, ellers spiller animasjonen på nytt
+    // hver gang fanen blir synlig.
+    const ms = parseFloat(getComputedStyle(boks).animationDuration) * 1000;
+    const timer = window.setTimeout(
+      () => boks.classList.remove(styles.markert),
+      ms + 50
+    );
+    return () => window.clearTimeout(timer);
   }, [sok, bruddgruppe, wcagFilter, periode]);
 
   // Sidestørrelse og sortering er ikke filtre og nullstilles ikke.

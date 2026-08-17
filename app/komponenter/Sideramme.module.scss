@@ -26,6 +26,15 @@
  * 0 over 640 px, der containeren selv gir margen). Loddrett luft settes etter,
  * så den ikke blir overskrevet av kortformen.
  */
+// Hopplenken flytter fokus hit. <main> er ingen kontroll man betjener, bare
+// et landingspunkt, så fokusrammen rundt hele innholdet gir ingen mening –
+// den ser ut som om noe er valgt. Skjermleseren annonserer landemerket via
+// aria-labelledby, og synlige brukere ser at siden har hoppet.
+.innhold:focus,
+.innhold:focus-visible {
+  outline: none;
+}
+
 .innhold {
   max-width: var(--semantic-responsive-container);
   margin: 0 auto;

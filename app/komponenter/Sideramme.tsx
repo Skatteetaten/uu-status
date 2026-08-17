@@ -20,8 +20,15 @@ export function Sideramme({ children }: SiderammeProps): ReactElement {
     <>
       {/* Default-logoen brukes: å overstyre den krever logo, mobileLogo og alt. */}
       <TopBannerExternal skipLink={{ text: 'Hopp til hovedinnhold' }} />
-      <main id={'hovedinnhold'} className={styles.innhold}>
-        <Heading as={'h1'} level={1}>
+      {/* aria-labelledby peker på h1: da leser skjermleseren opp «UU-status,
+          hovedinnhold» når man hopper hit, i stedet for bare «hovedinnhold».
+          Uten navn er landemerket stille, og hoppet føles som å lande i tomrom. */}
+      <main
+        id={'hovedinnhold'}
+        aria-labelledby={'sidetittel'}
+        className={styles.innhold}
+      >
+        <Heading as={'h1'} level={1} id={'sidetittel'}>
           {'UU-status'}
         </Heading>
         {/* Gjelder alle tre fanene: samme datagrunnlag, samme oppdatering. */}
