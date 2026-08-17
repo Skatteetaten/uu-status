@@ -28,7 +28,7 @@
     "@skatteetaten/ds-status": "2.10.0",
     "@skatteetaten/ds-table": "2.10.0",
     "@skatteetaten/ds-typography": "2.10.0",
-    "i18next": "25.10.10",
+    "i18next": "26.3.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-i18next": "15.7.4"
