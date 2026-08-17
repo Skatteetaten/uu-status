@@ -171,6 +171,27 @@
   white-space: nowrap;
 }
 
+/**
+ * Holder sorteringsikonet på samme linje som etiketten.
+ *
+ * DS rendrer sorteringsknappen som inline-block med white-space: normal, og
+ * innholdet er en tekstnode etterfulgt av en inline SVG. De flyter dermed som
+ * vanlig tekst og brytes når kolonnen blir smal nok. «Brudd (av 48)» er den
+ * lengste etiketten i den smaleste kolonnen: den trenger 130 px, men fikk 93
+ * ved containerbredde 960 – altså på hver eneste skjerm mellom 1024 og 1365,
+ * der DS bruker container-m.
+ *
+ * Med nowrap krever kolonnen sin fulle bredde, og tabellens auto-layout tar
+ * plassen fra navnekolonnen, som har rikelig.
+ *
+ * Selektoren treffer elementtypen, ikke DS sitt hash-klassenavn, så den
+ * overlever en oppgradering. Arv fungerer ikke her – DS setter white-space
+ * eksplisitt på knappen.
+ */
+.sorterbar button {
+  white-space: nowrap;
+}
+
 // Bare loddrett luft her. Kortformen `padding` ville nullstilt venstresiden,
 // som felles.utvidetInnhold setter for å gi plass til streken.
 .detaljer {

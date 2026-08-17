@@ -526,16 +526,35 @@ export function Statusoversikt(): ReactElement {
             <Table.HeaderCell>
               <span className={felles.srOnly}>{'Vis detaljer'}</span>
             </Table.HeaderCell>
-            <Table.HeaderCell isSortable sortKey={'navn'}>
+            {/* styles.sorterbar holder etikett og sorteringsikon på samme
+                linje. Se kommentaren i status.module.scss. */}
+            <Table.HeaderCell
+              isSortable
+              sortKey={'navn'}
+              className={styles.sorterbar}
+            >
               {'Navn'}
             </Table.HeaderCell>
-            <Table.HeaderCell isSortable sortKey={'brudd'} alignment={'right'}>
+            <Table.HeaderCell
+              isSortable
+              sortKey={'brudd'}
+              alignment={'right'}
+              className={styles.sorterbar}
+            >
               {`Brudd (av ${ANTALL_KRAV})`}
             </Table.HeaderCell>
-            <Table.HeaderCell isSortable sortKey={'oppdatert'}>
+            <Table.HeaderCell
+              isSortable
+              sortKey={'oppdatert'}
+              className={styles.sorterbar}
+            >
               {'Sist oppdatert'}
             </Table.HeaderCell>
-            <Table.HeaderCell isSortable sortKey={'opprettet'}>
+            <Table.HeaderCell
+              isSortable
+              sortKey={'opprettet'}
+              className={styles.sorterbar}
+            >
               {'Opprettet'}
             </Table.HeaderCell>
           </Table.Row>
