@@ -1,3 +1,8 @@
+// Brekkpunktene hentes fra designsystemet. De finnes ikke som CSS-variabler,
+// bare som SCSS – og CSS-variabler kan uansett ikke brukes i media queries.
+// xs 480, s 640, m 1024, l 1366, xl 1920.
+@use '@skatteetaten/ds-core-designtokens/designtokens/breakpoints.scss' as ds;
+
 // min(…, 100%) i alle auto-fit-rutenettene på denne siden.
 //
 // minmax(15rem, 1fr) er et gulv kolonnen ikke kan krysse, også når det ikke
@@ -24,7 +29,8 @@
   // Bunnjuster, så kontrollene flukter selv om etikettene brytes ulikt.
   align-items: end;
   gap: var(--spacing-m);
-  padding: var(--spacing-l);
+  // Smått først; den romsligere polstringen settes ved breakpoint-s nedenfor.
+  padding: var(--spacing-m);
   margin: 0 0 var(--spacing-l);
   border: 1px solid var(--palette-graphite-10);
   border-radius: 4px;
@@ -96,11 +102,16 @@
   white-space: nowrap;
 }
 
-// 24 px på hver side spiser en sjettedel av en 320 px-skjerm. Under 30rem
-// gir vi plassen til kontrollene i stedet.
-@media (max-width: 30rem) {
+// 24 px på hver side spiser en sjettedel av en 320 px-skjerm, så på smale
+// skjermer gir vi plassen til kontrollene i stedet.
+//
+// Mobil-først, som resten av designsystemet: den lille verdien er standard,
+// og den store slår inn ved et brekkpunkt. Brekkpunktet hentes fra DS i
+// stedet for å skrives som tall – 640 px er der DS selv slutter å gi
+// containeren vannrett luft og lar den sentrere seg i stedet.
+@media (width >= ds.$breakpoint-s) {
   .filtre {
-    padding: var(--spacing-m);
+    padding: var(--spacing-l);
   }
 }
 

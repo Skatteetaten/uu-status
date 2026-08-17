@@ -1,5 +1,6 @@
-// Ingressen til venstre, Dashboard-knappen helt til høyre på samme linje.
-// På smal skjerm faller knappen ned under teksten.
+// Se arkiv.module.scss: brekkpunktene finnes bare som SCSS i designsystemet.
+@use '@skatteetaten/ds-core-designtokens/designtokens/breakpoints.scss' as ds;
+
 // Ingressen til venstre, Dashboard-knappen helt til høyre. Knappen er høyere
 // enn tekstlinjen, så den sentreres mot teksten framfor å toppjusteres – ellers
 // henger den nedenfor. På smal skjerm faller den ned under teksten.
@@ -69,17 +70,18 @@
   // brytes over ulikt antall linjer på smale skjermer.
   align-items: end;
   gap: var(--spacing-m);
-  padding: var(--spacing-l);
+  // Smått først; den romsligere polstringen settes ved breakpoint-s nedenfor.
+  padding: var(--spacing-m);
   margin: 0 0 var(--spacing-l);
   border: 1px solid var(--palette-graphite-10);
   border-radius: 4px;
   background: var(--palette-graphite-5);
 }
 
-// Se arkiv.module.scss: 24 px på hver side er for mye på en 320 px-skjerm.
-@media (max-width: 30rem) {
+// Se arkiv.module.scss: mobil-først, og brekkpunktet hentes fra DS.
+@media (width >= ds.$breakpoint-s) {
   .filtre {
-    padding: var(--spacing-m);
+    padding: var(--spacing-l);
   }
 }
 
