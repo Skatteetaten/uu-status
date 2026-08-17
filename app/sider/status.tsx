@@ -338,7 +338,13 @@ export function Statusoversikt(): ReactElement {
           {`Hver løsning er vurdert mot ${ANTALL_KRAV} WCAG-krav. Erklæringene ` +
             'skal oppdateres minst én gang i året.'}
         </Paragraph>
-        <Button onClick={() => dashboardRef.current?.showModal()}>
+        {/* Sekundær: dashbordet er et supplement til tabellen, ikke sidens
+            hovedhandling. Med primærstil var det det tyngste elementet over
+            folden, og trakk blikket bort fra tallene det skal utdype. */}
+        <Button
+          variant={'secondary'}
+          onClick={() => dashboardRef.current?.showModal()}
+        >
           {'Dashboard'}
         </Button>
       </div>
