@@ -166,12 +166,12 @@ export function Statusoversikt(): ReactElement {
   const [periode, setPeriode] = useState<string>(ALLE);
   const [sidestoerrelse, setSidestoerrelse] = useState<string>('25');
   const [side, setSide] = useState(1);
-  const [puls, setPuls] = useState(0);
   const [sortState, setSortState] = useState<SortState>({
     direction: 'ascending',
     sortKey: 'navn',
   });
   const treffRef = useRef<HTMLDivElement>(null);
+  const boksRef = useRef<HTMLDivElement>(null);
   const sokRef = useRef<HTMLInputElement>(null);
   const dashboardRef = useRef<HTMLDialogElement>(null);
 
@@ -191,13 +191,21 @@ export function Statusoversikt(): ReactElement {
   // Se arkiv.tsx: grønt blink på treffteksten, men ikke ved sidelast. Verdiene
   // sammenlignes fordi StrictMode kjører effekten to ganger i utvikling.
   // Sidestørrelse er utelatt – den endrer ikke treffet, bare oppdelingen.
+  // Klassen tas av og på i stedet for at noden remonteres: en remontering inne
+  // i live-området fikk NVDA til å lese resultatet to ganger.
   const forrigeFilter = useRef<string | null>(null);
   useEffect(() => {
     const naa = `${sok} ${bruddgruppe} ${wcagFilter} ${periode}`;
-    if (forrigeFilter.current !== null && forrigeFilter.current !== naa) {
-      setPuls((n) => n + 1);
-    }
+    const endret =
+      forrigeFilter.current !== null && forrigeFilter.current !== naa;
     forrigeFilter.current = naa;
+    if (!endret) return;
+
+    const boks = boksRef.current;
+    if (!boks) return;
+    boks.classList.remove(styles.markert);
+    void boks.offsetWidth; // tvinger reflow, så animasjonen starter på nytt
+    boks.classList.add(styles.markert);
   }, [sok, bruddgruppe, wcagFilter, periode]);
 
   // Sidestørrelse og sortering er ikke filtre og nullstilles ikke.
@@ -461,12 +469,9 @@ export function Statusoversikt(): ReactElement {
           aria-live={'polite'}
           className={styles.treff}
         >
-          {/* Se arkiv.tsx: key={puls} starter blinket på nytt, og ligger her
-              inne fordi live-området ikke tåler å bli remontert. */}
-          <div
-            key={puls}
-            className={`${styles.treffboks} ${puls ? styles.markert : ''}`}
-          >
+          {/* Se arkiv.tsx: ingen key. Noden må være stabil, ellers leser NVDA
+              resultatet to ganger. */}
+          <div ref={boksRef} className={styles.treffboks}>
             {/* Se arkiv.tsx: ordlyden unngår «Viser» fordi DS-pagineringens
                 egen live-region sier «Viser 1–25 av 54» i samme øyeblikk. */}
             <Paragraph>
