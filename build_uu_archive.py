@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import sys
 import hashlib
 import datetime
@@ -17,10 +18,19 @@ LOGS_DIR    = DATA_DIR / "logs"
 LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff
 CHANGES_LOG = LOGS_DIR / "changes.jsonl"
 SNAP_BY_UPDATED = DATA_DIR / "snapshots_by_updated"
+REGISTER_JSON = DATA_DIR / "erklaeringsregister.json"
 
 # ---------- util ----------
 def today_str():
-    return datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+
+def now_iso():
+    """UTC-tidsstempel på formen 2026-08-17T06:20:28Z."""
+    return (
+        datetime.datetime.now(datetime.timezone.utc)
+        .isoformat(timespec="seconds")
+        .replace("+00:00", "Z")
+    )
 
 def load_json(fp: Path, fallback=None):
     try:
@@ -141,6 +151,10 @@ def normalize_entry(raw: dict):
 
     return {
         "url": url,
+        # Tjenestenavnet må følge med. Når en erklæring fjernes fra registeret,
+        # er arkivet eneste sted navnet fortsatt finnes – oppslag mot dagens
+        # datasett gir ingenting, og da sto det bare «Erklæring (fjernet)».
+        "name": (raw.get("name") or "").strip(),
         "domain": domain,
         "title": title,
         "updatedAt": updatedAt,
@@ -151,13 +165,37 @@ def normalize_entry(raw: dict):
 def sha1(obj):
     return hashlib.sha1(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
+UUID_RE = re.compile(
+    r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.I
+)
+
+def erklaering_id(url: str) -> str:
+    """Stabil identitet for én erklæring.
+
+    UUID-en i URL-en, ikke hele adressen. Samme erklæring finnes nemlig på
+    både https://uustatus.no/nb/… og /nn/… – bokmål og nynorsk er to visninger
+    av samme sak hos uutilsynet.
+
+    Med hele URL-en som nøkkel ble språkbyttet lest som at én erklæring
+    forsvant og en helt ny dukket opp. Det skjedde 2026-03-05: fire
+    erklæringer ble logget som «Ny erklæring» da adressen gikk fra /nb/ til
+    /nn/, og de samme fire så ut som slettet da de senere gikk tilbake.
+
+    Uten UUID i adressen faller vi tilbake på den kanoniske URL-en.
+    """
+    m = UUID_RE.search(url or "")
+    return m.group(0).lower() if m else canon_url(url)
+
+def key_for_url(url: str) -> str:
+    return "id::" + erklaering_id(url)
+
 def make_key(it: dict) -> str | None:
-    """Primær nøkkel = URL (kanonisk). Fallback = title+domain."""
+    """Primær nøkkel = erklæringens UUID. Fallback = title+domain."""
     if not isinstance(it, dict):
         return None
     url = (it.get("url") or it.get("href") or "").strip()
     if url:
-        return "url::" + canon_url(url)
+        return key_for_url(url)
     title = (it.get("title") or it.get("name") or "").strip().lower()
     domain = (it.get("domain") or "").strip().lower()
     if title:
@@ -182,7 +220,16 @@ def read_current():
 
 def read_prev_from_ref(ref: str):
     """Les baseline latest.json fra gitt git-ref.
-       Ved feil/mangel -> TOM baseline ([]) for å trigge 'første gangs' endringer.
+
+    Returnerer:
+      list  -- gyldig baseline (kan være tom liste hvis fila faktisk er tom)
+      None  -- kunne ikke leses
+
+    Skillet er vesentlig. Tidligere ga enhver feil tom liste tilbake, og en tom
+    baseline får hele datasettet til å se nytt ut. Ett mislykket git-oppslag
+    førte da til at alle 118 erklæringene ble logget som nyopprettede – det
+    skjedde 2026-01-10 og 2026-07-19, og forklarer at 64 erklæringer står
+    registrert som «ny» flere ganger.
     """
     try:
         # Få stderr også for bedre diagnostikk
@@ -195,12 +242,12 @@ def read_prev_from_ref(ref: str):
         blob = result.stdout
         if not blob.strip():
             print(f"  WARN: Baseline fra {ref} er tom")
-            return []
+            return None
         js = json.loads(blob)
         urls = js.get("urls") if isinstance(js, dict) else js
         if not isinstance(urls, list):
             print(f"  WARN: Baseline fra {ref}: 'urls' er ikke en liste (type: {type(urls).__name__})")
-            return []
+            return None
         print(f"  Leser baseline fra {ref}: {len(urls)} entries")
         return urls
     except subprocess.CalledProcessError as e:
@@ -208,40 +255,45 @@ def read_prev_from_ref(ref: str):
         print(f"  WARN: Kunne ikke lese baseline fra {ref}: git show feilet (exit code {e.returncode})")
         if stderr_msg:
             print(f"    Git-feil: {stderr_msg.strip()}")
-        return []  # <- viktig
+        return None
     except json.JSONDecodeError as e:
         print(f"  WARN: Kunne ikke parse baseline fra {ref}: JSON-feil: {e}")
         print(f"    Feil på linje {e.lineno}, kolonne {e.colno}")
         if 'blob' in locals() and blob:
             preview = blob[:200].replace('\n', '\\n')
             print(f"    Første 200 tegn: {preview}")
-        return []
+        return None
     except Exception as e:
         print(f"  WARN: Kunne ikke lese baseline fra {ref}: {type(e).__name__}: {e}")
-        return []  # <- viktig
+        return None
 
 def read_prev_from_local():
     """Les baseline latest.json fra lokal fil (for testing).
-       Ved feil/mangel -> TOM baseline ([]) for å trigge 'første gangs' endringer.
+
+    Samme kontrakt som read_prev_from_ref: liste ved suksess, None ved feil.
     """
     try:
         if not LATEST_JSON.exists():
             print(f"  Leser baseline fra lokal fil: filen eksisterer ikke")
-            return []
+            return None
         js = load_json(LATEST_JSON, fallback=None)
         if js is None:
             print(f"  Leser baseline fra lokal fil: kunne ikke parse JSON")
-            return []
+            return None
         urls = js.get("urls") if isinstance(js, dict) else js
-        result = urls if isinstance(urls, list) else []
-        print(f"  Leser baseline fra lokal fil: {len(result)} entries")
-        return result
+        if not isinstance(urls, list):
+            print(f"  Leser baseline fra lokal fil: 'urls' er ikke en liste")
+            return None
+        print(f"  Leser baseline fra lokal fil: {len(urls)} entries")
+        return urls
     except Exception as e:
         print(f"  WARN: Kunne ikke lese baseline fra lokal fil: {type(e).__name__}: {e}")
-        return []
+        return None
 
 # --------- diff ----------
-CHECK_FIELDS = ["title", "updatedAt", "totalNonConformities"]
+# `title` er bevisst utelatt: den er en avledet visningstekst, ikke
+# tilgjengelighetsdata. En ren tittelendring skal ikke bli en arkivoppføring.
+CHECK_FIELDS = ["updatedAt", "totalNonConformities"]
 
 def compute_change(prev_entry: dict, curr_entry: dict):
     p_nc = set(prev_entry.get("nonConformities") or [])
@@ -268,10 +320,35 @@ def compute_change(prev_entry: dict, curr_entry: dict):
         return (changed or None, added, removed)
     return (None, [], [])
 
+def dedup_key(row: dict):
+    """Nøkkel for å unngå å logge samme oppdagelse to ganger samme dag.
+
+    Deteksjonsdatoen er med med vilje. Uten den ble en ekte gjentakelse slettet
+    som duplikat: rettes 1.3.1, gjeninnføres den, og rettes igjen, fikk andre
+    rettelse identisk nøkkel som den første og forsvant fra arkivet. Med datoen
+    er kjøringen fortsatt idempotent innenfor samme døgn, samtidig som noe som
+    faktisk skjer to ganger blir stående som to hendelser.
+    """
+    changed = row.get("changed") or {}
+    total = changed.get("totalNonConformities") or {}
+    return (
+        row.get("detectedDate", ""),
+        # Identitet, ikke adresse: ellers ville samme hendelse logget på nytt
+        # dersom erklæringen byttet mellom /nb/ og /nn/.
+        erklaering_id(row.get("url", "")),
+        tuple(sorted(row.get("added") or [])),
+        tuple(sorted(row.get("removed") or [])),
+        total.get("after"),
+    )
+
+
 def make_initial_changes(curr_rows):
     """Hvis baseline mangler/er ulesbar eller ingen nøkler kan lages: marker ALT som nytt."""
-    now = datetime.datetime.utcnow()
-    now_iso = now.isoformat(timespec="seconds") + "Z"
+    now = datetime.datetime.now(datetime.timezone.utc)
+    # Tidssone-bevisst datetime gir allerede "+00:00"; bytt den mot "Z" i
+    # stedet for å legge til, ellers blir det "+00:00Z" – som ikke er gyldig
+    # ISO 8601, og som new Date() i nettleseren ikke klarer å tolke.
+    now_iso = now.isoformat(timespec="seconds").replace("+00:00", "Z")
     detected_date = now.strftime("%Y-%m-%d")
     out = []
     for c in curr_rows:
@@ -280,6 +357,7 @@ def make_initial_changes(curr_rows):
             "ts": now_iso,
             "detectedDate": detected_date,
             "url": c.get("url") or "",
+            "name": c.get("name") or c.get("title") or "",
             "domain": c.get("domain") or to_domain(c.get("url") or ""),
             "before_hash": None,
             "after_hash": sha1(c),
@@ -306,8 +384,11 @@ def diff_once(prev_rows, curr_rows):
         return make_initial_changes(curr_rows)
 
     changes = []
-    now = datetime.datetime.utcnow()
-    now_iso = now.isoformat(timespec="seconds") + "Z"
+    now = datetime.datetime.now(datetime.timezone.utc)
+    # Tidssone-bevisst datetime gir allerede "+00:00"; bytt den mot "Z" i
+    # stedet for å legge til, ellers blir det "+00:00Z" – som ikke er gyldig
+    # ISO 8601, og som new Date() i nettleseren ikke klarer å tolke.
+    now_iso = now.isoformat(timespec="seconds").replace("+00:00", "Z")
     detected_date = now.strftime("%Y-%m-%d")
 
     # Nye/endrede
@@ -319,6 +400,7 @@ def diff_once(prev_rows, curr_rows):
                 "ts": now_iso,
                 "detectedDate": detected_date,
                 "url": c.get("url") or "",
+                "name": c.get("name") or c.get("title") or "",
                 "domain": c.get("domain") or to_domain(c.get("url") or ""),
                 "before_hash": None,
                 "after_hash": sha1(c),
@@ -342,6 +424,11 @@ def diff_once(prev_rows, curr_rows):
                     "ts": now_iso,
                     "detectedDate": detected_date,
                     "url": url_str,
+                    # Navnet må med her også, ikke bare på nye og fjernede.
+                    # Dette er den vanligste radtypen: uten navnet ville en
+                    # erklæring som endres i dag og slettes i morgen stått
+                    # igjen i arkivet med bare en URL som gir 404.
+                    "name": c.get("name") or c.get("title") or "",
                     "domain": c.get("domain") or to_domain(url_str),
                     "before_hash": before_h,
                     "after_hash": after_h,
@@ -362,6 +449,8 @@ def diff_once(prev_rows, curr_rows):
             "ts": now_iso,
             "detectedDate": detected_date,
             "url": p.get("url") or "",
+            # Fra forrige tilstand: erklæringen finnes ikke i dagens datasett.
+            "name": p.get("name") or p.get("title") or "",
             "domain": p.get("domain") or to_domain(p.get("url") or ""),
             "before_hash": sha1(dict(p)),
             "after_hash": None,
@@ -375,6 +464,174 @@ def diff_once(prev_rows, curr_rows):
         })
 
     return changes
+
+# ---------- erklæringsregister ----------
+#
+# Datasettet fra uutilsynet inneholder bare erklæringer som finnes NÅ. Når en
+# erklæring slettes hos uustatus.no, forsvinner navnet, bruddene og alt annet
+# ut av kilden vår samme natt – og da står endringsarkivet igjen med en URL som
+# peker på en side som ikke finnes.
+#
+# Registeret er langtidshukommelsen: én rad per erklæring vi noen gang har
+# sett, med navnet, når vi så den først og sist, når den forsvant, og hvilke
+# brudd den hadde siste gang vi så den. Rader fjernes aldri herfra.
+
+def load_register() -> dict:
+    """Les registeret som {kanonisk url: rad}. Tom dict hvis fila mangler."""
+    data = load_json(REGISTER_JSON)
+    rader = data.get("erklaeringer") if isinstance(data, dict) else data
+    if not isinstance(rader, list):
+        return {}
+    out = {}
+    for r in rader:
+        if isinstance(r, dict) and (r.get("url") or "").strip():
+            out[erklaering_id(r["url"])] = r
+    return out
+
+
+def rebuild_register_fra_logg(reg: dict) -> dict:
+    """Gjenskap de fjernede erklæringene fra endringsloggen.
+
+    Kjøres når registerfila mangler. Uten dette ville et tapt register bety at
+    alt vi vet om slettede erklæringer forsvant for godt neste natt: dagens
+    datasett inneholder dem ikke, så registeret ville blitt bygd opp igjen med
+    bare de aktive. Endringsloggen har derimot én rad per fjerning, med navn,
+    dato og bruddene erklæringen hadde.
+    """
+    if not CHANGES_LOG.exists():
+        return reg
+
+    funnet = 0
+    try:
+        with CHANGES_LOG.open("r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if not (row.get("changed") or {}).get("removedEntry"):
+                    continue
+                url = (row.get("url") or "").strip()
+                if not url:
+                    continue
+                k = erklaering_id(url)
+                dato = (row.get("detectedDate") or "")[:10]
+                post = reg.get(k)
+                if post is None:
+                    post = {
+                        "url": url,
+                        "name": (row.get("name") or "").strip(),
+                        "domain": (row.get("domain") or to_domain(url)).strip(),
+                        "firstSeen": dato,
+                        "lastSeen": dato,
+                        "status": "fjernet",
+                        "removedDates": [],
+                    }
+                    reg[k] = post
+                    funnet += 1
+                if dato and dato not in post["removedDates"]:
+                    post["removedDates"].append(dato)
+                    post["removedDates"].sort()
+                total = (row.get("changed") or {}).get("totalNonConformities") or {}
+                post["lastKnown"] = {
+                    "updatedAt": (row.get("updatedDate") or "")[:10],
+                    "totalNonConformities": int(total.get("before") or 0),
+                    "nonConformities": sorted(row.get("removed") or []),
+                }
+    except Exception as e:
+        print(f"  WARN: Kunne ikke gjenskape register fra loggen: {e}")
+        return reg
+
+    if funnet:
+        print(f"  Gjenskapte {funnet} fjernede erklæringer fra endringsloggen.")
+    return reg
+
+
+def update_register(reg: dict, curr_rows: list, dagens_dato: str) -> dict:
+    """Oppdater registeret mot dagens datasett.
+
+    Erklæringer som finnes i dag får friske verdier. De som mangler markeres
+    som fjernet – men lastKnown fryses slik den var sist vi så dem, for det er
+    hele poenget: bruddene skal fortsatt kunne leses etterpå.
+    """
+    sett_i_dag = set()
+
+    for rad in curr_rows:
+        url = (rad.get("url") or "").strip()
+        if not url:
+            continue
+        k = erklaering_id(url)
+        sett_i_dag.add(k)
+        post = reg.get(k) or {
+            "url": url,
+            "name": "",
+            "domain": "",
+            "firstSeen": dagens_dato,
+            "removedDates": [],
+        }
+        post["url"] = url
+        # Navnet overskrives bare av et faktisk navn. Et tomt felt i kilden
+        # skal aldri kunne slette navnet vi allerede har.
+        navn = (rad.get("name") or rad.get("title") or "").strip()
+        if navn:
+            post["name"] = navn
+        post["domain"] = (rad.get("domain") or to_domain(url)).strip()
+        post["lastSeen"] = dagens_dato
+        post["status"] = "aktiv"
+        post["lastKnown"] = {
+            "updatedAt": rad.get("updatedAt") or "",
+            "totalNonConformities": int(rad.get("totalNonConformities") or 0),
+            "nonConformities": sorted(rad.get("nonConformities") or []),
+        }
+        reg[k] = post
+
+    for k, post in reg.items():
+        if k in sett_i_dag:
+            continue
+        if post.get("status") == "fjernet":
+            continue
+        # Første kjøring der erklæringen mangler. lastSeen og lastKnown røres
+        # ikke – de skal peke på siste gang den faktisk fantes.
+        post["status"] = "fjernet"
+        datoer = post.get("removedDates")
+        if not isinstance(datoer, list):
+            datoer = []
+        if dagens_dato not in datoer:
+            datoer.append(dagens_dato)
+        post["removedDates"] = datoer
+        print(f"  Registeret: {post.get('name') or post.get('url')} er borte fra datasettet")
+
+    return reg
+
+
+def write_register(reg: dict) -> None:
+    rader = sorted(
+        reg.values(),
+        key=lambda r: ((r.get("name") or "").lower(), r.get("url") or ""),
+    )
+    aktive = sum(1 for r in rader if r.get("status") == "aktiv")
+    REGISTER_JSON.write_text(
+        json.dumps(
+            {
+                "oppdatert": now_iso(),
+                "antall": len(rader),
+                "antallAktive": aktive,
+                "antallFjernet": len(rader) - aktive,
+                "erklaeringer": rader,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    print(
+        f"Oppdaterte {REGISTER_JSON}: {len(rader)} erklæringer "
+        f"({aktive} aktive, {len(rader) - aktive} fjernet)"
+    )
+
 
 # ---------- main ----------
 def main():
@@ -395,45 +652,51 @@ def main():
     max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
 
     print(f"Dagens datasett: {len(curr)} elementer.")
-    final_changes = []
-    used_ref = None
 
-    # TEST_MODE: Bruk lokal fil for testing (ikke avhengig av git eller dato)
+    # Finn FØRSTE LESBARE baseline – ikke første som gir endringer.
+    #
+    # Den gamle løkken brøt på første ref som ga endringer. En uleselig baseline
+    # gir alltid endringer (alt ser nytt ut), så tilbakesporingen forsterket
+    # nettopp den feilen den skulle beskytte mot. På rolige dager gikk den også
+    # videre til HEAD~1, HEAD~2 … og rapporterte eldre differ som dagsferske.
     if test_mode:
         print("TEST_MODE: Bruker lokal fil som baseline (ikke git HEAD)")
         prev_rows = read_prev_from_local()
-        changes = diff_once(prev_rows, curr)
-        if changes:
-            used_ref = "LOCAL_FILE"
-            final_changes = changes
-        else:
-            # Ingen endringer funnet - dette er OK, ikke registrer noe
-            print("TEST_MODE: Ingen endringer funnet mellom baseline og dagens datasett.")
-            used_ref = "LOCAL_FILE"
-            final_changes = []  # Tom liste = ingen endringer
+        used_ref = "LOCAL_FILE" if prev_rows is not None else None
     else:
-        # Normal modus: Bruk git HEAD
         if forced_ref:
             refs = [forced_ref]
         elif auto_bt:
-            refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
+            refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt + 1)]
         else:
             refs = ["HEAD"]
 
-        # Prøv alle refs. diff_once() håndterer tom baseline/0 keys.
+        prev_rows, used_ref = None, None
         for ref in refs:
-            prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
-            changes = diff_once(prev_rows, curr)
-            if changes:
-                used_ref = ref
-                final_changes = changes
+            kandidat = read_prev_from_ref(ref)
+            if kandidat is not None:
+                prev_rows, used_ref = kandidat, ref
                 break
 
+    if prev_rows is None:
+        # Ingen lesbar baseline noe sted. Er arkivet allerede i gang, er dette
+        # en feil vi ikke skal gjette oss ut av: å behandle alt som nytt ville
+        # skrevet ett falskt «ny erklæring»-innslag per løsning. Avbryt heller,
+        # så neste kjøring får prøve igjen mot en intakt baseline.
+        if CHANGES_LOG.exists() and CHANGES_LOG.stat().st_size > 0:
+            print(
+                "FEIL: Fant ingen lesbar baseline, men endringsloggen har "
+                "historikk. Avbryter uten å skrive – arkivet skal ikke fylles "
+                "med falske nyregistreringer.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        print("Ingen baseline og tom endringslogg: dette er første kjøring.")
+        final_changes = make_initial_changes(curr)
+    else:
+        final_changes = diff_once(prev_rows, curr)
         if not final_changes:
-            # Siste forsvar: snapshot ALT
-            print("Ingen endringer funnet via refs. Tvinger initial snapshot for dagens datasett.")
-            final_changes = make_initial_changes(curr)
-            used_ref = refs[0] if refs else "(n/a)"
+            print("Ingen endringer mellom baseline og dagens datasett.")
 
     print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
     if final_changes:
@@ -446,8 +709,7 @@ def main():
         if len(final_changes) > 5:
             print(f"    ... og {len(final_changes) - 5} flere")
 
-    # 1) Logg endringer (behold kun de nye endringene - sjekk for duplikater)
-    # Les eksisterende endringer for å sjekke duplikater
+    # 1) Logg endringer, uten å skrive samme oppdagelse to ganger
     existing_changes = set()
     if CHANGES_LOG.exists():
         try:
@@ -457,68 +719,24 @@ def main():
                     if not line:
                         continue
                     try:
-                        existing = json.loads(line)
-                        # Bruk URL + added + removed + totalNonConformities_after som unik nøkkel
-                        # Dette sikrer at samme endring (samme resultat) ikke logges flere ganger,
-                        # uavhengig av updatedAt-endringer eller hva baseline var når endringen ble oppdaget
-                        url = existing.get("url", "")
-                        added = tuple(sorted(existing.get("added", [])))  # Tuple for å kunne bruke i set
-                        removed = tuple(sorted(existing.get("removed", [])))  # Tuple for å kunne bruke i set
-                        # Hent totalNonConformities_after fra changed-feltet eller beregn fra added/removed
-                        changed = existing.get("changed") or {}
-                        total_after = None
-                        if isinstance(changed, dict) and "totalNonConformities" in changed:
-                            total_after = changed["totalNonConformities"].get("after")
-                        # Fallback: beregn fra before og endringer hvis ikke tilgjengelig
-                        if total_after is None:
-                            total_before = None
-                            if isinstance(changed, dict) and "totalNonConformities" in changed:
-                                total_before = changed["totalNonConformities"].get("before")
-                            if total_before is not None:
-                                total_after = total_before - len(removed) + len(added)
-                        # Hvis fortsatt None, bruk None som nøkkel (for nye entries eller removed entries)
-                        # Dette er OK fordi vi sammenligner med samme logikk for nye endringer
-                        if url:
-                            # Bruk URL + added + removed + total_after som nøkkel
-                            # Dette fanger samme endring selv om updatedAt eller before_hash er forskjellig
-                            key = (url, added, removed, total_after)
-                            existing_changes.add(key)
+                        existing_changes.add(dedup_key(json.loads(line)))
                     except json.JSONDecodeError:
                         continue
         except Exception as e:
             print(f"  WARN: Kunne ikke lese eksisterende endringer: {e}")
 
-    # Logg kun nye endringer (ikke duplikater)
     new_changes = []
     for row in final_changes:
-        url = row.get("url", "")
-        added = tuple(sorted(row.get("added", [])))  # Tuple for å kunne bruke i set
-        removed = tuple(sorted(row.get("removed", [])))  # Tuple for å kunne bruke i set
-        # Hent totalNonConformities_after fra changed-feltet eller beregn fra added/removed
-        changed = row.get("changed") or {}
-        total_after = None
-        if isinstance(changed, dict) and "totalNonConformities" in changed:
-            total_after = changed["totalNonConformities"].get("after")
-        # Fallback: beregn fra before og endringer hvis ikke tilgjengelig
-        if total_after is None:
-            total_before = None
-            if isinstance(changed, dict) and "totalNonConformities" in changed:
-                total_before = changed["totalNonConformities"].get("before")
-            if total_before is not None:
-                total_after = total_before - len(removed) + len(added)
-        # Hvis fortsatt None, bruk None som nøkkel (for nye entries eller removed entries)
-        # Dette er OK fordi vi sammenligner med samme logikk for eksisterende endringer
-        # Samme logikk som over for å matche nøkkel-formatet
-        if url:
-            key = (url, added, removed, total_after)
-            if key not in existing_changes:
-                new_changes.append(row)
-            else:
-                print(f"  Skipper duplikat endring: {url[:50]}... (added: {len(added)}, removed: {len(removed)}, total_after: {total_after})")
-        else:
-            # Hvis mangler url, logg allikevel (skal ikke skje normalt)
+        if not row.get("url"):
+            # Skal ikke skje; logg heller for mye enn å miste en endring.
             new_changes.append(row)
-    
+            continue
+        if dedup_key(row) in existing_changes:
+            print(f"  Skipper duplikat: {row['url'][:50]}…")
+        else:
+            new_changes.append(row)
+
+
     # Skriv nye endringer til filen (legg til, ikke erstatt)
     if new_changes:
         # Legg til nye endringer (append mode)
@@ -541,8 +759,7 @@ def main():
             candidate = None
             url = (ch.get("url") or "").strip()
             if url:
-                kk = "url::" + canon_url(url)
-                candidate = curr_index.get(kk)
+                candidate = curr_index.get(key_for_url(url))
             if not candidate:
                 # fallback: prøv direkte URL-match
                 for it in curr:
@@ -569,6 +786,20 @@ def main():
     # curr er allerede normalisert fra read_current(), så vi kan lagre direkte
     LATEST_JSON.write_text(json.dumps({"urls": curr}, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Oppdaterte {LATEST_JSON} med {len(curr)} normaliserte entries")
+
+    # 4) Oppdater erklæringsregisteret.
+    #
+    # Kjøres alltid, også når diffen er tom: lastSeen skal flyttes fram hver
+    # natt, ellers ser en erklæring som ikke har endret seg på et halvt år ut
+    # som om vi mistet den for et halvt år siden.
+    #
+    # Registeret er den eneste kilden som overlever at en erklæring slettes hos
+    # uutilsynet, så det skrives etter at alt annet er på plass.
+    reg = load_register()
+    if not reg:
+        print("  Registeret er tomt – bygger det opp igjen.")
+        reg = rebuild_register_fra_logg(reg)
+    write_register(update_register(reg, curr, today_str()))
 
 if __name__ == "__main__":
     main()
