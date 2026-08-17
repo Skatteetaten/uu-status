@@ -1,0 +1,20 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/a49940f0-d273-4728-8ff4-4adce824cadf",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Skattelister | uustatus",
+      "updatedAt": "2026-06-16",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Utsatt frist søknad | uustatus",
+      "updatedAt": "2026-06-16",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    }
+  ]
+}

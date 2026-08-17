@@ -1,0 +1,28 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/6ff36d85-dfeb-4701-8f46-1fdb8293c33f",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Betalinger til selvstendig næringsdrivende | uustatus",
+      "updatedAt": "2026-06-22",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/46477ae1-0ba8-46bc-a2f4-2591f9b60593",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligsparing for ungdom | uustatus",
+      "updatedAt": "2026-06-22",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn | uustatus",
+      "updatedAt": "2026-06-22",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    }
+  ]
+}
