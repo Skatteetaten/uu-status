@@ -26,8 +26,6 @@ export interface Rad {
   erKommunal: boolean;
   /** Erklæringene som inngår, for detaljvisningen. */
   erklaeringsUrler: Lenke[];
-  /** De digitale løsningene erklæringene gjelder. */
-  loesningsUrler: Lenke[];
 }
 
 /**
@@ -108,7 +106,6 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
     {
       mål: Sammenligning;
       erklaeringer: Map<string, string>;
-      loesninger: Map<string, string>;
       brudd: number;
       sist: string | null;
     }
@@ -117,7 +114,6 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
     samlet.set(mål.key, {
       mål,
       erklaeringer: new Map(),
-      loesninger: new Map(),
       brudd: 0,
       sist: null,
     });
@@ -132,6 +128,15 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
     // Telleenheten er unike ERKLÆRINGSadresser, ikke løsningsadresser – samme
     // som den gamle sidens declarationUrls. To erklæringer for samme løsning
     // teller altså som to, og nevneren i bruddandelen følger den samme tellingen.
+    //
+    // Detaljvisningen listet en stund også løsningsadressene, med eget antall.
+    // Det tallet var systematisk for lavt: apper har ingen nettadresse, så
+    // iktLoeysingAdresse er tom i 709 poster og faller tilbake på
+    // publiseringsadresse. Drammens fem Vigilo-app-erklæringer havnet dermed
+    // alle på drammen.kommune.no/tilgjengelighet/ og ble til én «løsning».
+    // På landsbasis forsvant 693 erklæringer i den tellingen, og i 264 av 353
+    // sammenslåinger hadde de sammenslåtte erklæringene ulike løsningsnavn.
+    // Løsningslista er derfor fjernet – ikke flytt tellingen hit.
     const navn = (post.iktLoeysingNamn || '').trim();
 
     const noekkel =
@@ -142,12 +147,6 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
       rad.erklaeringer.set(noekkel, navn);
     }
 
-    const loesning =
-      post.iktLoeysingAdresse?.trim() || post.publiseringsadresse?.trim();
-    if (loesning && !rad.loesninger.get(loesning)) {
-      rad.loesninger.set(loesning, navn);
-    }
-
     rad.brudd += Number(post.talBrot) || 0;
 
     const oppdatert = (post.sisteOppdatering || '').slice(0, 10);
@@ -155,7 +154,7 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
   }
 
   return [...samlet.values()]
-    .map(({ mål, erklaeringer, loesninger, brudd, sist }) => {
+    .map(({ mål, erklaeringer, brudd, sist }) => {
       const antall = erklaeringer.size;
       return {
         key: mål.key,
@@ -167,7 +166,6 @@ export function byggRader(poster: DatasettPost[]): Rad[] {
         sistOppdatert: sist,
         erKommunal: /kommune|fylkeskommune/i.test(mål.name),
         erklaeringsUrler: tilLenker(erklaeringer),
-        loesningsUrler: tilLenker(loesninger),
       };
     })
     .filter((r) => r.erklaeringer > 0)

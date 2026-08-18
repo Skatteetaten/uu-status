@@ -220,20 +220,10 @@ export function Sammenligning(): ReactElement {
                   <Paragraph>
                     {`Bruddandelen er ${r.brudd} brudd delt på ${r.erklaeringer} erklæringer × ${ANTALL_KRAV} krav.`}
                   </Paragraph>
-                  <div className={styles.kolonner}>
-                    <div>
-                      <Heading as={'h3'} level={4} hasSpacing>
-                        {`Erklæringer (${r.erklaeringsUrler.length})`}
-                      </Heading>
-                      <Lenkeliste lenker={r.erklaeringsUrler} />
-                    </div>
-                    <div>
-                      <Heading as={'h3'} level={4} hasSpacing>
-                        {`Løsninger (${r.loesningsUrler.length})`}
-                      </Heading>
-                      <Lenkeliste lenker={r.loesningsUrler} />
-                    </div>
-                  </div>
+                  <Heading as={'h3'} level={4} hasSpacing>
+                    {`Erklæringer (${r.erklaeringsUrler.length})`}
+                  </Heading>
+                  <Lenkeliste lenker={r.erklaeringsUrler} />
                 </div>
               }
             >

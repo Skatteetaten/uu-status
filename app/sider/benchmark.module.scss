@@ -25,13 +25,6 @@
   padding-bottom: var(--spacing-m);
 }
 
-.kolonner {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
 .metodetittel {
   margin-top: 3rem;
 }
