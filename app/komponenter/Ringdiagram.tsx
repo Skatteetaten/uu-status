@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 
+import felles from '../stiler/felles.module.scss';
 import styles from './Ringdiagram.module.scss';
 
 export interface Ringsegment {
@@ -7,6 +8,11 @@ export interface Ringsegment {
   verdi: number;
   /** CSS-farge, normalt en --palette-*-variabel fra designsystemet. */
   farge: string;
+  /**
+   * Merkelappen slik den skal LESES. «1–5 brudd» blir «1 til 5 brudd»;
+   * tankestreken leses ellers som minus eller hoppes over.
+   */
+  talt?: string;
 }
 
 interface RingdiagramProps {
@@ -15,6 +21,8 @@ interface RingdiagramProps {
   totalTekst: string;
   totalEtikett: string;
   ariaLabel: string;
+  /** Hva verdiene teller, f.eks. «løsninger». Brukes i opplesningen. */
+  enhet: string;
 }
 
 const STOERRELSE = 200;
@@ -36,6 +44,7 @@ export function Ringdiagram({
   totalTekst,
   totalEtikett,
   ariaLabel,
+  enhet,
 }: RingdiagramProps): ReactElement {
   const total = segmenter.reduce((s, x) => s + x.verdi, 0);
   let forskyvning = 0;
@@ -102,14 +111,18 @@ export function Ringdiagram({
           const andel = total > 0 ? Math.round((s.verdi / total) * 100) : 0;
           return (
             <li key={s.merkelapp} className={styles.rad}>
-              <span
-                className={styles.prikk}
-                style={{ background: s.farge }}
-                aria-hidden={'true'}
-              />
-              <span className={styles.merkelapp}>{s.merkelapp}</span>
-              <span className={styles.verdi}>{s.verdi}</span>
-              <span className={styles.andel}>{`${andel} %`}</span>
+              <span className={felles.srOnly}>
+                {`${s.talt ?? s.merkelapp}: ${s.verdi} ${enhet}, ${andel} prosent.`}
+              </span>
+              <span className={styles.visuell} aria-hidden={'true'}>
+                <span
+                  className={styles.prikk}
+                  style={{ background: s.farge }}
+                />
+                <span className={styles.merkelapp}>{s.merkelapp}</span>
+                <span className={styles.verdi}>{s.verdi}</span>
+                <span className={styles.andel}>{`${andel} %`}</span>
+              </span>
             </li>
           );
         })}

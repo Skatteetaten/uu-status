@@ -35,12 +35,14 @@ import styles from './status.module.scss';
 
 const ALLE = 'alle';
 
+// `talt` er merkelappen slik den skal LESES av en skjermleser. Tankestreken i
+// «1–5» leses som minus eller hoppes over, og «11+» blir «elleve pluss».
 const BRUDD_FILTRE = [
-  { verdi: ALLE, tekst: 'Alle' },
-  { verdi: '0', tekst: '0 brudd' },
-  { verdi: '1-5', tekst: '1–5 brudd' },
-  { verdi: '6-10', tekst: '6–10 brudd' },
-  { verdi: '11+', tekst: '11+ brudd' },
+  { verdi: ALLE, tekst: 'Alle', talt: 'Alle' },
+  { verdi: '0', tekst: '0 brudd', talt: 'Ingen brudd' },
+  { verdi: '1-5', tekst: '1–5 brudd', talt: '1 til 5 brudd' },
+  { verdi: '6-10', tekst: '6–10 brudd', talt: '6 til 10 brudd' },
+  { verdi: '11+', tekst: '11+ brudd', talt: '11 eller flere brudd' },
 ] as const;
 
 const PERIODE_FILTRE = [
@@ -306,7 +308,13 @@ export function Statusoversikt(): ReactElement {
 
   const toppKrav: Stolpe[] = [...perKrav]
     .slice(0, 8)
-    .map(([kode, antall]) => ({ merkelapp: kode, verdi: antall }));
+    .map(([kode, antall]) => ({
+      merkelapp: kode,
+      verdi: antall,
+      // «1.3.1» alene sier ingenting i tale. Prefikset gir tallet en kontekst
+      // som den visuelle plasseringen allerede gir seende brukere.
+      talt: `Krav ${kode}`,
+    }));
 
   // Samme fargebetydning som merkene i tabellen: 0 grønn, 1–5 gul, 6+ rød.
   // Diagrammet deler den røde sonen i to for å vise spennet, med lys og mørk
@@ -323,6 +331,7 @@ export function Statusoversikt(): ReactElement {
     (f) => f.verdi !== ALLE
   ).map((f) => ({
     merkelapp: f.tekst,
+    talt: f.talt,
     verdi: erklaeringer.filter((e) =>
       iBruddgruppe(e.totalNonConformities, f.verdi)
     ).length,
@@ -381,6 +390,7 @@ export function Statusoversikt(): ReactElement {
               <Stolpediagram
                 stolper={toppKrav}
                 ariaLabel={'WCAG-krav sortert etter antall løsninger med brudd'}
+                enhet={'løsninger'}
               />
             </section>
 
@@ -392,9 +402,13 @@ export function Statusoversikt(): ReactElement {
                 segmenter={fordeling}
                 totalTekst={String(erklaeringer.length)}
                 totalEtikett={'løsninger'}
+                enhet={'løsninger'}
+                // Totalen står som tekst inne i SVG-en, men role="img" gjør
+                // elementet til en blad-node: innholdet eksponeres ikke. Uten
+                // tallet her ville «118 løsninger» aldri blitt lest opp.
                 ariaLabel={
-                  'Løsninger fordelt på antall WCAG-brudd. Tallene står i ' +
-                  'tegnforklaringen under.'
+                  `${erklaeringer.length} løsninger fordelt på antall ` +
+                  'WCAG-brudd. Tallene står i tegnforklaringen under.'
                 }
               />
             </section>
