@@ -45,3 +45,11 @@
   font-weight: 600;
   text-align: right;
 }
+
+// Meldingen når det ikke finnes brudd å vise. Samme luft som en rad, så
+// kortet ikke klapper sammen når diagrammet er tomt.
+.tom {
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  color: var(--palette-graphite-70);
+}

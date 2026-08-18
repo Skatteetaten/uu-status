@@ -19,6 +19,12 @@ interface StolpediagramProps {
   ariaLabel: string;
   /** Hva verdien teller, f.eks. «løsninger». Brukes i opplesningen. */
   enhet: string;
+  /**
+   * Vises når det ikke finnes data. Uten den ble diagrammet en tom <ul> under
+   * en overskrift – visuelt en tom boks, for skjermleser «liste, 0 elementer».
+   * Det er tilstanden vi jobber mot, og den skal ikke se ut som en feil.
+   */
+  tomTekst: string;
 }
 
 /**
@@ -38,8 +44,13 @@ export function Stolpediagram({
   stolper,
   ariaLabel,
   enhet,
+  tomTekst,
 }: StolpediagramProps): ReactElement {
   const maks = Math.max(1, ...stolper.map((s) => s.verdi));
+
+  if (stolper.length === 0) {
+    return <p className={styles.tom}>{tomTekst}</p>;
+  }
 
   return (
     <ul className={styles.liste} aria-label={ariaLabel}>

@@ -389,8 +389,17 @@ export function Statusoversikt(): ReactElement {
               </Heading>
               <Stolpediagram
                 stolper={toppKrav}
-                ariaLabel={'WCAG-krav sortert etter antall løsninger med brudd'}
+                // Sier hvor mange av hvor mange som vises. Diagrammet kutter
+                // ved 8, og likhet er vanlig i disse tallene – tre krav deler
+                // 17 i dag. Havner en likhet på grensen, vises det ene og ikke
+                // det andre, sortert på kravnummer. Da skal etiketten ikke
+                // love en fullstendig rangering.
+                ariaLabel={
+                  `De ${toppKrav.length} mest utbredte WCAG-kravene av ` +
+                  `${perKrav.size} med registrerte brudd.`
+                }
                 enhet={'løsninger'}
+                tomTekst={'Ingen av løsningene har registrerte brudd.'}
               />
             </section>
 
@@ -408,7 +417,11 @@ export function Statusoversikt(): ReactElement {
                 // tallet her ville «118 løsninger» aldri blitt lest opp.
                 ariaLabel={
                   `${erklaeringer.length} løsninger fordelt på antall ` +
-                  'WCAG-brudd. Tallene står i tegnforklaringen under.'
+                  'WCAG-brudd. Tallene står i tegnforklaringen under. ' +
+                  // Fire avrundede prosenter summerer sjelden til 100 – i dag
+                  // blir det 99. Hvert tall er riktig, men den som hører dem
+                  // etter hverandre skal slippe å lure.
+                  'Prosentene er avrundet.'
                 }
               />
             </section>
