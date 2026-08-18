@@ -9,4 +9,15 @@
  */
 .boks {
   display: inline-flex;
+
+  // Designsystemet setter verken skriftvekt eller justering på innholdet i
+  // popoveren, og den rendres der knappen står – ikke i en portal. Dermed arvet
+  // forklaringene stilen fra forelderen: fet skrift fra kortetiketten, og
+  // høyrejustering fra tabelloverskriftene som har alignment="right" for
+  // tallkolonnene. Forklaringene er brødtekst og skal se ut som brødtekst.
+  //
+  // Ligger på wrapperen, ikke på selve innholdet, så vi slipper å treffe
+  // designsystemets hash-genererte klassenavn.
+  font-weight: var(--font-weight-regular);
+  text-align: left;
 }
