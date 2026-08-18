@@ -51,7 +51,7 @@ const TYPER: Record<Endringstype, { tekst: string; farge: Merkefarge }> = {
   'nye-brudd': { tekst: 'Nye brudd', farge: 'burgundy' },
   endret: { tekst: 'Endret', farge: 'ochre' },
   oppdatert: { tekst: 'Oppdatert', farge: 'graphite' },
-  fjernet: { tekst: 'Fjernet fra registeret', farge: 'graphite' },
+  fjernet: { tekst: 'Fjernet', farge: 'graphite' },
 };
 
 const TYPE_REKKEFOELGE: Endringstype[] = [
@@ -510,7 +510,9 @@ export function Endringsarkiv(): ReactElement {
               >
                 {'Navn'}
               </Table.HeaderCell>
-              <Table.HeaderCell>{'Endring'}</Table.HeaderCell>
+              <Table.HeaderCell className={styles.enLinje}>
+                {'Endring'}
+              </Table.HeaderCell>
               <Table.HeaderCell alignment={'right'} className={styles.enLinje}>
                 {'Rettet / nye'}
               </Table.HeaderCell>
@@ -616,7 +618,7 @@ export function Endringsarkiv(): ReactElement {
                       </Link>
                     )}
                   </Table.DataCell>
-                  <Table.DataCell>
+                  <Table.DataCell className={styles.enLinje}>
                     <Tag color={merke.farge} size={'small'}>
                       {merke.tekst}
                     </Tag>

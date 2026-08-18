@@ -96,8 +96,13 @@
   white-space: nowrap;
 }
 
-// «Rettet / nye» brakk mellom skråstreken og «nye», så overskriften ble to
-// linjer høy og dro resten av overskriftsraden med seg.
+// Holder korte, faste tekster på én linje.
+//
+// «Rettet / nye» brakk mellom skråstreken og «nye». Merkelappen «Ny erklæring»
+// trengte 91 px i en celle på 87 – fire piksler. Alternativet var å forkorte
+// den til «Ny», men den står rett ved «Nye brudd» og ville vært lett å
+// forveksle. Med nowrap krever kolonnen de fire pikslene, og tabellens
+// auto-layout tar dem fra navnekolonnen, som har rikelig.
 .enLinje {
   white-space: nowrap;
 }
