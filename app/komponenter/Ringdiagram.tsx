@@ -21,7 +21,7 @@ interface RingdiagramProps {
   totalTekst: string;
   totalEtikett: string;
   ariaLabel: string;
-  /** Hva verdiene teller, f.eks. «løsninger». Brukes i opplesningen. */
+  /** Hva verdiene teller, f.eks. «erklæringer». Brukes i opplesningen. */
   enhet: string;
 }
 

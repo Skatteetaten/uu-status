@@ -17,7 +17,7 @@ interface StolpediagramProps {
   stolper: Stolpe[];
   /** Tilgjengelig navn på listen. */
   ariaLabel: string;
-  /** Hva verdien teller, f.eks. «løsninger». Brukes i opplesningen. */
+  /** Hva verdien teller, f.eks. «erklæringer». Brukes i opplesningen. */
   enhet: string;
   /**
    * Vises når det ikke finnes data. Uten den ble diagrammet en tom <ul> under

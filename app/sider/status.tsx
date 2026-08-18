@@ -344,8 +344,8 @@ export function Statusoversikt(): ReactElement {
 
       <div className={styles.ingressrad}>
         <Paragraph>
-          {`Hver løsning er vurdert mot ${ANTALL_KRAV} WCAG-krav. Erklæringene ` +
-            'skal oppdateres minst én gang i året.'}
+          {`Hver erklæring er vurdert mot ${ANTALL_KRAV} WCAG-krav. ` +
+            'Erklæringene skal oppdateres minst én gang i året.'}
         </Paragraph>
         {/* Sekundær: dashbordet er et supplement til tabellen, ikke sidens
             hovedhandling. Med primærstil var det det tyngste elementet over
@@ -398,25 +398,25 @@ export function Statusoversikt(): ReactElement {
                   `De ${toppKrav.length} mest utbredte WCAG-kravene av ` +
                   `${perKrav.size} med registrerte brudd.`
                 }
-                enhet={'løsninger'}
-                tomTekst={'Ingen av løsningene har registrerte brudd.'}
+                enhet={'erklæringer'}
+                tomTekst={'Ingen av erklæringene har registrerte brudd.'}
               />
             </section>
 
             <section aria-labelledby={'fordeling'} className={styles.diagramkort}>
               <Heading as={'h2'} level={4} id={'fordeling'} hasSpacing>
-                {'Fordeling av brudd per løsning'}
+                {'Fordeling av brudd per erklæring'}
               </Heading>
               <Ringdiagram
                 segmenter={fordeling}
                 totalTekst={String(erklaeringer.length)}
-                totalEtikett={'løsninger'}
-                enhet={'løsninger'}
+                totalEtikett={'erklæringer'}
+                enhet={'erklæringer'}
                 // Totalen står som tekst inne i SVG-en, men role="img" gjør
                 // elementet til en blad-node: innholdet eksponeres ikke. Uten
-                // tallet her ville «118 løsninger» aldri blitt lest opp.
+                // tallet her ville «118 erklæringer» aldri blitt lest opp.
                 ariaLabel={
-                  `${erklaeringer.length} løsninger fordelt på antall ` +
+                  `${erklaeringer.length} erklæringer fordelt på antall ` +
                   'WCAG-brudd. Tallene står i tegnforklaringen under. ' +
                   // Fire avrundede prosenter summerer sjelden til 100 – i dag
                   // blir det 99. Hvert tall er riktig, men den som hører dem
