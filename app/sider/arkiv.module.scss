@@ -140,3 +140,9 @@
 .paginering {
   margin-top: 1.5rem;
 }
+
+// Se status.module.scss: DS lar sorteringsknappen bryte mellom etikett og
+// ikon. Selektoren treffer elementtypen, ikke DS sitt hash-klassenavn.
+.sorterbar button {
+  white-space: nowrap;
+}

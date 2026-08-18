@@ -7,6 +7,7 @@ import { UndoSVGpath } from '@skatteetaten/ds-icons';
 import { Pagination } from '@skatteetaten/ds-navigation';
 import { Alert, Tag } from '@skatteetaten/ds-status';
 import { Table } from '@skatteetaten/ds-table';
+import type { SortState } from '@skatteetaten/ds-table';
 import { Heading, Paragraph } from '@skatteetaten/ds-typography';
 
 import { Kravmerke } from '../komponenter/Kravmerke';
@@ -85,6 +86,26 @@ function uuid(url: string): string {
 function visTid(iso: string): string {
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? iso : tidFormat.format(d);
+}
+
+/**
+ * Datoen endringen faktisk skjedde, ikke datoen vi oppdaget den.
+ *
+ * `ts` er tidspunktet nattjobben kjørte. Den lå tidligere i kolonnen, og for
+ * 95 av 266 rader var den feil – median 61 dager på etterskudd, på det meste
+ * 670. Massedagen 2026-04-19 fanget opp endringer gjort helt tilbake i
+ * november 2025.
+ *
+ * `updatedDate` kommer fra erklæringens eget updatedAt hos uutilsynet, og er
+ * det riktige svaret på «når ble dette endret».
+ *
+ * Unntaket er fjerninger: der er updatedDate siste gang erklæringen ble
+ * oppdatert FØR den forsvant, ofte år tilbake. Ingenting ble endret den datoen;
+ * hendelsen er at den ble borte, og det vet vi bare når vi oppdaget det.
+ */
+function endretDato(e: Endring): string {
+  if (erFjernetErklaering(e)) return e.detectedDate || e.ts.slice(0, 10);
+  return e.updatedDate || e.detectedDate || e.ts.slice(0, 10);
 }
 
 function erNyErklaering(e: Endring): boolean {
@@ -175,6 +196,10 @@ export function Endringsarkiv(): ReactElement {
   const [type, setType] = useState<string>(ALLE);
   const [periode, setPeriode] = useState<string>(ALLE);
   const [side, setSide] = useState(1);
+  const [sortState, setSortState] = useState<SortState>({
+    direction: 'descending',
+    sortKey: 'dato',
+  });
   const treffRef = useRef<HTMLDivElement>(null);
   const boksRef = useRef<HTMLDivElement>(null);
   const sokRef = useRef<HTMLInputElement>(null);
@@ -193,7 +218,7 @@ export function Endringsarkiv(): ReactElement {
 
   useEffect(() => {
     setSide(1);
-  }, [sok, type, periode]);
+  }, [sok, type, periode, sortState]);
 
   // Grønt blink på treffteksten når filteret endres, men ikke ved sidelast –
   // da har brukeren ikke gjort noe å kvittere for.
@@ -292,16 +317,28 @@ export function Endringsarkiv(): ReactElement {
         // vise rader med en annen merkelapp enn den man filtrerte på.
         if (type !== ALLE && endringstype(e) !== type) return false;
         if (periode !== ALLE) {
-          const t = new Date(e.ts).getTime();
+          // Samme dato som kolonnen viser. Med e.ts ville «siste 30 dager»
+          // fanget alt vi oppdaget i går, uansett hvor gammel endringen var.
+          const t = new Date(endretDato(e)).getTime();
           if (Number.isNaN(t)) return false;
           if ((naa - t) / 86_400_000 > Number(periode)) return false;
         }
         return true;
       })
-      .sort((a, b) => b.ts.localeCompare(a.ts));
+      .sort((a, b) => {
+        const retning = sortState.direction === 'descending' ? -1 : 1;
+        if (sortState.sortKey === 'navn') {
+          return navnFor(a).localeCompare(navnFor(b), 'nb') * retning;
+        }
+        // Datoene er ISO, så tekstsammenligning gir riktig rekkefølge.
+        // Lik dato brytes på navn, ellers hopper rader om hverandre mellom
+        // rendringer – 171 av 266 rader deler dato med minst én annen.
+        const d = endretDato(a).localeCompare(endretDato(b)) * retning;
+        return d !== 0 ? d : navnFor(a).localeCompare(navnFor(b), 'nb');
+      });
     // navnFor er avledet av navnPerUuid, som allerede er en avhengighet.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endringer, sok, type, periode, navnPerUuid]);
+  }, [endringer, sok, type, periode, navnPerUuid, sortState]);
 
   const paginert = useMemo(
     () => synlige.slice((side - 1) * PER_SIDE, side * PER_SIDE),
@@ -444,7 +481,12 @@ export function Endringsarkiv(): ReactElement {
           {'Ingen endringer med gjeldende filter.'}
         </Alert>
       ) : (
-        <Table caption={'Endringer i tilgjengelighetserklæringene'} hasFullWidth>
+        <Table
+          caption={'Endringer i tilgjengelighetserklæringene'}
+          sortState={sortState}
+          setSortState={setSortState}
+          hasFullWidth
+        >
           <Table.Header>
             <Table.Row>
               {/* Se status.tsx: utvidingskolonnen må ha egen overskriftscelle,
@@ -452,8 +494,22 @@ export function Endringsarkiv(): ReactElement {
               <Table.HeaderCell>
                 <span className={felles.srOnly}>{'Vis detaljer'}</span>
               </Table.HeaderCell>
-              <Table.HeaderCell>{'Oppdaget'}</Table.HeaderCell>
-              <Table.HeaderCell>{'Erklæring'}</Table.HeaderCell>
+              {/* styles.sorterbar holder sorteringsikonet på samme linje som
+                  etiketten. Se status.module.scss. */}
+              <Table.HeaderCell
+                isSortable
+                sortKey={'dato'}
+                className={`${styles.datokolonne} ${styles.sorterbar}`}
+              >
+                {'Dato endret'}
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                isSortable
+                sortKey={'navn'}
+                className={styles.sorterbar}
+              >
+                {'Navn'}
+              </Table.HeaderCell>
               <Table.HeaderCell>{'Endring'}</Table.HeaderCell>
               <Table.HeaderCell alignment={'right'} className={styles.enLinje}>
                 {'Rettet / nye'}
@@ -545,7 +601,7 @@ export function Endringsarkiv(): ReactElement {
                   }
                 >
                   <Table.DataCell className={styles.datokolonne}>
-                    {visTid(e.ts)}
+                    {visTid(endretDato(e))}
                   </Table.DataCell>
                   <Table.DataCell as={'th'} scope={'row'} id={`endring-${i}`}>
                     {/* Lenken ligger på navnet, som på statusfanen: da slipper
