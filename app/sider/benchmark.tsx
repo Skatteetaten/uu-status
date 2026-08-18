@@ -68,7 +68,13 @@ export function Sammenligning(): ReactElement {
     () => (skjulKommunale ? alleRader.filter((r) => !r.erKommunal) : alleRader),
     [alleRader, skjulKommunale]
   );
-  const noekkeltall = useMemo(() => beregnNoekkeltall(rader), [rader]);
+  // alleRader, ikke rader: avkryssingsboksen filtrerer tabellen, ikke
+  // sammenligningen. Med rader endret et klikk på boksen stille tre tall langt
+  // oppe på siden – «2 av 22» ble «2 av 11» – uten at noe varslet om det. For
+  // en skjermleserbruker skjer det helt usynlig, og det er en endring av
+  // innhold utløst av en kontroll uten forvarsel (WCAG 3.2.2). Nøkkeltallene
+  // svarer på «hvordan ligger vi an», og det spørsmålet har ett svar.
+  const noekkeltall = useMemo(() => beregnNoekkeltall(alleRader), [alleRader]);
 
   if (feil) {
     return (
@@ -165,12 +171,15 @@ export function Sammenligning(): ReactElement {
           kursiv – den er laget som en fotnote. En sorteringsforklaring kommer
           for sent der. Derfor et vanlig avsnitt over, som resten av siden.
 
-          Captionen beholder en kort form, ellers ville en skjermleserbruker
-          hørt det samme to ganger: avsnittet i leserekkefølgen, og captionen
-          ved inngangen til tabellen. Tallet følger avkryssingsboksen. */}
+          Uten tall: setningen sier hvordan tabellen er ordnet, og det er sant
+          uansett hva boksen over står på. Et antall her ville endret seg ved
+          avkryssing, og da leser en skjermleserbruker en setning som er ny uten
+          at noe sa fra. Antallet står uansett i tabellen.
+
+          Captionen beholder en kort form, ellers ville den samme setningen
+          kommet to ganger: i leserekkefølgen, og ved inngangen til tabellen. */}
       <Paragraph hasSpacing>
-        {`Tabellen viser ${rader.length} utvalgte virksomheter, sortert fra ` +
-          'lavest til høyest bruddandel.'}
+        {'Virksomhetene er sortert fra lavest bruddandel til høyest.'}
       </Paragraph>
 
       <Table caption={'Bruddandel per virksomhet'} hasFullWidth>
