@@ -156,10 +156,24 @@ export function Sammenligning(): ReactElement {
         </Checkbox>
       </div>
 
-      <Table
-        caption={'Bruddandel per virksomhet, sortert fra lavest til høyest'}
-        hasFullWidth
-      >
+      {/* Rekkefølgen er selve poenget med tabellen, men ingenting sa det.
+          Tabellen har ingen sorteringsknapper, så den som ikke gjetter at
+          radene er rangert, leser den som en vilkårlig liste.
+
+          Teksten sto allerede i caption, men designsystemet skjuler caption som
+          standard, og med showCaption legger det den UNDER tabellen i grå
+          kursiv – den er laget som en fotnote. En sorteringsforklaring kommer
+          for sent der. Derfor et vanlig avsnitt over, som resten av siden.
+
+          Captionen beholder en kort form, ellers ville en skjermleserbruker
+          hørt det samme to ganger: avsnittet i leserekkefølgen, og captionen
+          ved inngangen til tabellen. Tallet følger avkryssingsboksen. */}
+      <Paragraph hasSpacing>
+        {`Tabellen viser ${rader.length} utvalgte virksomheter, sortert fra ` +
+          'lavest til høyest bruddandel.'}
+      </Paragraph>
+
+      <Table caption={'Bruddandel per virksomhet'} hasFullWidth>
         <Table.Header>
           <Table.Row>
             {/* Se status.tsx: utvidingskolonnen må ha egen overskriftscelle,
