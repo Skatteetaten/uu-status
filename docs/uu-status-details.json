@@ -1732,22 +1732,14 @@
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/eb130211-e58f-4677-9a3e-319446e3f898",
     "name": "Søknad om skattekort for utenlandsk arbeidstaker",
-    "codes": [
-      "3.3.3",
-      "4.1.2",
-      "4.1.3"
-    ],
-    "nonConformities": [
-      "3.3.3",
-      "4.1.2",
-      "4.1.3"
-    ],
-    "totalNonConformities": 3,
-    "updatedAt": "2026-08-05",
+    "codes": [],
+    "nonConformities": [],
+    "totalNonConformities": 0,
+    "updatedAt": "2026-08-17",
     "opprettet": "2023-01-19",
     "title": "Tilgjengelighetserklæring for Søknad om skattekort for utenlandsk arbeidstaker | uustatus",
     "domain": "uustatus.no",
-    "samsvarsstatus": "Delvis i samsvar"
+    "samsvarsstatus": "I samsvar"
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/5f92b879-42e9-4f0b-827e-eee292446cc6",
