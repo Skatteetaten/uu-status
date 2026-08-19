@@ -22,6 +22,16 @@
   margin: 0 0 var(--spacing-l);
 }
 
+// Egen rad nederst i filterboksen. grid-column 1/-1 gir den hele bredden
+// uansett hvor mange kolonner auto-fit har laget – som ett vanlig felt ville
+// den fylt en kolonne og stått i flukt med et nedtrekk, som om den var et
+// filtervalg. justify-self holder den i tekstens bredde i stedet for å strekke
+// den over hele raden.
+.tilbakestill {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
 // Samme tonede flate som på statusfanen, se status.module.scss.
 .filtre {
   display: grid;
@@ -37,10 +47,6 @@
   background: var(--palette-graphite-5);
 }
 
-// Ligger utenfor .filtre-boksen, så knappen ikke ser ut som et filtervalg.
-.nullstill {
-  margin: calc(var(--spacing-m) * -1) 0 var(--spacing-l);
-}
 
 // Fokusmarkering når søkeknappen flytter fokus hit. Samme som på statusfanen.
 .treff:focus-visible {

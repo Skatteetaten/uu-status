@@ -36,6 +36,16 @@
   margin: 0 0 var(--spacing-l);
 }
 
+// Egen rad nederst i filterboksen. grid-column 1/-1 gir den hele bredden
+// uansett hvor mange kolonner auto-fit har laget – som ett vanlig felt ville
+// den fylt en kolonne og stått i flukt med et nedtrekk, som om den var et
+// filtervalg. justify-self holder den i tekstens bredde i stedet for å strekke
+// den over hele raden.
+.tilbakestill {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
 // Se arkiv.module.scss for hvorfor alle auto-fit-rutenettene bruker
 // min(…, 100%): uten det kan ikke kolonnen krympe under sin egen ønskede
 // bredde, og innholdet skyves ut av beholderen på smale skjermer.
@@ -85,10 +95,6 @@
   }
 }
 
-// Ligger utenfor .filtre-boksen, så knappen ikke ser ut som et filtervalg.
-.nullstill {
-  margin: calc(var(--spacing-m) * -1) 0 var(--spacing-l);
-}
 
 .tabellinfo {
   display: flex;

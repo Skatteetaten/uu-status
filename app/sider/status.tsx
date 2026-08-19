@@ -5,7 +5,7 @@ import { OpenClose } from '@skatteetaten/ds-collections';
 import { Select, SearchField } from '@skatteetaten/ds-forms';
 import {
   CheckSVGpath,
-  UndoSVGpath,
+  CancelSVGpath,
   WarningSVGpath,
 } from '@skatteetaten/ds-icons';
 import { Pagination } from '@skatteetaten/ds-navigation';
@@ -174,6 +174,9 @@ export function Statusoversikt(): ReactElement {
   const treffRef = useRef<HTMLDivElement>(null);
   const boksRef = useRef<HTMLDivElement>(null);
   const sokRef = useRef<HTMLInputElement>(null);
+  // Kontrollert, fordi bryterteksten må vite om panelet er åpent: den veksler
+  // mellom «Vis filter» og «Skjul filter». Lukket som standard.
+  const [filterApent, setFilterApent] = useState(false);
   const dashboardRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -219,18 +222,23 @@ export function Statusoversikt(): ReactElement {
   }, [sok, bruddgruppe, wcagFilter, periode]);
 
   // Sidestørrelse og sortering er ikke filtre og nullstilles ikke.
-  const harFilter =
-    sok.trim() !== '' ||
-    bruddgruppe !== ALLE ||
-    wcagFilter !== ALLE ||
-    periode !== ALLE;
+  //
+  // Telles, ikke bare ja/nei: antallet står på selve bryteren, så den som har
+  // lukket filterpanelet ser at det ligger noe der. Det var mulig å filtrere,
+  // lukke panelet og siden lure på hvorfor tabellen var kort.
+  const antallAktive =
+    (sok.trim() !== '' ? 1 : 0) +
+    (bruddgruppe !== ALLE ? 1 : 0) +
+    (wcagFilter !== ALLE ? 1 : 0) +
+    (periode !== ALLE ? 1 : 0);
 
   const nullstillFiltrering = (): void => {
     setSok('');
     setBruddgruppe(ALLE);
     setWcagFilter(ALLE);
     setPeriode(ALLE);
-    // Se arkiv.tsx: knappen forsvinner, så fokus går til første filterfelt.
+    // Se arkiv.tsx: knappen forsvinner i det den brukes, så fokus går til
+    // første filterfelt.
     sokRef.current?.focus();
   };
 
@@ -428,8 +436,24 @@ export function Statusoversikt(): ReactElement {
         </div>
       </Modal>
 
-      {/* Filtrene er lukket som standard, etter husstandarden. */}
-      <OpenClose title={'Filtrer'} className={styles.filterbryter}>
+      {/* Mønsteret er designsystemets eksempel på intern arbeidsliste:
+          bryteren sier om panelet er åpent og hvor mange filtre som er aktive,
+          og tilbakestillingsknappen står til høyre på samme rad – også når
+          panelet er lukket. Da kan man rydde opp uten å åpne noe først.
+
+          «1 aktivt» / «2 aktive»: designsystemets eksempel skriver «(1 aktive)»
+          uansett antall. Mønsteret er verdt å følge, skrivefeilen er det ikke. */}
+      <OpenClose
+        title={
+          `${filterApent ? 'Skjul' : 'Vis'} filter` +
+          (antallAktive
+            ? ` (${antallAktive} ${antallAktive === 1 ? 'aktivt' : 'aktive'})`
+            : '')
+        }
+        isExpanded={filterApent}
+        onClick={() => setFilterApent((v) => !v)}
+        className={styles.filterbryter}
+      >
         <div className={styles.filtre}>
           {/* SearchField skjuler etiketten som standard (srOnly). Her står den
               i en rad med tre Select-er som viser sin, så uten dette ville
@@ -488,16 +512,22 @@ export function Statusoversikt(): ReactElement {
               </Select.Option>
             ))}
           </Select>
-        </div>
-        {/* Se arkiv.tsx: vises bare når det er noe å nullstille, og fokus
-            flyttes til treffteksten fordi knappen forsvinner ved klikk. */}
-        {harFilter && (
-          <div className={styles.nullstill}>
-            <InlineButton svgPath={UndoSVGpath} onClick={nullstillFiltrering}>
-              {'Nullstill filtrering'}
+          {/* Nederst i filterboksen, på egen rad. Vises bare når det er noe å
+              tilbakestille – en knapp som alltid står der, men som oftest ikke
+              gjør noe, er bare én kontroll til å tabbe forbi.
+
+              Se nullstillFiltrering for hvorfor fokus må flyttes: knappen
+              forsvinner i det den brukes. */}
+          {antallAktive > 0 && (
+            <InlineButton
+              className={styles.tilbakestill}
+              svgPath={CancelSVGpath}
+              onClick={nullstillFiltrering}
+            >
+              {'Tilbakestill filter'}
             </InlineButton>
-          </div>
-        )}
+          )}
+        </div>
       </OpenClose>
 
       <div className={styles.tabellinfo}>

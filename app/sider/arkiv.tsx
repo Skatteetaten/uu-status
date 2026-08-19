@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import { InlineButton, Link } from '@skatteetaten/ds-buttons';
 import { OpenClose } from '@skatteetaten/ds-collections';
 import { Select, SearchField } from '@skatteetaten/ds-forms';
-import { UndoSVGpath } from '@skatteetaten/ds-icons';
+import { CancelSVGpath } from '@skatteetaten/ds-icons';
 import { Pagination } from '@skatteetaten/ds-navigation';
 import { Alert, Tag } from '@skatteetaten/ds-status';
 import { Table } from '@skatteetaten/ds-table';
@@ -203,6 +203,8 @@ export function Endringsarkiv(): ReactElement {
   const treffRef = useRef<HTMLDivElement>(null);
   const boksRef = useRef<HTMLDivElement>(null);
   const sokRef = useRef<HTMLInputElement>(null);
+  // Kontrollert: bryterteksten veksler mellom «Vis» og «Skjul». Lukket først.
+  const [filterApent, setFilterApent] = useState(false);
 
   useEffect(() => {
     Promise.all([hentEndringer(), hentErklaeringer(), hentRegister()])
@@ -262,7 +264,12 @@ export function Endringsarkiv(): ReactElement {
     return () => window.clearTimeout(timer);
   }, [sok, type, periode]);
 
-  const harFilter = sok.trim() !== '' || type !== ALLE || periode !== ALLE;
+  // Telles, ikke bare ja/nei: antallet står på selve bryteren, så den som har
+  // lukket filterpanelet ser at det ligger noe der.
+  const antallAktive =
+    (sok.trim() !== '' ? 1 : 0) +
+    (type !== ALLE ? 1 : 0) +
+    (periode !== ALLE ? 1 : 0);
 
   const nullstillFiltrering = (): void => {
     setSok('');
@@ -270,6 +277,7 @@ export function Endringsarkiv(): ReactElement {
     setPeriode(ALLE);
     // Knappen forsvinner i det den brukes, så fokus må ta et sted. Første
     // filterfelt: brukeren blir stående i filteret og kan filtrere på nytt.
+    // Knappen ligger i filterboksen, så panelet er alltid åpent her.
     // Resultatet leses uansett opp av live-området, uten at fokus er der.
     sokRef.current?.focus();
   };
@@ -389,8 +397,20 @@ export function Endringsarkiv(): ReactElement {
         <Noekkeltall verdi={nye} tekst={'Med nye brudd'} />
       </div>
 
-      {/* Lukket som standard, som på statusfanen. */}
-      <OpenClose title={'Filtrer'} className={styles.filterbryter}>
+      {/* Se status.tsx for mønsteret: bryteren bærer antallet aktive filtre,
+          og tilbakestillingsknappen står til høyre på samme rad, også når
+          panelet er lukket. */}
+      <OpenClose
+        title={
+          `${filterApent ? 'Skjul' : 'Vis'} filter` +
+          (antallAktive
+            ? ` (${antallAktive} ${antallAktive === 1 ? 'aktivt' : 'aktive'})`
+            : '')
+        }
+        isExpanded={filterApent}
+        onClick={() => setFilterApent((v) => !v)}
+        className={styles.filterbryter}
+      >
         <div className={styles.filtre}>
           {/* Se kommentaren i status.tsx: etiketten må vises for å flukte med
               Select-ene i samme rad, og søkeknappen har ingen filtrering å
@@ -436,16 +456,22 @@ export function Endringsarkiv(): ReactElement {
               </Select.Option>
             ))}
           </Select>
-        </div>
-        {/* Vises bare når det er noe å nullstille. Se nullstillFiltrering for
-            hvorfor fokus må flyttes når knappen forsvinner. */}
-        {harFilter && (
-          <div className={styles.nullstill}>
-            <InlineButton svgPath={UndoSVGpath} onClick={nullstillFiltrering}>
-              {'Nullstill filtrering'}
+          {/* Nederst i filterboksen, på egen rad. Vises bare når det er noe å
+              tilbakestille – en knapp som alltid står der, men som oftest ikke
+              gjør noe, er bare én kontroll til å tabbe forbi.
+
+              Se nullstillFiltrering for hvorfor fokus må flyttes: knappen
+              forsvinner i det den brukes. */}
+          {antallAktive > 0 && (
+            <InlineButton
+              className={styles.tilbakestill}
+              svgPath={CancelSVGpath}
+              onClick={nullstillFiltrering}
+            >
+              {'Tilbakestill filter'}
             </InlineButton>
-          </div>
-        )}
+          )}
+        </div>
       </OpenClose>
 
       {/* aria-live: filtreringen skjer mens man skriver, så treffantallet må
