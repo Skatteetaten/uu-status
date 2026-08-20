@@ -1,6 +1,12 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ReactElement, RefObject } from 'react';
 import { TopBannerExternal } from '@skatteetaten/ds-layout';
+import {
+  ArrowForwardIcon,
+  CompletedIcon,
+  ListAddIcon,
+  TimersandIcon,
+} from '@skatteetaten/ds-icons';
 
 import '@skatteetaten/ds-core-designtokens/index.css';
 
@@ -14,6 +20,7 @@ import { hentEndringer, hentErklaeringer, ANTALL_KRAV } from '../lib/data';
 import { monter } from '../lib/monter';
 import type { Endring, Erklaering } from '../lib/typer';
 
+import felles from '../stiler/felles.module.scss';
 import styles from './infoskjerm.module.scss';
 
 /**
@@ -56,11 +63,54 @@ const HENDELSE_TEKST: Record<Hendelsestype, string> = {
 
 const PANEL_TITTEL: Record<Panel['id'], string> = {
   'flest-brudd': 'Flest brudd nå',
-  'rettet-til-null': 'Ble kvitt alle brudd',
+  'rettet-til-null': 'Rettet alle feil',
   frister: 'Frist for oppdatering',
   'krav-topp': 'Kravene vi bryter oftest',
   'nye-erklaeringer': 'Nye erklæringer',
 };
+
+/**
+ * Ikon etter paneltittelen, for de panelene som har ett.
+ *
+ * «Completed» (fylt sirkel med hake) er designsystemets nærmeste markør for
+ * noe som er i havn – det finnes hverken konfetti eller pokal, og i
+ * forest-grønt leser den som en seier uten å bryte med etatens tone.
+ *
+ * «ListAdd» er en liste med pluss, altså ordrett det underteksten sier: lagt
+ * til i registeret. Denim, samme farge som «Ny erklæring»-merket i
+ * endringslista, så nye erklæringer har én farge på hele skjermen.
+ *
+ * «Timersand» er et timeglass – tid som renner ut, som er nettopp det
+ * fristpanelet teller ned til. Valgt framfor CalendarClock, som er tre ganger
+ * så kompleks i konturen og ville blitt grøtete på 29 piksler. Ochre, samme
+ * familie som «Om N dager»-merkene i panelet.
+ *
+ * Alle tre bruker 100-tonen, så ikonene har lik tyngde ved siden av
+ * overskriftene sine.
+ *
+ * aria-hidden: overskriften sier allerede hva panelet er, så ikonet er pynt.
+ */
+const PANEL_IKON: Partial<
+  Record<Panel['id'], { Ikon: typeof CompletedIcon; farge: string }>
+> = {
+  'rettet-til-null': { Ikon: CompletedIcon, farge: styles.ikonForest },
+  'nye-erklaeringer': { Ikon: ListAddIcon, farge: styles.ikonDenim },
+  frister: { Ikon: TimersandIcon, farge: styles.ikonOchre },
+};
+
+function Panelikon({ id }: { id: Panel['id'] }): ReactElement | null {
+  const oppslag = PANEL_IKON[id];
+  if (!oppslag) return null;
+  const { Ikon, farge } = oppslag;
+  return (
+    <span
+      className={`${styles.paneltittelikon} ${farge}`}
+      aria-hidden={true}
+    >
+      <Ikon size={'large'} />
+    </span>
+  );
+}
 
 /** Én linje under tittelen som forklarer utvalget. Skjermen henger på en
  * vegg – det finnes ingen ⓘ-knapp å trykke på og ingen å spørre. */
@@ -69,7 +119,9 @@ function panelUndertekst(panel: Panel, kpi: Kpi): string {
     case 'flest-brudd':
       return `${kpi.erklaeringer - kpi.utenBrudd} av ${kpi.erklaeringer} erklæringer har registrerte brudd`;
     case 'rettet-til-null':
-      return 'Gikk fra brudd til null de siste 6 månedene';
+      return (
+        'Erklæringer som har rettet alle sine brudd de siste 6 månedene'
+      );
     case 'frister':
       return 'Erklæringer skal oppdateres minst én gang i året';
     case 'krav-topp':
@@ -165,11 +217,21 @@ function Panelinnhold({
         <ul className={styles.gladsak}>
           {panel.rettelser.slice(0, maks).map((r) => (
             <li key={r.navn} className={styles.gladsakKort}>
+              {/* Navnet brytes over inntil to linjer i stedet for å kuttes
+                  med ellipse. To linjer ved siden av tallene rommer 100 tegn,
+                  mot 66 på én – nok til det lengste navnet i lista. */}
               <span className={styles.gladsakNavn}>{r.navn}</span>
+              {/* Pilen er designsystemets ikon, ikke tegnet «→». Glyfen
+                  sitter på skriftens grunnlinje og fløt dårlig mellom to
+                  ulike skriftstørrelser; ikonet sentreres mot tallene.
+
+                  srOnly bærer meningen for opplesning, siden ikonet er
+                  aria-hidden og «3 0» ellers ville blitt lest som to tall. */}
               <span className={styles.gladsakSprang}>
                 <span className={styles.gladsakFoer}>{r.foer}</span>
+                <span className={felles.srOnly}>{' brudd, redusert til '}</span>
                 <span className={styles.gladsakPil} aria-hidden={true}>
-                  {'→'}
+                  <ArrowForwardIcon size={'small'} />
                 </span>
                 <strong className={styles.gladsakNull}>{'0'}</strong>
               </span>
@@ -377,7 +439,10 @@ export function Infoskjerm(): ReactElement {
                 Nederst sto de i veien for siste rad i fulle lister. */}
             <div className={styles.panelhode}>
               <div>
-                <h2 className={styles.paneltittel}>{PANEL_TITTEL[panel.id]}</h2>
+                <h2 className={styles.paneltittel}>
+                  {PANEL_TITTEL[panel.id]}
+                  <Panelikon id={panel.id} />
+                </h2>
                 <p className={styles.panelunder}>{panelUndertekst(panel, kpi)}</p>
               </div>
               {antallPaneler > 1 && !laastPanel && (

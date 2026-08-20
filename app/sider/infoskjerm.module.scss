@@ -230,9 +230,32 @@
 }
 
 .paneltittel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
   margin: 0;
   font-size: 1.7rem;
   font-weight: var(--font-weight-bold);
+}
+
+// Ikonet arver ikke overskriftens farge – Icon setter sin egen. Fargen
+// settes derfor på svg-en, og flex-boksen sentrerer den mot tekstlinjen
+// uavhengig av skriftstørrelse.
+.paneltittelikon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ikonForest svg {
+  fill: var(--palette-forest-100);
+}
+
+.ikonDenim svg {
+  fill: var(--palette-denim-100);
+}
+
+.ikonOchre svg {
+  fill: var(--palette-ochre-100);
 }
 
 .panelunder {
@@ -350,42 +373,73 @@
   list-style: none;
 }
 
+// min-height rommer et navn på to linjer, så alle kort er like høye enten
+// navnet brytes eller ikke. Radmålingen i infoskjerm.tsx regner høyde per rad
+// og forutsetter at de er like – uten dette ville den regnet feil.
+//
+// Polstringen er knappere enn ellers på siden: kortet må holde seg under
+// 94 px for at fire skal få plass på en 1080-skjerm, og navnets to linjer
+// spiser 64 av dem.
 .gladsakKort {
+  // border-box: uten den regnes min-height som innholdshøyde, og polstring
+  // pluss kant kommer i tillegg – kortet ble 113 px der 92 var bestilt.
+  // Designsystemets reset setter det ikke på vilkårlige elementer.
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: var(--spacing-m);
-  padding: var(--spacing-m) var(--spacing-l);
+  min-height: 4.7rem;
+  padding: var(--spacing-s) var(--spacing-l);
   border: 1px solid var(--palette-forest-30);
   border-left: 5px solid var(--palette-forest-100);
   border-radius: 8px;
   background: var(--palette-forest-10);
 }
 
+// Inntil to linjer i stedet for én med ellipse. Tjenestenavnene er lange –
+// «Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og
+// tros- og livssynssamfunn» er 98 tegn og ble kuttet midt i.
+//
+// line-clamp trenger -webkit-box for å virke; egenskapen er standardisert,
+// men prefiksene er fortsatt det som faktisk implementeres i nettleserne.
 .gladsakNavn {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   flex: 1;
   overflow: hidden;
-  font-size: 1.35rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 1.25rem;
+  line-height: 1.25;
 }
 
 // Tallene er poenget i dette panelet, så de får mest vekt av alt på raden.
+//
+// align-items: center, ikke baseline. Med grunnlinje ble de tre delene
+// justert etter skriftens bunnlinje, og siden de har ulik størrelse hang
+// pilen og totallet i utakt. Sentrering gir en rolig, vannrett rad.
 .gladsakSprang {
   display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
+  align-items: center;
+  gap: 0.4rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
+// Utgangspunktet dempes, så blikket lander på nullen.
 .gladsakFoer {
-  font-size: 1.35rem;
+  font-size: 1.5rem;
+  line-height: 1;
   color: var(--palette-graphite-70);
 }
 
 .gladsakPil {
-  font-size: 1.2rem;
-  color: var(--palette-forest-70);
+  display: inline-flex;
+  align-items: center;
+}
+
+.gladsakPil svg {
+  fill: var(--palette-forest-70);
 }
 
 .gladsakNull {
@@ -397,9 +451,9 @@
 
 .gladsakDato {
   min-width: 4.2rem;
+  text-align: right;
   font-size: 1.05rem;
   color: var(--palette-graphite-70);
-  text-align: right;
   white-space: nowrap;
 }
 
@@ -426,10 +480,15 @@
 
 /* ---------- Krav-toppen ---------- */
 
+// Denim i lyseste tone. Kantstreken tar en trinn mørkere denim framfor
+// grå: en grå ramme rundt en blå flate ser ut som to farger som ikke hører
+// sammen. Teksten er graphite-100 og holder 14,4:1 mot denim-10, godt over
+// AA-kravet på 4,5:1.
 .kravkode {
   padding: 0.1rem 0.6rem;
-  border: 1px solid var(--palette-graphite-30);
+  border: 1px solid var(--palette-denim-30);
   border-radius: 4px;
+  background: var(--palette-denim-10);
   font-size: 1.15rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
