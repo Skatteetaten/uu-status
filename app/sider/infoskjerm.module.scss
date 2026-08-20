@@ -199,14 +199,20 @@
 
 /* Tynn linje øverst i panelet som fylles i takt med visningstiden, så man ser
  * at skjermen roterer og når neste bytte kommer. Varigheten MÅ være lik
- * VISNINGSTID_MS i lib/infoskjerm.ts. */
+ * VISNINGSTID_MS i lib/infoskjerm.ts.
+ *
+ * Grå og halvt så tynn som før. Den var denim-70 og 0,28 rem, og en blå strek
+ * i bevegelse trakk blikket bort fra innholdet den skal ledsage – på en skjerm
+ * man ser på i forbifarten er det tallene som skal ha oppmerksomheten.
+ * graphite-30 er synlig mot det hvite panelet uten å konkurrere. Streken er
+ * ren pynt, så det stilles ingen kontrastkrav til den. */
 .fremdrift {
   position: absolute;
   top: 0;
   left: 0;
-  height: 0.28rem;
+  height: 0.14rem;
   width: 100%;
-  background: var(--palette-denim-70);
+  background: var(--palette-graphite-30);
   transform-origin: left;
   animation: fyll 15s linear;
 }
