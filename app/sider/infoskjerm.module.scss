@@ -465,7 +465,8 @@
 }
 
 .hendelsesdato {
-  min-width: 4.2rem;
+  // Ingen min-width lenger: datoen står sist og trenger ikke danne en
+  // kolonne, den skal bare henge ytterst til høyre.
   font-size: 1.02rem;
   color: var(--palette-graphite-70);
   white-space: nowrap;

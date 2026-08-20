@@ -333,20 +333,23 @@ export function Infoskjerm(): ReactElement {
               </p>
             ) : (
               <ul className={styles.strom}>
+                {/* Navnet først: det er det man leter etter når man skanner
+                    lista. Datoen sist, dempet ytterst til høyre – samme plass
+                    som tidsstempler har i e-post- og meldingslister. */}
                 {hendelser.map((h, i) => (
                   <li key={`${h.dato}-${h.navn}-${i}`}>
-                    <span className={styles.hendelsesdato}>
-                      {kortDato(h.dato)}
-                    </span>
+                    <span className={styles.hendelsesnavn}>{h.navn}</span>
                     <span
                       className={`${styles.merke} ${styles[`merke_${h.type}`]}`}
                     >
                       {HENDELSE_TEKST[h.type]}
                     </span>
-                    <span className={styles.hendelsesnavn}>{h.navn}</span>
                     {h.delta && (
                       <span className={styles.hendelsesdelta}>{h.delta}</span>
                     )}
+                    <span className={styles.hendelsesdato}>
+                      {kortDato(h.dato)}
+                    </span>
                   </li>
                 ))}
               </ul>
