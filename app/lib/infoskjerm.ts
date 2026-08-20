@@ -163,9 +163,10 @@ export function byggInnhold(
         b.totalNonConformities - a.totalNonConformities ||
         a.name.localeCompare(b.name, 'nb')
     )
-    // Samme tak som fristlista: 6 rader pluss undertekst fyller panelet på en
-    // 768-skjerm uten at noe klippes.
-    .slice(0, 6)
+    // Taket er et rimelighetstak, ikke en layoutgrense: infoskjerm.tsx måler
+    // hvor mange rader det er plass til og trimmer videre. En høy skjerm får
+    // dermed se flere enn en lav.
+    .slice(0, 8)
     .map((e) => ({ navn: e.name, brudd: e.totalNonConformities }));
   if (stolper.length) {
     paneler.push({ id: 'flest-brudd', stolper });
@@ -192,7 +193,7 @@ export function byggInnhold(
     rettelser.push({ navn: navnFor(e), foer: t.foer, dato: hendelsesdato(e) });
   }
   if (rettelser.length) {
-    paneler.push({ id: 'rettet-til-null', rettelser: rettelser.slice(0, 6) });
+    paneler.push({ id: 'rettet-til-null', rettelser: rettelser.slice(0, 8) });
   }
 
   // Frister: utløpte og de som nærmer seg. Panelet finnes bare når noe faktisk
@@ -201,9 +202,7 @@ export function byggInnhold(
     .map((e) => ({ navn: e.name, dager: dagerTilFrist(e, naa) }))
     .filter((p): p is Fristpost => p.dager !== null && p.dager <= FRIST_VARSEL_DAGER)
     .sort((a, b) => a.dager - b.dager)
-    // 6, ikke 7: med underteksten under paneltittelen klippes rad 7 av
-    // kortkanten på en 1080-skjerm.
-    .slice(0, 6);
+    .slice(0, 8);
   if (frister.length) {
     paneler.push({ id: 'frister', poster: frister });
   }
@@ -238,7 +237,7 @@ export function byggInnhold(
       dato: hendelsesdato(e),
     }))
     .sort((a, b) => b.dato.localeCompare(a.dato))
-    .slice(0, 6);
+    .slice(0, 8);
   if (nye.length) {
     paneler.push({ id: 'nye-erklaeringer', poster: nye });
   }
@@ -249,7 +248,7 @@ export function byggInnhold(
   const hendelser: Hendelse[] = [...endringer]
     .sort((a, b) => hendelsesdato(b).localeCompare(hendelsesdato(a)))
     .filter((e) => dagerSiden(hendelsesdato(e), naa) <= FERSK_DAGER)
-    .slice(0, 8)
+    .slice(0, 12)
     .map((e) => {
       const type = hendelsestype(e);
       // «–» framfor tom celle: kolonnen har fast bredde, og et hull i den ser

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import type { ReactElement } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { ReactElement, RefObject } from 'react';
 import { TopBannerExternal } from '@skatteetaten/ds-layout';
 
 import '@skatteetaten/ds-core-designtokens/index.css';
@@ -79,19 +79,75 @@ function panelUndertekst(panel: Panel, kpi: Kpi): string {
   }
 }
 
-function Panelinnhold({ panel }: { panel: Panel }): ReactElement {
+/**
+ * Hvor mange rader det er plass til i beholderen.
+ *
+ * Antallet sto tidligere som et tall i innholdsreglene, men riktig antall
+ * avhenger av skjermhøyden, ikke av dataene: 7 rader var for mange på 1080,
+ * og 6 var fortsatt for mange på en lavere flate. Her måles høyden på én rad
+ * og deles på plassen som er igjen, så skjermen selv avgjør – og en høy skjerm
+ * får se mer enn en lav.
+ *
+ * Målingen er stabil under trimming: radhøyden er fast, og beholderens høyde
+ * er flex: 1 av panelet. Å fjerne rader endrer derfor ingen av de to
+ * størrelsene, og resultatet kan ikke svinge fram og tilbake.
+ */
+function useRaderSomFaarPlass(
+  ref: RefObject<HTMLDivElement | null>,
+  panelId: string
+): number | null {
+  const [antall, setAntall] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    const boks = ref.current;
+    if (!boks) return;
+
+    const maal = (): void => {
+      const liste = boks.firstElementChild as HTMLElement | null;
+      const rad = liste?.firstElementChild as HTMLElement | null;
+      if (!liste || !rad) return;
+
+      // rowGap er «normal» uten gap satt, og parseFloat gir da NaN.
+      const gap = parseFloat(getComputedStyle(liste).rowGap) || 0;
+      const radHoyde = rad.getBoundingClientRect().height + gap;
+      if (radHoyde <= 0) return;
+
+      // n rader opptar n·h + (n−1)·g, altså n·(h+g) − g.
+      setAntall(Math.max(1, Math.floor((boks.clientHeight + gap) / radHoyde)));
+    };
+
+    maal();
+    // Skjermen kan bytte oppløsning uten omlasting – en infoskjerm settes ofte
+    // opp én gang og står i månedsvis.
+    const obs = new ResizeObserver(maal);
+    obs.observe(boks);
+    return () => obs.disconnect();
+  }, [ref, panelId]);
+
+  return antall;
+}
+
+function Panelinnhold({
+  panel,
+  maks,
+}: {
+  panel: Panel;
+  maks: number;
+}): ReactElement {
   switch (panel.id) {
     case 'flest-brudd': {
-      const maks = panel.stolper[0]?.brudd || 1;
+      // Skalaen tas fra hele lista, ikke det viste utsnittet – vi kutter
+      // nedenfra, så toppverdien er uansett med.
+      const topp = panel.stolper[0]?.brudd || 1;
       return (
         <ol className={styles.stolper}>
-          {panel.stolper.map((s) => (
+          {panel.stolper.slice(0, maks).map((s) => (
             <li key={s.navn}>
               <span className={styles.stolpenavn}>{s.navn}</span>
               <span className={styles.stolpespor}>
                 <span
                   className={styles.stolpefyll}
-                  style={{ width: `${(s.brudd / maks) * 100}%` }}
+                  style={{ width: `${(s.brudd / topp) * 100}%` }}
                 />
               </span>
               <span className={styles.stolpetall}>{s.brudd}</span>
@@ -103,7 +159,7 @@ function Panelinnhold({ panel }: { panel: Panel }): ReactElement {
     case 'rettet-til-null':
       return (
         <ul className={`${styles.rader} ${styles.gladsak}`}>
-          {panel.rettelser.map((r) => (
+          {panel.rettelser.slice(0, maks).map((r) => (
             <li key={r.navn}>
               <span className={styles.radnavn}>{r.navn}</span>
               <span className={styles.raddato}>{kortDato(r.dato)}</span>
@@ -118,7 +174,7 @@ function Panelinnhold({ panel }: { panel: Panel }): ReactElement {
     case 'frister':
       return (
         <ul className={styles.rader}>
-          {panel.poster.map((p) => (
+          {panel.poster.slice(0, maks).map((p) => (
             <li key={p.navn}>
               <span className={styles.radnavn}>{p.navn}</span>
               <span
@@ -139,7 +195,7 @@ function Panelinnhold({ panel }: { panel: Panel }): ReactElement {
     case 'krav-topp':
       return (
         <ol className={styles.rader}>
-          {panel.krav.map((k) => (
+          {panel.krav.slice(0, maks).map((k) => (
             <li key={k.kode}>
               <span className={styles.kravkode}>{k.kode}</span>
               <span className={styles.radnavn}>{k.navn}</span>
@@ -153,7 +209,7 @@ function Panelinnhold({ panel }: { panel: Panel }): ReactElement {
     case 'nye-erklaeringer':
       return (
         <ul className={styles.rader}>
-          {panel.poster.map((p) => (
+          {panel.poster.slice(0, maks).map((p) => (
             <li key={p.navn}>
               <span className={styles.radnavn}>{p.navn}</span>
               <span className={styles.raddato}>{kortDato(p.dato)}</span>
@@ -176,6 +232,8 @@ export function Infoskjerm(): ReactElement {
   const [feil, setFeil] = useState(false);
   const [klokke, setKlokke] = useState(() => new Date());
   const [panelIndeks, setPanelIndeks] = useState(0);
+  const panelBoksRef = useRef<HTMLDivElement>(null);
+  const hendelsesBoksRef = useRef<HTMLDivElement>(null);
 
   // Datagrunnlaget hentes ved oppstart og deretter med faste mellomrom.
   // Skjermen står uten tastatur: feiler en henting beholdes forrige innhold,
@@ -229,6 +287,19 @@ export function Infoskjerm(): ReactElement {
 
   const antallPaneler = innhold?.paneler.length ?? 0;
 
+  // Panelvalget må gjøres før den tidlige returen under: hookene som måler
+  // radplass trenger panelets id, og hooks kan ikke kalles betinget.
+  const laastIndeks =
+    laastPanel && innhold
+      ? innhold.paneler.findIndex((p) => p.id === laastPanel)
+      : -1;
+  const visIndeks =
+    laastIndeks >= 0 ? laastIndeks : antallPaneler ? panelIndeks % antallPaneler : 0;
+  const panel = innhold?.paneler[visIndeks];
+
+  const maksPanelrader = useRaderSomFaarPlass(panelBoksRef, panel?.id ?? '');
+  const maksHendelser = useRaderSomFaarPlass(hendelsesBoksRef, 'hendelser');
+
   useEffect(() => {
     if (antallPaneler < 2 || laastPanel) return;
     const t = window.setInterval(
@@ -238,7 +309,7 @@ export function Infoskjerm(): ReactElement {
     return () => window.clearInterval(t);
   }, [antallPaneler, laastPanel]);
 
-  if (!innhold) {
+  if (!innhold || !panel) {
     return (
       <div className={styles.laster}>
         {feil ? 'Får ikke hentet data – prøver igjen …' : 'Henter data …'}
@@ -247,11 +318,6 @@ export function Infoskjerm(): ReactElement {
   }
 
   const { kpi, paneler, hendelser, sisteNattkjoering } = innhold;
-  const laastIndeks = laastPanel
-    ? paneler.findIndex((p) => p.id === laastPanel)
-    : -1;
-  const visIndeks = laastIndeks >= 0 ? laastIndeks : panelIndeks % paneler.length;
-  const panel = paneler[visIndeks];
 
   return (
     <div className={styles.skjerm}>
@@ -320,8 +386,8 @@ export function Infoskjerm(): ReactElement {
             </div>
             {/* Egen boks rundt innholdet: den tar plassen som er igjen og
                 klipper innenfor seg selv, aldri utenfor panelet. */}
-            <div className={styles.panelinnhold}>
-              <Panelinnhold panel={panel} />
+            <div className={styles.panelinnhold} ref={panelBoksRef}>
+              <Panelinnhold panel={panel} maks={maksPanelrader ?? 99} />
             </div>
           </section>
 
@@ -332,25 +398,27 @@ export function Infoskjerm(): ReactElement {
                 {'Ingen endringer de siste 8 ukene.'}
               </p>
             ) : (
-              <ul className={styles.strom}>
+              <div className={styles.panelinnhold} ref={hendelsesBoksRef}>
                 {/* Navnet først: det er det man leter etter når man skanner
                     lista. Datoen sist, dempet ytterst til høyre – samme plass
                     som tidsstempler har i e-post- og meldingslister. */}
-                {hendelser.map((h, i) => (
-                  <li key={`${h.dato}-${h.navn}-${i}`}>
-                    <span className={styles.hendelsesnavn}>{h.navn}</span>
-                    <span
-                      className={`${styles.merke} ${styles[`merke_${h.type}`]}`}
-                    >
-                      {HENDELSE_TEKST[h.type]}
-                    </span>
-                    <span className={styles.hendelsesdelta}>{h.delta}</span>
-                    <span className={styles.hendelsesdato}>
-                      {kortDato(h.dato)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                <ul className={styles.strom}>
+                  {hendelser.slice(0, maksHendelser ?? 99).map((h, i) => (
+                    <li key={`${h.dato}-${h.navn}-${i}`}>
+                      <span className={styles.hendelsesnavn}>{h.navn}</span>
+                      <span
+                        className={`${styles.merke} ${styles[`merke_${h.type}`]}`}
+                      >
+                        {HENDELSE_TEKST[h.type]}
+                      </span>
+                      <span className={styles.hendelsesdelta}>{h.delta}</span>
+                      <span className={styles.hendelsesdato}>
+                        {kortDato(h.dato)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </section>
         </div>
