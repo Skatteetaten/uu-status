@@ -4,7 +4,6 @@ import { TopBannerExternal } from '@skatteetaten/ds-layout';
 import {
   ArrowForwardIcon,
   CompletedIcon,
-  ListAddIcon,
   TimersandIcon,
 } from '@skatteetaten/ds-icons';
 
@@ -76,16 +75,16 @@ const PANEL_TITTEL: Record<Panel['id'], string> = {
  * noe som er i havn – det finnes hverken konfetti eller pokal, og i
  * forest-grønt leser den som en seier uten å bryte med etatens tone.
  *
- * «ListAdd» er en liste med pluss, altså ordrett det underteksten sier: lagt
- * til i registeret. Denim, samme farge som «Ny erklæring»-merket i
- * endringslista, så nye erklæringer har én farge på hele skjermen.
+ * «Nye erklæringer» står uten ikon. ListAdd ble prøvd – semantisk riktig,
+ * men konturen er tre tynne streker og et pluss, og den blir til grå grøt i
+ * overskriftsstørrelse. Et ikon som ikke leses er verre enn ingen.
  *
  * «Timersand» er et timeglass – tid som renner ut, som er nettopp det
  * fristpanelet teller ned til. Valgt framfor CalendarClock, som er tre ganger
  * så kompleks i konturen og ville blitt grøtete på 29 piksler. Ochre, samme
  * familie som «Om N dager»-merkene i panelet.
  *
- * Alle tre bruker 100-tonen, så ikonene har lik tyngde ved siden av
+ * Begge bruker 100-tonen, så ikonene har lik tyngde ved siden av
  * overskriftene sine.
  *
  * aria-hidden: overskriften sier allerede hva panelet er, så ikonet er pynt.
@@ -94,7 +93,6 @@ const PANEL_IKON: Partial<
   Record<Panel['id'], { Ikon: typeof CompletedIcon; farge: string }>
 > = {
   'rettet-til-null': { Ikon: CompletedIcon, farge: styles.ikonForest },
-  'nye-erklaeringer': { Ikon: ListAddIcon, farge: styles.ikonDenim },
   frister: { Ikon: TimersandIcon, farge: styles.ikonOchre },
 };
 

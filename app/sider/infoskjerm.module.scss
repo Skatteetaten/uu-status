@@ -250,9 +250,6 @@
   fill: var(--palette-forest-100);
 }
 
-.ikonDenim svg {
-  fill: var(--palette-denim-100);
-}
 
 .ikonOchre svg {
   fill: var(--palette-ochre-100);
@@ -355,16 +352,26 @@
 // linje med skillestrek i en stor flate leser som en glipp – et kort med egen
 // bakgrunn og kantstrek holder seg selv oppe også når det står alene.
 //
-// align-content: safe center sentrerer få kort loddrett, så tomrommet
-// fordeles over og under i stedet for å samle seg som et hull under lista.
-// «safe» slår sentreringen av hvis innholdet likevel er høyere enn plassen,
-// så toppen aldri klippes bort – uten den ville første bilde, før
-// radmålingen har trimmet, mistet øverste kort.
+// grid-auto-rows: 1fr deler høyden likt mellom kortene, så panelet alltid er
+// fullt. Sentrering ble prøvd først, men da samlet plassen som ble til overs
+// seg som luft over og under: tre kort på en litt lav skjerm etterlot et hull
+// på nesten et helt kort. Nå vokser kortene i stedet.
 //
-// Én kolonne er også et krav fra radmålingen i infoskjerm.tsx: den regner
-// høyde per rad, og et flerkolonners rutenett ville gitt feil svar.
+// Dette gir ingen svingning sammen med radmålingen i infoskjerm.tsx. Første
+// tegning har alle kortene på min-height, som er høyere enn plassen, så
+// målingen teller hvor mange som får plass ved minstehøyden. Etterpå strekker
+// nøyaktig så mange seg til å fylle – og en ny måling gir samme tall, fordi
+// n kort som deler høyden alltid er n kort som får plass.
+//
+// safe center gjelder fortsatt for tilfellet der kortene ikke rekker å bli
+// trimmet ennå: «safe» slår sentreringen av når innholdet er høyere enn
+// plassen, så toppen aldri klippes bort.
+//
+// Én kolonne er et krav fra radmålingen: den regner høyde per rad, og et
+// flerkolonners rutenett ville gitt feil svar.
 .gladsak {
   display: grid;
+  grid-auto-rows: 1fr;
   align-content: safe center;
   gap: var(--spacing-s);
   height: 100%;
