@@ -407,14 +407,22 @@
 
 /* ---------- Rotasjonsprikker ---------- */
 
-// I normal flyt, ikke absolutt: en egen rad nederst kan per definisjon ikke
-// kollidere med innholdet over.
+// Prikkene deler rad med tittelen. Fortsatt normal flyt, ikke absolutt – de
+// har sin egen plass i hjørnet og kan ikke kollidere med noe.
+// align-items: center mot tittellinjen, så de sitter midt på dens høyde.
+.panelhode {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-m);
+}
+
 .prikker {
   display: flex;
-  justify-content: flex-end;
   flex: none;
   gap: 0.55rem;
-  padding-top: var(--spacing-s);
+  // I flukt med midten av tittelteksten (1,7 rem høy linje, 0,6 rem prikk).
+  margin-top: 0.55rem;
 }
 
 .prikk,
