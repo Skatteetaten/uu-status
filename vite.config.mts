@@ -118,6 +118,9 @@ export default defineConfig({
         statusOmdirigering: resolve(rootDir, 'app/uu-status.html'),
         arkiv: resolve(rootDir, 'app/uu-arkiv.html'),
         benchmark: resolve(rootDir, 'app/benchmark.html'),
+        // Ulenket kioskvisning for infoskjermene i etaten. Lenkes ikke fra
+        // fanene – adressen deles direkte med dem som rigger skjermene.
+        infoskjerm: resolve(rootDir, 'app/infoskjerm.html'),
       },
     },
   },

@@ -1,0 +1,503 @@
+/**
+ * Infoskjermen skalerer med rot-skriftstørrelsen: alt under er satt i rem, så
+ * én clamp bestemmer hele skjermens størrelse. 1,02vw gir ~19,6px på en
+ * 1920-skjerm og vokser pent på 4K; taket hindrer at en ultrabred skjerm
+ * blåser opp typografien mer enn lesbarheten trenger.
+ */
+:global(html) {
+  font-size: clamp(11px, 1.02vw, 24px);
+}
+
+:global(body) {
+  margin: 0;
+  overflow: hidden;
+  background: var(--palette-graphite-5);
+}
+
+/* Se Sideramme.module.scss: språkvelgeren i toppbanneret kan ikke slås av
+ * med prop, og på en skjerm uten mus er den bare støy. */
+:global([class*='TopBannerLangPicker-module_container']) {
+  display: none;
+}
+
+.skjerm {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.laster {
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+  font-size: 1.8rem;
+  color: var(--palette-graphite-70);
+}
+
+.topp {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-l);
+  padding: var(--spacing-m) 3rem 0;
+}
+
+.tittel {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+}
+
+.undertittel {
+  margin: 0.35rem 0 0;
+  font-size: 1.15rem;
+  color: var(--palette-graphite-70);
+}
+
+.klokkeblokk {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.klokke {
+  font-size: 2.6rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.dato {
+  font-size: 1.15rem;
+  color: var(--palette-graphite-70);
+}
+
+// Norske ukedager skrives med liten forbokstav; øverst på en skjerm ser
+// «onsdag 20. august» likevel ut som en glipp. Stor forbokstavvisning er
+// ren presentasjon, så den ligger her og ikke i formatteringen.
+.dato::first-letter {
+  text-transform: uppercase;
+}
+
+.hoved {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-l);
+  padding: var(--spacing-l) 3rem;
+}
+
+/* Samme kortspråk som Noekkeltall-komponenten: strek i mørkeste tone,
+ * bakgrunn i lyseste. Kortene er bygget på nytt her fordi tallene skal være
+ * vesentlig større enn på nettsiden – komponentens størrelser er satt for
+ * lesing på armlengdes avstand, ikke tre meter. */
+.noekkeltall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-l);
+}
+
+.kort {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-m) var(--spacing-l);
+  border: 1px solid var(--palette-graphite-10);
+  border-left: 6px solid;
+  border-radius: 8px;
+}
+
+.denim {
+  border-left-color: var(--palette-denim-100);
+  background: var(--palette-denim-10);
+}
+
+.burgundy {
+  border-left-color: var(--palette-burgundy-100);
+  background: var(--palette-burgundy-10);
+}
+
+.forest {
+  border-left-color: var(--palette-forest-100);
+  background: var(--palette-forest-10);
+}
+
+.ochre {
+  border-left-color: var(--palette-ochre-100);
+  background: var(--palette-ochre-10);
+}
+
+.kortetikett {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.kortverdi {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+.innhold {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-l);
+}
+
+.panel,
+.hendelser {
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-l) var(--spacing-xl);
+  border: 1px solid var(--palette-graphite-10);
+  border-radius: 8px;
+  background: var(--palette-graphite-0);
+}
+
+.panel {
+  flex: 1.55;
+  // Plass til rotasjonsprikkene: uten den kolliderer siste rad i en full
+  // liste med prikkene nede til høyre.
+  padding-bottom: calc(var(--spacing-l) + 1.2rem);
+  animation: tonInn 400ms ease-out;
+}
+
+.hendelser {
+  flex: 1;
+}
+
+@keyframes tonInn {
+  from {
+    opacity: 0;
+    transform: translateY(0.3rem);
+  }
+}
+
+/* Tynn linje øverst i panelet som fylles i takt med visningstiden, så man ser
+ * at skjermen roterer og når neste bytte kommer. Varigheten MÅ være lik
+ * VISNINGSTID_MS i lib/infoskjerm.ts. */
+.fremdrift {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0.28rem;
+  width: 100%;
+  background: var(--palette-denim-70);
+  transform-origin: left;
+  animation: fyll 15s linear;
+}
+
+@keyframes fyll {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+  .fremdrift {
+    display: none;
+  }
+}
+
+.paneltittel {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.panelunder {
+  margin: 0.2rem 0 var(--spacing-l);
+  font-size: 1.1rem;
+  color: var(--palette-graphite-70);
+}
+
+/* ---------- Flest brudd ---------- */
+
+.stolper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stolper li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) 1.3fr auto;
+  align-items: center;
+  gap: var(--spacing-m);
+}
+
+.stolpenavn {
+  overflow: hidden;
+  font-size: 1.3rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stolpespor {
+  height: 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--palette-burgundy-10);
+}
+
+.stolpefyll {
+  display: block;
+  height: 100%;
+  border-radius: 0.75rem;
+  background: var(--palette-burgundy-70);
+}
+
+.stolpetall {
+  min-width: 2ch;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Fellesform for radlister ---------- */
+
+.rader {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rader li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-m);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--palette-graphite-10);
+}
+
+.rader li:last-child {
+  border-bottom: 0;
+}
+
+.radnavn {
+  flex: 1;
+  overflow: hidden;
+  font-size: 1.3rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.raddato {
+  font-size: 1.05rem;
+  color: var(--palette-graphite-70);
+  white-space: nowrap;
+}
+
+/* ---------- Ble kvitt alle brudd ---------- */
+
+// Gladsaken har sjelden mer enn et par rader, og én tynn linje drukner i et
+// stort panel. Større tekst og luftigere rader lar den lille listen bære
+// panelet alene.
+.gladsak .radnavn {
+  font-size: 1.6rem;
+}
+
+.gladsak li {
+  padding: 1.1rem 0;
+}
+
+.nullsprang {
+  font-size: 1.4rem;
+  color: var(--palette-graphite-70);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nullsprang strong {
+  font-size: 1.6rem;
+  color: var(--palette-forest-100);
+}
+
+/* ---------- Frister ---------- */
+
+.fristUtloept,
+.fristSnart {
+  padding: 0.15rem 0.9rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fristUtloept {
+  background: var(--palette-burgundy-100);
+  color: var(--palette-graphite-0);
+}
+
+.fristSnart {
+  border: 1px solid var(--palette-ochre-70);
+  background: var(--palette-ochre-10);
+}
+
+/* ---------- Krav-toppen ---------- */
+
+.kravkode {
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--palette-graphite-30);
+  border-radius: 4px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kravtall {
+  font-size: 1.15rem;
+  color: var(--palette-graphite-70);
+  white-space: nowrap;
+}
+
+/* ---------- Nye erklæringer ---------- */
+
+.nyUtenBrudd,
+.nyMedBrudd {
+  padding: 0.15rem 0.9rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nyUtenBrudd {
+  border: 1px solid var(--palette-forest-70);
+  background: var(--palette-forest-10);
+}
+
+.nyMedBrudd {
+  border: 1px solid var(--palette-burgundy-70);
+  background: var(--palette-burgundy-10);
+}
+
+/* ---------- Rotasjonsprikker ---------- */
+
+.prikker {
+  position: absolute;
+  right: var(--spacing-xl);
+  bottom: var(--spacing-l);
+  display: flex;
+  gap: 0.55rem;
+}
+
+.prikk,
+.prikkAktiv {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--palette-graphite-30);
+}
+
+.prikkAktiv {
+  background: var(--palette-denim-100);
+}
+
+/* ---------- Siste endringer ---------- */
+
+.stille {
+  font-size: 1.3rem;
+  color: var(--palette-graphite-70);
+}
+
+.strom {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.strom li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--palette-graphite-10);
+}
+
+.strom li:last-child {
+  border-bottom: 0;
+}
+
+.hendelsesdato {
+  min-width: 4.2rem;
+  font-size: 1.02rem;
+  color: var(--palette-graphite-70);
+  white-space: nowrap;
+}
+
+.hendelsesnavn {
+  flex: 1;
+  overflow: hidden;
+  font-size: 1.18rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hendelsesdelta {
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Merkelappene bruker arkivfanens fargebetydning: denim ny, forest rettet,
+ * burgundy nye brudd, ochre endret, graphite resten. */
+.merke {
+  padding: 0.08rem 0.6rem;
+  border: 1px solid var(--palette-graphite-30);
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--palette-graphite-5);
+}
+
+.merke_ny-erklaering {
+  border-color: var(--palette-denim-70);
+  background: var(--palette-denim-10);
+}
+
+.merke_brudd-rettet {
+  border-color: var(--palette-forest-70);
+  background: var(--palette-forest-10);
+}
+
+.merke_nye-brudd {
+  border-color: var(--palette-burgundy-70);
+  background: var(--palette-burgundy-10);
+}
+
+.merke_endret {
+  border-color: var(--palette-ochre-70);
+  background: var(--palette-ochre-10);
+}
+
+.bunn {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-l);
+  padding: 0 3rem var(--spacing-m);
+  font-size: 1rem;
+  color: var(--palette-graphite-70);
+}
