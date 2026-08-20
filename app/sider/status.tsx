@@ -167,9 +167,12 @@ export function Statusoversikt(): ReactElement {
   const [periode, setPeriode] = useState<string>(ALLE);
   const [sidestoerrelse, setSidestoerrelse] = useState<string>('25');
   const [side, setSide] = useState(1);
+  // Flest brudd først. Siden står på en infoskjerm på kontoret og leses i
+  // forbifarten, så den skal åpne på det som trenger arbeid – ikke på
+  // alfabetet, som ikke sier noe om tilstanden.
   const [sortState, setSortState] = useState<SortState>({
-    direction: 'ascending',
-    sortKey: 'navn',
+    direction: 'descending',
+    sortKey: 'brudd',
   });
   const treffRef = useRef<HTMLDivElement>(null);
   const boksRef = useRef<HTMLDivElement>(null);
@@ -263,17 +266,34 @@ export function Statusoversikt(): ReactElement {
     });
 
     const retning = sortState.direction === 'descending' ? -1 : 1;
+    // Likhet brytes på navn, som på arkivfanen. 116 av 119 erklæringer deler
+    // bruddtall med minst én annen – 58 av dem står på null – så uten dette
+    // følger rekkefølgen innad i gruppene datasettets egen, og den flytter seg
+    // mellom nattkjøringene. På en infoskjerm som leses hver dag blir det
+    // daglig omrokkering uten at noe faktisk har endret seg.
+    //
+    // Navnet brytes alltid stigende, ikke ganget med retning: snur man
+    // sorteringen, er det hovedkolonnen som skal snu, ikke alfabetet i
+    // gruppene.
+    const påNavn = (a: Erklaering, b: Erklaering): number =>
+      a.name.localeCompare(b.name, 'nb');
+
     return [...filtrert].sort((a, b) => {
+      let d: number;
       switch (sortState.sortKey) {
         case 'brudd':
-          return (a.totalNonConformities - b.totalNonConformities) * retning;
+          d = (a.totalNonConformities - b.totalNonConformities) * retning;
+          break;
         case 'oppdatert':
-          return a.updatedAt.localeCompare(b.updatedAt) * retning;
+          d = a.updatedAt.localeCompare(b.updatedAt) * retning;
+          break;
         case 'opprettet':
-          return a.opprettet.localeCompare(b.opprettet) * retning;
+          d = a.opprettet.localeCompare(b.opprettet) * retning;
+          break;
         default:
-          return a.name.localeCompare(b.name, 'nb') * retning;
+          return påNavn(a, b) * retning;
       }
+      return d !== 0 ? d : påNavn(a, b);
     });
   }, [erklaeringer, sok, bruddgruppe, wcagFilter, periode, sortState]);
 
