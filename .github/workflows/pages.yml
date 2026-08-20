@@ -48,8 +48,17 @@ jobs:
 
     steps:
       # Se uu-status.yml: pinnet til commit-SHA, ikke tagg. Tagger kan flyttes.
+      #
+      # ref: main er nødvendig, ikke pynt. Uten den sjekker actions/checkout ut
+      # github.sha – commiten som utløste kjøringen. Når uu-status.yml kaller
+      # denne workflowen, er det commiten fra FØR nattens datacommit, og siden
+      # ble bygget med gårsdagens data. Den lå dermed permanent ett døgn bak
+      # repoet: 20. august publiserte vi 118 erklæringer mens repoet hadde 119.
+      # commit-jobben har allerede pushet når vi kommer hit, så main er fersk.
       - name: Sjekk ut repo
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
 
       - name: Sett opp Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
