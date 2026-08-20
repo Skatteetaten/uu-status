@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ReactElement, RefObject } from 'react';
+import type { CSSProperties, ReactElement, RefObject } from 'react';
 import { TopBannerExternal } from '@skatteetaten/ds-layout';
 import {
   ArrowForwardIcon,
@@ -177,12 +177,107 @@ function useRaderSomFaarPlass(
   return antall;
 }
 
+/**
+ * Oppsettet for gladsakpanelet: hvor mange kort, og hvor mange linjer navnet
+ * får.
+ *
+ * Den generelle radmålingen svarer på «hvor mange får plass ved komfortabel
+ * høyde», og på en lav skjerm ble svaret to – med to kort strukket til å fylle
+ * panelet og masse luft inni. Panelet skal i stedet garantere fire når det
+ * finnes fire, og la kortene krympe.
+ *
+ * Antallet regnes derfor ut fra en KONSTANT komforthøyde, ikke fra kortenes
+ * målte høyde. Det er avgjørende: med grid-auto-rows: 1fr fyller n kort alltid
+ * panelet nøyaktig, så en måling av de tegnede kortene ville bekreftet et
+ * hvilket som helst n og aldri funnet et bedre.
+ *
+ * Navnelinjene faller ut av den samme regnestykket. Blir kortene lave, er det
+ * ikke plass til to linjer, og da er én linje med ellipse bedre enn en andre
+ * linje som klippes på midten.
+ */
+const GLADSAK_MINST = 4;
+/** Komfortabel korthøyde: to navnelinjer pluss luft. Se .gladsakKort. */
+const GLADSAK_KOMFORT_REM = 4.7;
+/** font-size × line-height for .gladsakNavn. */
+const GLADSAK_LINJE_REM = 1.25 * 1.25;
+/** Loddrett polstring pluss kantlinjer på .gladsakKort. */
+const GLADSAK_RAMME_REM = 1.1;
+/**
+ * Absolutt minste korthøyde: én navnelinje pluss den knappe polstringen i
+ * .gladsakKompakt. Garantien om fire kort har en fysisk grense – uten dette
+ * gulvet ble kortene 24 px på en 460 px høy flate, og innholdet rant ut av
+ * panelet.
+ */
+const GLADSAK_GULV_REM = 2.4;
+
+interface Gladsakoppsett {
+  antall: number;
+  linjer: number;
+}
+
+function useGladsakOppsett(
+  ref: RefObject<HTMLDivElement | null>,
+  tilgjengelig: number
+): Gladsakoppsett {
+  const [oppsett, setOppsett] = useState<Gladsakoppsett>({
+    antall: GLADSAK_MINST,
+    linjer: 2,
+  });
+
+  useLayoutEffect(() => {
+    const boks = ref.current;
+    if (!boks) return;
+
+    const maal = (): void => {
+      const rot = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      );
+      const hoyde = boks.clientHeight;
+      const liste = boks.firstElementChild as HTMLElement | null;
+      const gap = liste ? parseFloat(getComputedStyle(liste).rowGap) || 0 : 0;
+      if (hoyde <= 0 || rot <= 0) return;
+
+      const komfort = GLADSAK_KOMFORT_REM * rot;
+      const passer = Math.floor((hoyde + gap) / (komfort + gap));
+      // Så mange som overhodet får plass uten at innholdet renner ut.
+      const tak = Math.max(
+        1,
+        Math.floor((hoyde + gap) / (GLADSAK_GULV_REM * rot + gap))
+      );
+      const antall = Math.max(
+        1,
+        Math.min(tilgjengelig, tak, Math.max(GLADSAK_MINST, passer))
+      );
+
+      const kortHoyde = (hoyde - (antall - 1) * gap) / antall;
+      const innhold = kortHoyde - GLADSAK_RAMME_REM * rot;
+      const linjer = Math.max(
+        1,
+        Math.min(2, Math.floor(innhold / (GLADSAK_LINJE_REM * rot)))
+      );
+
+      setOppsett((f) =>
+        f.antall === antall && f.linjer === linjer ? f : { antall, linjer }
+      );
+    };
+
+    maal();
+    const obs = new ResizeObserver(maal);
+    obs.observe(boks);
+    return () => obs.disconnect();
+  }, [ref, tilgjengelig]);
+
+  return oppsett;
+}
+
 function Panelinnhold({
   panel,
   maks,
+  gladsak,
 }: {
   panel: Panel;
   maks: number;
+  gladsak: Gladsakoppsett;
 }): ReactElement {
   switch (panel.id) {
     case 'flest-brudd': {
@@ -212,9 +307,17 @@ function Panelinnhold({
       // flate holder seg selv oppe, og lista sentreres loddrett når den er
       // kort, så tomrommet fordeles i stedet for å samle seg under.
       return (
-        <ul className={styles.gladsak}>
-          {panel.rettelser.slice(0, maks).map((r) => (
-            <li key={r.navn} className={styles.gladsakKort}>
+        <ul
+          className={styles.gladsak}
+          style={{ '--gladsak-linjer': gladsak.linjer } as CSSProperties}
+        >
+          {panel.rettelser.slice(0, gladsak.antall).map((r) => (
+            <li
+              key={r.navn}
+              className={`${styles.gladsakKort} ${
+                gladsak.linjer < 2 ? styles.gladsakKompakt : ''
+              }`}
+            >
               {/* Navnet brytes over inntil to linjer i stedet for å kuttes
                   med ellipse. To linjer ved siden av tallene rommer 100 tegn,
                   mot 66 på én – nok til det lengste navnet i lista. */}
@@ -365,6 +468,12 @@ export function Infoskjerm(): ReactElement {
   const panel = innhold?.paneler[visIndeks];
 
   const maksPanelrader = useRaderSomFaarPlass(panelBoksRef, panel?.id ?? '');
+  // Gladsakpanelet har sin egen regel, se useGladsakOppsett: det garanterer
+  // fire kort og lar dem krympe, framfor å vise færre store.
+  const gladsakOppsett = useGladsakOppsett(
+    panelBoksRef,
+    panel?.id === 'rettet-til-null' ? panel.rettelser.length : 0
+  );
   const maksHendelser = useRaderSomFaarPlass(hendelsesBoksRef, 'hendelser');
 
   useEffect(() => {
@@ -457,7 +566,11 @@ export function Infoskjerm(): ReactElement {
             {/* Egen boks rundt innholdet: den tar plassen som er igjen og
                 klipper innenfor seg selv, aldri utenfor panelet. */}
             <div className={styles.panelinnhold} ref={panelBoksRef}>
-              <Panelinnhold panel={panel} maks={maksPanelrader ?? 99} />
+              <Panelinnhold
+                panel={panel}
+                maks={maksPanelrader ?? 99}
+                gladsak={gladsakOppsett}
+              />
             </div>
           </section>
 

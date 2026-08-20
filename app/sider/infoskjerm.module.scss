@@ -380,22 +380,18 @@
   list-style: none;
 }
 
-// min-height rommer et navn på to linjer, så alle kort er like høye enten
-// navnet brytes eller ikke. Radmålingen i infoskjerm.tsx regner høyde per rad
-// og forutsetter at de er like – uten dette ville den regnet feil.
+// Ingen min-height. Høyden kommer fra grid-auto-rows: 1fr, og useGladsakOppsett
+// har allerede regnet ut hvor mange kort det er plass til – en minstehøyde her
+// ville bare tvunget fram overflyt når panelet garanterer fire på en lav skjerm.
 //
-// Polstringen er knappere enn ellers på siden: kortet må holde seg under
-// 94 px for at fire skal få plass på en 1080-skjerm, og navnets to linjer
-// spiser 64 av dem.
+// border-box fordi kortet har både polstring og kant: uten den legges de
+// utenpå enhver høyde vi setter. Designsystemets reset setter den ikke på
+// vilkårlige elementer.
 .gladsakKort {
-  // border-box: uten den regnes min-height som innholdshøyde, og polstring
-  // pluss kant kommer i tillegg – kortet ble 113 px der 92 var bestilt.
-  // Designsystemets reset setter det ikke på vilkårlige elementer.
   box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: var(--spacing-m);
-  min-height: 4.7rem;
   padding: var(--spacing-s) var(--spacing-l);
   border: 1px solid var(--palette-forest-30);
   border-left: 5px solid var(--palette-forest-100);
@@ -407,17 +403,35 @@
 // «Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og
 // tros- og livssynssamfunn» er 98 tegn og ble kuttet midt i.
 //
+// Antall linjer settes av useGladsakOppsett, ikke her: er kortene lave, er det
+// ikke plass til to, og da er én linje med ellipse bedre enn en andre linje
+// som klippes på midten.
+//
 // line-clamp trenger -webkit-box for å virke; egenskapen er standardisert,
 // men prefiksene er fortsatt det som faktisk implementeres i nettleserne.
 .gladsakNavn {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: var(--gladsak-linjer, 2);
+  line-clamp: var(--gladsak-linjer, 2);
   flex: 1;
   overflow: hidden;
   font-size: 1.25rem;
   line-height: 1.25;
+}
+
+// Lave kort: tallet må ned i størrelse, ellers er det høyere enn kortet det
+// står i. Nullen beholder vekt og farge, så den leser fortsatt som poenget.
+.gladsakKompakt {
+  padding: var(--spacing-xs) var(--spacing-l);
+}
+
+.gladsakKompakt .gladsakNull {
+  font-size: 1.5rem;
+}
+
+.gladsakKompakt .gladsakFoer {
+  font-size: 1.25rem;
 }
 
 // Tallene er poenget i dette panelet, så de får mest vekt av alt på raden.
