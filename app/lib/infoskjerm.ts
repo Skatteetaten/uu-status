@@ -252,14 +252,20 @@ export function byggInnhold(
     .slice(0, 8)
     .map((e) => {
       const type = hendelsestype(e);
-      let delta = '';
+      // «–» framfor tom celle: kolonnen har fast bredde, og et hull i den ser
+      // ut som manglende data heller enn som «ikke aktuelt». Gjelder fjernede
+      // erklæringer og rene oppdateringer, som ikke har noe bruddtall å vise.
+      let delta = '–';
       if (type === 'brudd-rettet') delta = `−${e.removed.length} brudd`;
       else if (type === 'nye-brudd') delta = `+${e.added.length} brudd`;
-      else if (type === 'endret')
-        delta = `+${e.added.length} / −${e.removed.length} brudd`;
-      else if (type === 'ny-erklaering') {
+      else if (type === 'endret') {
+        // Uten «brudd»: «+4 / −2 brudd» er den bredeste teksten i kolonnen og
+        // ville krevd 7 rem, som er nesten to rem stjålet fra navnet i hver
+        // eneste rad. Merkelappen «Endret» sier allerede hva tallene gjelder.
+        delta = `+${e.added.length} / −${e.removed.length}`;
+      } else if (type === 'ny-erklaering') {
         const t = foerEtter(e);
-        delta = t ? `${t.etter} brudd` : '';
+        delta = t ? `${t.etter} brudd` : '–';
       }
       return { dato: hendelsesdato(e), navn: navnFor(e), type, delta };
     });

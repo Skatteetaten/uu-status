@@ -344,9 +344,7 @@ export function Infoskjerm(): ReactElement {
                     >
                       {HENDELSE_TEKST[h.type]}
                     </span>
-                    {h.delta && (
-                      <span className={styles.hendelsesdelta}>{h.delta}</span>
-                    )}
+                    <span className={styles.hendelsesdelta}>{h.delta}</span>
                     <span className={styles.hendelsesdato}>
                       {kortDato(h.dato)}
                     </span>

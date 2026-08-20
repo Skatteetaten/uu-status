@@ -167,10 +167,13 @@
   background: var(--palette-graphite-0);
 }
 
+// 1,4 mot 1: endringslista har fire kolonner med faste bredder, og navnet
+// fikk 13,5 rem der «Statens innkrevingssentral» trenger 13,8. Hovedpanelet
+// tåler å gi fra seg litt etter at stolpekolonnene ble vektet om.
 .panel {
   display: flex;
   flex-direction: column;
-  flex: 1.55;
+  flex: 1.4;
   animation: tonInn 400ms ease-out;
 }
 
@@ -249,9 +252,12 @@
   list-style: none;
 }
 
+// Navnet foran sporet i vektfordelingen: med 1,1 mot 1,3 fikk navnet 21,3 rem
+// og trengte 26,6, mens sporet hadde 25,1 rem det ikke brukte til noe – en
+// stolpe leses like godt på 18 rem. Nå beskjæres ingen av navnene.
 .stolper li {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) 1.3fr auto;
+  grid-template-columns: minmax(0, 1.55fr) 1fr auto;
   align-items: center;
   gap: var(--spacing-m);
 }
@@ -452,8 +458,21 @@
   list-style: none;
 }
 
+// Rutenett, ikke fleks: i en fleksrad legges hver rad ut for seg, så
+// merkelapp, bruddtall og dato havnet på ulik x fra rad til rad – lista så
+// rotete ut selv om hver enkelt rad var riktig. Med grid deler radene kolonner.
+//
+// Faste bredder framfor auto: auto-kolonner måles på radene som vises akkurat
+// nå, så bredden ville hoppet når en «Endret»-rad kom eller gikk. Verdiene er
+// målt for verste tilfelle, ikke for dagens innhold:
+//   merke  7,5 rem  – «Ny erklæring» er 7,27
+//   brudd  5,6 rem  – «+14 brudd», høyeste tall i loggen
+//   dato   4,2 rem  – «12. mars», bredeste korte datoform
+// Navnet får resten via minmax(0, 1fr); minmax med 0 er nødvendig for at
+// text-overflow skal virke – ellers nekter kolonnen å bli smalere enn teksten.
 .strom li {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7.5rem 5.6rem 4.2rem;
   align-items: center;
   gap: var(--spacing-s);
   padding: 0.62rem 0;
@@ -465,10 +484,9 @@
 }
 
 .hendelsesdato {
-  // Ingen min-width lenger: datoen står sist og trenger ikke danne en
-  // kolonne, den skal bare henge ytterst til høyre.
   font-size: 1.02rem;
   color: var(--palette-graphite-70);
+  text-align: right;
   white-space: nowrap;
 }
 
@@ -483,18 +501,22 @@
 .hendelsesdelta {
   font-size: 1.1rem;
   font-weight: 600;
+  text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
 /* Merkelappene bruker arkivfanens fargebetydning: denim ny, forest rettet,
  * burgundy nye brudd, ochre endret, graphite resten. */
+// Fyller hele kolonnen med sentrert tekst. Venstrestilte piller i en fast
+// kolonne gir en ujevn høyrekant – like brede piller leser som én kolonne.
 .merke {
   padding: 0.08rem 0.6rem;
   border: 1px solid var(--palette-graphite-30);
   border-radius: 999px;
   font-size: 0.98rem;
   font-weight: 600;
+  text-align: center;
   white-space: nowrap;
   background: var(--palette-graphite-5);
 }
