@@ -1,11 +1,18 @@
 /**
  * Infoskjermen skalerer med rot-skriftstørrelsen: alt under er satt i rem, så
- * én clamp bestemmer hele skjermens størrelse. 1,02vw gir ~19,6px på en
+ * ett uttrykk bestemmer hele skjermens størrelse. 1,02vw gir ~19,6px på en
  * 1920-skjerm og vokser pent på 4K; taket hindrer at en ultrabred skjerm
  * blåser opp typografien mer enn lesbarheten trenger.
+ *
+ * min() mot 1,85vh: skjermen er tegnet for 16:9, og med ren vw-skalering
+ * sprenger innholdet høyden i et vindu som er lavere enn det – et
+ * nettleservindu med bokmerkelinje og oppgavelinje er typisk 1,9:1. Den
+ * knappeste dimensjonen får bestemme. På ekte 16:9 velger min() fortsatt
+ * vw-leddet (1080 × 1,85 % = 20 px > 19,6), så fullskjermsvisningen er
+ * uendret.
  */
 :global(html) {
-  font-size: clamp(11px, 1.02vw, 24px);
+  font-size: clamp(11px, min(1.02vw, 1.85vh), 24px);
 }
 
 :global(body) {
@@ -161,11 +168,19 @@
 }
 
 .panel {
+  display: flex;
+  flex-direction: column;
   flex: 1.55;
-  // Plass til rotasjonsprikkene: uten den kolliderer siste rad i en full
-  // liste med prikkene nede til høyre.
-  padding-bottom: calc(var(--spacing-l) + 1.2rem);
   animation: tonInn 400ms ease-out;
+}
+
+// Tar plassen mellom underteksten og prikkeraden. min-height: 0 lar boksen
+// krympe under innholdets naturlige høyde, så en for lang liste klippes her –
+// inne i sin egen boks – og aldri under prikkene.
+.panelinnhold {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .hendelser {
@@ -392,12 +407,14 @@
 
 /* ---------- Rotasjonsprikker ---------- */
 
+// I normal flyt, ikke absolutt: en egen rad nederst kan per definisjon ikke
+// kollidere med innholdet over.
 .prikker {
-  position: absolute;
-  right: var(--spacing-xl);
-  bottom: var(--spacing-l);
   display: flex;
+  justify-content: flex-end;
+  flex: none;
   gap: 0.55rem;
+  padding-top: var(--spacing-s);
 }
 
 .prikk,

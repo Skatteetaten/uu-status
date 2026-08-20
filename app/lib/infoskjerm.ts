@@ -163,7 +163,9 @@ export function byggInnhold(
         b.totalNonConformities - a.totalNonConformities ||
         a.name.localeCompare(b.name, 'nb')
     )
-    .slice(0, 7)
+    // Samme tak som fristlista: 6 rader pluss undertekst fyller panelet på en
+    // 768-skjerm uten at noe klippes.
+    .slice(0, 6)
     .map((e) => ({ navn: e.name, brudd: e.totalNonConformities }));
   if (stolper.length) {
     paneler.push({ id: 'flest-brudd', stolper });

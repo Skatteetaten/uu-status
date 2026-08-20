@@ -301,7 +301,13 @@ export function Infoskjerm(): ReactElement {
             )}
             <h2 className={styles.paneltittel}>{PANEL_TITTEL[panel.id]}</h2>
             <p className={styles.panelunder}>{panelUndertekst(panel, kpi)}</p>
-            <Panelinnhold panel={panel} />
+            {/* Egen boks rundt innholdet: den tar plassen som er igjen og
+                klipper innenfor seg selv. Prikkene ligger ETTER den i normal
+                flyt – de var absolutt plassert oppå panelet, og på lavere
+                skjermer landet de midt i nederste rad. */}
+            <div className={styles.panelinnhold}>
+              <Panelinnhold panel={panel} />
+            </div>
             {antallPaneler > 1 && !laastPanel && (
               <span className={styles.prikker} aria-hidden={true}>
                 {paneler.map((p, i) => (
