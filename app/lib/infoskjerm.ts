@@ -15,8 +15,18 @@ import type { Endring, Erklaering } from './typer';
  * sted – og datoene sendes inn, så funksjonene er deterministiske.
  */
 
-/** Gladsaker og nyheter vises i 8 uker, så byttes de ut. */
-export const FERSK_DAGER = 56;
+/**
+ * Vinduet for gladsaker, nye erklæringer og hendelseslista.
+ *
+ * Var 56 dager. Med 8 uker hadde «Ble kvitt alle brudd» én eneste rad i et
+ * panel bygget for seks – ikke fordi det gikk dårlig, men fordi vinduet var
+ * for smalt: over et halvår har 23 erklæringer gått til null.
+ *
+ * Panelet blir ikke statisk av det. Lista sorteres nyest først og kuttes til
+ * det som får plass, så en ny retting skyver den eldste ut. Halvåret er en
+ * ytre grense, ikke det som vises.
+ */
+export const FERSK_DAGER = 182;
 
 /** Frister varsles fra 60 dager før. */
 export const FRIST_VARSEL_DAGER = 60;
@@ -172,8 +182,8 @@ export function byggInnhold(
     paneler.push({ id: 'flest-brudd', stolper });
   }
 
-  // Gladsaken: erklæringer som gikk fra brudd til null. Bare de siste 8 ukene,
-  // og bare hvis de fortsatt står på null – en erklæring som fikk nye brudd
+  // Gladsaken: erklæringer som gikk fra brudd til null innenfor vinduet, og
+  // bare hvis de fortsatt står på null – en erklæring som fikk nye brudd
   // etterpå skal ikke feires. Loggens before/after gjør oppslaget eksakt.
   const staarPaaNull = new Set(
     erklaeringer
@@ -193,6 +203,15 @@ export function byggInnhold(
     rettelser.push({ navn: navnFor(e), foer: t.foer, dato: hendelsesdato(e) });
   }
   if (rettelser.length) {
+    // Eksplisitt sortering på datoen kortet faktisk viser. Løkka over går
+    // gjennom loggen baklengs, men det gir OPPDAGELSESrekkefølge, og kortet
+    // viser erklæringens egen dato (updatedDate). De to spriker: uten dette
+    // sto 17. aug. før 16. juni før 22. juni. Samme fallgruve som i arkivet.
+    // Lik dato brytes på navn, så rekkefølgen ikke flytter seg mellom
+    // nattkjøringene.
+    rettelser.sort(
+      (a, b) => b.dato.localeCompare(a.dato) || a.navn.localeCompare(b.navn, 'nb')
+    );
     paneler.push({ id: 'rettet-til-null', rettelser: rettelser.slice(0, 8) });
   }
 

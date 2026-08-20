@@ -328,27 +328,79 @@
 
 /* ---------- Ble kvitt alle brudd ---------- */
 
-// Gladsaken har sjelden mer enn et par rader, og én tynn linje drukner i et
-// stort panel. Større tekst og luftigere rader lar den lille listen bære
-// panelet alene.
-.gladsak .radnavn {
-  font-size: 1.6rem;
+// Kort i én kolonne, ikke tabellrader. Panelet har ofte få treff, og en tynn
+// linje med skillestrek i en stor flate leser som en glipp – et kort med egen
+// bakgrunn og kantstrek holder seg selv oppe også når det står alene.
+//
+// align-content: safe center sentrerer få kort loddrett, så tomrommet
+// fordeles over og under i stedet for å samle seg som et hull under lista.
+// «safe» slår sentreringen av hvis innholdet likevel er høyere enn plassen,
+// så toppen aldri klippes bort – uten den ville første bilde, før
+// radmålingen har trimmet, mistet øverste kort.
+//
+// Én kolonne er også et krav fra radmålingen i infoskjerm.tsx: den regner
+// høyde per rad, og et flerkolonners rutenett ville gitt feil svar.
+.gladsak {
+  display: grid;
+  align-content: safe center;
+  gap: var(--spacing-s);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.gladsak li {
-  padding: 1.1rem 0;
+.gladsakKort {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-m);
+  padding: var(--spacing-m) var(--spacing-l);
+  border: 1px solid var(--palette-forest-30);
+  border-left: 5px solid var(--palette-forest-100);
+  border-radius: 8px;
+  background: var(--palette-forest-10);
 }
 
-.nullsprang {
-  font-size: 1.4rem;
-  color: var(--palette-graphite-70);
+.gladsakNavn {
+  flex: 1;
+  overflow: hidden;
+  font-size: 1.35rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Tallene er poenget i dette panelet, så de får mest vekt av alt på raden.
+.gladsakSprang {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.nullsprang strong {
-  font-size: 1.6rem;
+.gladsakFoer {
+  font-size: 1.35rem;
+  color: var(--palette-graphite-70);
+}
+
+.gladsakPil {
+  font-size: 1.2rem;
+  color: var(--palette-forest-70);
+}
+
+.gladsakNull {
+  font-size: 1.9rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
   color: var(--palette-forest-100);
+}
+
+.gladsakDato {
+  min-width: 4.2rem;
+  font-size: 1.05rem;
+  color: var(--palette-graphite-70);
+  text-align: right;
+  white-space: nowrap;
 }
 
 /* ---------- Frister ---------- */

@@ -69,13 +69,13 @@ function panelUndertekst(panel: Panel, kpi: Kpi): string {
     case 'flest-brudd':
       return `${kpi.erklaeringer - kpi.utenBrudd} av ${kpi.erklaeringer} erklæringer har registrerte brudd`;
     case 'rettet-til-null':
-      return 'Gikk fra brudd til null de siste 8 ukene';
+      return 'Gikk fra brudd til null de siste 6 månedene';
     case 'frister':
       return 'Erklæringer skal oppdateres minst én gang i året';
     case 'krav-topp':
       return 'Antall erklæringer med brudd på kravet';
     case 'nye-erklaeringer':
-      return 'Lagt til i registeret de siste 8 ukene';
+      return 'Lagt til i registeret de siste 6 månedene';
   }
 }
 
@@ -157,16 +157,23 @@ function Panelinnhold({
       );
     }
     case 'rettet-til-null':
+      // Kort framfor tabellrader: panelet har ofte få treff, og én tynn linje
+      // med skillestrek i en stor flate leser som en glipp. Et kort med egen
+      // flate holder seg selv oppe, og lista sentreres loddrett når den er
+      // kort, så tomrommet fordeles i stedet for å samle seg under.
       return (
-        <ul className={`${styles.rader} ${styles.gladsak}`}>
+        <ul className={styles.gladsak}>
           {panel.rettelser.slice(0, maks).map((r) => (
-            <li key={r.navn}>
-              <span className={styles.radnavn}>{r.navn}</span>
-              <span className={styles.raddato}>{kortDato(r.dato)}</span>
-              <span className={styles.nullsprang}>
-                {`${r.foer} → `}
-                <strong>{'0'}</strong>
+            <li key={r.navn} className={styles.gladsakKort}>
+              <span className={styles.gladsakNavn}>{r.navn}</span>
+              <span className={styles.gladsakSprang}>
+                <span className={styles.gladsakFoer}>{r.foer}</span>
+                <span className={styles.gladsakPil} aria-hidden={true}>
+                  {'→'}
+                </span>
+                <strong className={styles.gladsakNull}>{'0'}</strong>
               </span>
+              <span className={styles.gladsakDato}>{kortDato(r.dato)}</span>
             </li>
           ))}
         </ul>
@@ -395,7 +402,7 @@ export function Infoskjerm(): ReactElement {
             <h2 className={styles.paneltittel}>{'Siste endringer'}</h2>
             {hendelser.length === 0 ? (
               <p className={styles.stille}>
-                {'Ingen endringer de siste 8 ukene.'}
+                {'Ingen endringer de siste 6 månedene.'}
               </p>
             ) : (
               <div className={styles.panelinnhold} ref={hendelsesBoksRef}>
