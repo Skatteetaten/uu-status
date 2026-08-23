@@ -1,0 +1,24 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121",
+      "name": "Servicesenter for utenlandske arbeidstakere",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Servicesenter for utenlandske arbeidstakere | uustatus",
+      "updatedAt": "2026-08-21",
+      "nonConformities": [
+        "1.3.1",
+        "1.4.1",
+        "1.4.11",
+        "1.4.13",
+        "1.4.3",
+        "2.4.2",
+        "2.4.3",
+        "2.4.4",
+        "3.1.2",
+        "4.1.2"
+      ],
+      "totalNonConformities": 10
+    }
+  ]
+}

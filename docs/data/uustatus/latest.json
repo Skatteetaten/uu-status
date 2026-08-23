@@ -823,15 +823,20 @@
       "name": "Servicesenter for utenlandske arbeidstakere",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Servicesenter for utenlandske arbeidstakere | uustatus",
-      "updatedAt": "2026-02-18",
+      "updatedAt": "2026-08-21",
       "nonConformities": [
         "1.3.1",
+        "1.4.1",
+        "1.4.11",
         "1.4.13",
+        "1.4.3",
+        "2.4.2",
+        "2.4.3",
         "2.4.4",
         "3.1.2",
         "4.1.2"
       ],
-      "totalNonConformities": 5
+      "totalNonConformities": 10
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/a220a476-5308-4a4f-91f8-2589cfb4cd52",
