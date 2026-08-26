@@ -17,6 +17,12 @@ export interface Erklaering {
   updatedAt: string;
   /** ISO-dato for første gang erklæringen ble produsert. */
   opprettet: string;
+  /**
+   * Neste oppdateringsfrist (YYYY-MM-DD), beregnet av enrich_uu_details.py –
+   * samme verdi som abonnementskatalogen publiserer. Valgfri fordi datasett
+   * generert før feltet fantes mangler den; fristDato() regner da selv.
+   */
+  deadline?: string | null;
   title: string;
   domain: string;
   /** «I samsvar» | «Delvis i samsvar» | «Ikkje i samsvar» */

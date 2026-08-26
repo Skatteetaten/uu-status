@@ -99,8 +99,17 @@ export function registerKart(reg: Register): Map<string, Registerpost> {
 /**
  * Fristen: en erklæring skal oppdateres minst én gang i året. Samme regel som
  * UU-portalen bruker, så tallene på de to flatene ikke spriker.
+ *
+ * Selve beregningen bor i enrich_uu_details.py, som skriver `deadline` til
+ * details.json – da viser nettsiden, abonnementskatalogen og feedene garantert
+ * samme dato. Den lokale utregningen under er bare fallback for datasett
+ * generert før feltet fantes.
  */
 export function fristDato(e: Erklaering): Date | null {
+  if (e.deadline) {
+    const frist = new Date(e.deadline);
+    if (!Number.isNaN(frist.getTime())) return frist;
+  }
   const dato = e.updatedAt || e.opprettet;
   if (!dato) return null;
   const frist = new Date(dato);

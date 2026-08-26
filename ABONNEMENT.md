@@ -69,12 +69,18 @@ som nøkkel i SharePoint-listen.
 
 ### Fristen
 
-Kildedataene har **ikke** noe eksplisitt fristfelt. `deadline` er den etablerte
-regelen som UU-status og UU-portalen allerede deler (`fristDato()` i
-`app/lib/data.ts`): en erklæring skal oppdateres minst én gang i året, så
-fristen er `sourceUpdatedAt` (eller opprettelsesdatoen, hvis den aldri er
-oppdatert) pluss ett år. Endrer uutilsynet fristreglene, må denne ene regelen
-oppdateres – det finnes ingen frist å hente fra kilden.
+Kildedataene har **ikke** noe eksplisitt fristfelt. Regelen er den UU-status
+og UU-portalen allerede deler: en erklæring skal oppdateres minst én gang i
+året, så fristen er `sourceUpdatedAt` (eller opprettelsesdatoen, hvis den
+aldri er oppdatert) pluss ett år.
+
+Regelen er implementert **ett sted**: `beregn_frist()` i
+`enrich_uu_details.py`, som skriver `deadline` inn i `uu-status-details.json`.
+Katalogen og feedene bruker samme funksjon, og `fristDato()` i
+`app/lib/data.ts` foretrekker det publiserte feltet – nettsiden og
+SharePoint-varslene kan derfor ikke regne seg fram til ulike datoer. Endrer
+uutilsynet fristreglene, oppdateres den ene funksjonen. (UU-portalen har
+fortsatt sin egen kopi av regelen; den styres ikke herfra.)
 
 ### Fjernede erklæringer
 
@@ -84,6 +90,12 @@ brudd, slik at abonnementer og SharePoint-rader kan beholdes og historikken
 består. Kilden er `docs/data/uustatus/erklaeringsregister.json`, som husker
 alle erklæringer vi har sett. Dukker erklæringen opp igjen, blir den aktiv
 igjen med samme `declarationId`.
+
+Merk: for fjerninger fra før registeret var komplett kan fjerningsdatoen og
+siste kjente brudd mangle i kilden. Da er `removedAt` `null` og
+`nonConformities` tom – manglende data representeres som `null`, aldri som en
+gjettet dato. Flyter som datostempler deaktivering bør derfor falle tilbake på
+egen synkroniseringsdato når `removedAt` er `null`.
 
 ## Hendelsesfeeden (`uu-events.xml`)
 
@@ -100,7 +112,7 @@ Hver `description` inneholder:
 | `eventType` | Se under |
 | `declarationId`, `title`, `declarationUrl` | Som i katalogen |
 | `changedFields` | Hvilke katalogfelt som endret seg |
-| `previousValues` / `currentValues` | Verdier før/etter, når de er kjent; ellers `null` |
+| `previousValues` / `currentValues` | Verdier før/etter, når de er kjent; ellers `null`. Alltid `null` for `declaration_created` – en ny erklæring har ingen før-tilstand |
 | `addedNonConformities` / `removedNonConformities` | WCAG-krav som kom til / ble rettet |
 | `detectedAt` | Når endringen ble oppdaget (UTC) |
 | `deadline` | Gjeldende frist etter endringen, når den kan beregnes |
@@ -196,8 +208,11 @@ Slik aktiveres den senere:
 3. Oppdater testene i `app/lib/abonnement.test.ts` og
    `app/komponenter/AbonnerLenke.test.tsx` som fryser av-tilstanden.
 
-Inngangen er semantisk en lenke (designsystemets `Button` med `href` – den
-rendrer `<a>`), åpner i samme fane og får designsystemets fokusmarkering.
+Inngangen er semantisk en lenke: designsystemets `Link`-komponent, som rendrer
+en ren `<a>` med designsystemets fokusmarkering, og som åpner i samme fane.
+(`Button` med `href` er bevisst ikke brukt – den setter `role="button"` på
+ankeret, og da annonserer skjermlesere «knapp» mens mellomromstasten ikke
+aktiverer den.)
 
 ## Tester
 

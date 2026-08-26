@@ -13,6 +13,7 @@ Feltnavnene i utdata er en kontrakt: UU-portalen henter fila direkte fra
 GitHub Pages og leser nonConformities, codes, totalNonConformities, updatedAt
 og opprettet. Ikke endre dem uten a oppdatere konsumentene.
 """
+import datetime
 import json
 import re
 import sys
@@ -44,6 +45,40 @@ def normalize_nb_url(url: str) -> str:
     return re.sub(r"/(?:nn|en)/erklaringer/", "/nb/erklaringer/", url)
 
 
+def beregn_frist(oppdatert, opprettet=""):
+    """Neste oppdateringsfrist: siste oppdatering + ett aar. None uten grunnlag.
+
+    Datasettet har ikke noe eksplisitt fristfelt. Dette er regelen UU-status og
+    UU-portalen deler: en erklaering skal oppdateres minst en gang i aaret,
+    regnet fra updatedAt -- eller opprettet, hvis updatedAt er tom. En ikke-tom
+    men ugyldig updatedAt gir None, ikke fallback: samme semantikk som
+    `e.updatedAt || e.opprettet` etterfulgt av NaN-sjekken i fristDato() i
+    app/lib/data.ts.
+
+    Beregnes HER, en gang, og skrives som `deadline` i details.json, slik at
+    nettsiden og abonnementskatalogen/-feedene garantert viser samme dato.
+    fristDato() i app/lib/data.ts foretrekker feltet og regner bare selv som
+    fallback for eldre datasett. (UU-portalen har fortsatt sin egen kopi av
+    regelen -- den kan vi ikke styre herfra.)
+
+    29. februar + 1 aar gir 1. mars, slik JavaScripts setFullYear() gjoer det.
+    Paritet gjelder trimmede ISO-datoer i norsk/UTC-kontekst, som er det
+    kjeden produserer; JS bruker lokale datokomponenter og kan avvike en dag
+    vest for UTC.
+    """
+    grunnlag = oppdatert if isinstance(oppdatert, str) and oppdatert else (
+        opprettet if isinstance(opprettet, str) and opprettet else ""
+    )
+    try:
+        dato = datetime.date.fromisoformat(grunnlag.strip()[:10])
+    except ValueError:
+        return None
+    try:
+        return dato.replace(year=dato.year + 1).isoformat()
+    except ValueError:  # 29. februar
+        return dato.replace(year=dato.year + 1, month=3, day=1).isoformat()
+
+
 def brudd_koder(record: dict) -> list:
     """WCAG-koder der virksomheten har svart at innholdet ikke oppfyller kravet."""
     koder = {
@@ -59,6 +94,7 @@ def build_entry(record: dict) -> dict:
     name = (record.get("iktLoeysingNamn") or "").strip()
     koder = brudd_koder(record)
     updated = (record.get("sisteOppdatering") or "").strip()[:10]
+    opprettet = (record.get("foersteProduserteErklaering") or "").strip()[:10]
 
     return {
         "url": url,
@@ -67,7 +103,8 @@ def build_entry(record: dict) -> dict:
         "nonConformities": koder,
         "totalNonConformities": len(koder),
         "updatedAt": updated,
-        "opprettet": (record.get("foersteProduserteErklaering") or "").strip()[:10],
+        "opprettet": opprettet,
+        "deadline": beregn_frist(updated, opprettet),
         # Samme form som den skrapte <title> hadde, sa arkivet ikke tolker
         # omleggingen som en endring pa hver eneste erklaering.
         "title": f"Tilgjengelighetserklæring for {name} | uustatus" if name else "",

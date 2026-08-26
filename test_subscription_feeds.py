@@ -95,8 +95,20 @@ sjekk("frist er updatedAt + ett år", feeds.frist("2026-05-01"), "2027-05-01")
 sjekk("frist faller tilbake på opprettet", feeds.frist("", "2024-01-15"), "2025-01-15")
 sjekk("manglende frist blir None, ikke oppdiktet", feeds.frist("", ""), None)
 sjekk("ugyldig dato blir None", feeds.frist("ikke-en-dato"), None)
+# Paritet med fristDato() i app/lib/data.ts: `updatedAt || opprettet` betyr at
+# en IKKE-TOM men ugyldig updatedAt gir null – ikke fallback til opprettet.
+sjekk("ugyldig updatedAt faller ikke tilbake på opprettet",
+      feeds.frist("ikke-en-dato", "2024-01-15"), None)
+sjekk("feil type gir None, ikke krasj", feeds.frist(20260501, None), None)
 # JavaScripts setFullYear(29. feb + 1) gir 1. mars – Python må svare det samme.
 sjekk("29. februar + ett år gir 1. mars", feeds.frist("2024-02-29"), "2025-03-01")
+# Én implementasjon: feeds.frist ER beregn_frist fra enrich-steget, som også
+# skriver deadline-feltet i details.json. To kopier kan ikke drifte fra
+# hverandre når de er samme funksjonsobjekt.
+import enrich_uu_details  # noqa: E402
+
+sjekk("fristregelen er samme funksjon som i enrich-steget",
+      feeds.frist is enrich_uu_details.beregn_frist, True)
 
 
 # ----------------------------------------------------------------- katalogen
@@ -144,10 +156,14 @@ tom = feeds.bygg_katalog([], [], [])
 sjekk("tomt datasett gir tom katalog", tom["declarations"], [])
 sjekk("tom katalog teller null", tom["count"], 0)
 
-# Nynorskadresse skal gi samme ID som bokmålsadresse.
+# Nynorskadresse skal gi samme ID som bokmålsadresse – og kontrakten lover
+# at declarationUrl alltid er /nb/-adressen, også når kilden sier /nn/.
 nn = feeds.bygg_katalog([detalj(A, "Skattemelding", [], spraak="nn")], [], [])
 sjekk("/nn/ og /nb/ gir samme declarationId",
       nn["declarations"][0]["declarationId"], A)
+sjekk("declarationUrl normaliseres til /nb/",
+      nn["declarations"][0]["declarationUrl"],
+      f"https://uustatus.no/nb/erklaringer/publisert/{A}")
 
 # Deterministisk: samme input i annen rekkefølge gir identisk serialisering.
 k_a = feeds.bygg_katalog([detalj(A, "A", []), detalj(B, "B", [])], [], [])
@@ -172,6 +188,10 @@ hendelser = feeds.bygg_hendelser([ny, endret, fjernet])
 sjekk("tre rader gir tre hendelser", len(hendelser), 3)
 sjekk("ny erklæring blir declaration_created",
       hendelser[0]["eventType"], "declaration_created")
+# Ingen før-tilstand finnes for en ny erklæring, selv om arkivraden bærer et
+# teknisk {before: 0} – kontrakten sier previousValues er null da.
+sjekk("ny erklæring har previousValues null",
+      hendelser[0]["previousValues"], None)
 sjekk("reell endring blir declaration_changed",
       hendelser[1]["eventType"], "declaration_changed")
 sjekk("fjernet erklæring blir declaration_removed",
@@ -233,6 +253,30 @@ sjekk("statusendring alene gir ingen hendelse (kjent begrensning)",
 
 # Tom logg gir tom hendelsesliste.
 sjekk("tom logg gir ingen hendelser", feeds.bygg_hendelser([]), [])
+
+# Loggen er append-only og rettes aldri automatisk: en rad med feil TYPE i et
+# felt skal hoppes over, ikke krasje nattjobben for alltid.
+oedelagt = dict(loggrad(A, "2026-05-01T02:00:00Z"), ts=20260501)
+sjekk("feil type i ts hoppes over uten krasj",
+      feeds.bygg_hendelser([oedelagt]), [])
+sjekk("feil type i url hoppes over uten krasj",
+      feeds.bygg_hendelser([dict(loggrad(A, "2026-05-01T02:00:00Z"), url=42)]), [])
+sjekk("feil type påvirker ikke lastMeaningfulChangeAt",
+      feeds.siste_endring_per_id([oedelagt]), {})
+
+# Gamle loggrader kan bære /nn/-adresser; hendelsene skal likevel publisere
+# /nb/, slik kontrakten lover.
+nn_rad = dict(loggrad(A, "2026-05-01T02:00:00Z", added=["1.1.1"],
+                      changed={"totalNonConformities": {"before": 0, "after": 1}}),
+              url=f"https://uustatus.no/nn/erklaringer/publisert/{A}")
+nn_hendelse = feeds.bygg_hendelser([nn_rad])[0]
+sjekk("hendelses-URL normaliseres til /nb/",
+      nn_hendelse["declarationUrl"],
+      f"https://uustatus.no/nb/erklaringer/publisert/{A}")
+sjekk("normaliseringen endrer ikke eventId",
+      nn_hendelse["eventId"],
+      feeds.bygg_hendelser([dict(nn_rad,
+          url=f"https://uustatus.no/nb/erklaringer/publisert/{A}")])[0]["eventId"])
 
 
 # ------------------------------------------------------------------- RSS/XML

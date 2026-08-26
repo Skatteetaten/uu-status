@@ -40,8 +40,12 @@ describe('AbonnerLenke', () => {
       />
     );
     // Semantisk en lenke (navigasjon til et annet nettsted), ikke en knapp.
+    // role="button" ville fått skjermlesere til å annonsere «knapp» og
+    // brutt forventningen om at mellomrom aktiverer – derfor DS Link, ikke
+    // Button med href (som setter nettopp role="button").
     expect(markup).toContain('<a ');
     expect(markup).not.toContain('<button');
+    expect(markup).not.toContain('role="button"');
     expect(markup).toContain('href="https://example.sharepoint.com/skjema"');
     expect(markup).toContain('Abonner på varsler');
     // Samme fane: ikke noe dokumentert behov for target="_blank".

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Button } from '@skatteetaten/ds-buttons';
+import { Link } from '@skatteetaten/ds-buttons';
 
 import {
   ABONNEMENT_KONFIG,
@@ -16,10 +16,12 @@ interface AbonnerLenkeProps {
  * Inngangen til abonnement på varsler om erklæringsendringer.
  *
  * Navigasjon til et annet nettsted (SharePoint-skjemaet), derfor semantisk en
- * lenke – designsystemets Button med href rendrer <a> stylet som knapp, med
- * synlig fokus og vanlig tastaturbetjening. isExternal viser ikonet for
- * ekstern tjeneste. Åpnes i samme fane; det finnes ikke noe dokumentert behov
- * for target="_blank".
+ * lenke. Designsystemets Link rendrer en ren <a> med synlig fokus og vanlig
+ * lenke-tastaturbetjening; isExternal viser ikonet for ekstern tjeneste.
+ * Button med href er bevisst IKKE brukt: den setter role="button" på ankeret,
+ * og da annonserer skjermleseren «knapp» mens mellomrom – standardtasten for
+ * knapper – ikke aktiverer den. Åpnes i samme fane; det finnes ikke noe
+ * dokumentert behov for target="_blank".
  *
  * Rendrer null – ingenting i DOM – med mindre funksjonsbryteren er på OG
  * adressen er en gyldig https-URL. Se app/lib/abonnement.ts.
@@ -32,8 +34,8 @@ export function AbonnerLenke({
     return null;
   }
   return (
-    <Button href={adresse} variant={'secondary'} isExternal>
+    <Link href={adresse} isExternal>
       {'Abonner på varsler'}
-    </Button>
+    </Link>
   );
 }

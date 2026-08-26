@@ -25,7 +25,6 @@ Se ABONNEMENT.md for hele kontrakten og begrensningene i kildedataene.
 """
 import datetime
 import email.utils
-import hashlib
 import json
 import sys
 import xml.etree.ElementTree as ET
@@ -33,7 +32,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import build_uu_archive as arkiv  # noqa: E402  (erklaering_id, load_json)
+import build_uu_archive as arkiv  # noqa: E402  (erklaering_id, load_json, sha1)
+import enrich_uu_details  # noqa: E402  (beregn_frist, normalize_nb_url)
 
 SCHEMA_VERSION = "1.0.0"
 SITE_URL = "https://skatteetaten.github.io/uu-status/"
@@ -75,24 +75,21 @@ def parse_ts(s):
         return None
 
 
-def frist(source_updated_at, opprettet=None):
-    """Fristen for neste oppdatering: siste oppdatering + ett år.
+# Fristregelen bor i enrich_uu_details.beregn_frist() – én implementasjon i
+# Python, skrevet som `deadline` i details.json og gjenbrukt her, slik at
+# katalogen, feedene og nettsiden aldri kan regne seg fram til ulike datoer.
+frist = enrich_uu_details.beregn_frist
 
-    Kildedataene har ikke noe eksplisitt fristfelt. Dette er den etablerte
-    regelen fra fristDato() i app/lib/data.ts, som igjen er samme regel som
-    UU-portalen bruker: en erklæring skal oppdateres minst én gang i året,
-    regnet fra updatedAt (eller opprettet, hvis den aldri er oppdatert).
 
-    29. februar + 1 år gir 1. mars, slik JavaScripts setFullYear() gjør det –
-    de to implementasjonene skal gi samme svar.
+def tekstfelt(verdi):
+    """Trimmet streng, eller "" for alt som ikke er en streng.
+
+    Endringsloggen er append-only og rettes aldri automatisk. Én rad med feil
+    TYPE i et felt (f.eks. "ts": 20260501 etter en håndredigering) skal hoppes
+    over som ugyldig – ikke kaste AttributeError og blokkere hele nattjobben
+    for alltid.
     """
-    grunnlag = parse_dato(source_updated_at) or parse_dato(opprettet)
-    if grunnlag is None:
-        return None
-    try:
-        return grunnlag.replace(year=grunnlag.year + 1).isoformat()
-    except ValueError:  # 29. februar
-        return grunnlag.replace(year=grunnlag.year + 1, month=3, day=1).isoformat()
+    return verdi.strip() if isinstance(verdi, str) else ""
 
 
 def rfc822(dt):
@@ -127,8 +124,8 @@ def siste_endring_per_id(endringer):
     """
     ut = {}
     for rad in endringer:
-        url = (rad.get("url") or "").strip()
-        ts = (rad.get("ts") or "").strip()
+        url = tekstfelt(rad.get("url"))
+        ts = tekstfelt(rad.get("ts"))
         if not url or parse_ts(ts) is None:
             continue
         did = arkiv.erklaering_id(url)
@@ -181,7 +178,7 @@ def bygg_katalog(detaljer, register_rader, endringer):
     per_id = {}
 
     for e in detaljer or []:
-        url = (e.get("url") or "").strip()
+        url = enrich_uu_details.normalize_nb_url(tekstfelt(e.get("url")))
         if not url:
             continue
         did = arkiv.erklaering_id(url)
@@ -202,7 +199,9 @@ def bygg_katalog(detaljer, register_rader, endringer):
         )
 
     for r in register_rader or []:
-        url = (r.get("url") or "").strip()
+        # Registeret kan bære historiske /nn/-adresser (gjenoppbygd fra gamle
+        # loggrader); kontrakten lover alltid /nb/.
+        url = enrich_uu_details.normalize_nb_url(tekstfelt(r.get("url")))
         if not url:
             continue
         did = arkiv.erklaering_id(url)
@@ -252,10 +251,11 @@ def hendelse_fra_rad(rad):
     når loggen. Når updatedAt endres sammen med en reell endring, står
     «deadline» i changedFields. Se ABONNEMENT.md.
     """
-    url = (rad.get("url") or "").strip()
-    ts = (rad.get("ts") or "").strip()
+    url = tekstfelt(rad.get("url"))
+    ts = tekstfelt(rad.get("ts"))
     if not url or parse_ts(ts) is None:
         return None
+    did = arkiv.erklaering_id(url)
 
     changed = rad.get("changed") or {}
     lagt_til = sorted(rad.get("added") or [])
@@ -289,30 +289,32 @@ def hendelse_fra_rad(rad):
     if etype == "declaration_created":
         felter.append("active")
         naa["active"] = True
+        # Ingen før-tilstand finnes for en ny erklæring. Arkivraden bærer et
+        # teknisk {before: 0}, men kontrakten sier at previousValues er null
+        # når det ikke fantes noe før – ellers feilklassifiserer konsumenter
+        # nyregistreringer som «sett før».
+        foer = {}
     elif etype == "declaration_removed":
         felter.append("active")
         foer["active"] = True
         naa["active"] = False
 
-    # Stabil og deterministisk: SHA1 av radens identifiserende felter. Radene
-    # i changes.jsonl skrives aldri om, så samme hendelse får samme ID i hver
-    # eneste bygging – det er dette som hindrer doble varsler.
-    event_id = hashlib.sha1(
-        json.dumps(
-            [ts, arkiv.erklaering_id(url), lagt_til, fjernet, changed],
-            sort_keys=True,
-            ensure_ascii=False,
-        ).encode("utf-8")
-    ).hexdigest()
+    # Stabil og deterministisk: SHA1 av radens identifiserende felter, med
+    # nøyaktig samme oppskrift som resten av løsningen (arkiv.sha1). Radene i
+    # changes.jsonl skrives aldri om, så samme hendelse får samme ID i hver
+    # eneste bygging – det er dette som hindrer doble varsler. Oppskriften er
+    # fryst: endres den, får hele historikken nye ID-er.
+    event_id = arkiv.sha1([ts, did, lagt_til, fjernet, changed])
 
-    gjeldende_oppdatert = (rad.get("updatedDate") or "").strip() or None
+    gjeldende_oppdatert = tekstfelt(rad.get("updatedDate")) or None
     return {
         "schemaVersion": SCHEMA_VERSION,
         "eventId": event_id,
         "eventType": etype,
-        "declarationId": arkiv.erklaering_id(url),
-        "title": (rad.get("name") or "").strip() or None,
-        "declarationUrl": url,
+        "declarationId": did,
+        "title": tekstfelt(rad.get("name")) or None,
+        # Kontrakten lover /nb/-adressen; gamle loggrader kan bære /nn/.
+        "declarationUrl": enrich_uu_details.normalize_nb_url(url),
         "changedFields": felter,
         "previousValues": foer or None,
         "currentValues": naa,
