@@ -5,7 +5,35 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Thu, 20 Aug 2026 01:58:04 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 02:02:12 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: VAT On E-Commerce (VOEC)</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38</link>
+      <guid isPermaLink="false">1c6aa0e2171dd460fabe1597ff2f8d7cb42e5ae6</guid>
+      <pubDate>Wed, 26 Aug 2026 02:02:12 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"1c6aa0e2171dd460fabe1597ff2f8d7cb42e5ae6","eventType":"declaration_changed","declarationId":"39753a2a-0385-47e4-946e-2d934c0fcd38","title":"VAT On E-Commerce (VOEC)","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":7,"sourceUpdatedAt":"2026-03-17","deadline":"2027-03-17"},"currentValues":{"totalNonConformities":4,"sourceUpdatedAt":"2026-08-25","deadline":"2027-08-25"},"addedNonConformities":[],"removedNonConformities":["1.4.13","3.3.2","4.1.2"],"detectedAt":"2026-08-26T02:02:12Z","deadline":"2027-08-25"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Servicesenter for utenlandske arbeidstakere</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121</link>
+      <guid isPermaLink="false">1754bb764eafd9122af173493c03a02b3ae95035</guid>
+      <pubDate>Tue, 25 Aug 2026 01:58:25 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"1754bb764eafd9122af173493c03a02b3ae95035","eventType":"declaration_changed","declarationId":"0f8eb2c9-2436-418e-8c57-2ea8865c8121","title":"Servicesenter for utenlandske arbeidstakere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":10,"sourceUpdatedAt":"2026-08-21","deadline":"2027-08-21"},"currentValues":{"totalNonConformities":9,"sourceUpdatedAt":"2026-08-24","deadline":"2027-08-24"},"addedNonConformities":[],"removedNonConformities":["1.4.1"],"detectedAt":"2026-08-25T01:58:25Z","deadline":"2027-08-24"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Servicesenter for utenlandske arbeidstakere</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121</link>
+      <guid isPermaLink="false">bd7189ad4cbe7628eca96c83e217746a7da579cd</guid>
+      <pubDate>Sun, 23 Aug 2026 02:02:15 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"bd7189ad4cbe7628eca96c83e217746a7da579cd","eventType":"declaration_changed","declarationId":"0f8eb2c9-2436-418e-8c57-2ea8865c8121","title":"Servicesenter for utenlandske arbeidstakere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":5,"sourceUpdatedAt":"2026-02-18","deadline":"2027-02-18"},"currentValues":{"totalNonConformities":10,"sourceUpdatedAt":"2026-08-21","deadline":"2027-08-21"},"addedNonConformities":["1.4.1","1.4.11","1.4.3","2.4.2","2.4.3"],"removedNonConformities":[],"detectedAt":"2026-08-23T02:02:15Z","deadline":"2027-08-21"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Oppslag i Folkeregisteret</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6</link>
+      <guid isPermaLink="false">52be86f2bab02794dcfb0d041dfe8afa6ea4fa67</guid>
+      <pubDate>Fri, 21 Aug 2026 11:52:26 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"52be86f2bab02794dcfb0d041dfe8afa6ea4fa67","eventType":"declaration_changed","declarationId":"4bc20483-8788-4c4f-b2bd-756feb5ec2f6","title":"Oppslag i Folkeregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":7,"sourceUpdatedAt":"2026-08-19","deadline":"2027-08-19"},"currentValues":{"totalNonConformities":8,"sourceUpdatedAt":"2026-08-20","deadline":"2027-08-20"},"addedNonConformities":["3.1.2"],"removedNonConformities":[],"detectedAt":"2026-08-21T11:52:26Z","deadline":"2027-08-20"}</description>
+    </item>
     <item>
       <title>Ny erklæring: Oppslag i Folkeregisteret</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6</link>
@@ -1727,34 +1755,6 @@
       <guid isPermaLink="false">98e20281c5c70ad760eae104fe2e25441692d167</guid>
       <pubDate>Sat, 20 Dec 2025 02:10:52 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"98e20281c5c70ad760eae104fe2e25441692d167","eventType":"declaration_changed","declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":11,"sourceUpdatedAt":"2025-12-19","deadline":"2026-12-19"},"currentValues":{"totalNonConformities":8,"sourceUpdatedAt":"2025-12-20","deadline":"2026-12-20"},"addedNonConformities":["2.1.2","3.2.2","3.3.2"],"removedNonConformities":["1.3.2","1.3.5","1.4.12","2.1.1","2.4.6","3.1.2"],"detectedAt":"2025-12-20T02:10:52Z","deadline":"2026-12-20"}</description>
-    </item>
-    <item>
-      <title>Endret erklæring: Tredjepartsopplysninger - innskudd, utlån og renter mv</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c</link>
-      <guid isPermaLink="false">98186e9267b2bd9ea66a63260fa00f2b40f7609a</guid>
-      <pubDate>Wed, 17 Dec 2025 02:12:30 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"98186e9267b2bd9ea66a63260fa00f2b40f7609a","eventType":"declaration_changed","declarationId":"ea01a748-09dc-45d3-8eaa-a220ac38eb3c","title":"Tredjepartsopplysninger - innskudd, utlån og renter mv","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":2,"sourceUpdatedAt":"2025-12-16","deadline":"2026-12-16"},"currentValues":{"totalNonConformities":0,"sourceUpdatedAt":"2025-12-17","deadline":"2026-12-17"},"addedNonConformities":[],"removedNonConformities":["1.3.1","3.2.2"],"detectedAt":"2025-12-17T02:12:30Z","deadline":"2026-12-17"}</description>
-    </item>
-    <item>
-      <title>Endret erklæring: Tredjepartsopplysninger - boligsameie</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48</link>
-      <guid isPermaLink="false">e8afa27153fd71c57a44584dce5d8f620dd04be5</guid>
-      <pubDate>Thu, 11 Dec 2025 02:14:01 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"e8afa27153fd71c57a44584dce5d8f620dd04be5","eventType":"declaration_changed","declarationId":"c4742d76-f848-48ea-b12d-4b45a5bfde48","title":"Tredjepartsopplysninger - boligsameie","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":1,"sourceUpdatedAt":"2025-12-10","deadline":"2026-12-10"},"currentValues":{"totalNonConformities":2,"sourceUpdatedAt":"2025-12-11","deadline":"2026-12-11"},"addedNonConformities":["1.3.1","3.3.2"],"removedNonConformities":["3.3.1"],"detectedAt":"2025-12-11T02:14:01Z","deadline":"2026-12-11"}</description>
-    </item>
-    <item>
-      <title>Endret erklæring: Kjøp fra produsent – egg</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/ff1db11a-0c6e-4289-9a59-1cf56b03898f</link>
-      <guid isPermaLink="false">1dae799eb556b42aed195ef124055df24b6e9355</guid>
-      <pubDate>Thu, 04 Dec 2025 02:13:26 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"1dae799eb556b42aed195ef124055df24b6e9355","eventType":"declaration_changed","declarationId":"ff1db11a-0c6e-4289-9a59-1cf56b03898f","title":"Kjøp fra produsent – egg","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/ff1db11a-0c6e-4289-9a59-1cf56b03898f","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":3,"sourceUpdatedAt":"2025-12-03","deadline":"2026-12-03"},"currentValues":{"totalNonConformities":4,"sourceUpdatedAt":"2025-12-04","deadline":"2026-12-04"},"addedNonConformities":["2.4.3"],"removedNonConformities":[],"detectedAt":"2025-12-04T02:13:20Z","deadline":"2026-12-04"}</description>
-    </item>
-    <item>
-      <title>Endret erklæring: Tredjepartsopplysninger - innskudd, utlån og renter mv</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c</link>
-      <guid isPermaLink="false">0748eb8b432df43520b366937f68e1d331e32e9d</guid>
-      <pubDate>Thu, 04 Dec 2025 02:13:25 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"0748eb8b432df43520b366937f68e1d331e32e9d","eventType":"declaration_changed","declarationId":"ea01a748-09dc-45d3-8eaa-a220ac38eb3c","title":"Tredjepartsopplysninger - innskudd, utlån og renter mv","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":0,"sourceUpdatedAt":"2025-12-03","deadline":"2026-12-03"},"currentValues":{"totalNonConformities":2,"sourceUpdatedAt":"2025-12-04","deadline":"2026-12-04"},"addedNonConformities":["1.3.1","3.2.2"],"removedNonConformities":[],"detectedAt":"2025-12-04T02:13:20Z","deadline":"2026-12-04"}</description>
     </item>
   </channel>
 </rss>

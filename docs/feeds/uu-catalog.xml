@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Thu, 20 Aug 2026 01:58:04 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 02:02:12 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -52,8 +52,8 @@
       <title>Servicesenter for utenlandske arbeidstakere</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121</link>
       <guid isPermaLink="false">0f8eb2c9-2436-418e-8c57-2ea8865c8121</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"0f8eb2c9-2436-418e-8c57-2ea8865c8121","title":"Servicesenter for utenlandske arbeidstakere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.13","2.4.4","3.1.2","4.1.2"],"totalNonConformities":5,"deadline":"2027-02-18","sourceUpdatedAt":"2026-02-18","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Tue, 25 Aug 2026 01:58:25 GMT</pubDate>
+      <description>{"declarationId":"0f8eb2c9-2436-418e-8c57-2ea8865c8121","title":"Servicesenter for utenlandske arbeidstakere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.11","1.4.13","1.4.3","2.4.2","2.4.3","2.4.4","3.1.2","4.1.2"],"totalNonConformities":9,"deadline":"2027-08-24","sourceUpdatedAt":"2026-08-24","lastMeaningfulChangeAt":"2026-08-25T01:58:25Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Skriv til oss</title>
@@ -178,8 +178,8 @@
       <title>VAT On E-Commerce (VOEC)</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38</link>
       <guid isPermaLink="false">39753a2a-0385-47e4-946e-2d934c0fcd38</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"39753a2a-0385-47e4-946e-2d934c0fcd38","title":"VAT On E-Commerce (VOEC)","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38","status":"Delvis i samsvar","nonConformities":["1.1.1","1.3.1","1.4.13","2.4.3","2.4.7","3.3.2","4.1.2"],"totalNonConformities":7,"deadline":"2027-03-17","sourceUpdatedAt":"2026-03-17","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Wed, 26 Aug 2026 02:02:12 GMT</pubDate>
+      <description>{"declarationId":"39753a2a-0385-47e4-946e-2d934c0fcd38","title":"VAT On E-Commerce (VOEC)","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38","status":"Delvis i samsvar","nonConformities":["1.1.1","1.3.1","2.4.3","2.4.7"],"totalNonConformities":4,"deadline":"2027-08-25","sourceUpdatedAt":"2026-08-25","lastMeaningfulChangeAt":"2026-08-26T02:02:12Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Innlevering av kontoopplysninger</title>
@@ -262,8 +262,8 @@
       <title>Oppslag i Folkeregisteret</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6</link>
       <guid isPermaLink="false">4bc20483-8788-4c4f-b2bd-756feb5ec2f6</guid>
-      <pubDate>Thu, 20 Aug 2026 01:58:04 GMT</pubDate>
-      <description>{"declarationId":"4bc20483-8788-4c4f-b2bd-756feb5ec2f6","title":"Oppslag i Folkeregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.10","1.4.11","2.4.3","3.3.1","3.3.2","4.1.2"],"totalNonConformities":7,"deadline":"2027-08-19","sourceUpdatedAt":"2026-08-19","lastMeaningfulChangeAt":"2026-08-20T01:58:04Z","active":true,"removedAt":null}</description>
+      <pubDate>Fri, 21 Aug 2026 11:52:26 GMT</pubDate>
+      <description>{"declarationId":"4bc20483-8788-4c4f-b2bd-756feb5ec2f6","title":"Oppslag i Folkeregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4bc20483-8788-4c4f-b2bd-756feb5ec2f6","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.10","1.4.11","2.4.3","3.1.2","3.3.1","3.3.2","4.1.2"],"totalNonConformities":8,"deadline":"2027-08-20","sourceUpdatedAt":"2026-08-20","lastMeaningfulChangeAt":"2026-08-21T11:52:26Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Melding om offentlig støtte under Skatteetatens støtteordninger</title>
