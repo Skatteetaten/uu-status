@@ -17,7 +17,11 @@ const DOCS = join(rootDir, 'docs');
  * appen kan bruke de samme relative stiene som i produksjon.
  */
 function erDatasti(url: string): boolean {
-  return url === '/uu-status-details.json' || url.startsWith('/data/');
+  return (
+    url === '/uu-status-details.json' ||
+    url.startsWith('/data/') ||
+    url.startsWith('/feeds/')
+  );
 }
 
 function uuData(): Plugin {
@@ -36,9 +40,13 @@ function uuData(): Plugin {
         if (!file.startsWith(DOCS) || !existsSync(file)) {
           return next();
         }
+        const typer: Record<string, string> = {
+          '.jsonl': 'text/plain',
+          '.xml': 'application/rss+xml',
+        };
         res.setHeader(
           'Content-Type',
-          extname(file) === '.jsonl' ? 'text/plain' : 'application/json'
+          typer[extname(file)] ?? 'application/json'
         );
         res.setHeader('Cache-Control', 'no-store');
         createReadStream(file).pipe(res);
@@ -57,6 +65,11 @@ function uuData(): Plugin {
         // Den ble publisert uten at appen noen gang hentet den.
         filter: (src) => !src.endsWith('skatteetaten-source.json'),
       });
+      // RSS-feedene for abonnementstjenesten (build_subscription_feeds.py).
+      // Power Automate henter dem fra Pages, så de må med i artefakten.
+      if (existsSync(join(DOCS, 'feeds'))) {
+        cpSync(join(DOCS, 'feeds'), join(out, 'feeds'), { recursive: true });
+      }
     },
   };
 }

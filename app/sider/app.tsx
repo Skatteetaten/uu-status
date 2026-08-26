@@ -4,6 +4,7 @@ import { Tabs } from '@skatteetaten/ds-collections';
 
 import '@skatteetaten/ds-core-designtokens/index.css';
 
+import { AbonnerLenke } from '../komponenter/AbonnerLenke';
 import { Sideramme } from '../komponenter/Sideramme';
 import { overstyrDsTekster } from '../lib/ds-tekster';
 import { monter } from '../lib/monter';
@@ -55,6 +56,9 @@ export function App(): ReactElement {
 
   return (
     <Sideramme>
+      {/* Abonnement på varsler. Rendrer ingenting så lenge funksjonsbryteren
+          i app/lib/abonnement.ts er av – ingen tom plass, ikke noe element. */}
+      <AbonnerLenke />
       {/* isMultiline: uten den ligger fanene på én linje med nowrap, og på
           smal skjerm stikker den siste utenfor og gir vannrett rulling. */}
       <Tabs value={aktiv} onChange={velg} isMultiline>

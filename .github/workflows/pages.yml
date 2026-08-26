@@ -69,6 +69,11 @@ jobs:
       - name: Installer avhengigheter
         run: npm ci
 
+      # Blant annet at abonnementsinngangen IKKE rendres: funksjonsbryteren
+      # skal stå av til SharePoint-skjemaet finnes, og testene fryser det.
+      - name: Frontendtester
+        run: npm test
+
       - name: Bygg (typecheck + vite)
         run: npm run build
 
@@ -86,6 +91,12 @@ jobs:
             if (mangler.length) throw new Error('Mangler felt: ' + mangler.join(', '));
             console.log('OK: ' + d.length + ' erklæringer, alle kontraktsfelt til stede');
           "
+          # Power Automate henter katalogen og feedene fra Pages – mangler de
+          # i artefakten, stopper synkroniseringen stille. Se ABONNEMENT.md.
+          test -f dist/data/subscriptions/declarations.json
+          test -f dist/feeds/uu-catalog.xml
+          test -f dist/feeds/uu-events.xml
+          echo "OK: abonnementskatalog og feeds er med i artefakten"
 
       # actions/configure-pages er bevisst utelatt. Den finnes for å gi
       # base_path og origin til rammeverk som trenger dem – vi setter base

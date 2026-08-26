@@ -11,6 +11,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --port 3001",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "@vitejs/plugin-react": "5.2.0",
     "sass-embedded": "1.89.2",
     "typescript": "5.7.3",
-    "vite": "7.3.6"
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
   }
 }

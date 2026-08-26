@@ -16,6 +16,7 @@ uutilsynets åpne datasett
 build_benchmark_source.py    speiler datasettet til docs/data/uustatus/
 enrich_uu_details.py         utleder WCAG-koder → docs/uu-status-details.json
 build_uu_archive.py          diff mot i går → changes.jsonl + erklaeringsregister.json
+build_subscription_feeds.py  katalog + RSS → docs/data/subscriptions/ + docs/feeds/
           │
           ▼
 app/  (React + Vite + Skatteetatens designsystem)  →  dist/  →  GitHub Pages
@@ -51,6 +52,13 @@ med navn, når den forsvant og hvilke brudd den hadde sist. Datasettet inneholde
 bare det som finnes nå, så uten registeret forsvinner navnet og bruddene samme
 natt som en erklæring slettes hos uutilsynet.
 
+`docs/data/subscriptions/declarations.json`, `docs/feeds/uu-catalog.xml` og
+`docs/feeds/uu-events.xml` er kontrakten mot abonnementstjenesten i
+SharePoint/Power Automate – katalog og endringshendelser, bygget av
+`build_subscription_feeds.py` i nattjobben. Se [ABONNEMENT.md](ABONNEMENT.md)
+for felter, hendelsestyper og hvordan Power Automate skal konsumere dem.
+Abonnentdata lagres aldri i dette repoet.
+
 ## Identitet: UUID, ikke URL
 
 En erklæring identifiseres av UUID-en i adressen, ikke av hele URL-en. Samme
@@ -85,7 +93,9 @@ TEST_MODE=1 python build_uu_archive.py
 ## Tester
 
 ```bash
-python test_arkiv.py
+python test_arkiv.py                 # diffmotoren, dedupliseringen, registeret
+python test_subscription_feeds.py    # abonnementskatalogen og RSS-feedene
+npm test                             # frontend, bl.a. at abonnementsinngangen er av
 ```
 
 31 regresjonstester for diffmotoren, dedupliseringen og registeret. Hver enkelt

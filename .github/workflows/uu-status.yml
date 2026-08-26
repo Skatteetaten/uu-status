@@ -109,6 +109,18 @@ jobs:
         run: |
           python build_uu_archive.py
 
+      # Katalogen og feedene bygges av det arkivsteget nettopp skrev: details,
+      # erklæringsregisteret og endringsloggen. Testene kjøres først, og en
+      # feil hvor som helst her stopper jobben – da når ingen ødelagt katalog
+      # eller feed fram til commit-jobben, og gårsdagens filer blir stående.
+      - name: Regresjonstester for abonnementskatalog og feeds
+        run: |
+          python test_subscription_feeds.py
+
+      - name: Build subscription catalog & feeds (JSON + RSS)
+        run: |
+          python build_subscription_feeds.py
+
       - name: Send docs videre til commit-jobben
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
