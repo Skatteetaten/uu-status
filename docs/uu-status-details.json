@@ -2157,23 +2157,17 @@
     "codes": [
       "1.1.1",
       "1.3.1",
-      "1.4.13",
       "2.4.3",
-      "2.4.7",
-      "3.3.2",
-      "4.1.2"
+      "2.4.7"
     ],
     "nonConformities": [
       "1.1.1",
       "1.3.1",
-      "1.4.13",
       "2.4.3",
-      "2.4.7",
-      "3.3.2",
-      "4.1.2"
+      "2.4.7"
     ],
-    "totalNonConformities": 7,
-    "updatedAt": "2026-03-17",
+    "totalNonConformities": 4,
+    "updatedAt": "2026-08-25",
     "opprettet": "2023-06-01",
     "title": "Tilgjengelighetserklæring for VAT On E-Commerce (VOEC) | uustatus",
     "domain": "uustatus.no",
