@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-08-30T01:38:52Z",
+  "oppdatert": "2026-08-31T01:43:12Z",
   "antall": 123,
   "antallAktive": 119,
   "antallFjernet": 4,
@@ -9,7 +9,7 @@
       "name": "A-meldingen - Avstemmingsinformasjon",
       "domain": "uustatus.no",
       "firstSeen": "2023-11-16",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -26,7 +26,7 @@
       "name": "A-meldingen for arbeid i hjemmet",
       "domain": "uustatus.no",
       "firstSeen": "2023-11-16",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -42,7 +42,7 @@
       "name": "A-meldingen for veldedig eller allmennyttig organisasjon",
       "domain": "uustatus.no",
       "firstSeen": "2024-03-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -58,7 +58,7 @@
       "name": "A-meldingen for virksomheter uten lønnssystem (A10)",
       "domain": "uustatus.no",
       "firstSeen": "2023-06-26",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -78,7 +78,7 @@
       "name": "Aksjeoppgaven",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-10",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -97,7 +97,7 @@
       "name": "Attest for skatt og avgift",
       "domain": "uustatus.no",
       "firstSeen": "2025-05-09",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -111,7 +111,7 @@
       "name": "Avtale om fristforlengelse - Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -125,7 +125,7 @@
       "name": "Beregn skatt",
       "domain": "uustatus.no",
       "firstSeen": "2024-11-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -149,7 +149,7 @@
       "name": "Beta-API'er - Github",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -169,7 +169,7 @@
       "name": "Betalinger til selvstendig næringsdrivende",
       "domain": "uustatus.no",
       "firstSeen": "2025-02-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -183,7 +183,7 @@
       "name": "Betalingsavtale – Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -197,7 +197,7 @@
       "name": "Brev om skattemeldingen",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-23",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -221,7 +221,7 @@
       "name": "Endre skattekort",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -245,7 +245,7 @@
       "name": "Folkeregister",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -259,7 +259,7 @@
       "name": "Folkeregisteret - om tjenestene",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -280,7 +280,7 @@
       "name": "Forlik og namsmann",
       "domain": "uustatus.no",
       "firstSeen": "2025-12-02",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -302,7 +302,7 @@
       "name": "Fullmakt – Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-08-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -316,7 +316,7 @@
       "name": "Globalskatt mottak",
       "domain": "uustatus.no",
       "firstSeen": "2026-07-22",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -336,7 +336,7 @@
       "name": "Globalskatt validering",
       "domain": "uustatus.no",
       "firstSeen": "2026-07-22",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -356,7 +356,7 @@
       "name": "Godtgjøring til opphaver til åndsverk",
       "domain": "uustatus.no",
       "firstSeen": "2025-04-24",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -370,7 +370,7 @@
       "name": "Innboks",
       "domain": "uustatus.no",
       "firstSeen": "2025-01-28",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -389,7 +389,7 @@
       "name": "Innlevering av kontoopplysninger",
       "domain": "uustatus.no",
       "firstSeen": "2026-03-02",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -409,7 +409,7 @@
       "name": "Innrapportering av a-melding som vedlegg",
       "domain": "uustatus.no",
       "firstSeen": "2026-05-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -425,7 +425,7 @@
       "name": "Innrapportering SAF-T",
       "domain": "uustatus.no",
       "firstSeen": "2026-04-24",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -439,7 +439,7 @@
       "name": "Innsyn etter personopplysningsloven",
       "domain": "uustatus.no",
       "firstSeen": "2024-08-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -453,7 +453,7 @@
       "name": "Internasjonal rapportering CRS/FATCA",
       "domain": "uustatus.no",
       "firstSeen": "2025-09-04",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -469,7 +469,7 @@
       "name": "Intranett",
       "domain": "uustatus.no",
       "firstSeen": "2023-12-15",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -498,7 +498,7 @@
       "name": "Kildeskatt på aksjeutbytte",
       "domain": "uustatus.no",
       "firstSeen": "2026-03-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -512,7 +512,7 @@
       "name": "Kjøp fra produsent – egg",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -526,7 +526,7 @@
       "name": "Kjøp fra produsent – Jord- og hagebruk",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -540,7 +540,7 @@
       "name": "Kjøp fra produsent – korn",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -554,7 +554,7 @@
       "name": "Kjøp fra produsent – melk",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -568,7 +568,7 @@
       "name": "Kjøp fra produsent – slakt",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -582,7 +582,7 @@
       "name": "Klage på eller henvendelse om motregning – Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-08-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -596,7 +596,7 @@
       "name": "Klage på utleggspant – Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-11-24",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -610,7 +610,7 @@
       "name": "Klage på utleggstrekk eller beløp - Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-11-24",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -624,7 +624,7 @@
       "name": "Klage på vedtak om tvangsmulkt eller overtredelsesgebyr",
       "domain": "uustatus.no",
       "firstSeen": "2026-05-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -638,7 +638,7 @@
       "name": "Klage på vedtak om utvidet kontroll",
       "domain": "uustatus.no",
       "firstSeen": "2026-02-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -652,7 +652,7 @@
       "name": "Konto for utbetalinger fra Skatteetaten",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -669,7 +669,7 @@
       "name": "Land-for-land-rapportering for skatteformål",
       "domain": "uustatus.no",
       "firstSeen": "2026-05-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -685,7 +685,7 @@
       "name": "Melding om kildeskatt på renter, royalty og leiebetalinger",
       "domain": "uustatus.no",
       "firstSeen": "2025-09-19",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -704,7 +704,7 @@
       "name": "Melding om offentlig støtte under Skatteetatens støtteordninger",
       "domain": "uustatus.no",
       "firstSeen": "2026-03-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -718,7 +718,7 @@
       "name": "Merverdiavgifts­håndboken",
       "domain": "uustatus.no",
       "firstSeen": "2026-01-22",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -740,7 +740,7 @@
       "name": "Min merverdiavgift",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [
         "2026-03-05"
@@ -763,7 +763,7 @@
       "name": "Min side",
       "domain": "uustatus.no",
       "firstSeen": "2023-09-29",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -791,7 +791,7 @@
       "name": "Min side - Eiendommer",
       "domain": "uustatus.no",
       "firstSeen": "2026-04-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -807,7 +807,7 @@
       "name": "Min skatt og mine skattedokumenter",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -825,7 +825,7 @@
       "name": "Min skatteplikt",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-23",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -855,7 +855,7 @@
       "name": "Mine inntekter og arbeidsforhold",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -875,7 +875,7 @@
       "name": "Mine krav",
       "domain": "uustatus.no",
       "firstSeen": "2026-02-04",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -896,7 +896,7 @@
       "name": "Mine saker - Namsmann og forliksrådtjenester",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-16",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -922,7 +922,7 @@
       "name": "Nettolønn til bruttolønn",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-11",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -936,7 +936,7 @@
       "name": "Nytt eller endret kontonummer for utbetaling av skatt",
       "domain": "uustatus.no",
       "firstSeen": "2026-03-03",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -950,7 +950,7 @@
       "name": "Oppdrags- og arbeidsforholdsregisteret",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -975,7 +975,7 @@
       "name": "Oppdragsgiverportalen",
       "domain": "uustatus.no",
       "firstSeen": "2026-03-11",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -995,7 +995,7 @@
       "domain": "uustatus.no",
       "firstSeen": "2026-08-20",
       "removedDates": [],
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "lastKnown": {
         "updatedAt": "2026-08-20",
@@ -1017,7 +1017,7 @@
       "name": "Opsjoner i oppstartsselskaper og vekstselskaper – rapportering av tredjepartsopplysninger",
       "domain": "uustatus.no",
       "firstSeen": "2025-12-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1031,7 +1031,7 @@
       "name": "Oversikt over innhold i skattemeldingen",
       "domain": "uustatus.no",
       "firstSeen": "2025-07-03",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1054,7 +1054,7 @@
       "name": "Rapportering av opplysninger om avtalevilkår og salgsvilkår ved særskattepliktig realisasjon av naturgass fra norsk sokkel",
       "domain": "uustatus.no",
       "firstSeen": "2026-02-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1068,7 +1068,7 @@
       "name": "Rapportering av tredjepartsopplysninger med vedlegg",
       "domain": "uustatus.no",
       "firstSeen": "2025-12-03",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1082,7 +1082,7 @@
       "name": "Rapportering av utleie av fast eiendom fra formidlingsselskap",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-02",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1098,7 +1098,7 @@
       "name": "RDT portal",
       "domain": "uustatus.no",
       "firstSeen": "2026-04-07",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1116,7 +1116,7 @@
       "name": "Rettighetspakke innsyn web",
       "domain": "uustatus.no",
       "firstSeen": "2025-07-08",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1136,7 +1136,7 @@
       "name": "RF-1097 Søknad om endring av eller krav om forskuddsskatt – upersonlig skattyter",
       "domain": "uustatus.no",
       "firstSeen": "2024-01-09",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1150,7 +1150,7 @@
       "name": "Selvbetjening motorvogn",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-25",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1180,7 +1180,7 @@
       "name": "Servicesenter for utenlandske arbeidstakere",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-23",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1204,7 +1204,7 @@
       "name": "Skatt delegering",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1225,7 +1225,7 @@
       "name": "Skatteetaten github",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1242,7 +1242,7 @@
       "name": "Skatteetaten status",
       "domain": "uustatus.no",
       "firstSeen": "2024-02-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1266,7 +1266,7 @@
       "name": "skatteetaten.no",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-05",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1290,7 +1290,7 @@
       "name": "Skatteetatens API'er",
       "domain": "uustatus.no",
       "firstSeen": "2023-09-26",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1329,7 +1329,7 @@
       "name": "Skatteetatens designsystem - Github",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1346,7 +1346,7 @@
       "name": "Skattefrie utbetalinger fra offentlige virksomheter – rapportering av tredjepartsopplysninger",
       "domain": "uustatus.no",
       "firstSeen": "2025-12-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1360,7 +1360,7 @@
       "name": "Skattekalkulator - Beregn skatten din",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1376,7 +1376,7 @@
       "name": "Skattekort arbeidsgiver",
       "domain": "uustatus.no",
       "firstSeen": "2024-11-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1395,7 +1395,7 @@
       "name": "Skattelister",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-09",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1409,7 +1409,7 @@
       "name": "Skattelister for mediehus",
       "domain": "uustatus.no",
       "firstSeen": "2024-11-22",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1423,7 +1423,7 @@
       "name": "Skattemeldingen",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1439,7 +1439,7 @@
       "name": "Skattemessig bostedsbekreftelse",
       "domain": "uustatus.no",
       "firstSeen": "2026-05-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1453,7 +1453,7 @@
       "name": "Skiftefullmakt",
       "domain": "uustatus.no",
       "firstSeen": "2024-12-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1471,7 +1471,7 @@
       "name": "Skriv til oss",
       "domain": "uustatus.no",
       "firstSeen": "2024-08-27",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1515,7 +1515,7 @@
       "name": "Stil og tone: Språk, design og utvikling i Skatteetaten",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-25",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1536,7 +1536,7 @@
       "name": "Suppleringsskatt",
       "domain": "uustatus.no",
       "firstSeen": "2026-07-22",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1555,7 +1555,7 @@
       "name": "Svar oss i sak",
       "domain": "uustatus.no",
       "firstSeen": "2025-05-15",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1569,7 +1569,7 @@
       "name": "Systemleverandørers produkterklæring av kassasystemer",
       "domain": "uustatus.no",
       "firstSeen": "2026-05-08",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1583,7 +1583,7 @@
       "name": "Særavgifter",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1607,7 +1607,7 @@
       "name": "Søknad om dagsoppgjør eller månedsoppgjør",
       "domain": "uustatus.no",
       "firstSeen": "2023-11-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1621,7 +1621,7 @@
       "name": "Søknad om eller klage på motregning i fremtidige bidrag",
       "domain": "uustatus.no",
       "firstSeen": "2025-08-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1635,7 +1635,7 @@
       "name": "Søknad om endring av avregning i ytelse – Innkrevingsmyndigheten",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-02",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1649,7 +1649,7 @@
       "name": "Søknad om endring eller stans av utleggstrekk",
       "domain": "uustatus.no",
       "firstSeen": "2025-11-14",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1663,7 +1663,7 @@
       "name": "Søknad om fritak for solidaransvar",
       "domain": "uustatus.no",
       "firstSeen": "2025-08-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1677,7 +1677,7 @@
       "name": "Søknad om kjøretillatelse ved midlertidig opphold i Norge",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-17",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1691,7 +1691,7 @@
       "name": "Søknad om kreditt for engangsavgift",
       "domain": "uustatus.no",
       "firstSeen": "2025-06-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1705,7 +1705,7 @@
       "name": "Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet",
       "domain": "uustatus.no",
       "firstSeen": "2025-10-17",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1719,7 +1719,7 @@
       "name": "Søknad om skattekort for utenlandsk arbeidstaker",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-19",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1733,7 +1733,7 @@
       "name": "Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer",
       "domain": "uustatus.no",
       "firstSeen": "2026-04-24",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1747,7 +1747,7 @@
       "name": "Søknad om tollkreditt",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1761,7 +1761,7 @@
       "name": "Søknad om å endre, gjenåpne eller avslutte dagsoppgjør eller månedsoppgjør",
       "domain": "uustatus.no",
       "firstSeen": "2025-06-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1775,7 +1775,7 @@
       "name": "Søknad om å endre, gjenåpne eller avslutte kreditt for engangsavgift",
       "domain": "uustatus.no",
       "firstSeen": "2025-06-06",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1789,7 +1789,7 @@
       "name": "Søknad om å endre, gjenåpne eller avslutte tollkreditt",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-21",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1803,7 +1803,7 @@
       "name": "Tabellkort - beregn skattetrekk",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-11",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1817,7 +1817,7 @@
       "name": "Tenor Testdatasøk",
       "domain": "uustatus.no",
       "firstSeen": "2025-03-26",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1837,7 +1837,7 @@
       "name": "The Aurora Platform",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-12",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1863,7 +1863,7 @@
       "name": "Tips om avvik i Folkeregisteret",
       "domain": "uustatus.no",
       "firstSeen": "2025-02-26",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1877,7 +1877,7 @@
       "name": "Tips oss",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1895,7 +1895,7 @@
       "name": "Tredjepartsopplysninger - betaling for pass og stell av barn",
       "domain": "uustatus.no",
       "firstSeen": "2024-09-19",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1909,7 +1909,7 @@
       "name": "Tredjepartsopplysninger - boligsameie",
       "domain": "uustatus.no",
       "firstSeen": "2025-01-29",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1928,7 +1928,7 @@
       "name": "Tredjepartsopplysninger - boligselskap",
       "domain": "uustatus.no",
       "firstSeen": "2025-01-29",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1945,7 +1945,7 @@
       "name": "Tredjepartsopplysninger - boligsparing for ungdom",
       "domain": "uustatus.no",
       "firstSeen": "2024-11-15",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1959,7 +1959,7 @@
       "name": "Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn",
       "domain": "uustatus.no",
       "firstSeen": "2024-09-19",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1973,7 +1973,7 @@
       "name": "Tredjepartsopplysninger - innskudd, utlån og renter mv",
       "domain": "uustatus.no",
       "firstSeen": "2025-06-05",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -1987,7 +1987,7 @@
       "name": "Tredjepartsopplysninger - nye opplysninger til oppgavegiverregisteret",
       "domain": "uustatus.no",
       "firstSeen": "2025-05-14",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2001,7 +2001,7 @@
       "name": "Tredjepartsopplysninger - skadeforsikring",
       "domain": "uustatus.no",
       "firstSeen": "2025-05-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2020,7 +2020,7 @@
       "name": "Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring",
       "domain": "uustatus.no",
       "firstSeen": "2025-02-07",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2034,7 +2034,7 @@
       "name": "Trekkontroll",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-20",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2054,7 +2054,7 @@
       "name": "Utlegg og forlik",
       "domain": "uustatus.no",
       "firstSeen": "2025-12-02",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2073,7 +2073,7 @@
       "name": "Utsatt frist søknad",
       "domain": "uustatus.no",
       "firstSeen": "2023-01-18",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2087,7 +2087,7 @@
       "name": "Utskrift av skattemelding og skatteoppgjør",
       "domain": "uustatus.no",
       "firstSeen": "2025-06-05",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
@@ -2103,7 +2103,7 @@
       "name": "VAT On E-Commerce (VOEC)",
       "domain": "uustatus.no",
       "firstSeen": "2023-06-01",
-      "lastSeen": "2026-08-30",
+      "lastSeen": "2026-08-31",
       "status": "aktiv",
       "removedDates": [],
       "lastKnown": {
