@@ -561,13 +561,11 @@
       "name": "Min skatt og mine skattedokumenter",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Min skatt og mine skattedokumenter | uustatus",
-      "updatedAt": "2026-02-11",
+      "updatedAt": "2026-08-31",
       "nonConformities": [
-        "1.1.1",
-        "1.3.1",
         "1.3.2"
       ],
-      "totalNonConformities": 3
+      "totalNonConformities": 1
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/2c1faadd-00a7-40fd-870e-9cf5805a2d35",
@@ -1415,7 +1413,7 @@
       "name": "Utsatt frist søknad",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Utsatt frist søknad | uustatus",
-      "updatedAt": "2026-06-16",
+      "updatedAt": "2026-08-31",
       "nonConformities": [],
       "totalNonConformities": 0
     },

@@ -5,7 +5,14 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Wed, 26 Aug 2026 02:02:12 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 01:46:21 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Min skatt og mine skattedokumenter</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a</link>
+      <guid isPermaLink="false">02b34dd89cbe350de2856e6c64ba5d7474912f2e</guid>
+      <pubDate>Tue, 01 Sep 2026 01:46:21 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"02b34dd89cbe350de2856e6c64ba5d7474912f2e","eventType":"declaration_changed","declarationId":"4fd1edd9-7157-4e62-bd8c-63a991c4102a","title":"Min skatt og mine skattedokumenter","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":3,"sourceUpdatedAt":"2026-02-11","deadline":"2027-02-11"},"currentValues":{"totalNonConformities":1,"sourceUpdatedAt":"2026-08-31","deadline":"2027-08-31"},"addedNonConformities":[],"removedNonConformities":["1.1.1","1.3.1"],"detectedAt":"2026-09-01T01:46:21Z","deadline":"2027-08-31"}</description>
+    </item>
     <item>
       <title>Endret erklæring: VAT On E-Commerce (VOEC)</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/39753a2a-0385-47e4-946e-2d934c0fcd38</link>
@@ -1748,13 +1755,6 @@
       <guid isPermaLink="false">826b25898f749ffa732d612fb8cd244825fb480f</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:50 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"826b25898f749ffa732d612fb8cd244825fb480f","eventType":"declaration_created","declarationId":"032a655f-22dc-40ad-95ac-749baecf04dd","title":"Utskrift av skattemelding og skatteoppgjør","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Endret erklæring: Tredjepartsopplysninger - boligselskap</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
-      <guid isPermaLink="false">98e20281c5c70ad760eae104fe2e25441692d167</guid>
-      <pubDate>Sat, 20 Dec 2025 02:10:52 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"98e20281c5c70ad760eae104fe2e25441692d167","eventType":"declaration_changed","declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":11,"sourceUpdatedAt":"2025-12-19","deadline":"2026-12-19"},"currentValues":{"totalNonConformities":8,"sourceUpdatedAt":"2025-12-20","deadline":"2026-12-20"},"addedNonConformities":["2.1.2","3.2.2","3.3.2"],"removedNonConformities":["1.3.2","1.3.5","1.4.12","2.1.1","2.4.6","3.1.2"],"detectedAt":"2025-12-20T02:10:52Z","deadline":"2026-12-20"}</description>
     </item>
   </channel>
 </rss>

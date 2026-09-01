@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Wed, 26 Aug 2026 02:02:12 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 01:46:21 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -304,8 +304,8 @@
       <title>Min skatt og mine skattedokumenter</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a</link>
       <guid isPermaLink="false">4fd1edd9-7157-4e62-bd8c-63a991c4102a</guid>
-      <pubDate>Sat, 31 Jan 2026 02:15:01 GMT</pubDate>
-      <description>{"declarationId":"4fd1edd9-7157-4e62-bd8c-63a991c4102a","title":"Min skatt og mine skattedokumenter","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a","status":"Delvis i samsvar","nonConformities":["1.1.1","1.3.1","1.3.2"],"totalNonConformities":3,"deadline":"2027-02-11","sourceUpdatedAt":"2026-02-11","lastMeaningfulChangeAt":"2026-01-31T02:15:01Z","active":true,"removedAt":null}</description>
+      <pubDate>Tue, 01 Sep 2026 01:46:21 GMT</pubDate>
+      <description>{"declarationId":"4fd1edd9-7157-4e62-bd8c-63a991c4102a","title":"Min skatt og mine skattedokumenter","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a","status":"Delvis i samsvar","nonConformities":["1.3.2"],"totalNonConformities":1,"deadline":"2027-08-31","sourceUpdatedAt":"2026-08-31","lastMeaningfulChangeAt":"2026-09-01T01:46:21Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Skattemessig bostedsbekreftelse</title>
@@ -739,7 +739,7 @@
       <link>https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220</link>
       <guid isPermaLink="false">dd668d30-1d3f-4cc4-bf56-e34feac2a220</guid>
       <pubDate>Mon, 17 Aug 2026 10:30:43 GMT</pubDate>
-      <description>{"declarationId":"dd668d30-1d3f-4cc4-bf56-e34feac2a220","title":"Utsatt frist søknad","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-06-16","sourceUpdatedAt":"2026-06-16","lastMeaningfulChangeAt":"2026-08-17T10:30:43Z","active":true,"removedAt":null}</description>
+      <description>{"declarationId":"dd668d30-1d3f-4cc4-bf56-e34feac2a220","title":"Utsatt frist søknad","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-08-31","sourceUpdatedAt":"2026-08-31","lastMeaningfulChangeAt":"2026-08-17T10:30:43Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Selvbetjening motorvogn</title>

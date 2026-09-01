@@ -717,14 +717,12 @@
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a",
       "status": "Delvis i samsvar",
       "nonConformities": [
-        "1.1.1",
-        "1.3.1",
         "1.3.2"
       ],
-      "totalNonConformities": 3,
-      "deadline": "2027-02-11",
-      "sourceUpdatedAt": "2026-02-11",
-      "lastMeaningfulChangeAt": "2026-01-31T02:15:01Z",
+      "totalNonConformities": 1,
+      "deadline": "2027-08-31",
+      "sourceUpdatedAt": "2026-08-31",
+      "lastMeaningfulChangeAt": "2026-09-01T01:46:21Z",
       "active": true,
       "removedAt": null
     },
@@ -1663,8 +1661,8 @@
       "status": "I samsvar",
       "nonConformities": [],
       "totalNonConformities": 0,
-      "deadline": "2027-06-16",
-      "sourceUpdatedAt": "2026-06-16",
+      "deadline": "2027-08-31",
+      "sourceUpdatedAt": "2026-08-31",
       "lastMeaningfulChangeAt": "2026-08-17T10:30:43Z",
       "active": true,
       "removedAt": null

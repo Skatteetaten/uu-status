@@ -885,19 +885,15 @@
     "url": "https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a",
     "name": "Min skatt og mine skattedokumenter",
     "codes": [
-      "1.1.1",
-      "1.3.1",
       "1.3.2"
     ],
     "nonConformities": [
-      "1.1.1",
-      "1.3.1",
       "1.3.2"
     ],
-    "totalNonConformities": 3,
-    "updatedAt": "2026-02-11",
+    "totalNonConformities": 1,
+    "updatedAt": "2026-08-31",
     "opprettet": "2023-01-18",
-    "deadline": "2027-02-11",
+    "deadline": "2027-08-31",
     "title": "Tilgjengelighetserklæring for Min skatt og mine skattedokumenter | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "Delvis i samsvar"
@@ -2245,9 +2241,9 @@
     "codes": [],
     "nonConformities": [],
     "totalNonConformities": 0,
-    "updatedAt": "2026-06-16",
+    "updatedAt": "2026-08-31",
     "opprettet": "2023-01-18",
-    "deadline": "2027-06-16",
+    "deadline": "2027-08-31",
     "title": "Tilgjengelighetserklæring for Utsatt frist søknad | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "I samsvar"
