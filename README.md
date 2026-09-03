@@ -59,6 +59,40 @@ SharePoint/Power Automate – katalog og endringshendelser, bygget av
 for felter, hendelsestyper og hvordan Power Automate skal konsumere dem.
 Abonnentdata lagres aldri i dette repoet.
 
+## Innbygging i SharePoint
+
+`noekkeltall.html` viser bare de fire nøkkeltallkortene fra statusfanen
+(Erklæringer, Brudd totalt, Uten brudd, Med utløpt frist) – uten banner,
+overskrift eller lenker. Siden er ulenket og laget for «Bygg inn»-webdelen på
+interne SharePoint-sider. Tallene regnes av samme funksjon som statusfanen,
+`beregnNoekkeltall()` i `app/lib/noekkeltall.ts`, så de to flatene viser
+alltid det samme.
+
+Innbyggingskode til webdelen:
+
+```html
+<iframe
+  src="https://skatteetaten.github.io/uu-status/noekkeltall.html"
+  title="Nøkkeltall for Skatteetatens tilgjengelighetserklæringer"
+  width="100%"
+  height="120"
+  style="border: 0"
+  loading="lazy"
+></iframe>
+```
+
+Kortene fyller bredden og bryter til flere rader når rammen er smal. Sett
+`height` etter hvor bred webdelen er (målt med standard skriftstørrelse):
+én rad, som krever en ramme bredere enn ca. 700 px, er 108 px høy; to rader
+er 224 px. 120 og 240 gir litt slingringsmonn. For lav ramme gir rullefelt,
+ikke skjult innhold, så feilen er synlig for den som redigerer siden.
+
+Før det virker må en SharePoint-administrator legge `skatteetaten.github.io`
+til i listen over tillatte domener for innbygging (Områdeinnstillinger →
+HTML-feltsikkerhet). Uten det avviser webdelen adressen. GitHub Pages sender
+verken `X-Frame-Options` eller `frame-ancestors`, så selve siden lar seg
+ramme inn.
+
 ## Identitet: UUID, ikke URL
 
 En erklæring identifiseres av UUID-en i adressen, ikke av hele URL-en. Samme

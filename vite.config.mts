@@ -134,6 +134,11 @@ export default defineConfig({
         // Ulenket kioskvisning for infoskjermene i etaten. Lenkes ikke fra
         // fanene – adressen deles direkte med dem som rigger skjermene.
         infoskjerm: resolve(rootDir, 'app/infoskjerm.html'),
+        // Ulenket, innbyggbar visning av de fire nøkkeltallkortene, laget for
+        // «Bygg inn»-webdelen på interne SharePoint-sider. Skal kunne lastes
+        // i en iframe fra et annet domene: legg aldri `frame-ancestors` i
+        // CSP-en over (den virker uansett ikke i meta). Se README, «Innbygging».
+        noekkeltall: resolve(rootDir, 'app/noekkeltall.html'),
       },
     },
   },

@@ -1,0 +1,18 @@
+// Innbyggbar nøkkeltallsvisning (noekkeltall.html). Siden lever inne i en
+// iframe på en SharePoint-side, så den har ingen egen ramme: ikke banner,
+// ikke overskrift, ingen ytre marg. Kortene fyller rammen.
+
+// Litt luft rundt kortene, ellers klippes 1 px-kanten og hjørneradiusen av
+// iframens egen kant. Ikke mer: høyden på rammen settes av den som redigerer
+// SharePoint-siden, og hver piksel her må hen betale for der.
+:global(body) {
+  padding: var(--spacing-xs);
+  // Hvit, ikke sidebakgrunnen fra designsystemet: SharePoint-sider er hvite,
+  // og en tonet flate ville stått som en boks rundt kortene.
+  background: #fff;
+}
+
+.melding {
+  margin: 0;
+  color: var(--palette-graphite-70);
+}

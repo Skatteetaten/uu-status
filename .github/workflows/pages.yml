@@ -106,6 +106,10 @@ jobs:
           test -f dist/feeds/uu-catalog.xml
           test -f dist/feeds/uu-events.xml
           echo "OK: abonnementskatalog og feeds er med i artefakten"
+          # Interne SharePoint-sider bygger inn denne i en iframe. Faller
+          # den ut av bygget, viser webdelen bare en tom ramme.
+          test -f dist/noekkeltall.html
+          echo "OK: innbyggbar nøkkeltallside er med i artefakten"
 
       # actions/configure-pages er bevisst utelatt. Den finnes for å gi
       # base_path og origin til rammeverk som trenger dem – vi setter base

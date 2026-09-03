@@ -1,0 +1,9 @@
+// Samme rutenett som statusfanen (status.module.scss), uten loddrett marg –
+// den innbyggbare siden skal ikke ha luft mot noe over eller under, og
+// statusfanen setter sin egen marg rundt.
+.noekkeltall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+  gap: var(--spacing-m);
+  margin: 0;
+}
