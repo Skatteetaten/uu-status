@@ -5,7 +5,14 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Tue, 01 Sep 2026 01:46:21 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 01:39:29 GMT</lastBuildDate>
+    <item>
+      <title>Ny erklæring: Designsystemet</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e</link>
+      <guid isPermaLink="false">5652fc057bd1a51548a0eda5a4dc66e0f8f4bbd4</guid>
+      <pubDate>Wed, 16 Sep 2026 01:39:29 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"5652fc057bd1a51548a0eda5a4dc66e0f8f4bbd4","eventType":"declaration_created","declarationId":"3daf0fcb-305b-4df9-bb92-46baf73f373e","title":"Designsystemet","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-09-16T01:39:29Z","deadline":"2027-09-14"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Min skatt og mine skattedokumenter</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a</link>
@@ -1748,13 +1755,6 @@
       <guid isPermaLink="false">6306baa89a8bda51074674b1c56cc511a5ccc859</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:51 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"6306baa89a8bda51074674b1c56cc511a5ccc859","eventType":"declaration_created","declarationId":"0724e689-fa47-4b24-8f35-8163f194564a","title":"Intranett","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":12,"active":true},"addedNonConformities":["1.1.1","1.3.1","1.4.1","1.4.11","1.4.12","1.4.3","2.1.1","2.1.2","2.4.3","2.4.4","2.5.3","3.1.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Utskrift av skattemelding og skatteoppgjør</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd</link>
-      <guid isPermaLink="false">826b25898f749ffa732d612fb8cd244825fb480f</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:50 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"826b25898f749ffa732d612fb8cd244825fb480f","eventType":"declaration_created","declarationId":"032a655f-22dc-40ad-95ac-749baecf04dd","title":"Utskrift av skattemelding og skatteoppgjør","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>

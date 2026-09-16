@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "source": "https://skatteetaten.github.io/uu-status/",
-  "count": 123,
+  "count": 124,
   "declarations": [
     {
       "declarationId": "00318500-e9c5-48c0-9400-e06daf2407dd",
@@ -417,8 +417,8 @@
         "2.4.3"
       ],
       "totalNonConformities": 1,
-      "deadline": "2026-09-26",
-      "sourceUpdatedAt": "2025-09-26",
+      "deadline": "2027-09-14",
+      "sourceUpdatedAt": "2026-09-14",
       "lastMeaningfulChangeAt": "2026-01-10T02:13:50Z",
       "active": true,
       "removedAt": null
@@ -511,6 +511,19 @@
       "deadline": "2027-07-22",
       "sourceUpdatedAt": "2026-07-22",
       "lastMeaningfulChangeAt": "2026-07-23T02:23:01Z",
+      "active": true,
+      "removedAt": null
+    },
+    {
+      "declarationId": "3daf0fcb-305b-4df9-bb92-46baf73f373e",
+      "title": "Designsystemet",
+      "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e",
+      "status": "I samsvar",
+      "nonConformities": [],
+      "totalNonConformities": 0,
+      "deadline": "2027-09-14",
+      "sourceUpdatedAt": "2026-09-14",
+      "lastMeaningfulChangeAt": "2026-09-16T01:39:29Z",
       "active": true,
       "removedAt": null
     },
@@ -1213,8 +1226,8 @@
         "2.4.3"
       ],
       "totalNonConformities": 1,
-      "deadline": "2026-09-28",
-      "sourceUpdatedAt": "2025-09-28",
+      "deadline": "2027-09-14",
+      "sourceUpdatedAt": "2026-09-14",
       "lastMeaningfulChangeAt": "2026-01-10T02:13:50Z",
       "active": true,
       "removedAt": null
@@ -1245,8 +1258,8 @@
         "4.1.2"
       ],
       "totalNonConformities": 5,
-      "deadline": "2026-09-28",
-      "sourceUpdatedAt": "2025-09-28",
+      "deadline": "2027-09-14",
+      "sourceUpdatedAt": "2026-09-14",
       "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
       "active": true,
       "removedAt": null

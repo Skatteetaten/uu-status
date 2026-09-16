@@ -28,9 +28,9 @@
       "2.4.3"
     ],
     "totalNonConformities": 1,
-    "updatedAt": "2025-09-26",
+    "updatedAt": "2026-09-14",
     "opprettet": "2023-11-16",
-    "deadline": "2026-09-26",
+    "deadline": "2027-09-14",
     "title": "Tilgjengelighetserklæring for A-meldingen for arbeid i hjemmet | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "Delvis i samsvar"
@@ -45,9 +45,9 @@
       "2.4.3"
     ],
     "totalNonConformities": 1,
-    "updatedAt": "2025-09-28",
+    "updatedAt": "2026-09-14",
     "opprettet": "2024-03-01",
-    "deadline": "2026-09-28",
+    "deadline": "2027-09-14",
     "title": "Tilgjengelighetserklæring for A-meldingen for veldedig eller allmennyttig organisasjon | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "Delvis i samsvar"
@@ -70,9 +70,9 @@
       "4.1.2"
     ],
     "totalNonConformities": 5,
-    "updatedAt": "2025-09-28",
+    "updatedAt": "2026-09-14",
     "opprettet": "2023-06-26",
-    "deadline": "2026-09-28",
+    "deadline": "2027-09-14",
     "title": "Tilgjengelighetserklæring for A-meldingen for virksomheter uten lønnssystem (A10) | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "Delvis i samsvar"
@@ -242,6 +242,19 @@
     "title": "Tilgjengelighetserklæring for Brev om skattemeldingen | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "Delvis i samsvar"
+  },
+  {
+    "url": "https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e",
+    "name": "Designsystemet",
+    "codes": [],
+    "nonConformities": [],
+    "totalNonConformities": 0,
+    "updatedAt": "2026-09-14",
+    "opprettet": "2026-09-14",
+    "deadline": "2027-09-14",
+    "title": "Tilgjengelighetserklæring for Designsystemet | uustatus",
+    "domain": "uustatus.no",
+    "samsvarsstatus": "I samsvar"
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a",

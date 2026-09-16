@@ -17,7 +17,7 @@
       "name": "A-meldingen for arbeid i hjemmet",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for A-meldingen for arbeid i hjemmet | uustatus",
-      "updatedAt": "2025-09-26",
+      "updatedAt": "2026-09-14",
       "nonConformities": [
         "2.4.3"
       ],
@@ -28,7 +28,7 @@
       "name": "A-meldingen for veldedig eller allmennyttig organisasjon",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for A-meldingen for veldedig eller allmennyttig organisasjon | uustatus",
-      "updatedAt": "2025-09-28",
+      "updatedAt": "2026-09-14",
       "nonConformities": [
         "2.4.3"
       ],
@@ -39,7 +39,7 @@
       "name": "A-meldingen for virksomheter uten lønnssystem (A10)",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for A-meldingen for virksomheter uten lønnssystem (A10) | uustatus",
-      "updatedAt": "2025-09-28",
+      "updatedAt": "2026-09-14",
       "nonConformities": [
         "2.4.2",
         "2.4.3",
@@ -151,6 +151,15 @@
         "4.1.3"
       ],
       "totalNonConformities": 9
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e",
+      "name": "Designsystemet",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Designsystemet | uustatus",
+      "updatedAt": "2026-09-14",
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a",
