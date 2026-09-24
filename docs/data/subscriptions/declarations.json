@@ -1934,7 +1934,7 @@
     },
     {
       "declarationId": "facaf2cb-a765-4920-aa7d-689954951b3b",
-      "title": "Stil og tone: Språk, design og utvikling i Skatteetaten",
+      "title": "Skattekartet",
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b",
       "status": "Delvis i samsvar",
       "nonConformities": [
@@ -1946,8 +1946,8 @@
         "4.1.2"
       ],
       "totalNonConformities": 6,
-      "deadline": "2027-02-17",
-      "sourceUpdatedAt": "2026-02-17",
+      "deadline": "2027-09-23",
+      "sourceUpdatedAt": "2026-09-23",
       "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
       "active": true,
       "removedAt": null

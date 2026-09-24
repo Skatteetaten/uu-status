@@ -1545,6 +1545,33 @@
     "samsvarsstatus": "Delvis i samsvar"
   },
   {
+    "url": "https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b",
+    "name": "Skattekartet",
+    "codes": [
+      "1.1.1",
+      "1.4.11",
+      "2.4.1",
+      "3.1.2",
+      "4.1.1",
+      "4.1.2"
+    ],
+    "nonConformities": [
+      "1.1.1",
+      "1.4.11",
+      "2.4.1",
+      "3.1.2",
+      "4.1.1",
+      "4.1.2"
+    ],
+    "totalNonConformities": 6,
+    "updatedAt": "2026-09-23",
+    "opprettet": "2023-01-25",
+    "deadline": "2027-09-23",
+    "title": "Tilgjengelighetserklæring for Skattekartet | uustatus",
+    "domain": "uustatus.no",
+    "samsvarsstatus": "Delvis i samsvar"
+  },
+  {
     "url": "https://uustatus.no/nb/erklaringer/publisert/31334400-de06-4eeb-909f-ac880e5af8c9",
     "name": "Skattekort arbeidsgiver",
     "codes": [
@@ -1656,33 +1683,6 @@
     "title": "Tilgjengelighetserklæring for Skriv til oss | uustatus",
     "domain": "uustatus.no",
     "samsvarsstatus": "I samsvar"
-  },
-  {
-    "url": "https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b",
-    "name": "Stil og tone: Språk, design og utvikling i Skatteetaten",
-    "codes": [
-      "1.1.1",
-      "1.4.11",
-      "2.4.1",
-      "3.1.2",
-      "4.1.1",
-      "4.1.2"
-    ],
-    "nonConformities": [
-      "1.1.1",
-      "1.4.11",
-      "2.4.1",
-      "3.1.2",
-      "4.1.1",
-      "4.1.2"
-    ],
-    "totalNonConformities": 6,
-    "updatedAt": "2026-02-17",
-    "opprettet": "2023-01-25",
-    "deadline": "2027-02-17",
-    "title": "Tilgjengelighetserklæring for Stil og tone: Språk, design og utvikling i Skatteetaten | uustatus",
-    "domain": "uustatus.no",
-    "samsvarsstatus": "Delvis i samsvar"
   },
   {
     "url": "https://uustatus.no/nb/erklaringer/publisert/74032b18-c3b1-4d34-9045-2d624f715597",

@@ -847,11 +847,11 @@
       <description>{"declarationId":"f85283dd-ef02-4af3-b67f-69aba2168e3e","title":"Utlegg og forlik","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/f85283dd-ef02-4af3-b67f-69aba2168e3e","status":"Delvis i samsvar","nonConformities":["1.3.1","1.3.2","2.4.6","4.1.2"],"totalNonConformities":4,"deadline":"2026-12-02","sourceUpdatedAt":"2025-12-02","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
-      <title>Stil og tone: Språk, design og utvikling i Skatteetaten</title>
+      <title>Skattekartet</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b</link>
       <guid isPermaLink="false">facaf2cb-a765-4920-aa7d-689954951b3b</guid>
       <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"facaf2cb-a765-4920-aa7d-689954951b3b","title":"Stil og tone: Språk, design og utvikling i Skatteetaten","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b","status":"Delvis i samsvar","nonConformities":["1.1.1","1.4.11","2.4.1","3.1.2","4.1.1","4.1.2"],"totalNonConformities":6,"deadline":"2027-02-17","sourceUpdatedAt":"2026-02-17","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <description>{"declarationId":"facaf2cb-a765-4920-aa7d-689954951b3b","title":"Skattekartet","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b","status":"Delvis i samsvar","nonConformities":["1.1.1","1.4.11","2.4.1","3.1.2","4.1.1","4.1.2"],"totalNonConformities":6,"deadline":"2027-09-23","sourceUpdatedAt":"2026-09-23","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Land-for-land-rapportering for skatteformål</title>
