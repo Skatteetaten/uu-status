@@ -5,7 +5,14 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Wed, 16 Sep 2026 01:39:29 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 01:39:38 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Skattekartet</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b</link>
+      <guid isPermaLink="false">2b3f53b2104afa4694f39d888bd853c5311f455d</guid>
+      <pubDate>Fri, 25 Sep 2026 01:39:38 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"2b3f53b2104afa4694f39d888bd853c5311f455d","eventType":"declaration_changed","declarationId":"facaf2cb-a765-4920-aa7d-689954951b3b","title":"Skattekartet","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/facaf2cb-a765-4920-aa7d-689954951b3b","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":6,"sourceUpdatedAt":"2026-09-23","deadline":"2027-09-23"},"currentValues":{"totalNonConformities":7,"sourceUpdatedAt":"2026-09-24","deadline":"2027-09-24"},"addedNonConformities":["1.3.1","1.4.10","2.4.3"],"removedNonConformities":["1.1.1","1.4.11"],"detectedAt":"2026-09-25T01:39:38Z","deadline":"2027-09-24"}</description>
+    </item>
     <item>
       <title>Ny erklæring: Designsystemet</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/3daf0fcb-305b-4df9-bb92-46baf73f373e</link>
@@ -1748,13 +1755,6 @@
       <guid isPermaLink="false">73bb2289af5c2dd1e8974a8cd0c481f9cb25ebe8</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:52 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"73bb2289af5c2dd1e8974a8cd0c481f9cb25ebe8","eventType":"declaration_created","declarationId":"0f8eb2c9-2436-418e-8c57-2ea8865c8121","title":"Servicesenter for utenlandske arbeidstakere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0f8eb2c9-2436-418e-8c57-2ea8865c8121","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.3.1","1.4.13","2.1.1","3.1.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Intranett</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a</link>
-      <guid isPermaLink="false">6306baa89a8bda51074674b1c56cc511a5ccc859</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:51 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"6306baa89a8bda51074674b1c56cc511a5ccc859","eventType":"declaration_created","declarationId":"0724e689-fa47-4b24-8f35-8163f194564a","title":"Intranett","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0724e689-fa47-4b24-8f35-8163f194564a","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":12,"active":true},"addedNonConformities":["1.1.1","1.3.1","1.4.1","1.4.11","1.4.12","1.4.3","2.1.1","2.1.2","2.4.3","2.4.4","2.5.3","3.1.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>
