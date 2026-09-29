@@ -166,19 +166,15 @@
       "name": "Endre skattekort",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Endre skattekort | uustatus",
-      "updatedAt": "2025-11-09",
+      "updatedAt": "2026-09-28",
       "nonConformities": [
+        "1.2.2",
         "1.3.1",
         "1.3.2",
-        "1.4.11",
-        "2.4.3",
-        "2.4.4",
-        "2.4.6",
-        "3.3.2",
         "4.1.2",
         "4.1.3"
       ],
-      "totalNonConformities": 9
+      "totalNonConformities": 5
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c",
@@ -1233,7 +1229,7 @@
       "name": "Tabellkort - beregn skattetrekk",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tabellkort - beregn skattetrekk | uustatus",
-      "updatedAt": "2025-09-30",
+      "updatedAt": "2026-09-28",
       "nonConformities": [],
       "totalNonConformities": 0
     },

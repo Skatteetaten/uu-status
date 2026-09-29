@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Fri, 25 Sep 2026 01:39:38 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 01:46:47 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -150,8 +150,8 @@
       <title>Endre skattekort</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a</link>
       <guid isPermaLink="false">2e9af915-796a-4b03-8f51-fe1d0f76850a</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"2e9af915-796a-4b03-8f51-fe1d0f76850a","title":"Endre skattekort","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a","status":"Delvis i samsvar","nonConformities":["1.3.1","1.3.2","1.4.11","2.4.3","2.4.4","2.4.6","3.3.2","4.1.2","4.1.3"],"totalNonConformities":9,"deadline":"2026-11-09","sourceUpdatedAt":"2025-11-09","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Tue, 29 Sep 2026 01:46:47 GMT</pubDate>
+      <description>{"declarationId":"2e9af915-796a-4b03-8f51-fe1d0f76850a","title":"Endre skattekort","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a","status":"Delvis i samsvar","nonConformities":["1.2.2","1.3.1","1.3.2","4.1.2","4.1.3"],"totalNonConformities":5,"deadline":"2027-09-28","sourceUpdatedAt":"2026-09-28","lastMeaningfulChangeAt":"2026-09-29T01:46:47Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Mine arbeidsgivere</title>
@@ -193,7 +193,7 @@
       <link>https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784</link>
       <guid isPermaLink="false">39f00367-5950-4917-8521-6c2faf74f784</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:50 GMT</pubDate>
-      <description>{"declarationId":"39f00367-5950-4917-8521-6c2faf74f784","title":"Tabellkort - beregn skattetrekk","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2026-09-30","sourceUpdatedAt":"2025-09-30","lastMeaningfulChangeAt":"2026-01-10T02:13:50Z","active":true,"removedAt":null}</description>
+      <description>{"declarationId":"39f00367-5950-4917-8521-6c2faf74f784","title":"Tabellkort - beregn skattetrekk","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-09-28","sourceUpdatedAt":"2026-09-28","lastMeaningfulChangeAt":"2026-01-10T02:13:50Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Oversikt over innhold i skattemeldingen</title>
