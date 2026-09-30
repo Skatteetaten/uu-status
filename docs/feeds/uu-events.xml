@@ -5,7 +5,14 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Tue, 29 Sep 2026 01:46:47 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 01:49:30 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Melding om kildeskatt på renter, royalty og leiebetalinger</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228</link>
+      <guid isPermaLink="false">7ba683bfc4faa764f426368a900e253ca2e59772</guid>
+      <pubDate>Wed, 30 Sep 2026 01:49:30 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"7ba683bfc4faa764f426368a900e253ca2e59772","eventType":"declaration_changed","declarationId":"46f94252-a1d0-4161-9192-5fe073f98228","title":"Melding om kildeskatt på renter, royalty og leiebetalinger","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":4,"sourceUpdatedAt":"2025-09-19","deadline":"2026-09-19"},"currentValues":{"totalNonConformities":5,"sourceUpdatedAt":"2026-09-29","deadline":"2027-09-29"},"addedNonConformities":["1.4.3","4.1.2"],"removedNonConformities":["4.1.1"],"detectedAt":"2026-09-30T01:49:30Z","deadline":"2027-09-29"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Endre skattekort</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a</link>
@@ -1748,13 +1755,6 @@
       <guid isPermaLink="false">a0d65a92234b2146f0bb274a5ad2a009172b39f4</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:54 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"a0d65a92234b2146f0bb274a5ad2a009172b39f4","eventType":"declaration_created","declarationId":"18fecbde-8bf8-4bfd-ad26-440f4f96af94","title":"Avtale om fristforlengelse - Innkrevingsmyndigheten","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/18fecbde-8bf8-4bfd-ad26-440f4f96af94","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Skriv til oss</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/18bd7a08-517c-4ef7-8bec-06cd6568563b</link>
-      <guid isPermaLink="false">33703ae221b5f3ea726e608095aa46d227d8a921</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:53 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"33703ae221b5f3ea726e608095aa46d227d8a921","eventType":"declaration_created","declarationId":"18bd7a08-517c-4ef7-8bec-06cd6568563b","title":"Skriv til oss","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/18bd7a08-517c-4ef7-8bec-06cd6568563b","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>

@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Tue, 29 Sep 2026 01:46:47 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 01:49:30 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -248,8 +248,8 @@
       <title>Melding om kildeskatt på renter, royalty og leiebetalinger</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228</link>
       <guid isPermaLink="false">46f94252-a1d0-4161-9192-5fe073f98228</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"46f94252-a1d0-4161-9192-5fe073f98228","title":"Melding om kildeskatt på renter, royalty og leiebetalinger","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.10","2.4.3","4.1.1"],"totalNonConformities":4,"deadline":"2026-09-19","sourceUpdatedAt":"2025-09-19","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Wed, 30 Sep 2026 01:49:30 GMT</pubDate>
+      <description>{"declarationId":"46f94252-a1d0-4161-9192-5fe073f98228","title":"Melding om kildeskatt på renter, royalty og leiebetalinger","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228","status":"Delvis i samsvar","nonConformities":["1.3.1","1.4.10","1.4.3","2.4.3","4.1.2"],"totalNonConformities":5,"deadline":"2027-09-29","sourceUpdatedAt":"2026-09-29","lastMeaningfulChangeAt":"2026-09-30T01:49:30Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Søknad om fritak for solidaransvar</title>
