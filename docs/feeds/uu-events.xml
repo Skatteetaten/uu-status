@@ -5,7 +5,35 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Wed, 30 Sep 2026 01:49:30 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 01:44:03 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Skattekalkulator - Beregn skatten din</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba</link>
+      <guid isPermaLink="false">aceb83ca77581815718bceeaabf4a29a81ca8d6c</guid>
+      <pubDate>Sat, 03 Oct 2026 01:44:03 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"aceb83ca77581815718bceeaabf4a29a81ca8d6c","eventType":"declaration_changed","declarationId":"8174d150-d11c-4685-a6a1-12024c7bf2ba","title":"Skattekalkulator - Beregn skatten din","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":1,"sourceUpdatedAt":"2025-09-30","deadline":"2026-09-30"},"currentValues":{"totalNonConformities":3,"sourceUpdatedAt":"2026-10-02","deadline":"2027-10-02"},"addedNonConformities":["1.3.1","1.3.5","4.1.2"],"removedNonConformities":["1.4.10"],"detectedAt":"2026-10-03T01:44:00Z","deadline":"2027-10-02"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Beregn skatt</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a</link>
+      <guid isPermaLink="false">62ccee3dc75f39d6aff8e97c164d438966b279a5</guid>
+      <pubDate>Sat, 03 Oct 2026 01:44:02 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"62ccee3dc75f39d6aff8e97c164d438966b279a5","eventType":"declaration_changed","declarationId":"47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a","title":"Beregn skatt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":9,"sourceUpdatedAt":"2025-10-02","deadline":"2026-10-02"},"currentValues":{"totalNonConformities":3,"sourceUpdatedAt":"2026-10-02","deadline":"2027-10-02"},"addedNonConformities":[],"removedNonConformities":["1.3.1","1.4.10","2.4.7","3.1.2","3.2.4","4.1.3"],"detectedAt":"2026-10-03T01:44:00Z","deadline":"2027-10-02"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Tips oss</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c</link>
+      <guid isPermaLink="false">bfd63ec454de62be77115f68edb97ca65dbbc3b0</guid>
+      <pubDate>Sat, 03 Oct 2026 01:44:01 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"bfd63ec454de62be77115f68edb97ca65dbbc3b0","eventType":"declaration_changed","declarationId":"461f43ab-f826-46b5-a664-8caea74d7e0c","title":"Tips oss","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":3,"sourceUpdatedAt":"2025-09-30","deadline":"2026-09-30"},"currentValues":{"totalNonConformities":4,"sourceUpdatedAt":"2026-10-02","deadline":"2027-10-02"},"addedNonConformities":["1.3.5","3.3.1"],"removedNonConformities":["4.1.2"],"detectedAt":"2026-10-03T01:44:00Z","deadline":"2027-10-02"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Skattekort arbeidsgiver</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/31334400-de06-4eeb-909f-ac880e5af8c9</link>
+      <guid isPermaLink="false">c5bf565bd46dfe3c1196e6ad39541318183e9eb7</guid>
+      <pubDate>Sat, 03 Oct 2026 01:44:00 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"c5bf565bd46dfe3c1196e6ad39541318183e9eb7","eventType":"declaration_changed","declarationId":"31334400-de06-4eeb-909f-ac880e5af8c9","title":"Skattekort arbeidsgiver","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/31334400-de06-4eeb-909f-ac880e5af8c9","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":4,"sourceUpdatedAt":"2026-01-21","deadline":"2027-01-21"},"currentValues":{"totalNonConformities":0,"sourceUpdatedAt":"2026-10-02","deadline":"2027-10-02"},"addedNonConformities":[],"removedNonConformities":["1.3.1","2.4.2","3.3.2","4.1.2"],"detectedAt":"2026-10-03T01:44:00Z","deadline":"2027-10-02"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Melding om kildeskatt på renter, royalty og leiebetalinger</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228</link>
@@ -1727,34 +1755,6 @@
       <guid isPermaLink="false">6696ecb5003c1534369c7a37c6730c2432ac0c0a</guid>
       <pubDate>Sat, 10 Jan 2026 02:13:58 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"6696ecb5003c1534369c7a37c6730c2432ac0c0a","eventType":"declaration_created","declarationId":"26c4a573-0f38-4ba4-95f8-d6a7c504b387","title":"Skiftefullmakt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/26c4a573-0f38-4ba4-95f8-d6a7c504b387","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.4.10","2.4.3","3.3.1","3.3.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Oppdrags- og arbeidsforholdsregisteret</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/23cc25da-3600-433b-a83c-9f0797057e50</link>
-      <guid isPermaLink="false">15ead9887801cac646ea550758b2fd2794926580</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:57 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"15ead9887801cac646ea550758b2fd2794926580","eventType":"declaration_created","declarationId":"23cc25da-3600-433b-a83c-9f0797057e50","title":"Oppdrags- og arbeidsforholdsregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/23cc25da-3600-433b-a83c-9f0797057e50","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":7,"active":true},"addedNonConformities":["1.3.1","1.4.10","2.4.3","3.1.2","3.2.2","3.3.1","3.3.3"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Søknad om tollkreditt</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/19bc325d-4200-4f68-9788-e4d478a9c49e</link>
-      <guid isPermaLink="false">c70463c21ed2a01b6f68bd1ab3139854d071d15c</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:56 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"c70463c21ed2a01b6f68bd1ab3139854d071d15c","eventType":"declaration_created","declarationId":"19bc325d-4200-4f68-9788-e4d478a9c49e","title":"Søknad om tollkreditt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/19bc325d-4200-4f68-9788-e4d478a9c49e","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Min merverdiavgift</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/1962c333-41e1-4cfa-9882-bb3fad358981</link>
-      <guid isPermaLink="false">b24b1825229c50c4cc3da99dbd514d55aa2ff42e</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:55 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"b24b1825229c50c4cc3da99dbd514d55aa2ff42e","eventType":"declaration_created","declarationId":"1962c333-41e1-4cfa-9882-bb3fad358981","title":"Min merverdiavgift","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/1962c333-41e1-4cfa-9882-bb3fad358981","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.4.10","2.4.3","3.3.1","3.3.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Avtale om fristforlengelse - Innkrevingsmyndigheten</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/18fecbde-8bf8-4bfd-ad26-440f4f96af94</link>
-      <guid isPermaLink="false">a0d65a92234b2146f0bb274a5ad2a009172b39f4</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:54 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"a0d65a92234b2146f0bb274a5ad2a009172b39f4","eventType":"declaration_created","declarationId":"18fecbde-8bf8-4bfd-ad26-440f4f96af94","title":"Avtale om fristforlengelse - Innkrevingsmyndigheten","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/18fecbde-8bf8-4bfd-ad26-440f4f96af94","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>

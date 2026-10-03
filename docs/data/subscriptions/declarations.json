@@ -390,17 +390,12 @@
       "declarationId": "31334400-de06-4eeb-909f-ac880e5af8c9",
       "title": "Skattekort arbeidsgiver",
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/31334400-de06-4eeb-909f-ac880e5af8c9",
-      "status": "Delvis i samsvar",
-      "nonConformities": [
-        "1.3.1",
-        "2.4.2",
-        "3.3.2",
-        "4.1.2"
-      ],
-      "totalNonConformities": 4,
-      "deadline": "2027-01-21",
-      "sourceUpdatedAt": "2026-01-21",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "status": "I samsvar",
+      "nonConformities": [],
+      "totalNonConformities": 0,
+      "deadline": "2027-10-02",
+      "sourceUpdatedAt": "2026-10-02",
+      "lastMeaningfulChangeAt": "2026-10-03T01:44:00Z",
       "active": true,
       "removedAt": null
     },
@@ -556,13 +551,14 @@
       "status": "Delvis i samsvar",
       "nonConformities": [
         "1.3.1",
+        "1.3.5",
         "1.4.10",
-        "4.1.2"
+        "3.3.1"
       ],
-      "totalNonConformities": 3,
-      "deadline": "2026-09-30",
-      "sourceUpdatedAt": "2025-09-30",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "totalNonConformities": 4,
+      "deadline": "2027-10-02",
+      "sourceUpdatedAt": "2026-10-02",
+      "lastMeaningfulChangeAt": "2026-10-03T01:44:00Z",
       "active": true,
       "removedAt": null
     },
@@ -617,20 +613,14 @@
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a",
       "status": "Delvis i samsvar",
       "nonConformities": [
-        "1.3.1",
-        "1.4.10",
         "1.4.12",
         "2.4.3",
-        "2.4.7",
-        "3.1.2",
-        "3.2.4",
-        "4.1.2",
-        "4.1.3"
+        "4.1.2"
       ],
-      "totalNonConformities": 9,
-      "deadline": "2026-10-02",
-      "sourceUpdatedAt": "2025-10-02",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "totalNonConformities": 3,
+      "deadline": "2027-10-02",
+      "sourceUpdatedAt": "2026-10-02",
+      "lastMeaningfulChangeAt": "2026-10-03T01:44:00Z",
       "active": true,
       "removedAt": null
     },
@@ -1010,12 +1000,14 @@
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba",
       "status": "Delvis i samsvar",
       "nonConformities": [
-        "1.4.10"
+        "1.3.1",
+        "1.3.5",
+        "4.1.2"
       ],
-      "totalNonConformities": 1,
-      "deadline": "2026-09-30",
-      "sourceUpdatedAt": "2025-09-30",
-      "lastMeaningfulChangeAt": "2026-01-10T02:13:50Z",
+      "totalNonConformities": 3,
+      "deadline": "2027-10-02",
+      "sourceUpdatedAt": "2026-10-02",
+      "lastMeaningfulChangeAt": "2026-10-03T01:44:00Z",
       "active": true,
       "removedAt": null
     },
@@ -1408,8 +1400,8 @@
         "3.1.1"
       ],
       "totalNonConformities": 6,
-      "deadline": "2026-10-06",
-      "sourceUpdatedAt": "2025-10-06",
+      "deadline": "2027-10-02",
+      "sourceUpdatedAt": "2026-10-02",
       "lastMeaningfulChangeAt": "2026-01-10T02:13:50Z",
       "active": true,
       "removedAt": null
