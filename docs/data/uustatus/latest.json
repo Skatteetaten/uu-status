@@ -1002,11 +1002,9 @@
       "name": "Skattemeldingen",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Skattemeldingen | uustatus",
-      "updatedAt": "2026-03-25",
-      "nonConformities": [
-        "4.1.3"
-      ],
-      "totalNonConformities": 1
+      "updatedAt": "2026-10-09",
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/50313dcd-45e5-40bd-9268-be896f8298f4",
@@ -1298,26 +1296,23 @@
       "name": "Tredjepartsopplysninger - boligsameie",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligsameie | uustatus",
-      "updatedAt": "2025-12-10",
+      "updatedAt": "2026-10-09",
       "nonConformities": [
-        "1.3.1",
-        "3.3.2",
-        "4.1.2",
+        "3.2.2",
         "4.1.3"
       ],
-      "totalNonConformities": 4
+      "totalNonConformities": 2
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109",
       "name": "Tredjepartsopplysninger - boligselskap",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligselskap | uustatus",
-      "updatedAt": "2026-03-26",
+      "updatedAt": "2026-10-09",
       "nonConformities": [
-        "2.1.2",
         "4.1.3"
       ],
-      "totalNonConformities": 2
+      "totalNonConformities": 1
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/46477ae1-0ba8-46bc-a2f4-2591f9b60593",

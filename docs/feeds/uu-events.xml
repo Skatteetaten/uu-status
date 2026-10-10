@@ -5,7 +5,28 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Sat, 03 Oct 2026 01:44:03 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 01:51:05 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Tredjepartsopplysninger - boligselskap</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
+      <guid isPermaLink="false">d1a59ee6fa6fcb714de269aaffede816dde7803d</guid>
+      <pubDate>Sat, 10 Oct 2026 01:51:05 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"d1a59ee6fa6fcb714de269aaffede816dde7803d","eventType":"declaration_changed","declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":2,"sourceUpdatedAt":"2026-03-26","deadline":"2027-03-26"},"currentValues":{"totalNonConformities":1,"sourceUpdatedAt":"2026-10-09","deadline":"2027-10-09"},"addedNonConformities":[],"removedNonConformities":["2.1.2"],"detectedAt":"2026-10-10T01:51:03Z","deadline":"2027-10-09"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Tredjepartsopplysninger - boligsameie</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48</link>
+      <guid isPermaLink="false">bdad251e517d16c40dd5bc3fa3ebc82c652b84b3</guid>
+      <pubDate>Sat, 10 Oct 2026 01:51:04 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"bdad251e517d16c40dd5bc3fa3ebc82c652b84b3","eventType":"declaration_changed","declarationId":"c4742d76-f848-48ea-b12d-4b45a5bfde48","title":"Tredjepartsopplysninger - boligsameie","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":4,"sourceUpdatedAt":"2025-12-10","deadline":"2026-12-10"},"currentValues":{"totalNonConformities":2,"sourceUpdatedAt":"2026-10-09","deadline":"2027-10-09"},"addedNonConformities":["3.2.2"],"removedNonConformities":["1.3.1","3.3.2","4.1.2"],"detectedAt":"2026-10-10T01:51:03Z","deadline":"2027-10-09"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Skattemeldingen</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d</link>
+      <guid isPermaLink="false">f00bcf4d917a86d4ec6b59c7d0409a09e5d62c47</guid>
+      <pubDate>Sat, 10 Oct 2026 01:51:03 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"f00bcf4d917a86d4ec6b59c7d0409a09e5d62c47","eventType":"declaration_changed","declarationId":"53e8e046-5b41-49f5-9dff-d5cfd12ff40d","title":"Skattemeldingen","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":1,"sourceUpdatedAt":"2026-03-25","deadline":"2027-03-25"},"currentValues":{"totalNonConformities":0,"sourceUpdatedAt":"2026-10-09","deadline":"2027-10-09"},"addedNonConformities":[],"removedNonConformities":["4.1.3"],"detectedAt":"2026-10-10T01:51:03Z","deadline":"2027-10-09"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Skattekalkulator - Beregn skatten din</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba</link>
@@ -1734,27 +1755,6 @@
       <guid isPermaLink="false">9eb641aa66f66b53848605ed1d9a575c25ab94a1</guid>
       <pubDate>Sat, 10 Jan 2026 02:14:01 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"9eb641aa66f66b53848605ed1d9a575c25ab94a1","eventType":"declaration_created","declarationId":"2b1a0612-6d0b-4d33-855b-fe3173ed655b","title":"Tips om avvik i Folkeregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2b1a0612-6d0b-4d33-855b-fe3173ed655b","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.3.1","1.3.2","1.3.5","3.3.1"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Brev om skattemeldingen</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/28600a84-ef55-4d19-b69c-919cc48f6df0</link>
-      <guid isPermaLink="false">0d6e72ba7c5ea386776f31214c94b3fab7d4578d</guid>
-      <pubDate>Sat, 10 Jan 2026 02:14:00 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"0d6e72ba7c5ea386776f31214c94b3fab7d4578d","eventType":"declaration_created","declarationId":"28600a84-ef55-4d19-b69c-919cc48f6df0","title":"Brev om skattemeldingen","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/28600a84-ef55-4d19-b69c-919cc48f6df0","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":6,"active":true},"addedNonConformities":["1.3.1","2.2.1","2.4.1","2.4.2","3.1.2","3.3.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57</link>
-      <guid isPermaLink="false">be0d398c218e7fbba4d0805cb8fe1542ac778d52</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:59 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"be0d398c218e7fbba4d0805cb8fe1542ac778d52","eventType":"declaration_created","declarationId":"27230555-3e1d-43a8-bbbe-4b3566d62b57","title":"Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Skiftefullmakt</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/26c4a573-0f38-4ba4-95f8-d6a7c504b387</link>
-      <guid isPermaLink="false">6696ecb5003c1534369c7a37c6730c2432ac0c0a</guid>
-      <pubDate>Sat, 10 Jan 2026 02:13:58 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"6696ecb5003c1534369c7a37c6730c2432ac0c0a","eventType":"declaration_created","declarationId":"26c4a573-0f38-4ba4-95f8-d6a7c504b387","title":"Skiftefullmakt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/26c4a573-0f38-4ba4-95f8-d6a7c504b387","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.4.10","2.4.3","3.3.1","3.3.2"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>

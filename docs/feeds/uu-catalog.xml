@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Sat, 03 Oct 2026 01:44:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 01:51:03 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -325,8 +325,8 @@
       <title>Skattemeldingen</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d</link>
       <guid isPermaLink="false">53e8e046-5b41-49f5-9dff-d5cfd12ff40d</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"53e8e046-5b41-49f5-9dff-d5cfd12ff40d","title":"Skattemeldingen","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d","status":"Delvis i samsvar","nonConformities":["4.1.3"],"totalNonConformities":1,"deadline":"2027-03-25","sourceUpdatedAt":"2026-03-25","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Sat, 10 Oct 2026 01:51:03 GMT</pubDate>
+      <description>{"declarationId":"53e8e046-5b41-49f5-9dff-d5cfd12ff40d","title":"Skattemeldingen","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-10-09","sourceUpdatedAt":"2026-10-09","lastMeaningfulChangeAt":"2026-10-10T01:51:03Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Svar oss i sak</title>
@@ -661,8 +661,8 @@
       <title>Tredjepartsopplysninger - boligsameie</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48</link>
       <guid isPermaLink="false">c4742d76-f848-48ea-b12d-4b45a5bfde48</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"c4742d76-f848-48ea-b12d-4b45a5bfde48","title":"Tredjepartsopplysninger - boligsameie","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48","status":"Delvis i samsvar","nonConformities":["1.3.1","3.3.2","4.1.2","4.1.3"],"totalNonConformities":4,"deadline":"2026-12-10","sourceUpdatedAt":"2025-12-10","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Sat, 10 Oct 2026 01:51:03 GMT</pubDate>
+      <description>{"declarationId":"c4742d76-f848-48ea-b12d-4b45a5bfde48","title":"Tredjepartsopplysninger - boligsameie","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48","status":"Delvis i samsvar","nonConformities":["3.2.2","4.1.3"],"totalNonConformities":2,"deadline":"2027-10-09","sourceUpdatedAt":"2026-10-09","lastMeaningfulChangeAt":"2026-10-10T01:51:03Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Innrapportering av a-melding som vedlegg</title>
@@ -738,8 +738,8 @@
       <title>Tredjepartsopplysninger - boligselskap</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
       <guid isPermaLink="false">db6ea2aa-9391-4db4-b6c7-14f4663be109</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","status":"Delvis i samsvar","nonConformities":["2.1.2","4.1.3"],"totalNonConformities":2,"deadline":"2027-03-26","sourceUpdatedAt":"2026-03-26","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Sat, 10 Oct 2026 01:51:03 GMT</pubDate>
+      <description>{"declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","status":"Delvis i samsvar","nonConformities":["4.1.3"],"totalNonConformities":1,"deadline":"2027-10-09","sourceUpdatedAt":"2026-10-09","lastMeaningfulChangeAt":"2026-10-10T01:51:03Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Utsatt frist søknad</title>

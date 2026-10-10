@@ -743,14 +743,12 @@
       "declarationId": "53e8e046-5b41-49f5-9dff-d5cfd12ff40d",
       "title": "Skattemeldingen",
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/53e8e046-5b41-49f5-9dff-d5cfd12ff40d",
-      "status": "Delvis i samsvar",
-      "nonConformities": [
-        "4.1.3"
-      ],
-      "totalNonConformities": 1,
-      "deadline": "2027-03-25",
-      "sourceUpdatedAt": "2026-03-25",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "status": "I samsvar",
+      "nonConformities": [],
+      "totalNonConformities": 0,
+      "deadline": "2027-10-09",
+      "sourceUpdatedAt": "2026-10-09",
+      "lastMeaningfulChangeAt": "2026-10-10T01:51:03Z",
       "active": true,
       "removedAt": null
     },
@@ -1466,15 +1464,13 @@
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48",
       "status": "Delvis i samsvar",
       "nonConformities": [
-        "1.3.1",
-        "3.3.2",
-        "4.1.2",
+        "3.2.2",
         "4.1.3"
       ],
-      "totalNonConformities": 4,
-      "deadline": "2026-12-10",
-      "sourceUpdatedAt": "2025-12-10",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "totalNonConformities": 2,
+      "deadline": "2027-10-09",
+      "sourceUpdatedAt": "2026-10-09",
+      "lastMeaningfulChangeAt": "2026-10-10T01:51:03Z",
       "active": true,
       "removedAt": null
     },
@@ -1646,13 +1642,12 @@
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109",
       "status": "Delvis i samsvar",
       "nonConformities": [
-        "2.1.2",
         "4.1.3"
       ],
-      "totalNonConformities": 2,
-      "deadline": "2027-03-26",
-      "sourceUpdatedAt": "2026-03-26",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "totalNonConformities": 1,
+      "deadline": "2027-10-09",
+      "sourceUpdatedAt": "2026-10-09",
+      "lastMeaningfulChangeAt": "2026-10-10T01:51:03Z",
       "active": true,
       "removedAt": null
     },
