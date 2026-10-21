@@ -1337,7 +1337,7 @@
       "name": "Tredjepartsopplysninger - innskudd, utlån og renter mv",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - innskudd, utlån og renter mv | uustatus",
-      "updatedAt": "2025-12-16",
+      "updatedAt": "2026-10-19",
       "nonConformities": [],
       "totalNonConformities": 0
     },
@@ -1355,7 +1355,7 @@
       "name": "Tredjepartsopplysninger - skadeforsikring",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - skadeforsikring | uustatus",
-      "updatedAt": "2025-11-19",
+      "updatedAt": "2026-10-19",
       "nonConformities": [
         "1.3.1",
         "2.4.2",
