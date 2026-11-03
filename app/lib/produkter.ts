@@ -146,6 +146,7 @@ const PRODUKT_PER_ERKLAERING: Readonly<Record<string, string>> = {
   '5b0cfae5-d1df-42d9-a6ad-c76a7a124f00': 'Skattemelding særavgifter', // Klage på vedtak om tvangsmulkt eller overtredelsesgebyr
   '98148ac6-eb3d-4f84-b3af-e167f9dad103': 'Skattemelding særavgifter', // Søknad om kjøretillatelse ved midlertidig opphold i Norge
   'da746138-2ec0-464d-8442-61a65639f0bb': 'Skattemelding særavgifter', // Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet
+  'e32e9bfb-189a-4390-af64-f39fc93a190a': 'Skattemelding særavgifter', // Særavgifter
 
   // Testlab
   '70c131d2-31de-4af7-b2cf-bf2a2ae4b144': 'Testlab', // Tenor Testdatasøk
@@ -169,7 +170,6 @@ const PRODUKT_PER_ERKLAERING: Readonly<Record<string, string>> = {
   '90be03a3-13e4-4979-8c88-f38727fb77e0': ANDRE_TJENESTER, // Skatteetatens designsystem - Github
   'facaf2cb-a765-4920-aa7d-689954951b3b': ANDRE_TJENESTER, // Skattekartet
   '26c4a573-0f38-4ba4-95f8-d6a7c504b387': ANDRE_TJENESTER, // Skiftefullmakt
-  'e32e9bfb-189a-4390-af64-f39fc93a190a': ANDRE_TJENESTER, // Særavgifter
   'e6745fbf-76e5-469b-abb6-3e9fd52c7e9c': ANDRE_TJENESTER, // The Aurora Platform
 
   // Utvidet kontroll
