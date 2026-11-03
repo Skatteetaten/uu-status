@@ -211,3 +211,24 @@
 .paginering {
   margin-top: 1.5rem;
 }
+
+// Produktraden skiller gruppene: lys bakgrunn og halvfet tekst, så den leses
+// som overskrift og ikke som enda en erklæring. Antallet står i normal vekt
+// for å ikke konkurrere med navnet.
+.produktrad th {
+  background: var(--palette-graphite-5);
+  font-weight: var(--font-weight-bold);
+}
+
+.produktantall {
+  font-weight: var(--font-weight-regular);
+}
+
+// Grupperingsvalget og sidestørrelsen står samlet til høyre for treffteksten,
+// på linje med hverandre.
+.tabellvalg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}

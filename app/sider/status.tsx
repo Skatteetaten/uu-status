@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactElement } from 'react';
 import { Button, InlineButton, Link } from '@skatteetaten/ds-buttons';
 import { OpenClose } from '@skatteetaten/ds-collections';
-import { Select, SearchField } from '@skatteetaten/ds-forms';
+import { Checkbox, Select, SearchField } from '@skatteetaten/ds-forms';
 import {
   CheckSVGpath,
   CancelSVGpath,
@@ -25,9 +25,11 @@ import {
   ANTALL_KRAV,
   dagerTilFrist,
   erFristUtloept,
+  erklaeringId,
   hentErklaeringer,
   tellPerKrav,
 } from '../lib/data';
+import { produktFor, sammenlignProdukter } from '../lib/produkter';
 import type { Erklaering } from '../lib/typer';
 
 import felles from '../stiler/felles.module.scss';
@@ -150,6 +152,42 @@ function Bruddmerke({ antall }: { antall: number }): ReactElement {
   );
 }
 
+/** Erklæringene på én side, delt i sammenhengende produktgrupper. */
+interface Produktgruppe {
+  produkt: string;
+  rader: Erklaering[];
+  /** Gruppen begynte på en tidligere side. */
+  fortsetter: boolean;
+}
+
+function delIProdukter(
+  rader: Erklaering[],
+  forrige: Erklaering | undefined
+): Produktgruppe[] {
+  const grupper: Produktgruppe[] = [];
+  for (const e of rader) {
+    const produkt = produktFor(e);
+    const siste = grupper.at(-1);
+    if (siste?.produkt === produkt) {
+      siste.rader.push(e);
+    } else {
+      grupper.push({
+        produkt,
+        rader: [e],
+        fortsetter:
+          grupper.length === 0 &&
+          forrige !== undefined &&
+          produktFor(forrige) === produkt,
+      });
+    }
+  }
+  return grupper;
+}
+
+function antallErklaeringer(antall: number): string {
+  return `${antall} ${antall === 1 ? 'erklæring' : 'erklæringer'}`;
+}
+
 function Seksjonstittel(): ReactElement {
   return (
     <Heading as={'h2'} level={2} hasSpacing>
@@ -165,7 +203,13 @@ export function Statusoversikt(): ReactElement {
   const [bruddgruppe, setBruddgruppe] = useState<string>(ALLE);
   const [wcagFilter, setWcagFilter] = useState<string>(ALLE);
   const [periode, setPeriode] = useState<string>(ALLE);
-  const [sidestoerrelse, setSidestoerrelse] = useState<string>('25');
+  const [produktFilter, setProduktFilter] = useState<string>(ALLE);
+  // Alle rader som standard. Med produktgrupper blir en side på 25 et
+  // tilfeldig snitt gjennom gruppene, og oversikten er det tabellen er til for.
+  const [sidestoerrelse, setSidestoerrelse] = useState<string>(ALLE);
+  // Gruppert gir oversikt per produkt, flat gir én rangering på tvers. Begge
+  // trengs, og ingen av dem kan utledes av sorteringen alene.
+  const [gruppert, setGruppert] = useState(true);
   const [side, setSide] = useState(1);
   // Flest brudd først. Siden står på en infoskjerm på kontoret og leses i
   // forbifarten, så den skal åpne på det som trenger arbeid – ikke på
@@ -193,7 +237,7 @@ export function Statusoversikt(): ReactElement {
   // Filterendringer skal alltid bringe brukeren tilbake til første side.
   useEffect(() => {
     setSide(1);
-  }, [sok, bruddgruppe, wcagFilter, periode, sidestoerrelse]);
+  }, [sok, bruddgruppe, wcagFilter, periode, produktFilter, sidestoerrelse]);
 
   // Se arkiv.tsx: grønt blink på treffteksten, men ikke ved sidelast. Verdiene
   // sammenlignes fordi StrictMode kjører effekten to ganger i utvikling.
@@ -202,7 +246,7 @@ export function Statusoversikt(): ReactElement {
   // i live-området fikk NVDA til å lese resultatet to ganger.
   const forrigeFilter = useRef<string | null>(null);
   useEffect(() => {
-    const naa = `${sok} ${bruddgruppe} ${wcagFilter} ${periode}`;
+    const naa = [sok, bruddgruppe, wcagFilter, periode, produktFilter].join(' ');
     const endret =
       forrigeFilter.current !== null && forrigeFilter.current !== naa;
     forrigeFilter.current = naa;
@@ -222,7 +266,7 @@ export function Statusoversikt(): ReactElement {
       ms + 50
     );
     return () => window.clearTimeout(timer);
-  }, [sok, bruddgruppe, wcagFilter, periode]);
+  }, [sok, bruddgruppe, wcagFilter, periode, produktFilter]);
 
   // Sidestørrelse og sortering er ikke filtre og nullstilles ikke.
   //
@@ -233,13 +277,15 @@ export function Statusoversikt(): ReactElement {
     (sok.trim() !== '' ? 1 : 0) +
     (bruddgruppe !== ALLE ? 1 : 0) +
     (wcagFilter !== ALLE ? 1 : 0) +
-    (periode !== ALLE ? 1 : 0);
+    (periode !== ALLE ? 1 : 0) +
+    (produktFilter !== ALLE ? 1 : 0);
 
   const nullstillFiltrering = (): void => {
     setSok('');
     setBruddgruppe(ALLE);
     setWcagFilter(ALLE);
     setPeriode(ALLE);
+    setProduktFilter(ALLE);
     // Se arkiv.tsx: knappen forsvinner i det den brukes, så fokus går til
     // første filterfelt.
     sokRef.current?.focus();
@@ -250,13 +296,34 @@ export function Statusoversikt(): ReactElement {
     [erklaeringer]
   );
 
+  // Bare produkter som faktisk har erklæringer, så filteret aldri tilbyr et
+  // valg som gir tom tabell.
+  const produkter = useMemo(() => {
+    const antall = new Map<string, number>();
+    for (const e of erklaeringer ?? []) {
+      const p = produktFor(e);
+      antall.set(p, (antall.get(p) ?? 0) + 1);
+    }
+    return [...antall].sort(([a], [b]) => sammenlignProdukter(a, b));
+  }, [erklaeringer]);
+
   const synlige = useMemo(() => {
     if (!erklaeringer) return [];
     const sokLower = sok.trim().toLowerCase();
     const naa = new Date();
 
     const filtrert = erklaeringer.filter((e) => {
-      if (sokLower && !e.name.toLowerCase().includes(sokLower)) return false;
+      // Søket treffer også produktet, så «finans» gir hele Finans-gruppen.
+      if (
+        sokLower &&
+        !e.name.toLowerCase().includes(sokLower) &&
+        !produktFor(e).toLowerCase().includes(sokLower)
+      ) {
+        return false;
+      }
+      if (produktFilter !== ALLE && produktFor(e) !== produktFilter) {
+        return false;
+      }
       if (!iBruddgruppe(e.totalNonConformities, bruddgruppe)) return false;
       if (wcagFilter !== ALLE && !e.nonConformities.includes(wcagFilter)) {
         return false;
@@ -278,9 +345,21 @@ export function Statusoversikt(): ReactElement {
     const påNavn = (a: Erklaering, b: Erklaering): number =>
       a.name.localeCompare(b.name, 'nb');
 
+    //
+    // Gruppert står produktene alltid alfabetisk, uansett kolonne, og
+    // sorteringen gjelder radene inne i hver gruppe – ellers ville gruppene
+    // byttet plass hver gang et bruddtall endret seg. Vil man ha én samlet
+    // rangering, slår man av grupperingen.
     return [...filtrert].sort((a, b) => {
+      if (gruppert) {
+        const gruppe = sammenlignProdukter(produktFor(a), produktFor(b));
+        if (gruppe !== 0) return gruppe;
+      }
       let d: number;
       switch (sortState.sortKey) {
+        case 'produkt':
+          d = sammenlignProdukter(produktFor(a), produktFor(b)) * retning;
+          break;
         case 'brudd':
           d = (a.totalNonConformities - b.totalNonConformities) * retning;
           break;
@@ -295,14 +374,51 @@ export function Statusoversikt(): ReactElement {
       }
       return d !== 0 ? d : påNavn(a, b);
     });
-  }, [erklaeringer, sok, bruddgruppe, wcagFilter, periode, sortState]);
+  }, [
+    erklaeringer,
+    sok,
+    bruddgruppe,
+    wcagFilter,
+    periode,
+    produktFilter,
+    sortState,
+    gruppert,
+  ]);
+
+  // Gruppestørrelse i hele filtreringsresultatet, ikke bare på denne siden:
+  // overskriften skal si hvor stor gruppen er, også når den deles av sideskift.
+  const perProdukt = useMemo(() => {
+    const antall = new Map<string, number>();
+    for (const e of synlige) {
+      const p = produktFor(e);
+      antall.set(p, (antall.get(p) ?? 0) + 1);
+    }
+    return antall;
+  }, [synlige]);
 
   const perSide =
     sidestoerrelse === ALLE ? synlige.length || 1 : Number(sidestoerrelse);
-  const paginert = useMemo(
-    () => synlige.slice((side - 1) * perSide, side * perSide),
-    [synlige, side, perSide]
+  const start = (side - 1) * perSide;
+  const sideRader = useMemo(
+    () => synlige.slice(start, start + perSide),
+    [synlige, start, perSide]
   );
+  const grupper = useMemo(
+    () =>
+      gruppert
+        ? delIProdukter(sideRader, start > 0 ? synlige[start - 1] : undefined)
+        : [],
+    [gruppert, sideRader, synlige, start]
+  );
+
+  const endreGruppering = (paa: boolean): void => {
+    setGruppert(paa);
+    // Produktkolonnen finnes bare i flat visning. Var den sorteringsnøkkelen,
+    // ville tabellen ellers stått uten synlig sortering.
+    if (paa && sortState.sortKey === 'produkt') {
+      setSortState({ sortKey: 'navn', direction: 'ascending' });
+    }
+  };
 
   if (feil) {
     return (
@@ -365,6 +481,66 @@ export function Statusoversikt(): ReactElement {
     ).length,
     farge: BRUDD_FARGER[f.verdi] ?? 'var(--palette-graphite-50)',
   }));
+
+  const visRad = (e: Erklaering): ReactElement => (
+    <Table.Row
+      key={e.url}
+      isExpandable
+      // Ingen expandButtonTitle: designsystemet har sin egen tekst
+      // ("Mer informasjon" fra tablerow.Expandable), og skiller selv
+      // mellom knappetekst og skjermleserforklaring. Radens navn
+      // kobles på med aria-describedby.
+      expandButtonAriaDescribedby={`tjeneste-${erklaeringId(e.url)}`}
+      expandableContent={
+        <div className={`${styles.detaljer} ${felles.utvidetInnhold}`}>
+          {e.nonConformities.length === 0 ? (
+            <Paragraph>
+              {'Ingen WCAG-brudd registrert i erklæringen.'}
+            </Paragraph>
+          ) : (
+            <>
+              <Heading as={'h3'} level={4} hasSpacing>
+                {'WCAG-krav som ikke er oppfylt'}
+              </Heading>
+              <ul className={styles.kodeliste}>
+                {e.nonConformities.map((kode) => (
+                  <li key={kode}>
+                    <Kravmerke kode={kode} />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      }
+    >
+      <Table.DataCell
+        as={'th'}
+        scope={'row'}
+        id={`tjeneste-${erklaeringId(e.url)}`}
+      >
+        {/* Lenken ligger på navnet, ikke inne i detaljvisningen: da
+            slipper man å utvide raden for å komme til erklæringen.
+            isExternal gir ikonet som varsler at man forlater siden. */}
+        <Link href={e.url} target={'_blank'} isExternal>
+          {e.name}
+        </Link>
+      </Table.DataCell>
+      {!gruppert && <Table.DataCell>{produktFor(e)}</Table.DataCell>}
+      <Table.DataCell alignment={'right'}>
+        <Bruddmerke antall={e.totalNonConformities} />
+      </Table.DataCell>
+      <Table.DataCell className={styles.datokolonne}>
+        <span className={styles.datocelle}>
+          {visDato(e.updatedAt)}
+          <Fristmerke e={e} />
+        </span>
+      </Table.DataCell>
+      <Table.DataCell className={styles.datokolonne}>
+        {visDato(e.opprettet)}
+      </Table.DataCell>
+    </Table.Row>
+  );
 
   return (
     <>
@@ -485,7 +661,7 @@ export function Statusoversikt(): ReactElement {
             resultatet står faktisk det nyttige. */}
         <SearchField
           ref={sokRef}
-          label={'Søk etter tjeneste'}
+          label={'Søk etter tjeneste eller produkt'}
           hideLabel={false}
           value={sok}
           onChange={(e) => setSok(e.currentTarget.value)}
@@ -493,6 +669,19 @@ export function Statusoversikt(): ReactElement {
           onSearch={() => treffRef.current?.focus()}
           onSearchClick={() => treffRef.current?.focus()}
         />
+        <Select
+          label={'Produkt/område'}
+          hidePlaceholder
+          value={produktFilter}
+          onChange={(e) => setProduktFilter(e.currentTarget.value)}
+        >
+          <Select.Option value={ALLE}>{'Alle produkter'}</Select.Option>
+          {produkter.map(([produkt, antall]) => (
+            <Select.Option key={produkt} value={produkt}>
+              {`${produkt} (${antall})`}
+            </Select.Option>
+          ))}
+        </Select>
         <Select
           label={'Antall brudd'}
           // Ingen plassholder: filteret har alltid en verdi, og «Velg» ville
@@ -572,23 +761,38 @@ export function Statusoversikt(): ReactElement {
             </Paragraph>
           </div>
         </div>
-        <Select
-          label={'Rader per side'}
-          hideLabel
-          hidePlaceholder
-          value={sidestoerrelse}
-          onChange={(e) => setSidestoerrelse(e.currentTarget.value)}
-        >
-          {SIDESTOERRELSER.map((s) => (
-            <Select.Option key={s} value={s}>
-              {s === ALLE ? 'Alle rader' : `${s} per side`}
-            </Select.Option>
-          ))}
-        </Select>
+        <div className={styles.tabellvalg}>
+          {/* Avkrysningsboks, ikke bryter: designsystemet har ingen bryter,
+              og en avkrysningsboks er den kontrollen skjermlesere og
+              tastatur håndterer mest forutsigbart. Den står foran tabellen,
+              så endringen skjer etter kontrollen i lese- og tabrekkefølgen. */}
+          <Checkbox
+            checked={gruppert}
+            onChange={(e) => endreGruppering(e.currentTarget.checked)}
+          >
+            {'Grupper etter produkt/område'}
+          </Checkbox>
+          <Select
+            label={'Rader per side'}
+            hideLabel
+            hidePlaceholder
+            value={sidestoerrelse}
+            onChange={(e) => setSidestoerrelse(e.currentTarget.value)}
+          >
+            {SIDESTOERRELSER.map((s) => (
+              <Select.Option key={s} value={s}>
+                {s === ALLE ? 'Alle rader' : `${s} per side`}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
       </div>
 
       <Table
-        caption={'Tilgjengelighetserklæringer med antall WCAG-brudd'}
+        caption={
+          'Tilgjengelighetserklæringer med antall WCAG-brudd' +
+          (gruppert ? ', gruppert etter produkt eller område' : '')
+        }
         sortState={sortState}
         setSortState={setSortState}
         hasFullWidth
@@ -609,6 +813,17 @@ export function Statusoversikt(): ReactElement {
             >
               {'Navn'}
             </Table.HeaderCell>
+            {/* Bare i flat visning. Gruppert står produktet i gruppeoverskriften,
+                og samme navn på hver rad i gruppen ville bare vært gjentakelse. */}
+            {!gruppert && (
+              <Table.HeaderCell
+                isSortable
+                sortKey={'produkt'}
+                className={styles.sorterbar}
+              >
+                {'Produkt/område'}
+              </Table.HeaderCell>
+            )}
             <Table.HeaderCell
               isSortable
               sortKey={'brudd'}
@@ -633,62 +848,29 @@ export function Statusoversikt(): ReactElement {
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        <Table.Body>
-          {paginert.map((e, i) => (
-            <Table.Row
-              key={e.url}
-              isExpandable
-              // Ingen expandButtonTitle: designsystemet har sin egen tekst
-              // ("Mer informasjon" fra tablerow.Expandable), og skiller selv
-              // mellom knappetekst og skjermleserforklaring. Radens navn
-              // kobles på med aria-describedby.
-              expandButtonAriaDescribedby={`tjeneste-${i}`}
-              expandableContent={
-                <div className={`${styles.detaljer} ${felles.utvidetInnhold}`}>
-                  {e.nonConformities.length === 0 ? (
-                    <Paragraph>
-                      {'Ingen WCAG-brudd registrert i erklæringen.'}
-                    </Paragraph>
-                  ) : (
-                    <>
-                      <Heading as={'h3'} level={4} hasSpacing>
-                        {'WCAG-krav som ikke er oppfylt'}
-                      </Heading>
-                      <ul className={styles.kodeliste}>
-                        {e.nonConformities.map((kode) => (
-                          <li key={kode}>
-                            <Kravmerke kode={kode} />
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-              }
-            >
-              <Table.DataCell as={'th'} scope={'row'} id={`tjeneste-${i}`}>
-                {/* Lenken ligger på navnet, ikke inne i detaljvisningen: da
-                    slipper man å utvide raden for å komme til erklæringen.
-                    isExternal gir ikonet som varsler at man forlater siden. */}
-                <Link href={e.url} target={'_blank'} isExternal>
-                  {e.name}
-                </Link>
-              </Table.DataCell>
-              <Table.DataCell alignment={'right'}>
-                <Bruddmerke antall={e.totalNonConformities} />
-              </Table.DataCell>
-              <Table.DataCell className={styles.datokolonne}>
-                <span className={styles.datocelle}>
-                  {visDato(e.updatedAt)}
-                  <Fristmerke e={e} />
-                </span>
-              </Table.DataCell>
-              <Table.DataCell className={styles.datokolonne}>
-                {visDato(e.opprettet)}
-              </Table.DataCell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+        {/* Én tbody per produkt, med produktnavnet som th scope="rowgroup"
+            over alle kolonnene. Da kobler skjermleseren hver celle til både
+            radens navn, kolonnen og produktet (WCAG 1.3.1, teknikk H63).
+            Gruppeoverskriftene er ikke egne overskrifter (h3): det ville gitt
+            15 overskrifter inne i én tabell og druknet sidens struktur. */}
+        {gruppert ? (
+          grupper.map((g) => (
+            <Table.Body key={g.produkt}>
+              <Table.Row className={styles.produktrad}>
+                <Table.HeaderCell as={'th'} scope={'rowgroup'} colSpan={5}>
+                  {g.produkt}
+                  {g.fortsetter && ' (forts.)'}
+                  <span className={styles.produktantall}>
+                    {` (${antallErklaeringer(perProdukt.get(g.produkt) ?? 0)})`}
+                  </span>
+                </Table.HeaderCell>
+              </Table.Row>
+              {g.rader.map(visRad)}
+            </Table.Body>
+          ))
+        ) : (
+          <Table.Body>{sideRader.map(visRad)}</Table.Body>
+        )}
       </Table>
 
       {sidestoerrelse !== ALLE && synlige.length > perSide && (
