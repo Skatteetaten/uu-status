@@ -1,0 +1,24 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a",
+      "name": "Innrapportering av a-melding som vedlegg",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Innrapportering av a-melding som vedlegg | uustatus",
+      "updatedAt": "2026-11-03",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109",
+      "name": "Tredjepartsopplysninger - boligselskap",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - boligselskap | uustatus",
+      "updatedAt": "2026-11-03",
+      "nonConformities": [
+        "2.4.2"
+      ],
+      "totalNonConformities": 1
+    }
+  ]
+}

@@ -5,7 +5,21 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Sat, 10 Oct 2026 01:51:05 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 01:30:10 GMT</lastBuildDate>
+    <item>
+      <title>Endret erklæring: Tredjepartsopplysninger - boligselskap</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
+      <guid isPermaLink="false">0f208c8ac9ac47cf17623d300f0149fc8ced72d0</guid>
+      <pubDate>Thu, 05 Nov 2026 01:30:10 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"0f208c8ac9ac47cf17623d300f0149fc8ced72d0","eventType":"declaration_changed","declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","changedFields":["nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"sourceUpdatedAt":"2026-10-09","deadline":"2027-10-09"},"currentValues":{"sourceUpdatedAt":"2026-11-03","deadline":"2027-11-03"},"addedNonConformities":["2.4.2"],"removedNonConformities":["4.1.3"],"detectedAt":"2026-11-05T01:30:09Z","deadline":"2027-11-03"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Innrapportering av a-melding som vedlegg</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a</link>
+      <guid isPermaLink="false">65077219c11a42c5fe810e0dd27e87ea222524a6</guid>
+      <pubDate>Thu, 05 Nov 2026 01:30:09 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"65077219c11a42c5fe810e0dd27e87ea222524a6","eventType":"declaration_changed","declarationId":"c4a29794-9072-43fd-abdc-9a7c3309a70a","title":"Innrapportering av a-melding som vedlegg","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":1,"sourceUpdatedAt":"2026-06-02","deadline":"2027-06-02"},"currentValues":{"totalNonConformities":0,"sourceUpdatedAt":"2026-11-03","deadline":"2027-11-03"},"addedNonConformities":[],"removedNonConformities":["2.4.3"],"detectedAt":"2026-11-05T01:30:09Z","deadline":"2027-11-03"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Tredjepartsopplysninger - boligselskap</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
@@ -1741,20 +1755,6 @@
       <guid isPermaLink="false">289be686e5f5307d87d547f6c6051bd24a91870a</guid>
       <pubDate>Sat, 10 Jan 2026 02:14:03 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"289be686e5f5307d87d547f6c6051bd24a91870a","eventType":"declaration_created","declarationId":"310fd87d-0eb3-4982-8549-b9143ab22cbc","title":"Mine arbeidsgivere","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/310fd87d-0eb3-4982-8549-b9143ab22cbc","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":3,"active":true},"addedNonConformities":["1.3.1","1.4.1","2.4.1"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Min skatteplikt</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/2c1faadd-00a7-40fd-870e-9cf5805a2d35</link>
-      <guid isPermaLink="false">953733544c5c26608b212f3b207171fee5d78650</guid>
-      <pubDate>Sat, 10 Jan 2026 02:14:02 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"953733544c5c26608b212f3b207171fee5d78650","eventType":"declaration_created","declarationId":"2c1faadd-00a7-40fd-870e-9cf5805a2d35","title":"Min skatteplikt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2c1faadd-00a7-40fd-870e-9cf5805a2d35","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Tips om avvik i Folkeregisteret</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/2b1a0612-6d0b-4d33-855b-fe3173ed655b</link>
-      <guid isPermaLink="false">9eb641aa66f66b53848605ed1d9a575c25ab94a1</guid>
-      <pubDate>Sat, 10 Jan 2026 02:14:01 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"9eb641aa66f66b53848605ed1d9a575c25ab94a1","eventType":"declaration_created","declarationId":"2b1a0612-6d0b-4d33-855b-fe3173ed655b","title":"Tips om avvik i Folkeregisteret","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2b1a0612-6d0b-4d33-855b-fe3173ed655b","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.3.1","1.3.2","1.3.5","3.3.1"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>

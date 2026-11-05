@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Sat, 10 Oct 2026 01:51:03 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 01:30:09 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -46,7 +46,7 @@
       <link>https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445</link>
       <guid isPermaLink="false">0886dcd5-5ce1-4f94-9c3f-2199dc17f445</guid>
       <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"0886dcd5-5ce1-4f94-9c3f-2199dc17f445","title":"A-meldingen - Avstemmingsinformasjon","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445","status":"Delvis i samsvar","nonConformities":["2.4.3","4.1.3"],"totalNonConformities":2,"deadline":"2026-11-09","sourceUpdatedAt":"2025-11-09","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <description>{"declarationId":"0886dcd5-5ce1-4f94-9c3f-2199dc17f445","title":"A-meldingen - Avstemmingsinformasjon","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445","status":"Delvis i samsvar","nonConformities":["2.4.3","4.1.3"],"totalNonConformities":2,"deadline":"2027-11-03","sourceUpdatedAt":"2026-11-03","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Servicesenter for utenlandske arbeidstakere</title>
@@ -668,8 +668,8 @@
       <title>Innrapportering av a-melding som vedlegg</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a</link>
       <guid isPermaLink="false">c4a29794-9072-43fd-abdc-9a7c3309a70a</guid>
-      <pubDate>Fri, 22 May 2026 02:24:29 GMT</pubDate>
-      <description>{"declarationId":"c4a29794-9072-43fd-abdc-9a7c3309a70a","title":"Innrapportering av a-melding som vedlegg","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a","status":"Delvis i samsvar","nonConformities":["2.4.3"],"totalNonConformities":1,"deadline":"2027-06-02","sourceUpdatedAt":"2026-06-02","lastMeaningfulChangeAt":"2026-05-22T02:24:29Z","active":true,"removedAt":null}</description>
+      <pubDate>Thu, 05 Nov 2026 01:30:09 GMT</pubDate>
+      <description>{"declarationId":"c4a29794-9072-43fd-abdc-9a7c3309a70a","title":"Innrapportering av a-melding som vedlegg","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/c4a29794-9072-43fd-abdc-9a7c3309a70a","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-11-03","sourceUpdatedAt":"2026-11-03","lastMeaningfulChangeAt":"2026-11-05T01:30:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Skatteetaten status</title>
@@ -690,7 +690,7 @@
       <link>https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0</link>
       <guid isPermaLink="false">d2083279-2df2-46a7-9ea9-63fd71a58af0</guid>
       <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"d2083279-2df2-46a7-9ea9-63fd71a58af0","title":"Mine inntekter og arbeidsforhold","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0","status":"Delvis i samsvar","nonConformities":["1.3.1","2.4.2","2.4.3","3.2.2","4.1.3"],"totalNonConformities":5,"deadline":"2026-11-12","sourceUpdatedAt":"2025-11-12","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <description>{"declarationId":"d2083279-2df2-46a7-9ea9-63fd71a58af0","title":"Mine inntekter og arbeidsforhold","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0","status":"Delvis i samsvar","nonConformities":["1.3.1","2.4.2","2.4.3","3.2.2","4.1.3"],"totalNonConformities":5,"deadline":"2027-11-03","sourceUpdatedAt":"2026-11-03","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Min side - Eiendommer</title>
@@ -738,8 +738,8 @@
       <title>Tredjepartsopplysninger - boligselskap</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109</link>
       <guid isPermaLink="false">db6ea2aa-9391-4db4-b6c7-14f4663be109</guid>
-      <pubDate>Sat, 10 Oct 2026 01:51:03 GMT</pubDate>
-      <description>{"declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","status":"Delvis i samsvar","nonConformities":["4.1.3"],"totalNonConformities":1,"deadline":"2027-10-09","sourceUpdatedAt":"2026-10-09","lastMeaningfulChangeAt":"2026-10-10T01:51:03Z","active":true,"removedAt":null}</description>
+      <pubDate>Thu, 05 Nov 2026 01:30:09 GMT</pubDate>
+      <description>{"declarationId":"db6ea2aa-9391-4db4-b6c7-14f4663be109","title":"Tredjepartsopplysninger - boligselskap","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109","status":"Delvis i samsvar","nonConformities":["2.4.2"],"totalNonConformities":1,"deadline":"2027-11-03","sourceUpdatedAt":"2026-11-03","lastMeaningfulChangeAt":"2026-11-05T01:30:09Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Utsatt frist søknad</title>
