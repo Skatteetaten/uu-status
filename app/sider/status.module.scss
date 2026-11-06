@@ -215,9 +215,14 @@
 // Produktraden skiller gruppene: lys bakgrunn og halvfet tekst, så den leses
 // som overskrift og ikke som enda en erklæring. Antallet står i normal vekt
 // for å ikke konkurrere med navnet.
+// Tynn strek over og under, som vanlige rader. Designsystemet gir en th tykk
+// strek under, og den skilte gruppenavnet fra sine egne erklæringer. Den første
+// gruppen får likevel tykk strek over, fra kolonneoverskriftene.
 .produktrad th {
   background: var(--palette-graphite-5);
   font-weight: var(--font-weight-bold);
+  border-top: solid 1px var(--semantic-divider-30);
+  border-bottom: solid 1px var(--semantic-divider-30);
 }
 
 .produktantall {
