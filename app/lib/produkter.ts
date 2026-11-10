@@ -143,7 +143,6 @@ const PRODUKT_PER_ERKLAERING: Readonly<Record<string, string>> = {
   '032a655f-22dc-40ad-95ac-749baecf04dd': 'Skattemelding skatt', // Utskrift av skattemelding og skatteoppgjør
 
   // Skattemelding særavgifter
-  '5b0cfae5-d1df-42d9-a6ad-c76a7a124f00': 'Skattemelding særavgifter', // Klage på vedtak om tvangsmulkt eller overtredelsesgebyr
   '98148ac6-eb3d-4f84-b3af-e167f9dad103': 'Skattemelding særavgifter', // Søknad om kjøretillatelse ved midlertidig opphold i Norge
   'da746138-2ec0-464d-8442-61a65639f0bb': 'Skattemelding særavgifter', // Søknad om midlertidig kjøretillatelse for firmabil registrert i utlandet
   'e32e9bfb-189a-4390-af64-f39fc93a190a': 'Skattemelding særavgifter', // Særavgifter
@@ -160,6 +159,7 @@ const PRODUKT_PER_ERKLAERING: Readonly<Record<string, string>> = {
   'fda75c75-d3d3-42ac-acb5-627bae3c1b93': ANDRE_TJENESTER, // Beta-API'er - Github
   '3daf0fcb-305b-4df9-bb92-46baf73f373e': ANDRE_TJENESTER, // Designsystemet
   '0724e689-fa47-4b24-8f35-8163f194564a': ANDRE_TJENESTER, // Intranett
+  '5b0cfae5-d1df-42d9-a6ad-c76a7a124f00': ANDRE_TJENESTER, // Klage på vedtak om tvangsmulkt eller overtredelsesgebyr
   'a676aca0-a19c-419a-874e-9d1210a3cc68': ANDRE_TJENESTER, // RDT portal
   '96c10424-bbb7-4a19-8ce1-d75e1a146666': ANDRE_TJENESTER, // Rettighetspakke innsyn web
   '0f8eb2c9-2436-418e-8c57-2ea8865c8121': ANDRE_TJENESTER, // Servicesenter for utenlandske arbeidstakere
