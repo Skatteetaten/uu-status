@@ -317,6 +317,15 @@
       "totalNonConformities": 0
     },
     {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/5cece3e9-9dc1-4d53-9841-4c498de77c48",
+      "name": "Internasjonal profil",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Internasjonal profil | uustatus",
+      "updatedAt": "2026-11-13",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
       "url": "https://uustatus.no/nb/erklaringer/publisert/23a46c06-1d7f-46ce-aff3-ff2367d9f86f",
       "name": "Internasjonal rapportering CRS/FATCA",
       "domain": "uustatus.no",
@@ -625,6 +634,15 @@
         "4.1.3"
       ],
       "totalNonConformities": 11
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/8cead000-575e-4c29-92b1-c0a71fc7c16f",
+      "name": "Minside utland",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Minside utland | uustatus",
+      "updatedAt": "2026-11-13",
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/85e1c596-39a7-4808-86bf-81f5ec7971cd",
@@ -1393,14 +1411,15 @@
       "name": "Utlegg og forlik",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Utlegg og forlik | uustatus",
-      "updatedAt": "2025-12-02",
+      "updatedAt": "2026-11-13",
       "nonConformities": [
         "1.3.1",
-        "1.3.2",
-        "2.4.6",
-        "4.1.2"
+        "2.4.4",
+        "3.2.4",
+        "4.1.2",
+        "4.1.3"
       ],
-      "totalNonConformities": 4
+      "totalNonConformities": 5
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220",

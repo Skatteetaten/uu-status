@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "source": "https://skatteetaten.github.io/uu-status/",
-  "count": 124,
+  "count": 126,
   "declarations": [
     {
       "declarationId": "00318500-e9c5-48c0-9400-e06daf2407dd",
@@ -807,6 +807,19 @@
       "removedAt": null
     },
     {
+      "declarationId": "5cece3e9-9dc1-4d53-9841-4c498de77c48",
+      "title": "Internasjonal profil",
+      "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/5cece3e9-9dc1-4d53-9841-4c498de77c48",
+      "status": "I samsvar",
+      "nonConformities": [],
+      "totalNonConformities": 0,
+      "deadline": "2027-11-13",
+      "sourceUpdatedAt": "2026-11-13",
+      "lastMeaningfulChangeAt": "2026-11-15T01:30:03Z",
+      "active": true,
+      "removedAt": null
+    },
+    {
       "declarationId": "5f92b879-42e9-4f0b-827e-eee292446cc6",
       "title": "Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer",
       "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/5f92b879-42e9-4f0b-827e-eee292446cc6",
@@ -1069,6 +1082,19 @@
       "deadline": "2027-03-11",
       "sourceUpdatedAt": "2026-03-11",
       "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "active": true,
+      "removedAt": null
+    },
+    {
+      "declarationId": "8cead000-575e-4c29-92b1-c0a71fc7c16f",
+      "title": "Minside utland",
+      "declarationUrl": "https://uustatus.no/nb/erklaringer/publisert/8cead000-575e-4c29-92b1-c0a71fc7c16f",
+      "status": "I samsvar",
+      "nonConformities": [],
+      "totalNonConformities": 0,
+      "deadline": "2027-11-13",
+      "sourceUpdatedAt": "2026-11-13",
+      "lastMeaningfulChangeAt": "2026-11-15T01:30:03Z",
       "active": true,
       "removedAt": null
     },
@@ -1905,14 +1931,15 @@
       "status": "Delvis i samsvar",
       "nonConformities": [
         "1.3.1",
-        "1.3.2",
-        "2.4.6",
-        "4.1.2"
+        "2.4.4",
+        "3.2.4",
+        "4.1.2",
+        "4.1.3"
       ],
-      "totalNonConformities": 4,
-      "deadline": "2026-12-02",
-      "sourceUpdatedAt": "2025-12-02",
-      "lastMeaningfulChangeAt": "2026-04-19T09:32:09Z",
+      "totalNonConformities": 5,
+      "deadline": "2027-11-13",
+      "sourceUpdatedAt": "2026-11-13",
+      "lastMeaningfulChangeAt": "2026-11-15T01:30:03Z",
       "active": true,
       "removedAt": null
     },

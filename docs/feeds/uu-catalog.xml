@@ -5,7 +5,7 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Maskinlesbar katalog over Skatteetatens tilgjengelighetserklæringer. Hvert element har katalogposten som kompakt JSON i description. Datakontrakt: https://skatteetaten.github.io/uu-status/data/subscriptions/declarations.json</description>
     <language>nb</language>
-    <lastBuildDate>Fri, 13 Nov 2026 06:14:33 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 01:30:03 GMT</lastBuildDate>
     <item>
       <title>Merverdiavgifts­håndboken</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/00318500-e9c5-48c0-9400-e06daf2407dd</link>
@@ -350,6 +350,13 @@
       <description>{"declarationId":"5b0cfae5-d1df-42d9-a6ad-c76a7a124f00","title":"Klage på vedtak om tvangsmulkt eller overtredelsesgebyr","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/5b0cfae5-d1df-42d9-a6ad-c76a7a124f00","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-05-18","sourceUpdatedAt":"2026-05-18","lastMeaningfulChangeAt":"2026-05-19T02:22:37Z","active":true,"removedAt":null}</description>
     </item>
     <item>
+      <title>Internasjonal profil</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/5cece3e9-9dc1-4d53-9841-4c498de77c48</link>
+      <guid isPermaLink="false">5cece3e9-9dc1-4d53-9841-4c498de77c48</guid>
+      <pubDate>Sun, 15 Nov 2026 01:30:03 GMT</pubDate>
+      <description>{"declarationId":"5cece3e9-9dc1-4d53-9841-4c498de77c48","title":"Internasjonal profil","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/5cece3e9-9dc1-4d53-9841-4c498de77c48","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-11-13","sourceUpdatedAt":"2026-11-13","lastMeaningfulChangeAt":"2026-11-15T01:30:03Z","active":true,"removedAt":null}</description>
+    </item>
+    <item>
       <title>Søknad om tilbakebetaling av merverdiavgift for privatpersoner og uregistrerte firmaer</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/5f92b879-42e9-4f0b-827e-eee292446cc6</link>
       <guid isPermaLink="false">5f92b879-42e9-4f0b-827e-eee292446cc6</guid>
@@ -474,6 +481,13 @@
       <guid isPermaLink="false">8c79a29b-693a-432c-b404-b2dc280ff7bc</guid>
       <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
       <description>{"declarationId":"8c79a29b-693a-432c-b404-b2dc280ff7bc","title":"Aksjeoppgaven","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/8c79a29b-693a-432c-b404-b2dc280ff7bc","status":"Delvis i samsvar","nonConformities":["1.3.1","1.3.2","3.3.2","4.1.2"],"totalNonConformities":4,"deadline":"2027-03-11","sourceUpdatedAt":"2026-03-11","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+    </item>
+    <item>
+      <title>Minside utland</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/8cead000-575e-4c29-92b1-c0a71fc7c16f</link>
+      <guid isPermaLink="false">8cead000-575e-4c29-92b1-c0a71fc7c16f</guid>
+      <pubDate>Sun, 15 Nov 2026 01:30:03 GMT</pubDate>
+      <description>{"declarationId":"8cead000-575e-4c29-92b1-c0a71fc7c16f","title":"Minside utland","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/8cead000-575e-4c29-92b1-c0a71fc7c16f","status":"I samsvar","nonConformities":[],"totalNonConformities":0,"deadline":"2027-11-13","sourceUpdatedAt":"2026-11-13","lastMeaningfulChangeAt":"2026-11-15T01:30:03Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Oppdragsgiverportalen</title>
@@ -843,8 +857,8 @@
       <title>Utlegg og forlik</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/f85283dd-ef02-4af3-b67f-69aba2168e3e</link>
       <guid isPermaLink="false">f85283dd-ef02-4af3-b67f-69aba2168e3e</guid>
-      <pubDate>Sun, 19 Apr 2026 09:32:09 GMT</pubDate>
-      <description>{"declarationId":"f85283dd-ef02-4af3-b67f-69aba2168e3e","title":"Utlegg og forlik","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/f85283dd-ef02-4af3-b67f-69aba2168e3e","status":"Delvis i samsvar","nonConformities":["1.3.1","1.3.2","2.4.6","4.1.2"],"totalNonConformities":4,"deadline":"2026-12-02","sourceUpdatedAt":"2025-12-02","lastMeaningfulChangeAt":"2026-04-19T09:32:09Z","active":true,"removedAt":null}</description>
+      <pubDate>Sun, 15 Nov 2026 01:30:03 GMT</pubDate>
+      <description>{"declarationId":"f85283dd-ef02-4af3-b67f-69aba2168e3e","title":"Utlegg og forlik","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/f85283dd-ef02-4af3-b67f-69aba2168e3e","status":"Delvis i samsvar","nonConformities":["1.3.1","2.4.4","3.2.4","4.1.2","4.1.3"],"totalNonConformities":5,"deadline":"2027-11-13","sourceUpdatedAt":"2026-11-13","lastMeaningfulChangeAt":"2026-11-15T01:30:03Z","active":true,"removedAt":null}</description>
     </item>
     <item>
       <title>Skattekartet</title>
