@@ -160,15 +160,9 @@
       "name": "Endre skattekort",
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Endre skattekort | uustatus",
-      "updatedAt": "2026-09-28",
-      "nonConformities": [
-        "1.2.2",
-        "1.3.1",
-        "1.3.2",
-        "4.1.2",
-        "4.1.3"
-      ],
-      "totalNonConformities": 5
+      "updatedAt": "2026-11-23",
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c",
@@ -303,6 +297,15 @@
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Innrapportering SAF-T | uustatus",
       "updatedAt": "2026-06-12",
+      "nonConformities": [],
+      "totalNonConformities": 0
+    },
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/33bbae96-f021-4376-9623-252af28581f7",
+      "name": "Innsenders oversikt",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for Innsenders oversikt | uustatus",
+      "updatedAt": "2026-11-24",
       "nonConformities": [],
       "totalNonConformities": 0
     },

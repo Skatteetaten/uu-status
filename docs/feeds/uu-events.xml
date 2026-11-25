@@ -5,7 +5,21 @@
     <link>https://skatteetaten.github.io/uu-status/</link>
     <description>Reelle endringer i Skatteetatens tilgjengelighetserklæringer. Hvert element har hendelsen som kompakt JSON i description. Rene tidsstempelendringer i kilden gir aldri en hendelse.</description>
     <language>nb</language>
-    <lastBuildDate>Wed, 18 Nov 2026 01:30:26 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 07:19:27 GMT</lastBuildDate>
+    <item>
+      <title>Ny erklæring: Innsenders oversikt</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/33bbae96-f021-4376-9623-252af28581f7</link>
+      <guid isPermaLink="false">5c6704bec3fd01ece31a0e398bba60a4233b2f2a</guid>
+      <pubDate>Wed, 25 Nov 2026 07:19:27 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"5c6704bec3fd01ece31a0e398bba60a4233b2f2a","eventType":"declaration_created","declarationId":"33bbae96-f021-4376-9623-252af28581f7","title":"Innsenders oversikt","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/33bbae96-f021-4376-9623-252af28581f7","changedFields":["totalNonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":0,"active":true},"addedNonConformities":[],"removedNonConformities":[],"detectedAt":"2026-11-25T07:19:26Z","deadline":"2027-11-24"}</description>
+    </item>
+    <item>
+      <title>Endret erklæring: Endre skattekort</title>
+      <link>https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a</link>
+      <guid isPermaLink="false">c811ce4b3b4cc4f4f1be4198c8f78dda513db167</guid>
+      <pubDate>Wed, 25 Nov 2026 07:19:26 GMT</pubDate>
+      <description>{"schemaVersion":"1.0.0","eventId":"c811ce4b3b4cc4f4f1be4198c8f78dda513db167","eventType":"declaration_changed","declarationId":"2e9af915-796a-4b03-8f51-fe1d0f76850a","title":"Endre skattekort","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a","changedFields":["totalNonConformities","nonConformities","sourceUpdatedAt","deadline"],"previousValues":{"totalNonConformities":5,"sourceUpdatedAt":"2026-09-28","deadline":"2027-09-28"},"currentValues":{"totalNonConformities":0,"sourceUpdatedAt":"2026-11-23","deadline":"2027-11-23"},"addedNonConformities":[],"removedNonConformities":["1.2.2","1.3.1","1.3.2","4.1.2","4.1.3"],"detectedAt":"2026-11-25T07:19:26Z","deadline":"2027-11-23"}</description>
+    </item>
     <item>
       <title>Endret erklæring: Forlik og namsmann</title>
       <link>https://uustatus.no/nb/erklaringer/publisert/66527ffb-ee0e-4070-9ba2-10563b1ab6c8</link>
@@ -1741,20 +1755,6 @@
       <guid isPermaLink="false">edae8f29da7dc456fc949d602d3ced5125434ac3</guid>
       <pubDate>Sat, 10 Jan 2026 02:14:10 GMT</pubDate>
       <description>{"schemaVersion":"1.0.0","eventId":"edae8f29da7dc456fc949d602d3ced5125434ac3","eventType":"declaration_created","declarationId":"461f43ab-f826-46b5-a664-8caea74d7e0c","title":"Tips oss","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":2,"active":true},"addedNonConformities":["1.3.1","1.4.10"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Folkeregister</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c</link>
-      <guid isPermaLink="false">6e412f0d4d70c75e8bf1f806481a2fbee8905c85</guid>
-      <pubDate>Sat, 10 Jan 2026 02:14:09 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"6e412f0d4d70c75e8bf1f806481a2fbee8905c85","eventType":"declaration_created","declarationId":"3eea216f-0c8c-4d81-ba12-c63aa7e16e4c","title":"Folkeregister","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":7,"active":true},"addedNonConformities":["1.3.1","2.1.1","2.4.3","2.4.4","3.3.1","3.3.2","3.3.3"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
-    </item>
-    <item>
-      <title>Ny erklæring: Oversikt over innhold i skattemeldingen</title>
-      <link>https://uustatus.no/nb/erklaringer/publisert/3cda10ad-635e-457c-8fe1-c90c5b4bab4f</link>
-      <guid isPermaLink="false">5debdad14c5228a07281ab3a27e618fc81c38ee9</guid>
-      <pubDate>Sat, 10 Jan 2026 02:14:08 GMT</pubDate>
-      <description>{"schemaVersion":"1.0.0","eventId":"5debdad14c5228a07281ab3a27e618fc81c38ee9","eventType":"declaration_created","declarationId":"3cda10ad-635e-457c-8fe1-c90c5b4bab4f","title":"Oversikt over innhold i skattemeldingen","declarationUrl":"https://uustatus.no/nb/erklaringer/publisert/3cda10ad-635e-457c-8fe1-c90c5b4bab4f","changedFields":["totalNonConformities","nonConformities","active"],"previousValues":null,"currentValues":{"totalNonConformities":4,"active":true},"addedNonConformities":["1.3.1","1.4.10","1.4.3","2.4.1"],"removedNonConformities":[],"detectedAt":"2026-01-10T02:13:50Z","deadline":"2027-01-10"}</description>
     </item>
   </channel>
 </rss>
